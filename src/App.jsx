@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { templates, composePhotos, layoutSize } from './collage.js';
-import { Chevron, TemplateMini, StickerIcon, StripPreview } from './BoothParts.jsx';
+import { templates } from './collage.js';
+import { Chevron, TemplateMini } from './BoothParts.jsx';
+import StickerPicker from './StickerPicker.jsx';
 import StripEditor from './StripEditor.jsx';
-import { stickers, drawSticker } from './face-stickers.js';
+import { drawSticker } from './face-stickers.js';
 import { useFaceStickers } from './useFaceStickers.js';
 
 function Icon({ name, size = 20 }) {
@@ -30,7 +31,6 @@ export default function App() {
   const stream = useRef(null);
   const requestId = useRef(0);
   const timer = useRef(null);
-  const photoUrl = useRef(null);
   const shotUrls = useRef([]);
   const [shots, setShots] = useState([]);
   const [templateId, setTemplateId] = useState('strip-four');
@@ -42,7 +42,6 @@ export default function App() {
   const [mirror, setMirror] = useState(true);
   const [delay, setDelay] = useState(3);
   const [countdown, setCountdown] = useState(null);
-  const [photo, setPhoto] = useState(null);
   const [flash, setFlash] = useState(false);
   const [sticker, setSticker] = useState('none');
   const [page, setPage] = useState('booth');
@@ -74,7 +73,6 @@ export default function App() {
     requestId.current++;
     clearInterval(timer.current);
     if (stream.current) stream.current.getTracks().forEach(track => track.stop());
-    if (photoUrl.current) URL.revokeObjectURL(photoUrl.current);
     shotUrls.current.forEach(url => URL.revokeObjectURL(url));
   }, []);
 
@@ -151,7 +149,7 @@ export default function App() {
     ctx.drawImage(source, 0, 0);
     if (stickerPoints) drawSticker(ctx, stickerPoints, canvas.width, canvas.height, sticker);
     setFlash(true);
-    canvas.toBlob(async blob => {
+    canvas.toBlob(blob => {
       if (id !== requestId.current) return;
       setFlash(false);
       if (!blob) { setError('The photo couldn’t be saved. Please try again.'); setStatus('ready'); return; }
@@ -161,19 +159,7 @@ export default function App() {
       setShots(nextShots);
       if (nextShots.length < template.count) { setStatus('ready'); return; }
       releaseCamera();
-      try {
-        const result = await composePhotos(nextShots, template);
-        if (id !== requestId.current) return;
-        if (photoUrl.current) URL.revokeObjectURL(photoUrl.current);
-        const exportUrl = URL.createObjectURL(result.blob);
-        photoUrl.current = exportUrl;
-        setPhoto({ url: exportUrl, width: result.width, height: result.height, filename: `photopix-${template.id}-${new Date().toISOString().replace(/[:.]/g, '-')}.jpg` });
-        setStatus('review');
-      } catch {
-        if (id !== requestId.current) return;
-        setStatus('export-error');
-        setError('The layout couldn’t be saved. Download your individual photos below, or start a new session.');
-      }
+      setStatus('review');
     }, 'image/jpeg', 0.95);
   }
 
@@ -191,10 +177,9 @@ export default function App() {
 
   function retake() {
     location.hash = '/'; setPage('booth');
-    if (photoUrl.current) URL.revokeObjectURL(photoUrl.current);
     shotUrls.current.forEach(url => URL.revokeObjectURL(url));
     shotUrls.current = [];
-    photoUrl.current = null; setPhoto(null); setShots([]); openCamera(deviceId);
+    setShots([]); openCamera(deviceId);
   }
 
   const busy = countdown !== null || status === 'loading' || status === 'saving';
@@ -203,12 +188,8 @@ export default function App() {
   const templateLocked = busy || shots.length > 0;
 
   return <div className="app">
-    <header className="header">
-      <a className="wordmark" href="./" aria-label="PhotoPix home"><span className="brand-icon"><Icon name="camera" size={23}/></span>PhotoPix<span className="brand-dot">.</span></a>
-      <span className="header-note"><span className="header-status-dot"/>Photos stay on your device</span>
-    </header>
     {page === 'editor' && completed ? <StripEditor shots={shots} template={template} onBack={() => { location.hash = '/'; }} onStartOver={retake}/> : <main>
-      <div className="intro"><div><h1>Your moment. Your layout.</h1><p>Pick a template, strike a pose, and make something worth keeping.</p></div></div>
+      <div className="intro"><div><h1>Your moment. Your layout.</h1><p>Capture your photos here. Format your strip after Submit.</p></div></div>
       <div className="booth-layout">
         <div className="sidebar-column">
         <details className="template-rail panel" aria-label="Grid templates" open>
@@ -225,13 +206,14 @@ export default function App() {
           </div>
         </details>
         <details className="sticker-panel panel" open><summary><span>Face stickers</span><Chevron/></summary>
-          <div className="sticker-content"><div className="sticker-options" role="group" aria-label="Choose a face sticker">{stickers.map(item => <button key={item.id} className={`sticker-option ${sticker === item.id ? 'selected' : ''}`} aria-pressed={sticker === item.id} aria-label={`${item.name} face sticker`} disabled={busy || completed} onClick={() => setSticker(item.id)}><StickerIcon name={item.id}/><span>{item.name}</span></button>)}</div>
+          <div className="sticker-content"><StickerPicker selected={sticker} onSelect={setSticker} disabled={busy || completed}/>
           <p className="sticker-status" role="status" aria-live="polite">{sticker === 'none' ? 'Choose a sticker to wear in your photos.' : !cameraActive ? 'Switch on the camera to use your sticker.' : face.state === 'loading' ? 'Loading face tracking…' : face.state === 'tracking' ? 'Face found. Your sticker is ready.' : face.state === 'error' ? 'Face tracking couldn’t load. Retry or choose None.' : 'Face the camera to place your sticker.'}</p>
           {face.state === 'error' && <button className="text-button" onClick={face.retry}>Retry face tracking</button>}</div>
         </details>
         </div>
         <div className="camera-column">
           <section className="booth" aria-label="Photo booth">
+            <div className="booth-brand"><a className="wordmark" href="./" aria-label="PhotoPix home"><span className="brand-icon"><Icon name="camera" size={23}/></span>PhotoPix<span className="brand-dot">.</span></a></div>
             <div className="booth-bar"><h2 className="panel-title">Camera preview</h2><div className="camera-control"><span className="camera-toggle-label">{status === 'loading' ? 'Connecting…' : status === 'ready' || status === 'saving' && !completed ? 'Camera on' : 'Camera off'}</span><button className={`switch ${status === 'ready' || status === 'saving' && !completed ? 'on' : ''}`} role="switch" aria-label="Camera" aria-checked={status === 'ready' || status === 'saving' && !completed} disabled={status === 'saving' || completed} title={completed ? 'Start a new session to use the camera again' : status === 'loading' ? 'Cancel camera connection' : undefined} onClick={() => status === 'ready' || status === 'loading' ? stopCamera() : openCamera(deviceId)}><span/></button></div></div>
             <div className={`viewfinder ${flash ? 'flash' : ''}`}>
               <video ref={video} autoPlay muted playsInline className={`${mirror ? 'mirrored' : ''} ${status === 'ready' || status === 'saving' && !completed ? '' : 'hidden'}`} aria-label="Live webcam preview"/>
@@ -247,13 +229,11 @@ export default function App() {
 
         </div>
         <div className="preview-column">
-        <aside className="preview-panel" aria-label="Photo booth preview" style={{ '--preview-rows': template.rows, '--preview-cols': template.cols }}>
-          <h2>Photo booth preview</h2>
-          <p className="preview-subtitle">{template.name} · {shots.length} of {template.count} {template.count === 1 ? 'photo' : 'photos'}</p>
-          <StripPreview shots={shots} template={template}/>
-          <p className="strip-dimensions">{layoutSize(template).width} × {layoutSize(template).height} px</p>
+        <aside className="preview-panel" aria-label="Captured photos">
+          <h2>Captured photos</h2>
+          <p className="preview-subtitle">{shots.length} of {template.count} captured</p>
+          <div className={`capture-gallery ${shots.length ? '' : 'empty'}`} tabIndex={shots.length ? 0 : undefined} aria-label="Your captured photos">{shots.length ? shots.map((shot, index) => <figure key={shot.url}><img src={shot.url} alt={`Captured photo ${index + 1}`}/><figcaption>Photo {index + 1}</figcaption></figure>) : <div className="gallery-empty"><Icon name="camera" size={30}/><p>No photos yet</p><span>Take your first photo to begin.</span></div>}</div>
           {shots.length > 0 && !busy && !completed && <button className="text-button start-over" onClick={retake}><Icon name="retake" size={16}/>Start over</button>}
-          {status === 'export-error' && <div className="individual-downloads">{shots.map((shot, index) => <a key={shot.url} download={`photopix-photo-${index + 1}.jpg`} href={shot.url}>Download photo {index + 1}</a>)}</div>}
         </aside>
         <details className="settings-panel"><summary><span><Icon name="timer" size={18}/>Photo settings</span><svg className="settings-chevron" aria-hidden="true" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="m5 7 5 5 5-5"/></svg></summary>
           <div className="session-settings" aria-label="Photo controls">
@@ -265,7 +245,7 @@ export default function App() {
         </div>
       </div>
       {error && <div className="error-message" role="alert"><strong>Let’s get that sorted.</strong><p>{error}</p>{status === 'idle' && <button className="text-button" onClick={() => openCamera(deviceId)}>Try again <Icon name="arrow" size={16}/></button>}</div>}
-      <p className="session-announcement" role="status" aria-live="polite">{reviewing ? 'Layout complete. Submit to edit your strip, or start over.' : status === 'ready' ? `Camera ready. ${shots.length} of ${template.count} photos captured.` : ''}</p>
+      <p className="session-announcement" role="status" aria-live="polite">{reviewing ? 'All photos captured. Submit to format your strip, or start over.' : status === 'ready' ? `Camera ready. ${shots.length} of ${template.count} photos captured.` : ''}</p>
     </main>}
     <footer><span>PhotoPix — Your browser photo booth.</span><span>Capture. Retake. Download.</span></footer>
   </div>;

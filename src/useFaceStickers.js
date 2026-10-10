@@ -3,13 +3,16 @@ import { drawSticker } from './face-stickers.js';
 
 export function useFaceStickers(video, overlay, enabled, sticker) {
   const latest = useRef(null);
+  const selected = useRef(sticker);
+  selected.current = sticker;
+  const active = enabled && sticker !== 'none';
   const [state, setState] = useState('off');
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     latest.current = null;
     const canvas = overlay.current;
     if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-    if (!enabled || sticker === 'none') { setState('off'); return; }
+    if (!active) { setState('off'); return; }
     let stopped = false, ready = false, pending = false, lastFrame = -1, lastTime = 0, raf;
     const worker = new Worker(new URL('./face-worker.js', import.meta.url), { type: 'module' });
     setState('loading');
@@ -23,7 +26,8 @@ export function useFaceStickers(video, overlay, enabled, sticker) {
       else if (data.type === 'error') fail();
       else if (data.type === 'result') {
         pending = false;
-        latest.current = data.landmarks ? { points: data.landmarks, timestamp: data.timestamp } : null;
+        // Freshness starts when inference finishes, not when its input frame was queued.
+        latest.current = data.landmarks ? { points: data.landmarks, timestamp: performance.now() } : null;
         setState(data.landmarks ? 'tracking' : 'searching');
       }
     };
@@ -36,7 +40,7 @@ export function useFaceStickers(video, overlay, enabled, sticker) {
           target.width = source.videoWidth; target.height = source.videoHeight;
         }
         const ctx = target.getContext('2d'); ctx.clearRect(0, 0, target.width, target.height);
-        if (latest.current && now - latest.current.timestamp < 600) drawSticker(ctx, latest.current.points, target.width, target.height, sticker);
+        if (latest.current && now - latest.current.timestamp < 600) drawSticker(ctx, latest.current.points, target.width, target.height, selected.current);
         if (ready && !pending && now - lastTime >= 80 && source.currentTime !== lastFrame) {
           pending = true; lastFrame = source.currentTime; lastTime = now;
           try {
@@ -52,6 +56,6 @@ export function useFaceStickers(video, overlay, enabled, sticker) {
     raf = requestAnimationFrame(loop);
     return () => { stopped = true; clearTimeout(timeout); cancelAnimationFrame(raf); worker.terminate(); latest.current = null;
       if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height); };
-  }, [enabled, sticker, attempt, video, overlay]);
+  }, [active, attempt, video, overlay]);
   return { state, latest, retry: () => setAttempt(value => value + 1) };
 }

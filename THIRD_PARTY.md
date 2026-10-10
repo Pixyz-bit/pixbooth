@@ -11,5 +11,9 @@ the original runtime files remain alongside them. Regenerate with `npm run setup
 
 The model is served from this application's own static assets. Detection runs in
 a web worker in the user's browser. Photo pixels and landmarks are never uploaded.
-The dog, hat, and glasses overlays are authored canvas shapes in `src/face-stickers.js`.
+The 36 face effects are authored canvas shapes in `src/sticker-art.js`, re-exported
+through `src/face-stickers.js`. Animals (8), Eyewear (7), Headwear (10), and Fun (11)
+share one renderer for picker thumbnails, live overlays, and captured photos.
+No externally sourced sticker images or icon packs are required. Switching between
+active effects retains the existing face-tracking worker.
 Test-only portrait fixtures and screenshots are not application assets.

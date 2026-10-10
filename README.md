@@ -1,6 +1,10 @@
 # PhotoPix
 
-A React photo booth with seven single/strip/grid templates, webcam preview, 0/3/5-second countdown, mirrored captures, camera selection, live layout preview, and face stickers (None, Dog, Hat, Glasses). Capture one photo per click until the selected layout is complete. Stickers are baked into the photos. Then choose Start over or Submit to open the `#/edit` editor, select a background and photo filter, and download a JPG that matches the rendered preview.
+A React photo booth with seven single/strip/grid templates, webcam preview, 0/3/5-second countdown, mirrored captures, camera selection, an individual captured-photo gallery, and 36 searchable face-tracked effects plus None. Capture one photo per click until the selected session is complete. Effects are baked into the photos. Then choose Start over or Submit to open the `#/edit` editor, select a compatible layout, background, and photo filter, and download a JPG that matches the rendered preview.
+
+The logo sits inside the camera panel above Camera preview. The camera fills the flexible center column and preserves the full source frame. Captured shots appear individually at right; strip composition starts in the editor after Submit. The capture template locks after the first shot, but the editor allows layouts with the same photo count: four-photo sessions can switch between Classic strip and Four grid; six-photo sessions can switch between Six strip and Six grid.
+
+Face effects are grouped into Animals (8), Eyewear (7), Headwear (10), and Fun (11). Search by name, filter by category, or select None/Clear sticker. Picker thumbnails, live overlays, and captured effects share the same canvas renderer. Switching between active effects keeps the face-tracking worker loaded.
 
 Photos remain in browser memory and disappear on reload. A direct visit or reload at `#/edit` without a completed session returns to the booth. Photos and face landmarks are never uploaded. The camera stops when the layout is complete or explicitly turned off. Face detection uses a CPU browser worker and locally served MediaPipe 0.10.32 runtime/model assets.
 
@@ -45,7 +49,9 @@ The primary project is `C:\Martin Archive\Programming\2026 Projects\PhotoPix`. S
 
 Earlier automated Chrome checks passed with a simulated webcam for template selection and locking, countdown cancellation, camera shutdown after completion, new session, single-photo capture, and permission denial.
 
-For the current extension, browser checks passed at 1440 × 900, 1366 × 768, 1280 × 720, 1024 × 600, 390 × 844, and 320 × 740. Checks covered all seven fixed export dimensions, portrait face detection and all three overlays using the actual MediaPipe model, submission to the editor, background/filter JPG pixels, download, Back to booth, Start over, and no JavaScript errors. The production build and preview also passed checks for local MediaPipe worker loading, all three stickers, editor rendering, JPG download, and visible editor actions. Actual webcams and mobile browsers still need device testing.
+The earlier editor extension passed browser checks at 1440 × 900, 1366 × 768, 1280 × 720, 1024 × 600, 390 × 844, and 320 × 740. Checks covered all seven fixed export dimensions, portrait face detection and the original three overlays using the actual MediaPipe model, submission to the editor, background/filter JPG pixels, download, Back to booth, Start over, and no JavaScript errors. That production build and preview also passed checks for local MediaPipe worker loading, those three stickers, editor rendering, JPG download, and visible editor actions.
+
+The latest production build passed flexible camera and disclosure checks at 1920 × 1080, 1366 × 768, 1280 × 720, 1024 × 600, 768 × 1024, and 390 × 844, with no horizontal overflow and no page scrolling at the tested desktop sizes. Browser checks confirmed all 36 distinct effect previews plus None, search/categories and empty-search recovery, actual MediaPipe tracking and worker reuse between effects, four individual captures, and sticker pixels baked into the JPG. Submission, compatible editor layout switching, background/filter export pixels, download, Back to booth, and Start over passed with no JavaScript errors. Actual webcams and mobile browsers still need device testing.
 
 The original OneDrive folder had file-creation problems with Node/npm. The project now runs from the local project location above. The original source folder is retained as a backup.
 
@@ -54,9 +60,12 @@ The original OneDrive folder had file-creation problems with Node/npm. The proje
 - Allow camera access: confirm live preview, then capture with each countdown setting.
 - Cancel a countdown: no photo should be captured afterward.
 - Toggle mirror: preview and downloaded photo should have the same orientation.
-- Choose Dog, Hat, or Glasses: confirm face tracking places the overlay correctly and the captured photo retains it. Choose None to capture without an overlay.
+- Search the 36 effects and filter each category. Confirm None remains available, Clear sticker removes the effect, and an empty search can return to all stickers.
+- Switch between active effects: confirm face tracking continues without reloading the model, thumbnails match the live artwork, and captured photos retain the chosen effect. Check effects from every category and choose None to capture without an overlay.
+- Confirm each capture appears individually in Captured photos; the composed strip first appears after Submit.
+- Submit four- and six-photo sessions, switch between their compatible strip/grid layouts, and confirm photo order and fixed dimensions.
 - Complete a template, select Submit, choose a background and filter, and download a JPG; verify it matches the editor preview, contains every photo in order, and preserves full frames at the dimensions above.
-- At short desktop heights, scroll editor options and confirm download and Start over remain visible.
+- At short desktop heights, scroll the template and sticker collections as needed and confirm camera/actions fit. Scroll editor options and confirm download and Start over remain visible.
 - Use Back to booth to review the completed session; reload `#/edit` and confirm the booth opens without the discarded photos.
 - Start a new session: camera resumes, previous photos are discarded, and templates become selectable again.
 - Deny permission, disconnect a webcam, and test a busy camera: verify recovery messages.

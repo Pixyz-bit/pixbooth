@@ -14,13 +14,13 @@ Use the bundled DM Sans with a sans-serif fallback throughout the interface. The
 
 ## Layout
 
-The latest user request governs composition: maximize viewport width with a three-column workspace at desktop widths of 1000px and above. A compact sidebar holds collapsible templates and face stickers at left; the flexible center column gives the square camera booth more room; the photo preview and collapsible settings fill the right. The camera booth retains a 1:1 aspect ratio and is sized against its available column height and width, leaving room for capture actions. Video preserves the full source frame with containment. Desktop columns stretch to the remaining workspace height; the open template grid fills leftover vertical sidebar space without expanding the sidebar width.
+The latest user request governs composition: maximize viewport width with a three-column workspace at desktop widths of 1000px and above. A compact sidebar holds collapsible templates and face stickers at left; the camera fills the flexible center column; the Captured photos gallery and collapsible settings fill the right. The camera panel stretches to the available workspace height and width, leaving room for capture actions below. Video preserves the full source frame with containment. There is no global header; the PhotoPix logo sits inside the camera panel above Camera preview.
 
-The desktop page uses 24px horizontal padding and 16px workspace gaps, with a 220px sidebar and 280px preview column. At desktop widths of 1000–1199px, padding becomes 16px, gaps become 12px, and the outer columns become 200px and 240px. The camera takes the remaining width; its square size is the smaller of its column width and column height minus 64px for actions. Compact desktop header (8px vertical padding), introduction (8px top and 10px bottom), and footer (8px top margin and 6px vertical padding) leave more room for the camera.
+The desktop page uses 24px horizontal padding and 16px workspace gaps, with a 220px sidebar and 280px gallery column. At desktop widths of 1000–1199px, padding becomes 16px, gaps become 12px, and the outer columns become 200px and 240px. The camera takes the remaining width. The compact template collection can scroll when needed; the open sticker collection fills the remaining sidebar height and scrolls internally. The introduction uses 8px top and 10px bottom padding; the footer uses an 8px top margin and 6px vertical padding.
 
-Between 601px and 999px, the sidebar spans the top, with camera and preview below. At 600px and below, panels stack on one page and templates use a four-column grid. The camera booth remains square. The preview scales within its actual remaining space using container units and preserves each layout’s fixed export proportions.
+Between 601px and 999px, the sidebar spans the top, with camera and gallery below. At 600px and below, panels stack on one page and templates and stickers use four-column grids. The mobile camera column uses a responsive height (`clamp(380px, 68dvh, 600px)`), and captured photos form a two-column gallery. The editor preview contains the rendered JPG and preserves its fixed export proportions.
 
-The editor leads with the finished artifact at left and a controls panel at right. Background and filter choices use three-column grids. On desktop, options scroll inside their panel while download and Start over remain visible in a persistent action area. At 600px and below, the editor becomes a single scrolling page.
+The editor leads with the finished artifact at left and a controls panel at right. Compatible same-count layouts use a two-column option grid; background and filter choices use three-column grids. On desktop, options scroll inside their panel while download and Start over remain visible in a persistent action area. At 600px and below, the editor becomes a single scrolling page.
 
 ## Elevation & Depth
 
@@ -32,13 +32,14 @@ Main panels use 18px rounded corners and 2px black outlines. Primary and outline
 
 ## Components
 
-Templates, face stickers, and photo settings use native details/summary disclosures. The template selection is a grid, with the active choice filled black and a visible selected mark. Face stickers provide None, Dog, Hat, and Glasses choices with a tracking status below. Both option groups retain pressed-state semantics.
+Templates, face stickers, and photo settings use native details/summary disclosures. The template selection is a grid, with the active choice filled black and a visible selected mark. Face stickers provide None and 36 effects across Animals, Eyewear, Headwear, and Fun. A labeled search field and category selector sit above the scrollable collection; the selected effect and Clear sticker remain visible. Thumbnail canvases use the same artwork as live and captured effects. Both option groups retain pressed-state semantics, and tracking status appears below the collection.
 
-Photo settings sit below the preview, closed by default. Countdown, mirror, and device selection are stacked in that panel, including long camera labels without overflow. Retain the privacy statement in the header and accessible session announcements. After capture completes, paired Start over and Submit actions replace the shutter. Submit opens the editor, whose background swatches and photo-filter thumbnails show selected outlines and whose main preview displays the rendered JPG.
+Photo settings sit below the captured-photo gallery, closed by default. Countdown, mirror, and device selection are stacked in that panel, including long camera labels without overflow. The gallery starts with an empty state and adds each individual shot in capture order, with contained images and simple captions. Compose the photo strip only after Submit. Retain accessible session announcements. After capture completes, paired Start over and Submit actions replace the shutter. Submit opens the editor, whose compatible layout choices, background swatches, and photo-filter thumbnails show their selected state and whose main preview displays the rendered JPG.
 
 ## Do's and Don'ts
 
-- Do keep the booth square, full camera frames contained, and preview/export proportions aligned.
+- Do let the camera fill its available column, keep full camera frames contained, and align the editor preview with export proportions.
+- Do keep sticker search, category, selected effect, and tracking status usable while the collection scrolls.
 - Do verify open and closed disclosures, long camera labels, six-photo layouts, and editor actions at compact desktop heights.
 - Do use the existing 3px black focus outline and honor reduced motion.
 - Don't add shadows or replace the supplied screenshot world when extending the interface.
