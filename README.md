@@ -1,24 +1,46 @@
-# PhotoPix
+# Pixbooth
 
-A React photo booth with seven single/strip/grid templates, webcam preview, 0/3/5-second countdown, mirrored captures, camera selection, an individual captured-photo gallery, and 36 searchable face-tracked effects plus None. Capture one photo per click until the selected session is complete. Effects are baked into the photos. Then choose Start over or Submit to open the `#/edit` editor, select a compatible layout, background, and photo filter, and download a JPG that matches the rendered preview.
+A React browser booth for photos and five-second live clips, with a centered landing page and illustrative sample photos, 21 templates, 36 face effects plus None, and an editor with 20 backgrounds, 20 filters, 11 border-sticker designs plus None, and a custom caption.
 
-The logo sits inside the camera panel above Camera preview. The camera fills the flexible center column and preserves the full source frame. Captured shots appear individually at right; strip composition starts in the editor after Submit. The capture template locks after the first shot, but the editor allows layouts with the same photo count: four-photo sessions can switch between Classic strip and Four grid; six-photo sessions can switch between Six strip and Six grid.
+The authoritative site-wide visual guide is [docs/design/DESIGN-CONCEPT.md](docs/design/DESIGN-CONCEPT.md). [DESIGN.md](DESIGN.md) is its compact token entry point. Pixbooth uses the supplied PNG logo and a black-and-white neobrutalist interface. Creative media and user-selected strip artwork retain their colors.
 
-Face effects are grouped into Animals (8), Eyewear (7), Headwear (10), and Fun (11). Search by name, filter by category, or select None/Clear sticker. Picker thumbnails, live overlays, and captured effects share the same canvas renderer. Switching between active effects keeps the face-tracking worker loaded.
+## Workflow
 
-Photos remain in browser memory and disappear on reload. A direct visit or reload at `#/edit` without a completed session returns to the booth. Photos and face landmarks are never uploaded. The camera stops when the layout is complete or explicitly turned off. Face detection uses a CPU browser worker and locally served MediaPipe 0.10.32 runtime/model assets.
+Open `#/` for the home page. Its centered hero places the supplied logo above the headline on a subtle monochrome grid, with one Capture action and locally generated grayscale photo-print artwork labeled Illustrative sample captures. There is no landing navbar. Capture starts white, turns black on hover, and enters the template step at `#/templates`; the interactive landing playground has been removed. [Landing artwork provenance](docs/design/landing-artwork.md) records the exact generation prompt and local asset.
 
-Export uses fixed 900 × 675px photo cells, 36px outer padding, 23px gaps, and a 126px branding footer, independent of webcam resolution. Full camera frames are letterboxed within the cells. The editor offers Classic black, Paper white, Blush, Sky blue, Checkerboard, and Confetti backgrounds, plus Original, Black & white, Vintage, Warm, Cool, and Soft photo filters.
+1. **Choose template — `#/templates`.** Select from the 21-layout grid, review its selected-layout diagram and capture count, then choose Continue to capture. Classic strip is selected initially.
+2. **Capture photos — `#/booth`.** Choose Photo or Live mode and enable the webcam. The sidebar contains face stickers; the main camera, two-column individual-media gallery, and collapsible photo settings occupy the capture workspace. Capture one item per click with a 0/3/5-second countdown. The camera contains the full source frame; gallery crops follow template frame proportions. The capture template and mode lock after the first item.
+3. **Edit & download — `#/edit`.** Submit becomes available after the required captures. Use compatible layouts and finishing controls, then download the result.
 
-| Template | JPG dimensions |
+Non-home pages share step breadcrumbs with `aria-current="step"`. Capture is unavailable until Continue, and editing is unavailable until the session is complete. Previous steps remain clickable; captures and editor choices survive backtracking and browser history in memory. Returning to step one after a capture keeps the template locked.
+
+Search the 36 face effects by name or category: Animals (8), Eyewear (7), Headwear (10), and Fun (11). Choose None or Clear sticker to remove an effect. Thumbnail, live-overlay, and capture artwork share one renderer; active-effect changes retain the face-tracking worker. Effects are baked into photos and clips.
+
+When the session is complete, Start over discards it or Submit opens `#/edit`. Switch among layouts with the same capture count, then choose a background, filter, border-sticker design, and caption of up to 32 characters. Photo sessions download JPGs. Live sessions provide individual MP4 clip downloads, a playing/paused composed preview, an MP4 creation action with progress and cancellation, and a JPG cover-photo download.
+
+Photos, clips, and editor choices stay in browser memory and disappear on reload. Fresh or reloaded `#/booth` and `#/edit` URLs without a session return to `#/templates`. Start over clears captures and editor choices, returns to step one, and leaves the camera off. Leaving capture cancels countdown/recording and stops camera tracks; the camera also stops on completion, explicit cancellation, and unmount. Media and face landmarks are never uploaded.
+
+## Templates and export geometry
+
+| Capture count | Compatible templates |
 | --- | --- |
-| Single | 972 × 873px |
-| Duo strip | 972 × 1571px |
-| Trio strip | 972 × 2269px |
-| Classic strip | 972 × 2967px |
-| Four grid | 1895 × 1571px |
-| Six strip | 972 × 4363px |
-| Six grid | 1895 × 2269px |
+| 1 | Single, Polaroid, Portrait, Square |
+| 2 | Duo strip, Duo row, Square duo |
+| 3 | Trio strip, Trio row, Story trio |
+| 4 | Classic strip, Four grid, Hero + three, Square four, Film frames |
+| 6 | Six strip, Six grid, Six landscape, Contact sheet |
+| 8 | Eight grid |
+| 9 | Nine grid |
+
+`src/collage.js` owns template geometry. The base uses 900 × 675px cells, 36px padding, 23px gaps, and a 126px caption footer. Square variants and Contact sheet use 900px cell height; Portrait uses 1200px; Polaroid adds 72px padding and a 270px footer; Film frames uses 90px padding and 36px gaps. Story trio and Hero + three span cells for mixed-size frames.
+
+JPG dimensions remain fixed per template, independent of camera resolution. Each source is center-cropped to fill its frame. Background, filter, border motifs, and caption pass through the same strip renderer for the editor and export. The original seven layouts retain their sizes: Single 972 × 873px; Duo strip 972 × 1571px; Trio strip 972 × 2269px; Classic strip 972 × 2967px; Four grid 1895 × 1571px; Six strip 972 × 4363px; Six grid 1895 × 2269px.
+
+## Live MP4
+
+Live mode records silent five-second clips at 20fps. MediaBunny 1.61.3 encodes H.264 into an actual MP4 container in the browser; WebM data is not relabeled. Capture scales proportionally to at most 960 × 720px with even dimensions. A composed live strip preserves template proportions and scales its longest side to at most 1920px, also using even dimensions.
+
+Live is enabled only when the browser reports compatible H.264 encoding. Export also needs decoding support for the captured clips. An unavailable capability produces recovery copy and leaves Photo mode available. Hiding the tab cancels recording; recording/export controls support cancellation. No microphone or audio track is recorded.
 
 ## Development
 
@@ -30,9 +52,9 @@ npm run setup:face
 npm run dev
 ```
 
-`setup:face` copies the pinned MediaPipe runtime from the npm package and downloads the versioned Face Landmarker model if absent. Run it before the first development server or production build. Runtime assets are then served from `public/mediapipe/`; see [THIRD_PARTY.md](THIRD_PARTY.md) for provenance and licensing and `scripts/setup-face-assets.mjs` for the reproducible setup.
+`setup:face` copies the pinned MediaPipe 0.10.32 runtime and downloads the versioned Face Landmarker model if absent. Run it before the first server or build. Assets are then served locally from `public/mediapipe/`. [THIRD_PARTY.md](THIRD_PARTY.md) records dependency and asset provenance.
 
-Open the localhost URL printed by Vite. Camera access needs permission and HTTPS or localhost. A plain HTTP LAN address on a phone cannot access the camera; use an HTTPS deployment for mobile testing.
+Open Vite's localhost URL. Camera access needs permission and HTTPS or localhost. A plain HTTP LAN address cannot provide mobile camera access.
 
 ```sh
 npm run build
@@ -43,31 +65,32 @@ Deploy `dist/` to an HTTPS static host. No backend, credentials, or database are
 
 ## Project location
 
-The primary project is `C:\Martin Archive\Programming\2026 Projects\PhotoPix`. Start Vite from this directory with `npm run dev`.
+The canonical working project is `C:\Martin Archive\Programming\2026 Projects\PhotoPix`. Run development/build commands there. The original `C:\Users\arlan\OneDrive\ドキュメント\ChatGPT\PhotoPix` folder is retained for staged source/document changes after earlier Node/npm file-creation problems. The public brand is Pixbooth; the canonical folder and npm package name remain PhotoPix/photopix.
 
-## Verification in this workspace
+## Verification
 
-Earlier automated Chrome checks passed with a simulated webcam for template selection and locking, countdown cancellation, camera shutdown after completion, new session, single-photo capture, and permission denial.
+Earlier browser checks passed the photo workflow, the original seven export dimensions, actual MediaPipe portrait detection and 36 effect previews, worker reuse, centered gallery/export crops, editor choices, JPG download, cancellation, and camera cleanup. Those checks used simulated camera input and do not establish physical-camera compatibility.
 
-The earlier editor extension passed browser checks at 1440 × 900, 1366 × 768, 1280 × 720, 1024 × 600, 390 × 844, and 320 × 740. Checks covered all seven fixed export dimensions, portrait face detection and the original three overlays using the actual MediaPipe model, submission to the editor, background/filter JPG pixels, download, Back to booth, Start over, and no JavaScript errors. That production build and preview also passed checks for local MediaPipe worker loading, those three stickers, editor rendering, JPG download, and visible editor actions.
+The expanded implementation passed simulated-camera Chrome checks for home/booth/editor routes and logo display; all 21 fixed template geometries; the 21/20/20/12 layout/background/filter/border-choice counts; recording cancellation; a playable five-second 640 × 480px H.264 MP4 clip; and a decorated five-second 972 × 872px live-strip MP4 whose frames change during playback. Unsupported-MP4 fallback, denied-camera recovery, and direct `#/edit` recovery passed. Desktop layouts fit at 1366 × 768 and 1024 × 600, and 390px mobile had no horizontal overflow. Browser checks reported no JavaScript errors; eight desktop/mobile home, booth, editor, and live-editor screenshots were reviewed. These results use simulated input and do not establish physical-camera or mobile-browser compatibility.
 
-The latest production build passed flexible camera and disclosure checks at 1920 × 1080, 1366 × 768, 1280 × 720, 1024 × 600, 768 × 1024, and 390 × 844, with no horizontal overflow and no page scrolling at the tested desktop sizes. Browser checks confirmed all 36 distinct effect previews plus None, search/categories and empty-search recovery, actual MediaPipe tracking and worker reuse between effects, four individual captures, and sticker pixels baked into the JPG. Submission, compatible editor layout switching, background/filter export pixels, download, Back to booth, and Start over passed with no JavaScript errors. Actual webcams and mobile browsers still need device testing.
+The expanded-feature production build passed (116 modules) with the MP4 dependency loaded in a separate lazy chunk and no chunk warnings.
 
-The original OneDrive folder had file-creation problems with Node/npm. The project now runs from the local project location above. The original source folder is retained as a backup.
+The earlier landing refinement, before the later navbar removal and sequential workflow, passed its production build and browser smoke checks for asset decoding, compact layouts, focus, and navigation. Its screenshots are saved in `.impeccable/review/landing-refresh-{1366,768,390,320}.png`.
+
+The three-step workflow passed its production build (118 modules) and automated checks for all 21 templates, reload route guards, photo/live and composed-MP4 export, captured-media/editor-state preservation, browser history, and countdown/recording cancellation with the camera off after navigation. Nine desktop/compact/mobile screen checks confirmed height fit at 1366 × 768 and 1024 × 600, no horizontal overflow at 390 × 844, and no JavaScript errors. Actual webcams and mobile browsers still need device testing.
 
 ## Manual checks
 
-- Allow camera access: confirm live preview, then capture with each countdown setting.
-- Cancel a countdown: no photo should be captured afterward.
-- Toggle mirror: preview and downloaded photo should have the same orientation.
-- Search the 36 effects and filter each category. Confirm None remains available, Clear sticker removes the effect, and an empty search can return to all stickers.
-- Switch between active effects: confirm face tracking continues without reloading the model, thumbnails match the live artwork, and captured photos retain the chosen effect. Check effects from every category and choose None to capture without an overlay.
-- Confirm each capture appears individually in Captured photos; the composed strip first appears after Submit.
-- Submit four- and six-photo sessions, switch between their compatible strip/grid layouts, and confirm photo order and fixed dimensions.
-- Complete a template, select Submit, choose a background and filter, and download a JPG; verify it matches the editor preview, contains every photo in order, and preserves full frames at the dimensions above.
-- At short desktop heights, scroll the template and sticker collections as needed and confirm camera/actions fit. Scroll editor options and confirm download and Start over remain visible.
-- Use Back to booth to review the completed session; reload `#/edit` and confirm the booth opens without the discarded photos.
-- Start a new session: camera resumes, previous photos are discarded, and templates become selectable again.
-- Deny permission, disconnect a webcam, and test a busy camera: verify recovery messages.
-- If multiple cameras exist, switch between them and verify the old stream stops.
-- Test Chrome/Edge desktop, Android Chrome, and iPhone Safari on actual devices over HTTPS.
+The later hero refinement removes the navbar, centers the logo above the heading, adds a 32px monochrome landing grid, and makes Capture white by default and black on hover. The production build passed; the in-app page confirmed the hero logo, absent navbar, default button colors, grid, and no horizontal overflow.
+
+- Check the centered hero, grid, sample-capture label, and single Capture action; confirm it opens the template catalog with Classic strip initially selected.
+- Select a template, Continue, and confirm breadcrumb availability/current-step semantics. After capturing, backtrack through previous steps and browser history; verify captures, locked capture layout, and editor choices survive.
+- Confirm Photo and Live selection, template/mode locking, countdown cancellation, and Start over returning to step one with cleared captures/editor choices and camera off.
+- Search every face-effect category, recover from empty results, and compare thumbnail/live/captured artwork.
+- Check template collections, sticker scrolling, open/closed disclosures, and visible actions at compact desktop heights.
+- Capture templates with square, portrait, mixed-size, and eight/nine-frame geometry; verify same-count editor choices and centered crops.
+- Change backgrounds, filters, border artwork, and caption; confirm JPG preview/export agreement.
+- Record five-second clips, cancel recording, hide the tab, and verify camera shutdown and error recovery.
+- Create a live strip, play/pause preview, cancel export, and verify MP4 duration, playable H.264 video, frame geometry, selected artwork, and JPG cover download.
+- Open or reload `#/booth` and `#/edit` without a session and confirm both return to `#/templates`. Leave capture during countdown/recording and confirm cancellation and camera shutdown; test denied permission, disconnected/busy cameras, and multiple-device switching.
+- Test actual desktop and mobile devices over HTTPS. Check keyboard focus, reduced motion, and the concept's black/white chrome separately from colorful media.

@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { templates } from './collage.js';
-import { Chevron, TemplateMini } from './BoothParts.jsx';
+import { templates, frameRects } from './collage.js';
+import Landing from './Landing.jsx';
+import Brand from './Brand.jsx';
+import { supportsMp4, encodeCanvas } from './live-media.js';
+import { Chevron } from './BoothParts.jsx';
+import WorkflowSteps from './WorkflowSteps.jsx';
+import TemplateSelection from './TemplateSelection.jsx';
 import StickerPicker from './StickerPicker.jsx';
 import StripEditor from './StripEditor.jsx';
 import { drawSticker } from './face-stickers.js';
@@ -32,8 +37,11 @@ export default function App() {
   const requestId = useRef(0);
   const timer = useRef(null);
   const shotUrls = useRef([]);
+  const recording = useRef(null);
   const [shots, setShots] = useState([]);
   const [templateId, setTemplateId] = useState('strip-four');
+  const [layoutChosen, setLayoutChosen] = useState(false);
+  const [editorSettings, setEditorSettings] = useState(null);
   const template = templates.find(item => item.id === templateId);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
@@ -44,18 +52,29 @@ export default function App() {
   const [countdown, setCountdown] = useState(null);
   const [flash, setFlash] = useState(false);
   const [sticker, setSticker] = useState('none');
-  const [page, setPage] = useState('booth');
+  const [page, setPage] = useState(['/templates','/booth','/edit'].includes(location.hash.slice(1)) ? 'templates' : 'home');
+  const [mode, setMode] = useState('photo');
+  const [mp4Supported, setMp4Supported] = useState(null);
+  const [recordProgress, setRecordProgress] = useState(0);
   const completed = shots.length === template.count;
-  const cameraActive = status === 'ready' || status === 'saving' && !completed;
+  const cameraActive = ['ready','recording'].includes(status) || status === 'saving' && !completed;
   const face = useFaceStickers(video, overlay, cameraActive && page === 'booth', sticker);
   const stickerReady = sticker === 'none' || face.state === 'tracking';
+  useEffect(() => { if(page!=='booth')return;let cancelled=false;supportsMp4().then(value=>{if(!cancelled)setMp4Supported(value);});return()=>{cancelled=true;}; }, [page]);
+  useEffect(() => { document.querySelector('main h1')?.focus(); }, [page]);
 
   useEffect(() => {
-    function route() { setPage(location.hash === '#/edit' && completed ? 'editor' : 'booth'); }
+    function route() {
+      const requested = location.hash.slice(1);
+      const next = requested === '/edit' && completed ? 'editor' : ['/booth','/edit'].includes(requested) && layoutChosen ? 'booth' : ['/templates','/booth','/edit'].includes(requested) ? 'templates' : 'home';
+      const path = next === 'editor' ? '/edit' : next === 'booth' ? '/booth' : next === 'templates' ? '/templates' : '/';
+      if (requested !== path) history.replaceState(null, '', `#${path}`);
+      setPage(next);
+      if (next !== 'booth') { requestId.current++; recording.current?.abort(); cancelCountdown(); releaseCamera(); setFlash(false); setRecordProgress(0); setStatus(completed ? 'review' : 'idle'); }
+    }
     route(); window.addEventListener('hashchange', route);
-    if (!completed && location.hash === '#/edit') history.replaceState(null, '', location.pathname + location.search);
     return () => window.removeEventListener('hashchange', route);
-  }, [completed]);
+  }, [completed, layoutChosen]);
 
   function releaseCamera() {
     if (stream.current) stream.current.getTracks().forEach(track => track.stop());
@@ -71,6 +90,7 @@ export default function App() {
 
   useEffect(() => () => {
     requestId.current++;
+    recording.current?.abort();
     clearInterval(timer.current);
     if (stream.current) stream.current.getTracks().forEach(track => track.stop());
     shotUrls.current.forEach(url => URL.revokeObjectURL(url));
@@ -83,7 +103,7 @@ export default function App() {
     setError('');
     setStatus('loading');
     if (!navigator.mediaDevices?.getUserMedia) {
-      setError('Camera access requires HTTPS or localhost and a supported browser. Open PhotoPix through a secure address.');
+      setError('Camera access requires HTTPS or localhost and a supported browser. Open Pixbooth through a secure address.');
       setStatus('idle');
       return;
     }
@@ -95,7 +115,7 @@ export default function App() {
       track.onended = () => {
         if (stream.current !== next) return;
         requestId.current++;
-        cancelCountdown(); releaseCamera(); setStatus('idle');
+        recording.current?.abort(); cancelCountdown(); releaseCamera(); setStatus('idle');
         setError('The camera disconnected. Reconnect it and enable the camera again.');
       };
       setDeviceId(track.getSettings().deviceId || selected);
@@ -116,7 +136,35 @@ export default function App() {
   }
 
   function stopCamera() {
-    requestId.current++; cancelCountdown(); releaseCamera(); setStatus('idle');
+    requestId.current++; recording.current?.abort(); cancelCountdown(); releaseCamera(); setStatus('idle'); setRecordProgress(0);
+  }
+
+  useEffect(() => {
+    const visibility = () => { if (document.hidden && recording.current) { stopCamera(); setError('Live recording was cancelled when the tab was hidden. Keep this tab open and try again.'); } };
+    document.addEventListener('visibilitychange', visibility);
+    return () => document.removeEventListener('visibilitychange', visibility);
+  }, []);
+
+  async function captureLive() {
+    cancelCountdown(); const id=requestId.current, source=video.current;
+    if (!source?.videoWidth || !stream.current?.active) { setError('The camera isn’t ready. Enable it and try again.'); return; }
+    const controller=new AbortController();recording.current=controller;setStatus('recording');setRecordProgress(0);
+    const canvas=document.createElement('canvas'),scale=Math.min(1,960/source.videoWidth,720/source.videoHeight);
+    canvas.width=Math.floor(source.videoWidth*scale/2)*2;canvas.height=Math.floor(source.videoHeight*scale/2)*2;
+    const ctx=canvas.getContext('2d');let poster;
+    try {
+      const blob=await encodeCanvas(canvas,()=>{
+        if (!stream.current?.active) throw new Error('The camera disconnected during recording. Enable it and try again.');
+        ctx.save();if(mirror){ctx.translate(canvas.width,0);ctx.scale(-1,1);}ctx.drawImage(source,0,0,canvas.width,canvas.height);
+        const result=face.latest.current;if(sticker!=='none'&&result&&performance.now()-result.timestamp<600)drawSticker(ctx,result.points,canvas.width,canvas.height,sticker);ctx.restore();
+        if (!poster) poster=canvas.toDataURL('image/jpeg',.9);
+      },{signal:controller.signal,realtime:true,onProgress:setRecordProgress});
+      if(id!==requestId.current)return;
+      const url=URL.createObjectURL(blob);shotUrls.current.push(url);
+      const next=[...shots,{url,poster,blob,type:'live',width:canvas.width,height:canvas.height}];setShots(next);
+      if(next.length===template.count){releaseCamera();setStatus('review');}else setStatus('ready');
+    }catch(err){if(id===requestId.current&&err.name!=='AbortError'){setError(err.message||'Live recording failed. Try again or switch to Photo.');setStatus('ready');}}
+    finally{if(recording.current===controller)recording.current=null;setRecordProgress(0);}
   }
 
   async function capture() {
@@ -165,46 +213,37 @@ export default function App() {
 
   function takePhoto() {
     setError('');
-    if (delay === 0) { capture(); return; }
+    const take = mode === 'live' ? captureLive : capture;
+    if (delay === 0) { take(); return; }
     let remaining = delay;
     setCountdown(remaining);
     timer.current = setInterval(() => {
       remaining--;
-      if (remaining === 0) capture();
+      if (remaining === 0) take();
       else setCountdown(remaining);
     }, 1000);
   }
 
   function retake() {
-    location.hash = '/'; setPage('booth');
+    requestId.current++;recording.current?.abort();cancelCountdown();releaseCamera();
+    location.hash = '/templates'; setPage('templates');setLayoutChosen(false);
     shotUrls.current.forEach(url => URL.revokeObjectURL(url));
     shotUrls.current = [];
-    setShots([]); openCamera(deviceId);
+    setShots([]);setEditorSettings(null);setStatus('idle');setFlash(false);setError('');setRecordProgress(0);
   }
 
-  const busy = countdown !== null || status === 'loading' || status === 'saving';
+  const busy = countdown !== null || ['loading','saving','recording'].includes(status);
   const reviewing = status === 'review';
 
   const templateLocked = busy || shots.length > 0;
 
-  return <div className="app">
-    {page === 'editor' && completed ? <StripEditor shots={shots} template={template} onBack={() => { location.hash = '/'; }} onStartOver={retake}/> : <main>
-      <div className="intro"><div><h1>Your moment. Your layout.</h1><p>Capture your photos here. Format your strip after Submit.</p></div></div>
+  return <div className={`app ${page === 'home' ? 'home-app' : ''}`}>
+    {page !== 'home' && <WorkflowSteps page={page} layoutChosen={layoutChosen} completed={completed}/>}
+    {page === 'home' ? <Landing onCapture={()=>{location.hash='/templates';}}/> : page === 'templates' ? <TemplateSelection template={template} onSelect={id=>{setTemplateId(id);setEditorSettings(null);}} locked={shots.length > 0} captured={shots.length} onContinue={()=>{setLayoutChosen(true);location.hash='/booth';}} onStartOver={retake}/> : page === 'editor' && completed ? <StripEditor shots={shots} template={template} settings={editorSettings} onSettingsChange={setEditorSettings} onBack={() => { location.hash = '/booth'; }} onStartOver={retake}/> : <main className="capture-main">
+      <div className="intro booth-intro"><div><h1 tabIndex="-1">Capture your moments.</h1><p>{template.name} · {template.count} {mode === 'live' ? 'five-second clips' : 'photos'}. Submit when you’re ready to edit.</p></div><div className="capture-mode" role="group" aria-label="Capture mode"><button className={mode==='photo'?'active':''} aria-pressed={mode==='photo'} disabled={templateLocked} onClick={()=>setMode('photo')}>Photo</button><button className={mode==='live'?'active':''} aria-pressed={mode==='live'} disabled={templateLocked||mp4Supported!==true} onClick={()=>setMode('live')} title={mp4Supported===false?'MP4 encoding is unavailable in this browser. Try current Chrome, Edge or Safari.':undefined}>Live · 5 sec</button></div></div>
+      {mp4Supported===false&&<p className="compatibility-note">Live MP4 needs a browser with H.264 recording. Photo mode is ready to use.</p>}
       <div className="booth-layout">
         <div className="sidebar-column">
-        <details className="template-rail panel" aria-label="Grid templates" open>
-          <summary><span>Grid templates</span><Chevron/></summary>
-          <div className="template-content">
-          <div className="template-list" role="group" aria-label="Choose a photo layout">
-            {templates.map(item => <button key={item.id} className={templateId === item.id ? 'template-button selected' : 'template-button'} aria-pressed={templateId === item.id} disabled={templateLocked} onClick={() => setTemplateId(item.id)} aria-label={`${item.name}, ${item.count} ${item.count === 1 ? 'photo' : 'photos'}`}>
-              <TemplateMini template={item}/>
-              <span className="template-name">{item.name}</span>
-              {templateId === item.id && <svg className="selected-mark" aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2"><path d="m3 8 3 3 7-7"/></svg>}
-            </button>)}
-          </div>
-          <p className="rail-note">{shots.length > 0 ? 'Start a new session to change layout.' : 'Choose your layout before the first shot.'}</p>
-          </div>
-        </details>
         <details className="sticker-panel panel" open><summary><span>Face stickers</span><Chevron/></summary>
           <div className="sticker-content"><StickerPicker selected={sticker} onSelect={setSticker} disabled={busy || completed}/>
           <p className="sticker-status" role="status" aria-live="polite">{sticker === 'none' ? 'Choose a sticker to wear in your photos.' : !cameraActive ? 'Switch on the camera to use your sticker.' : face.state === 'loading' ? 'Loading face tracking…' : face.state === 'tracking' ? 'Face found. Your sticker is ready.' : face.state === 'error' ? 'Face tracking couldn’t load. Retry or choose None.' : 'Face the camera to place your sticker.'}</p>
@@ -213,26 +252,27 @@ export default function App() {
         </div>
         <div className="camera-column">
           <section className="booth" aria-label="Photo booth">
-            <div className="booth-brand"><a className="wordmark" href="./" aria-label="PhotoPix home"><span className="brand-icon"><Icon name="camera" size={23}/></span>PhotoPix<span className="brand-dot">.</span></a></div>
-            <div className="booth-bar"><h2 className="panel-title">Camera preview</h2><div className="camera-control"><span className="camera-toggle-label">{status === 'loading' ? 'Connecting…' : status === 'ready' || status === 'saving' && !completed ? 'Camera on' : 'Camera off'}</span><button className={`switch ${status === 'ready' || status === 'saving' && !completed ? 'on' : ''}`} role="switch" aria-label="Camera" aria-checked={status === 'ready' || status === 'saving' && !completed} disabled={status === 'saving' || completed} title={completed ? 'Start a new session to use the camera again' : status === 'loading' ? 'Cancel camera connection' : undefined} onClick={() => status === 'ready' || status === 'loading' ? stopCamera() : openCamera(deviceId)}><span/></button></div></div>
+            <div className="booth-brand"><Brand/></div>
+            <div className="booth-bar"><h2 className="panel-title">Camera preview</h2><div className="camera-control"><span className="camera-toggle-label">{status === 'loading' ? 'Connecting…' : cameraActive ? 'Camera on' : 'Camera off'}</span><button className={`switch ${cameraActive ? 'on' : ''}`} role="switch" aria-label="Camera" aria-checked={cameraActive} disabled={status === 'saving' || completed} title={completed ? 'Start a new session to use the camera again' : status === 'loading' ? 'Cancel camera connection' : undefined} onClick={() => cameraActive || status === 'loading' ? stopCamera() : openCamera(deviceId)}><span/></button></div></div>
             <div className={`viewfinder ${flash ? 'flash' : ''}`}>
-              <video ref={video} autoPlay muted playsInline className={`${mirror ? 'mirrored' : ''} ${status === 'ready' || status === 'saving' && !completed ? '' : 'hidden'}`} aria-label="Live webcam preview"/>
+              <video ref={video} autoPlay muted playsInline className={`${mirror ? 'mirrored' : ''} ${cameraActive ? '' : 'hidden'}`} aria-label="Live webcam preview"/>
               <canvas ref={overlay} className={`face-overlay ${mirror ? 'mirrored' : ''} ${cameraActive ? '' : 'hidden'}`} aria-hidden="true"/>
-              {completed && <img className="captured-photo" src={shots.at(-1).url} alt="Your last captured photo"/>}
+              {completed && (mode==='live'?<video className="captured-photo" src={shots.at(-1).url} autoPlay loop muted playsInline controls aria-label="Your last live clip"/>:<img className="captured-photo" src={shots.at(-1).url} alt="Your last captured photo"/>)}
               {!completed && (status === 'idle' || status === 'loading') && <div className="camera-placeholder"><div className="camera-outline"><Icon name="camera" size={44}/></div><h2>{status === 'loading' ? 'Just a moment…' : 'Ready when you are.'}</h2><p>{status === 'loading' ? 'Allow camera access when your browser asks.' : 'Switch on the camera above to get started.'}</p></div>}
               <span className="corner top-left"/><span className="corner top-right"/><span className="corner bottom-left"/><span className="corner bottom-right"/>
               {countdown !== null && <div className="countdown" role="status" aria-live="assertive" aria-atomic="true" key={countdown}>{countdown}</div>}
+              {status==='recording'&&<div className="recording-status" role="status"><span/>Recording · {Math.min(5,Math.ceil(recordProgress*5))} / 5 sec<progress value={recordProgress} max="1" aria-label="Live recording progress"/></div>}
             </div>
-            <div className="booth-bottom"><span>{completed ? 'All your moments, ready to keep.' : countdown !== null ? 'Hold that pose…' : `Photo ${shots.length + 1} of ${template.count} · Full frame, no cropping`}</span></div>
+            <div className="booth-bottom"><span>{completed ? 'All your moments, ready to keep.' : countdown !== null ? 'Hold that pose…' : `${mode==='live'?'Live clip':'Photo'} ${shots.length + 1} of ${template.count}`}</span></div>
           </section>
-            {countdown !== null ? <button className="button button-dark shutter-button" onClick={cancelCountdown}>Cancel countdown</button> : completed ? <div className="completion-actions"><button className="button button-outline" disabled={busy} onClick={retake}><Icon name="retake"/>Start over</button><button className="button button-dark" disabled={busy} onClick={() => { location.hash = '/edit'; }} >Submit<Icon name="arrow"/></button></div> : <button className="button button-dark shutter-button" disabled={status !== 'ready' || !stickerReady} onClick={takePhoto}><Icon name="camera"/>{status === 'saving' ? 'Saving photo…' : 'Say cheese!'}</button>}
+            {countdown !== null ? <button className="button button-dark shutter-button" onClick={cancelCountdown}>Cancel countdown</button> : status==='recording' ? <button className="button button-outline shutter-button" onClick={stopCamera}>Cancel recording</button> : completed ? <div className="completion-actions"><button className="button button-outline" disabled={busy} onClick={retake}><Icon name="retake"/>Start over</button><button className="button button-dark" disabled={busy} onClick={() => { location.hash = '/edit'; }} >Submit<Icon name="arrow"/></button></div> : <button className="button button-dark shutter-button" disabled={status !== 'ready' || !stickerReady} onClick={takePhoto}><Icon name="camera"/>{status === 'saving' ? 'Saving photo…' : mode==='live'?'Record 5 seconds':'Say cheese!'}</button>}
 
         </div>
         <div className="preview-column">
         <aside className="preview-panel" aria-label="Captured photos">
-          <h2>Captured photos</h2>
+          <h2>{mode==='live'?'Live clips':'Captured photos'}</h2>
           <p className="preview-subtitle">{shots.length} of {template.count} captured</p>
-          <div className={`capture-gallery ${shots.length ? '' : 'empty'}`} tabIndex={shots.length ? 0 : undefined} aria-label="Your captured photos">{shots.length ? shots.map((shot, index) => <figure key={shot.url}><img src={shot.url} alt={`Captured photo ${index + 1}`}/><figcaption>Photo {index + 1}</figcaption></figure>) : <div className="gallery-empty"><Icon name="camera" size={30}/><p>No photos yet</p><span>Take your first photo to begin.</span></div>}</div>
+          <div className={`capture-gallery ${shots.length ? '' : 'empty'}`} tabIndex={shots.length ? 0 : undefined} aria-label="Your captured photos">{shots.length ? shots.map((shot, index) => <figure key={shot.url}>{shot.type==='live'?<video src={shot.url} poster={shot.poster} controls loop muted playsInline aria-label={`Live clip ${index+1}`} style={{aspectRatio:frameRects(template)[index].width/frameRects(template)[index].height}}/>:<img src={shot.url} alt={`Captured photo ${index + 1}`} style={{aspectRatio:frameRects(template)[index].width/frameRects(template)[index].height}}/>}<figcaption>{shot.type==='live'?<a href={shot.url} download={`pixbooth-live-${index+1}.mp4`}>Clip {index+1} · Download MP4</a>:`Photo ${index+1}`}</figcaption></figure>) : <div className="gallery-empty"><Icon name="camera" size={30}/><p>{mode==='live'?'No clips yet':'No photos yet'}</p><span>{mode==='live'?'Record five seconds to begin.':'Take your first photo to begin.'}</span></div>}</div>
           {shots.length > 0 && !busy && !completed && <button className="text-button start-over" onClick={retake}><Icon name="retake" size={16}/>Start over</button>}
         </aside>
         <details className="settings-panel"><summary><span><Icon name="timer" size={18}/>Photo settings</span><svg className="settings-chevron" aria-hidden="true" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="m5 7 5 5 5-5"/></svg></summary>
@@ -247,6 +287,6 @@ export default function App() {
       {error && <div className="error-message" role="alert"><strong>Let’s get that sorted.</strong><p>{error}</p>{status === 'idle' && <button className="text-button" onClick={() => openCamera(deviceId)}>Try again <Icon name="arrow" size={16}/></button>}</div>}
       <p className="session-announcement" role="status" aria-live="polite">{reviewing ? 'All photos captured. Submit to format your strip, or start over.' : status === 'ready' ? `Camera ready. ${shots.length} of ${template.count} photos captured.` : ''}</p>
     </main>}
-    <footer><span>PhotoPix — Your browser photo booth.</span><span>Capture. Retake. Download.</span></footer>
+    <footer><span>Pixbooth — Your browser photo booth.</span><span>Capture. Customize. Keep.</span></footer>
   </div>;
 }
