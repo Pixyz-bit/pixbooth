@@ -1,0 +1,3 @@
+# PhotoPix
+
+Browser photo booth built with React JS. Choose one of seven single/strip/grid templates, enable webcam, preview, countdown, capture each photo, review the growing layout, and download the completed JPG. Default: four-photo classic strip. Templates lock after the first capture; start a new session to change layout. Preserve the full source frame with letterboxing. Photos stay in browser memory; no uploads, accounts, backend, or persistence. Camera access is explicit. Stop tracks after the layout is complete, cancellation, and unmount. Camera permissions and real-device compatibility require verification.
