@@ -10,6 +10,7 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
   const [decoration, setDecoration] = useState(settings?.decoration ?? 'none'),
     [caption, setCaption] = useState(settings?.caption ?? 'pixbooth'),
     [playing, setPlaying] = useState(true);
+  const [frame, setFrame] = useState(settings?.frame ?? 'none');
   const [output, setOutput] = useState(null),
     [busy, setBusy] = useState(true),
     [error, setError] = useState(''),
@@ -25,6 +26,7 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
     available = templates.filter((item) => item.count === shots.length),
     size = layoutSize(layout);
   const options = {
+    frame,
     background,
     filter,
     decoration,
@@ -35,13 +37,14 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
   }, []);
   useEffect(() => {
     onSettingsChange({
+      frame,
       background,
       layoutId,
       filter,
       decoration,
       caption,
     });
-  }, [background, layoutId, filter, decoration, caption, onSettingsChange]);
+  }, [frame, background, layoutId, filter, decoration, caption, onSettingsChange]);
   useEffect(() => {
     let cancelled = false;
     setBusy(true);
@@ -59,6 +62,7 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
             }))
           : shots;
         const result = await composePhotos(images, layout, {
+          frame,
           background,
           filter,
           decoration,
@@ -81,7 +85,7 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
       cancelled = true;
       clearTimeout(timeout);
     };
-  }, [shots, live, layout, background, filter, decoration, caption, retry]);
+  }, [shots, live, layout, frame, background, filter, decoration, caption, retry]);
   useEffect(
     () => () => {
       abort.current?.abort();
@@ -122,10 +126,12 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
       }
     }
   }
-  const filename = `pixbooth-${layout.id}-${background}-${filter}`;
+  const filename = `pixbooth-${layout.id}-${frame === 'none' ? background : frame}-${filter}`;
   const previewImage = shots[0].poster || shots[0].url;
   return {
     live,
+    frame,
+    setFrame,
     background,
     setBackground,
     layoutId,

@@ -1,5 +1,4 @@
 import Icon from '../common/Icon.jsx';
-import Brand from '../common/Brand.jsx';
 export default function CameraPreview({
   status,
   cameraActive,
@@ -19,9 +18,6 @@ export default function CameraPreview({
 }) {
   return (
     <section className="booth" aria-label="Photo booth">
-      <div className="booth-brand">
-        <Brand />
-      </div>
       <div className="booth-bar">
         <h2 className="panel-title">Camera preview</h2>
         <div className="camera-control">

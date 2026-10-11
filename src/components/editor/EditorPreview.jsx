@@ -1,6 +1,7 @@
 import { backgrounds } from '../../data/backgrounds.js';
 import { photoFilters } from '../../data/photoFilters.js';
 import LiveStripPreview from './LiveStripPreview.jsx';
+import { getFrame } from '../../data/frames.js';
 export default function EditorPreview({
   layout,
   live,
@@ -12,6 +13,7 @@ export default function EditorPreview({
   background,
   filter,
   decoration,
+  frame,
   exporting,
   setPlaying,
   progress,
@@ -37,7 +39,7 @@ export default function EditorPreview({
           <img
             className="edited-strip"
             src={output}
-            alt={`${layout.name} with ${backgrounds.find((item) => item.id === background).name} background, ${photoFilters.find((item) => item.id === filter).name} filter and ${decoration} border stickers`}
+            alt={`${layout.name} with ${frame === 'none' ? `${backgrounds.find((item) => item.id === background).name} background` : `${getFrame(frame).name} frame`}, ${photoFilters.find((item) => item.id === filter).name} filter and ${decoration} border stickers`}
           />
         ) : (
           <p>Preparing your strip…</p>

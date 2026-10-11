@@ -34,3 +34,7 @@ The four user-supplied images in `docs/design/references/` are retained as visua
 The additional `docs/design/references/landing-composition.png` is the user's structural reference for a centered hero and artifact arrangement. Its fonts, colors, interface assets, commerce content, and code are not adopted.
 
 Test-only portrait fixtures and verification screenshots are not application assets.
+
+## Original decorative frame artwork
+
+Three original paper PNGs in public/frames were generated with the built-in imagegen tool for this project. The supplied style references were not used as image inputs or traced. Eight frames combine these textures with original canvas mounts, patterns and motifs in src/lib/frames/frame-art.js. No stock frame pack, third-party character artwork or new runtime dependency was added. [Frame artwork provenance and exact prompts](docs/design/frame-artwork.md) record the files and generation brief.

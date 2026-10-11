@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { layoutSize, paintStrip } from '../../lib/collage.js';
+import useFrameArtwork from '../../hooks/useFrameArtwork.js';
 export default function LiveStripPreview({ shots, template, options, playing }) {
+  const artwork = useFrameArtwork(options.frame);
   const ref = useRef(null),
     settings = useRef({
       template,
@@ -11,6 +13,7 @@ export default function LiveStripPreview({ shots, template, options, playing }) 
     template,
     options,
     playing,
+    artwork,
   };
   useEffect(() => {
     let stopped = false,
@@ -42,8 +45,11 @@ export default function LiveStripPreview({ shots, template, options, playing }) 
       });
       const ctx = c.getContext('2d');
       ctx.setTransform(width / size.width, 0, 0, height / size.height, 0, 0);
-      if (videos.every((v) => v.readyState >= 2))
-        paintStrip(ctx, videos, current.template, current.options);
+      if (current.artwork.ready && videos.every((v) => v.readyState >= 2))
+        paintStrip(ctx, videos, current.template, {
+          ...current.options,
+          frameArtwork: current.artwork.image,
+        });
       raf = requestAnimationFrame(draw);
     };
     videos.forEach((v) => v.play().catch(() => {}));

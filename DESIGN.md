@@ -114,3 +114,9 @@ Focus uses a 3px outline; disabled primary buttons use a dashed border, white fi
 - Do preserve visible actions, keyboard focus, and native disclosure behavior.
 - Don't restore blue dots, soft panel shadows, or broad rounded cards.
 - Don't copy shopping carts, pricing, product imagery, reference copy, or third-party component code.
+
+## Original frames and editor interaction
+
+Eight original decorative frames combine three generated paper textures with authored canvas mounts and motifs. Artwork is creative media and may retain color; controls and selected states stay black and white. Frame thumbnails use empty apertures rather than simulated captures. Choosing a background explicitly removes the decorative frame. The template catalog adds name search, photo-count filters and Pick for me; the frame picker adds Surprise me.
+
+Finished strips display immediately without a printing animation, printer slot, or replay action. Fit the real artifact dimensions inside the stage and keep export actions visible. See [frame-artwork.md](docs/design/frame-artwork.md) for provenance and exact prompts.

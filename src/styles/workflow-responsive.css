@@ -13,6 +13,15 @@
     display: flex;
   }
 }
+@media (max-width: 800px) {
+  .workflow-nav {
+    flex-wrap: wrap;
+  }
+  .workflow-nav ol {
+    order: 3;
+    flex: 1 0 100%;
+  }
+}
 @media (max-width: 600px) {
   .workflow-nav {
     padding: 10px 0;
@@ -43,7 +52,7 @@
     flex-shrink: 0;
   }
   .workflow-home {
-    padding: 10px 0 2px;
+    padding: 10px 0;
   }
   .selection-layout {
     grid-template-columns: 1fr;

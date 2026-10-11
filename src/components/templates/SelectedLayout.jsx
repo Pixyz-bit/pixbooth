@@ -7,12 +7,12 @@ export default function SelectedLayout({ template, locked, onContinue, onStartOv
         {template.count} {template.count === 1 ? 'moment' : 'moments'}, one keepsake.
       </p>
       <div className="selection-stage">
-        <TemplateMini template={template} />
+        <TemplateMini key={template.id} template={template} />
       </div>
       <p className="selection-note">
         {locked
           ? 'Start over to choose a different layout.'
-          : 'Add backgrounds, filters and border stickers after capturing.'}
+          : 'Add an original frame, background or filter after capturing.'}
       </p>
       <button className="button button-dark" onClick={onContinue}>
         {locked ? 'Return to capture' : 'Continue to capture'}

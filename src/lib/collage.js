@@ -2,6 +2,14 @@ import { templates } from '../data/templates.js';
 import { backgrounds } from '../data/backgrounds.js';
 import { photoFilters } from '../data/photoFilters.js';
 import { decorations } from '../data/decorations.js';
+import { getFrame } from '../data/frames.js';
+import { prepareFrameOptions } from './frames/frame-assets.js';
+import {
+  framePhotoRect,
+  paintFramePaper,
+  paintFrameMounts,
+  paintFrameDetails,
+} from './frames/frame-art.js';
 export { templates, backgrounds, photoFilters, decorations };
 
 // Fixed output geometry: source camera resolution never changes a template's size.
@@ -236,14 +244,18 @@ export function paintBackground(ctx, width, height, design) {
   }
 }
 export function paintStrip(ctx, images, template, options = {}) {
-  const { cellWidth, padding, footer, width, height } = layoutSize(template);
+  const size = layoutSize(template);
+  const { cellWidth, padding, footer, width, height } = size;
   const design = backgrounds.find((item) => item.id === options.background) || backgrounds[0];
   const filter = photoFilters.find((item) => item.id === options.filter) || photoFilters[0];
+  const frameDesign = getFrame(options.frame);
   paintBackground(ctx, width, height, design);
   const frames = frameRects(template);
+  paintFramePaper(ctx, size, frameDesign.id, options.frameArtwork);
+  paintFrameMounts(ctx, frames, frameDesign.id);
   images.forEach((image, index) => {
-    const frame = frames[index];
-    if (!frame || !image) return;
+    if (!frames[index] || !image) return;
+    const frame = framePhotoRect(frames[index], frameDesign.id);
     const iw = image.naturalWidth || image.videoWidth || image.width,
       ih = image.naturalHeight || image.videoHeight || image.height;
     const scale = Math.max(frame.width / iw, frame.height / ih);
@@ -264,6 +276,7 @@ export function paintStrip(ctx, images, template, options = {}) {
     );
     ctx.restore();
   });
+  paintFrameDetails(ctx, frames, size, frameDesign.id);
   const decoration = decorations.find((item) => item.id === options.decoration);
   if (decoration && decoration.id !== 'none') {
     const radius = Math.min(padding * 0.38, 28);
@@ -282,7 +295,7 @@ export function paintStrip(ctx, images, template, options = {}) {
         decoration.color
       );
   }
-  ctx.fillStyle = design.ink;
+  ctx.fillStyle = frameDesign.id === 'none' ? design.ink : frameDesign.ink;
   ctx.font = `700 ${Math.round(cellWidth * 0.065)}px sans-serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -290,6 +303,7 @@ export function paintStrip(ctx, images, template, options = {}) {
   ctx.fillText(caption, width / 2, height - padding - footer / 2, width - padding * 2 - 100);
 }
 export async function composePhotos(shots, template, options = {}) {
+  const preparedOptions = await prepareFrameOptions(options);
   const images = await Promise.all(
     shots.map(
       (shot) =>
@@ -306,7 +320,7 @@ export async function composePhotos(shots, template, options = {}) {
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
-  paintStrip(ctx, images, template, options);
+  paintStrip(ctx, images, template, preparedOptions);
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.95));
   if (!blob) throw new Error('Layout could not be encoded');
   return {

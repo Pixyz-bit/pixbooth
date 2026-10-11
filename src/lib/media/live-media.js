@@ -1,4 +1,5 @@
 import { layoutSize, paintStrip } from '../collage.js';
+import { prepareFrameOptions } from '../frames/frame-assets.js';
 export const LIVE_SECONDS = 5;
 export const LIVE_FPS = 20;
 export async function supportsMp4() {
@@ -90,6 +91,9 @@ export async function encodeCanvas(canvas, draw, { signal, onProgress, realtime 
   }
 }
 export async function composeLive(shots, template, options, { signal, onProgress } = {}) {
+  check(signal);
+  const preparedOptions = await prepareFrameOptions(options);
+  check(signal);
   const { Input, BlobSource, ALL_FORMATS, CanvasSink } = await import('./mp4-codec.js');
   const size = layoutSize(template),
     scale = Math.min(1, 1920 / Math.max(size.width, size.height));
@@ -131,7 +135,7 @@ export async function composeLive(shots, template, options, { signal, onProgress
           ctx,
           frames.map((frame) => frame.canvas),
           template,
-          options
+          preparedOptions
         );
       },
       {

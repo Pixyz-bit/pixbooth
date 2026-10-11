@@ -74,13 +74,6 @@ summary:focus-visible,
   background: #111;
   color: #fff;
 }
-.booth-brand {
-  padding: 16px 18px 0;
-  flex-shrink: 0;
-}
-.booth-brand .wordmark {
-  width: fit-content;
-}
 main {
   min-width: 0;
 }

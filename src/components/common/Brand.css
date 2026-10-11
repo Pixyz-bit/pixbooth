@@ -7,9 +7,6 @@
 main h1[tabindex='-1']:focus {
   outline: none;
 }
-.booth-brand {
-  padding-top: 8px;
-}
 .booth-bar {
   padding-top: 8px;
 }

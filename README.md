@@ -1,6 +1,6 @@
 # Pixbooth
 
-A React browser booth for photos and five-second live clips, with a centered landing page and illustrative sample photos, 21 templates, 36 face effects plus None, and an editor with 20 backgrounds, 20 filters, 11 border-sticker designs plus None, and a custom caption.
+A React browser booth for photos and five-second live clips, with a centered landing page and illustrative sample photos, 21 templates, 36 face effects plus None, and an editor with eight original decorative frames, 20 backgrounds, 20 filters, 11 border-sticker designs plus None, and a custom caption.
 
 The authoritative site-wide visual guide is [docs/design/DESIGN-CONCEPT.md](docs/design/DESIGN-CONCEPT.md). [DESIGN.md](DESIGN.md) is its compact token entry point. Pixbooth uses the supplied PNG logo and a black-and-white neobrutalist interface. Creative media and user-selected strip artwork retain their colors.
 
@@ -8,15 +8,15 @@ The authoritative site-wide visual guide is [docs/design/DESIGN-CONCEPT.md](docs
 
 Open `#/` for the home page. Its centered hero places the supplied logo above the headline on a subtle monochrome grid, with one Capture action and locally generated grayscale photo-print artwork labeled Illustrative sample captures. There is no landing navbar. Capture starts white, turns black on hover, and enters the template step at `#/templates`; the interactive landing playground has been removed. [Landing artwork provenance](docs/design/landing-artwork.md) records the exact generation prompt and local asset.
 
-1. **Choose template — `#/templates`.** Select from the 21-layout grid, review its selected-layout diagram and capture count, then choose Continue to capture. Classic strip is selected initially.
+1. **Choose template — `#/templates`.** Search or filter the 21-layout grid by photo count, use Pick for me, review its selected-layout diagram and capture count, then choose Continue to capture. Classic strip is selected initially.
 2. **Capture photos — `#/booth`.** Choose Photo or Live mode and enable the webcam. The sidebar contains face stickers; the main camera, two-column individual-media gallery, and collapsible photo settings occupy the capture workspace. Capture one item per click with a 0/3/5-second countdown. The camera contains the full source frame; gallery crops follow template frame proportions. The capture template and mode lock after the first item.
 3. **Edit & download — `#/edit`.** Submit becomes available after the required captures. Use compatible layouts and finishing controls, then download the result.
 
-Non-home pages share step breadcrumbs with `aria-current="step"`. Capture is unavailable until Continue, and editing is unavailable until the session is complete. Previous steps remain clickable; captures and editor choices survive backtracking and browser history in memory. Returning to step one after a capture keeps the template locked.
+Non-home pages share the supplied Pixbooth logo and step breadcrumbs with `aria-current="step"` in the workflow navigation. The logo links home, and breadcrumbs wrap below it on narrow screens. Capture is unavailable until Continue, and editing is unavailable until the session is complete. Previous steps remain clickable; captures and editor choices survive backtracking and browser history in memory. Returning to step one after a capture keeps the template locked.
 
 Search the 36 face effects by name or category: Animals (8), Eyewear (7), Headwear (10), and Fun (11). Choose None or Clear sticker to remove an effect. Thumbnail, live-overlay, and capture artwork share one renderer; active-effect changes retain the face-tracking worker. Effects are baked into photos and clips.
 
-When the session is complete, Start over discards it or Submit opens `#/edit`. Switch among layouts with the same capture count, then choose a background, filter, border-sticker design, and caption of up to 32 characters. Photo sessions download JPGs. Live sessions provide individual MP4 clip downloads, a playing/paused composed preview, an MP4 creation action with progress and cancellation, and a JPG cover-photo download.
+When the session is complete, Start over discards it or Submit opens `#/edit`. Switch among layouts with the same capture count, then choose an original frame, background, filter, border-sticker design, and caption of up to 32 characters. Frame artwork applies to JPG and composed MP4 exports; choosing a background removes the frame. Finished strips display immediately without a printing animation. [Frame artwork and exact generation prompts](docs/design/frame-artwork.md) document the original assets. Photo sessions download JPGs. Live sessions provide individual MP4 clip downloads, a playing/paused composed preview, an MP4 creation action with progress and cancellation, and a JPG cover-photo download.
 
 Photos, clips, and editor choices stay in browser memory and disappear on reload. Fresh or reloaded `#/booth` and `#/edit` URLs without a session return to `#/templates`. Start over clears captures and editor choices, returns to step one, and leaves the camera off. Leaving capture cancels countdown/recording and stops camera tracks; the camera also stops on completion, explicit cancellation, and unmount. Media and face landmarks are never uploaded.
 
@@ -84,6 +84,10 @@ The expanded-feature production build passed (116 modules) with the MP4 dependen
 The earlier landing refinement, before the later navbar removal and sequential workflow, passed its production build and browser smoke checks for asset decoding, compact layouts, focus, and navigation. Its screenshots are saved in `.impeccable/review/landing-refresh-{1366,768,390,320}.png`.
 
 The three-step workflow passed its production build (118 modules) and automated checks for all 21 templates, reload route guards, photo/live and composed-MP4 export, captured-media/editor-state preservation, browser history, and countdown/recording cancellation with the camera off after navigation. Nine desktop/compact/mobile screen checks confirmed height fit at 1366 × 768 and 1024 × 600, no horizontal overflow at 390 × 844, and no JavaScript errors. Actual webcams and mobile browsers still need device testing.
+
+## Frame update validation
+
+The original-frame update passed production build and formatting checks. Static geometry checks cover all decorative styles across the 21 layouts, and the generated PNG files are checked in the production output. No camera or capture simulation was used for this update.
 
 ## Manual checks
 

@@ -17,7 +17,7 @@ src/
 │   ├── landing/             # Hero, showcase, sample print, formats, instructions
 │   ├── templates/           # Catalog, individual choice, selected-layout summary
 │   ├── capture/             # Camera, gallery, face stickers, settings, actions, feedback
-│   └── editor/              # Preview, controls, options, caption, errors, downloads
+│   └── editor/              # Preview, original frames, controls, downloads
 ├── hooks/
 │   ├── useBoothSession.js   # Owns the capture session above the pages
 │   ├── useCamera.js         # Webcam lifecycle, device selection, disconnection
@@ -25,11 +25,12 @@ src/
 │   ├── useWorkflow.js       # Hash routes, guards, focus, navigation cleanup
 │   ├── useFaceStickers.js   # Face-tracking worker and overlay lifecycle
 │   └── useStripEditor.js    # Editing choices, preview output, export lifecycle
-├── data/                    # Templates, backgrounds, photo filters, decorations
+├── data/                    # Templates, original frames, backgrounds, filters, decorations
 ├── lib/
 │   ├── collage.js           # Fixed geometry, crops, strip painting, JPG composition
 │   ├── cameraError.js       # Browser camera error messages
 │   ├── media/              # Live composition and lazy MP4 dependency adapter
+│   ├── frames/             # Cached original papers, mounts, motifs, photo apertures
 │   └── stickers/           # Shared face-effect canvas artwork
 ├── workers/                 # MediaPipe face inference worker
 └── styles/                  # Ordered stylesheet entry, shared styles, theme, responsiveness

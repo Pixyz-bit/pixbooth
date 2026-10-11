@@ -15,6 +15,13 @@
   margin: 0;
   padding: 0;
 }
+.workflow-nav .wordmark {
+  flex-shrink: 0;
+}
+.workflow-nav .brand-logo {
+  width: 112px;
+  height: auto;
+}
 .workflow-nav li {
   display: flex;
   align-items: center;

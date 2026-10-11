@@ -1,3 +1,5 @@
+import Brand from '../common/Brand.jsx';
+
 const steps = [
   {
     page: 'templates',
@@ -18,6 +20,7 @@ const steps = [
 export default function WorkflowSteps({ page, layoutChosen, completed }) {
   return (
     <nav className="workflow-nav" aria-label="Photo booth steps">
+      <Brand />
       <ol>
         {steps.map((step, index) => {
           const available = index === 0 || (index === 1 ? layoutChosen : completed);
