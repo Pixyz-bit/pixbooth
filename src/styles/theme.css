@@ -1,0 +1,182 @@
+/* Pixbooth's monochrome interface. Media and user-authored strip designs keep their colors. */
+:root {
+  color: #000;
+  background: #fff;
+  --muted: #000;
+  --line: #000;
+  scrollbar-color: #000 #fff;
+}
+body {
+  background-image: none;
+}
+.panel,
+.booth,
+.preview-panel,
+.settings-panel {
+  border-color: #000;
+  border-radius: 4px;
+}
+.booth,
+.preview-panel,
+.settings-panel {
+  box-shadow: none;
+}
+.template-button,
+.sticker-option,
+.design-option,
+.filter-option,
+.capture-mode,
+.segmented,
+.camera-select select,
+.sticker-toolbar input,
+.sticker-toolbar select,
+.caption-control input,
+.button {
+  border-color: #000;
+  border-radius: 2px;
+}
+.button-dark,
+.button-primary,
+.capture-mode button.active,
+.template-button.selected,
+.sticker-option.selected,
+.segmented button[aria-pressed='true'] {
+  background: #000;
+  color: #fff;
+}
+.template-button {
+  --mini-photo: #fff;
+}
+.template-button.selected {
+  --mini-photo: #000;
+}
+.template-button:hover:not(:disabled):not(.selected),
+.sticker-option:hover:not(:disabled):not(.selected),
+.button-outline:hover:not(:disabled),
+.segmented button:hover:not(:disabled):not([aria-pressed='true']) {
+  background: #000;
+  color: #fff;
+}
+.template-button:hover:not(:disabled):not(.selected) {
+  --mini-photo: #000;
+}
+.button-dark:hover:not(:disabled),
+.button-primary:hover,
+.template-button.selected:hover:not(:disabled),
+.sticker-option.selected:hover:not(:disabled) {
+  background: #fff;
+  color: #000;
+}
+.template-button.selected:hover:not(:disabled) {
+  --mini-photo: #fff;
+}
+.design-option.selected,
+.filter-option.selected {
+  border-color: #000;
+  background: #000;
+  color: #fff;
+}
+.switch {
+  border-color: #000;
+  background: #fff;
+}
+.switch span,
+.switch.on {
+  background: #000;
+}
+.switch.on span {
+  background: #fff;
+}
+.corner {
+  border-color: #000;
+}
+.viewfinder {
+  background: #fff;
+  border-radius: 2px;
+}
+.viewfinder:has(video:not(.hidden)),
+.viewfinder:has(.captured-photo) {
+  background: #000;
+}
+.camera-outline {
+  border-color: #000;
+  border-radius: 2px;
+}
+.capture-gallery img,
+.capture-gallery video {
+  border-radius: 2px;
+}
+.intro h1,
+.panel-title,
+.preview-panel h2,
+.editor-preview-heading h2 {
+  color: #000;
+}
+.button-dark {
+  box-shadow: 4px 4px 0 #000;
+  margin-bottom: 4px;
+}
+.button-dark:active:not(:disabled) {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+.button:disabled {
+  opacity: 1;
+  border-style: dashed;
+  background: #fff;
+  color: #000;
+  box-shadow: none;
+}
+.error-message {
+  background: #fff;
+  color: #000;
+  border-color: #000;
+  border-radius: 2px;
+}
+.editor-error {
+  color: #000;
+}
+.recording-status {
+  border: 2px solid #000;
+  border-radius: 2px;
+}
+.recording-status > span {
+  background: #000;
+}
+progress {
+  accent-color: #000;
+}
+.segmented button {
+  border-right-color: #000;
+}
+footer {
+  border-color: #000;
+}
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+[tabindex='0']:focus-visible {
+  outline-color: #000;
+}
+.segmented button:focus-visible,
+.capture-mode button:focus-visible {
+  outline-color: #000;
+}
+.capture-mode button.active:focus-visible,
+.segmented button[aria-pressed='true']:focus-visible {
+  outline-color: #fff;
+}
+::selection {
+  background: #000;
+  color: #fff;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -8,4 +8,4 @@ Generate a photographic asset for a monochrome browser photo booth landing page.
 
 ## Implementation
 
-`src/Landing.jsx` and `src/styles.css` display the four contact-sheet quadrants in photo-print frames using CSS background positioning. The layout, captions, navigation and controls remain real HTML and React components. The supplied Pixbooth logo remains unchanged. The artwork does not request camera access or become part of a user's captured media.
+`src/pages/landing/LandingPage.jsx` composes the landing components, including `src/components/landing/SamplePhoto.jsx`. `src/pages/landing/LandingPage.css` displays the four contact-sheet quadrants in photo-print frames using CSS background positioning. The layout, captions, navigation and controls remain real HTML and React components. The supplied Pixbooth logo remains unchanged. The artwork does not request camera access or become part of a user's captured media.

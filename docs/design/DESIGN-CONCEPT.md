@@ -95,7 +95,7 @@ At 601–999px, place the face-effect sidebar across the top, then camera and a 
 
 Submit opens `#/edit` only after the initial template's capture count is complete. Lead with the composed artifact and put controls beside it on desktop. Compatible same-count layouts, backgrounds, filters, and surrounding stickers are native collapsible groups. Caption text is a labeled field. Option controls scroll independently from the persistent action area. Mobile stacks artifact and controls on one scrolling page. Returning to earlier steps keeps editor choices in memory for the next visit; Start over clears them.
 
-The editor preview displays the output's actual geometry. Base photo cells are 900 × 675px, but square, portrait, Polaroid, film, and mixed-size templates have explicit geometry overrides. Respect those frame rectangles rather than forcing all gallery images or output frames to 4:3. Preview and export share the strip renderer and centered source-crop logic. See PRODUCT.md and `src/collage.js` for output dimensions and template behavior.
+The editor preview displays the output's actual geometry. Base photo cells are 900 × 675px, but square, portrait, Polaroid, film, and mixed-size templates have explicit geometry overrides. Respect those frame rectangles rather than forcing all gallery images or output frames to 4:3. Preview and export share the strip renderer and centered source-crop logic. See PRODUCT.md and `src/lib/collage.js` for output dimensions and template behavior.
 
 ## Elevation & Depth
 

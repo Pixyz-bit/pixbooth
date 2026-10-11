@@ -1,0 +1,61 @@
+/* Sequential booth workflow shares the committed monochrome vocabulary. */
+.workflow-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 2px solid #000;
+  flex-shrink: 0;
+}
+.workflow-nav ol {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.workflow-nav li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.workflow-nav li a,
+.step-unavailable {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 2px;
+}
+.workflow-nav li a:hover {
+  border-color: #000;
+}
+.workflow-nav li a[aria-current='step'] {
+  color: #fff;
+  background: #000;
+  border-color: #000;
+}
+.step-number {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid currentColor;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.step-unavailable {
+  opacity: 0.5;
+}
+.workflow-home {
+  margin-left: auto;
+  padding: 12px 0 12px 12px;
+  font-size: 13px;
+  text-underline-offset: 4px;
+}

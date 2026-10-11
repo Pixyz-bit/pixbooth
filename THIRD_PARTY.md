@@ -12,7 +12,7 @@ The model is served from the application's static assets. CPU detection runs in 
 
 ## MP4 media processing
 
-`mediabunny` version 1.61.3 is pinned in `package.json` and distributed under Mozilla Public License 2.0. The installed package includes `LICENSE`; retain its applicable notices when distributing the dependency. Pixbooth imports it through `src/mp4-codec.js` for browser H.264 encoding, MP4 muxing, and clip decoding/composition in `src/live-media.js`. Encoding capability is supplied by the browser.
+`mediabunny` version 1.61.3 is pinned in `package.json` and distributed under Mozilla Public License 2.0. The installed package includes `LICENSE`; retain its applicable notices when distributing the dependency. Pixbooth imports it through `src/lib/media/mp4-codec.js` for browser H.264 encoding, MP4 muxing, and clip decoding/composition in `src/lib/media/live-media.js`. Encoding capability is supplied by the browser.
 
 - [MediaBunny project, source, and license](https://github.com/Vanilagy/mediabunny)
 - [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
@@ -21,11 +21,11 @@ MP4 processing occurs locally in browser memory. No media service or upload is u
 
 ## Artwork, typography, and references
 
-The supplied Pixbooth PNG is retained unchanged at `public/pixbooth-logo.png`; `src/Brand.jsx` displays it. It is user-provided identity artwork, not generated or replaced by this implementation.
+The supplied Pixbooth PNG is retained unchanged at `public/pixbooth-logo.png`; `src/components/common/Brand.jsx` displays it. It is user-provided identity artwork, not generated or replaced by this implementation.
 
 The landing's project-local `public/landing-contact-sheet.webp` is a generated grayscale four-pose contact sheet of fictional adults, created with the built-in Image Generation tool. It is labeled Illustrative sample captures, not presented as a customer's session or testimonial. The shipped WebP is an optimized format conversion of the generated PNG without compositional changes. [Landing artwork provenance](docs/design/landing-artwork.md) preserves the exact prompt and implementation details; the original PNG is retained outside the project. The sample does not request camera access or enter a user's captured media.
 
-The 36 face effects are authored canvas shapes in `src/sticker-art.js`, re-exported through `src/face-stickers.js`. Animals (8), Eyewear (7), Headwear (10), and Fun (11) share a renderer for thumbnail, live-overlay, and capture artwork. Switching between active effects retains the face-tracking worker. The 11 surrounding border motifs plus None and 20 background designs are authored rendering choices in `src/collage.js`; they do not require externally sourced sticker images or icon packs.
+The 36 face effects are authored canvas shapes in `src/lib/stickers/sticker-art.js`. Animals (8), Eyewear (7), Headwear (10), and Fun (11) share a renderer for thumbnail, live-overlay, and capture artwork. Switching between active effects retains the face-tracking worker. The 11 surrounding border motifs plus None and 20 background designs are authored rendering choices in `src/lib/collage.js`, with their catalogs in `src/data/`; they do not require externally sourced sticker images or icon packs.
 
 DM Sans is bundled through `@fontsource/dm-sans`; the package's bundled license accompanies the font. The site currently imports weights 400, 500, and 700.
 

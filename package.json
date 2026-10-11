@@ -7,7 +7,9 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "setup:face": "node scripts/setup-face-assets.mjs"
+    "setup:face": "node scripts/setup-face-assets.mjs",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.2.0",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.4.0",
+    "prettier": "3.6.2",
     "vite": "^7.0.0"
   }
 }

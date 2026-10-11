@@ -32,7 +32,7 @@ Photos, clips, and editor choices stay in browser memory and disappear on reload
 | 8 | Eight grid |
 | 9 | Nine grid |
 
-`src/collage.js` owns template geometry. The base uses 900 × 675px cells, 36px padding, 23px gaps, and a 126px caption footer. Square variants and Contact sheet use 900px cell height; Portrait uses 1200px; Polaroid adds 72px padding and a 270px footer; Film frames uses 90px padding and 36px gaps. Story trio and Hero + three span cells for mixed-size frames.
+`src/lib/collage.js` owns template geometry. The base uses 900 × 675px cells, 36px padding, 23px gaps, and a 126px caption footer. Square variants and Contact sheet use 900px cell height; Portrait uses 1200px; Polaroid adds 72px padding and a 270px footer; Film frames uses 90px padding and 36px gaps. Story trio and Hero + three span cells for mixed-size frames.
 
 JPG dimensions remain fixed per template, independent of camera resolution. Each source is center-cropped to fill its frame. Background, filter, border motifs, and caption pass through the same strip renderer for the editor and export. The original seven layouts retain their sizes: Single 972 × 873px; Duo strip 972 × 1571px; Trio strip 972 × 2269px; Classic strip 972 × 2967px; Four grid 1895 × 1571px; Six strip 972 × 4363px; Six grid 1895 × 2269px.
 
@@ -62,6 +62,12 @@ npm run preview
 ```
 
 Deploy `dist/` to an HTTPS static host. No backend, credentials, or database are required.
+
+## Source organization
+
+Pages compose individual JSX components. Hooks own the camera, capture, routing, and editor lifecycles; static catalogs live in `src/data/`, rendering utilities in `src/lib/`, and face inference in `src/workers/`. Focused page/component CSS and shared styles are loaded once through `src/styles/index.css` in the established cascade order.
+
+[Project structure and maintenance guide](docs/development/PROJECT-STRUCTURE.md) explains the folders and state ownership. Run `npm run format` to format source files or `npm run format:check` to check them.
 
 ## Project location
 

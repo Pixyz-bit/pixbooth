@@ -1,0 +1,15 @@
+/* Expanded editor choices stay grouped in native, collapsible sections. */
+.brand-logo {
+  display: block;
+  width: 150px;
+  height: auto;
+}
+main h1[tabindex='-1']:focus {
+  outline: none;
+}
+.booth-brand {
+  padding-top: 8px;
+}
+.booth-bar {
+  padding-top: 8px;
+}

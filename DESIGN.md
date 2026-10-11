@@ -66,6 +66,8 @@ components:
 
 The four user-supplied neobrutalist references establish bold type, sharp frames, dense useful groups, and explicit states. The earlier pale-blue dotted, generously rounded PhotoPix world is superseded. The canonical project remains `C:\Martin Archive\Programming\2026 Projects\PhotoPix`.
 
+Source ownership and CSS loading order are documented in [docs/development/PROJECT-STRUCTURE.md](docs/development/PROJECT-STRUCTURE.md). Page and feature styles are separated, with shared tokens and theme rules under `src/styles/`; `src/styles/index.css` preserves their cascade order.
+
 The additional [landing composition reference](docs/design/references/landing-composition.png) pins the centered home-page hero as a user-approved composition. It does not replace the site's typography, palette, sharp controls, or camera behavior.
 
 ## Colors
