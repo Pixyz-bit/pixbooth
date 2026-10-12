@@ -1,4 +1,6 @@
+import { freshStickers, drawFreshSticker } from './fresh-stickers.js';
 const groups = {
+  'Fresh picks': freshStickers,
   Animals: [
     ['dog', 'Dog'],
     ['cat', 'Cat'],
@@ -60,31 +62,42 @@ export const stickers = [
   ),
 ];
 
-// Thumbnails, the live overlay and saved photos share source-frame artwork.
-export function drawSticker(ctx, landmarks, width, height, sticker) {
-  if (!landmarks || sticker === 'none') return;
-  const p = (i) => ({
-    x: landmarks[i].x * width,
-    y: landmarks[i].y * height,
-  });
+// Preview, GPU texture artwork, thumbnails and exports share this placement.
+export function getStickerPlacement(landmarks, width, height) {
+  if (
+    !landmarks ||
+    ![33, 263, 10, 1, 13].every(
+      (index) => Number.isFinite(landmarks[index]?.x) && Number.isFinite(landmarks[index]?.y)
+    )
+  )
+    return null;
+  const p = (i) => ({ x: landmarks[i].x * width, y: landmarks[i].y * height });
   const left = p(33),
-    right = p(263),
-    scale = Math.hypot(right.x - left.x, right.y - left.y);
-  if (scale < 1) return;
-  const angle = Math.atan2(right.y - left.y, right.x - left.x),
-    cx = (left.x + right.x) / 2,
+    right = p(263);
+  const scale = Math.hypot(right.x - left.x, right.y - left.y);
+  if (!Number.isFinite(scale) || scale < 1) return null;
+  const angle = Math.atan2(right.y - left.y, right.x - left.x);
+  const cx = (left.x + right.x) / 2,
     cy = (left.y + right.y) / 2;
   const local = (point) => ({
     x: ((point.x - cx) * Math.cos(angle) + (point.y - cy) * Math.sin(angle)) / scale,
     y: (-(point.x - cx) * Math.sin(angle) + (point.y - cy) * Math.cos(angle)) / scale,
   });
-  const top = local(p(10)),
-    nose = local(p(1)),
-    mouth = local(p(13));
+  return { cx, cy, scale, angle, top: local(p(10)), nose: local(p(1)), mouth: local(p(13)) };
+}
+export function drawSticker(ctx, landmarks, width, height, sticker) {
+  if (sticker === 'none') return;
+  const placement = getStickerPlacement(landmarks, width, height);
+  if (placement) drawStickerArtwork(ctx, placement, sticker, true);
+}
+export function drawStickerArtwork(ctx, placement, sticker, transform = false) {
+  const { top, nose, mouth } = placement;
   ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate(angle);
-  ctx.scale(scale, scale);
+  if (transform) {
+    ctx.translate(placement.cx, placement.cy);
+    ctx.rotate(placement.angle);
+    ctx.scale(placement.scale, placement.scale);
+  }
   ctx.lineWidth = 0.025;
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
@@ -146,6 +159,17 @@ export function drawSticker(ctx, landmarks, width, height, sticker) {
     }
     ellipse(x, y, r * 0.26, r * 0.26, '#f4c75f');
   };
+  if (
+    drawFreshSticker(
+      ctx,
+      { top, nose, mouth },
+      { ellipse, polygon, line, rect, star, heart, flower },
+      sticker
+    )
+  ) {
+    ctx.restore();
+    return;
+  }
   if (groups.Animals.some(([id]) => id === sticker)) {
     const color = {
       dog: '#9b6238',

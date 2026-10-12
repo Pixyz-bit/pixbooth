@@ -9,13 +9,15 @@
     "preview": "vite preview --host 0.0.0.0",
     "setup:face": "node scripts/setup-face-assets.mjs",
     "format": "prettier --write src",
-    "format:check": "prettier --check src"
+    "format:check": "prettier --check src",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.2.0",
     "@fontsource/space-grotesk": "^5.2.0",
     "@mediapipe/tasks-vision": "0.10.32",
     "mediabunny": "1.61.3",
+    "pixi.js": "8.22.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

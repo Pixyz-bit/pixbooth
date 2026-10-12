@@ -23,7 +23,7 @@ export default function CaptureFeedback({
       )}
       <p className="session-announcement" role="status" aria-live="polite">
         {reviewing
-          ? 'All photos captured. Submit to format your strip, or start over.'
+          ? 'All moments captured. Continue to customize, or redo the full set.'
           : status === 'ready'
             ? `Camera ready. ${shots.length} of ${template.count} photos captured.`
             : ''}

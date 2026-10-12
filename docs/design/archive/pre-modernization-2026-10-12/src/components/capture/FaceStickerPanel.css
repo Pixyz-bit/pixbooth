@@ -1,0 +1,135 @@
+.sticker-panel {
+  min-height: 0;
+  flex-shrink: 0;
+}
+.sticker-panel[open] {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.sticker-panel::details-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.sticker-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+  padding: 0 12px 12px;
+}
+.sticker-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 74px;
+  gap: 8px;
+  align-items: end;
+  flex-shrink: 0;
+}
+.sticker-toolbar label {
+  font-size: 10px;
+  font-weight: 700;
+}
+.sticker-toolbar input,
+.sticker-toolbar select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 32px;
+  border: 1px solid #a1a1aa;
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-top: 4px;
+  background: #fff;
+  font-size: 11px;
+}
+.sticker-toolbar .sticker-category select {
+  margin-top: 4px;
+}
+.sticker-selection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  padding: 8px 0;
+  flex-shrink: 0;
+}
+.sticker-selection > span {
+  font-weight: 700;
+}
+.sticker-selection .text-button {
+  font-size: 10px;
+}
+.sticker-browser {
+  overflow-y: auto;
+  flex: 1;
+  min-height: 70px;
+  padding: 3px;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+.sticker-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.sticker-option {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 2px;
+  border: 1.5px solid #111;
+  border-radius: 9px;
+  background: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+.sticker-icon {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 5px;
+}
+.sticker-option span {
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+.sticker-empty {
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+.sticker-empty .text-button {
+  display: block;
+  margin: 8px auto;
+}
+.sticker-status {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 10px 2px 0;
+  flex-shrink: 0;
+}
+.face-tracking-control {
+  display: block;
+  flex-shrink: 0;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.face-tracking-control select {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+}

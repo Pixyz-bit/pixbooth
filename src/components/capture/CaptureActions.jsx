@@ -5,45 +5,42 @@ export default function CaptureActions({
   status,
   stopCamera,
   completed,
-  busy,
-  retake,
   stickerReady,
   takePhoto,
   mode,
 }) {
-  return countdown !== null ? (
-    <button className="button button-dark shutter-button" onClick={cancelCountdown}>
-      Cancel countdown
-    </button>
-  ) : status === 'recording' ? (
-    <button className="button button-outline shutter-button" onClick={stopCamera}>
-      Cancel recording
-    </button>
-  ) : completed ? (
-    <div className="completion-actions">
-      <button className="button button-outline" disabled={busy} onClick={retake}>
-        <Icon name="retake" />
-        Start over
+  if (countdown !== null)
+    return (
+      <button className="button button-outline cancel-capture" onClick={cancelCountdown}>
+        Cancel countdown
       </button>
+    );
+  if (status === 'recording')
+    return (
+      <button className="button button-outline cancel-capture" onClick={stopCamera}>
+        Cancel recording
+      </button>
+    );
+  const label =
+    status === 'saving'
+      ? 'Saving…'
+      : completed
+        ? 'All captured'
+        : mode === 'live'
+          ? 'Record 5 seconds'
+          : 'Take photo';
+  return (
+    <div className="shutter-control">
       <button
-        className="button button-dark"
-        disabled={busy}
-        onClick={() => {
-          location.hash = '/edit';
-        }}
+        className="shutter-button"
+        disabled={completed || status !== 'ready' || !stickerReady}
+        onClick={takePhoto}
+        aria-label={label}
       >
-        Submit
-        <Icon name="arrow" />
+        <span className="shutter-core">
+          <Icon name="shutter" size={64} />
+        </span>
       </button>
     </div>
-  ) : (
-    <button
-      className="button button-dark shutter-button"
-      disabled={status !== 'ready' || !stickerReady}
-      onClick={takePhoto}
-    >
-      <Icon name="camera" />
-      {status === 'saving' ? 'Saving photo…' : mode === 'live' ? 'Record 5 seconds' : 'Say cheese!'}
-    </button>
   );
 }

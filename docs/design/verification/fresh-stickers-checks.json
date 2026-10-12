@@ -1,0 +1,59 @@
+{
+  "desktop": {
+    "camera": {
+      "height": 640,
+      "width": 800
+    },
+    "cards": {
+      "height": 80,
+      "width": 111.5999984741211
+    },
+    "left": {
+      "height": 884.4000244140625,
+      "width": 288
+    },
+    "overflowX": 0,
+    "overflowY": 0,
+    "right": {
+      "height": 884.4000244140625,
+      "width": 288
+    },
+    "viewport": {
+      "height": 1000,
+      "width": 1440
+    }
+  },
+  "compact": {
+    "camera": {
+      "height": 364.8000183105469,
+      "width": 456
+    },
+    "left": {
+      "height": 652.4000244140625,
+      "width": 256
+    },
+    "overflowX": 0,
+    "overflowY": 0,
+    "right": {
+      "height": 652.4000244140625,
+      "width": 256
+    }
+  },
+  "mobile": {
+    "camera": {
+      "height": 262.3999938964844,
+      "width": 328
+    },
+    "left": {
+      "height": 512,
+      "width": 328
+    },
+    "overflowX": 0,
+    "right": {
+      "height": 512,
+      "width": 328
+    }
+  },
+  "allStickerButtons": 49,
+  "freshChoices": 12
+}

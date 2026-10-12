@@ -1,66 +1,46 @@
-import { templates } from '../../data/templates.js';
-import TemplateChoice from './TemplateChoice.jsx';
 import { useState } from 'react';
+import { templates } from '../../data/templates.js';
+import { filterLayouts, layoutPhotoCounts } from '../../lib/layout-categories.js';
+import TemplateChoice from './TemplateChoice.jsx';
 import TemplateTools from './TemplateTools.jsx';
 export default function TemplateCatalog({ template, locked, onSelect }) {
-  const [query, setQuery] = useState('');
   const [count, setCount] = useState('all');
-  const visible = templates.filter(
-    (item) =>
-      item.name.toLowerCase().includes(query.trim().toLowerCase()) &&
-      (count === 'all' || (count === '6+' ? item.count >= 6 : item.count === count))
-  );
-  function surprise() {
-    const choices = visible.filter((item) => item.id !== template.id);
-    if (choices.length) onSelect(choices[Math.floor(Math.random() * choices.length)].id);
-  }
+  const visible = filterLayouts(templates, { count });
   return (
-    <section className="template-catalog panel" aria-label="Grid templates">
-      <div className="catalog-heading">
-        <h2>Grid templates</h2>
-        <span>{templates.length} layouts</span>
-      </div>
-      <TemplateTools
-        query={query}
-        setQuery={setQuery}
-        count={count}
-        setCount={setCount}
-        locked={locked || !visible.some((item) => item.id !== template.id)}
-        onSurprise={surprise}
-      />
+    <section className="template-catalog" aria-label="Photo layouts">
+      <TemplateTools {...{ count, setCount }} counts={layoutPhotoCounts(templates)} />
+      <p className="template-results" role="status" aria-live="polite">
+        {visible.length} {visible.length === 1 ? 'layout' : 'layouts'}
+        {locked ? ' · Your capture layout is locked for this session.' : ''}
+      </p>
       <div
         className="template-choices"
+        data-filtered={count !== 'all'}
         role="group"
         aria-label="Choose a photo layout"
-        tabIndex="0"
       >
         {visible.map((item) => (
           <TemplateChoice
             key={item.id}
-            item={item}
-            selected={template.id === item.id}
-            locked={locked}
-            onSelect={onSelect}
+            {...{ item, locked, onSelect }}
+            selected={item.id === template.id}
           />
         ))}
-        {!visible.length && (
-          <div className="template-empty">
-            <p>No layouts match. Try another name or photo count.</p>
-            <button
-              className="text-button"
-              onClick={() => {
-                setQuery('');
-                setCount('all');
-              }}
-            >
-              Clear filters
-            </button>
-          </div>
-        )}
       </div>
-      <p className="template-results" role="status" aria-live="polite">
-        {visible.length} of {templates.length} layouts · Selected: {template.name}
-      </p>
+      {!visible.length && (
+        <div className="template-empty">
+          <h2>No layouts found.</h2>
+          <p>Try another photo count.</p>
+          <button
+            className="button button-outline"
+            onClick={() => {
+              setCount('all');
+            }}
+          >
+            Clear filters
+          </button>
+        </div>
+      )}
     </section>
   );
 }

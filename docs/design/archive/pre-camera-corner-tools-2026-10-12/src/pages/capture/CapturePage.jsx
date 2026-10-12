@@ -1,0 +1,92 @@
+import FaceStickerPanel from '../../components/capture/FaceStickerPanel.jsx';
+import CameraPreview from '../../components/capture/CameraPreview.jsx';
+import CapturedGallery from '../../components/capture/CapturedGallery.jsx';
+import PhotoSettings from '../../components/capture/PhotoSettings.jsx';
+import CaptureFeedback from '../../components/capture/CaptureFeedback.jsx';
+import Icon from '../../components/common/Icon.jsx';
+export default function CapturePage({ session }) {
+  const remaining = Math.max(0, session.template.count - session.shots.length);
+  return (
+    <main className="capture-main">
+      <section className="camera-workspace" aria-label="Camera workspace">
+        <aside className="capture-controls" aria-label="Camera tools">
+          <div className="capture-tools">
+            <FaceStickerPanel {...session} />
+            <PhotoSettings {...session} />
+          </div>
+        </aside>
+        <div className="capture-camera">
+          <CameraPreview {...session}>
+            <CaptureFeedback {...session} />
+            {session.sticker !== 'none' && session.cameraActive && !session.stickerReady && (
+              <p className="tracking-note" role="status" aria-live="polite">
+                {session.face.state === 'loading'
+                  ? 'Loading your sticker. Keep facing the camera…'
+                  : session.face.state === 'error'
+                    ? 'Sticker tracking needs attention. Retry in Stickers or select None.'
+                    : 'Face the camera to place your sticker before capturing.'}
+              </p>
+            )}
+          </CameraPreview>
+        </div>
+        <aside className="capture-sidebar" aria-label="Captured moments and next step">
+          <div className="capture-review-scroll">
+            <CapturedGallery {...session} />
+            {session.retakeIndex !== null && (
+              <div className="retake-notice" role="status">
+                Replacing {session.mode === 'live' ? 'clip' : 'photo'} {session.retakeIndex + 1}.
+                Your original stays until you capture a replacement.
+                <button
+                  className="text-button"
+                  disabled={session.busy}
+                  onClick={session.cancelRetake}
+                >
+                  Cancel retake
+                </button>
+              </div>
+            )}
+          </div>
+          <div className="capture-continue">
+            <p>
+              {session.completed
+                ? 'Your moments are ready to customize.'
+                : session.retakeIndex !== null
+                  ? 'Finish this retake to continue.'
+                  : remaining +
+                    ' more ' +
+                    (session.mode === 'live'
+                      ? remaining === 1
+                        ? 'clip'
+                        : 'clips'
+                      : remaining === 1
+                        ? 'photo'
+                        : 'photos') +
+                    ' needed.'}
+            </p>
+            <div className="capture-next-actions">
+              <button
+                className="button button-dark"
+                disabled={!session.completed || session.busy}
+                onClick={() => {
+                  location.hash = '/edit';
+                }}
+              >
+                Continue to customize
+                <Icon name="arrow" />
+              </button>
+              {session.shots.length > 0 && (
+                <button
+                  className="button button-outline"
+                  disabled={session.busy}
+                  onClick={session.retake}
+                >
+                  Start over
+                </button>
+              )}
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  );
+}

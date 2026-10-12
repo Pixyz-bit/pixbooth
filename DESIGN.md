@@ -1,5 +1,225 @@
 ---
 name: Pixbooth
+description: A modern monochrome browser photo and live-clip booth.
+colors:
+  ink: "#111111"
+  paper: "#FFFFFF"
+  page: "#FAFAFA"
+  surface: "#F5F5F5"
+  line: "#E5E5E5"
+  muted: "#737373"
+typography:
+  display:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "clamp(48px, 5.3vw, 72px)"
+    fontWeight: 700
+    lineHeight: 1.02
+    letterSpacing: "-.035em"
+  headline:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "clamp(28px, 3vw, 36px)"
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: "-.03em"
+  title:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "24px"
+    fontWeight: 700
+    lineHeight: 1.25
+  body:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.5
+  label:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "14px"
+    fontWeight: 700
+  metadata:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.5
+  compactTitle:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "16px"
+    fontWeight: 500
+    lineHeight: 1.4
+  compactState:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "18px"
+    fontWeight: 700
+    lineHeight: 1.25
+  narrowTitle:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "22px"
+    fontWeight: 700
+    lineHeight: 1.25
+  countdownReadout:
+    fontFamily: "'DM Sans', sans-serif"
+    fontSize: "clamp(64px, 12vw, 120px)"
+    fontWeight: 700
+    lineHeight: 1
+rounded:
+  control: "8px"
+  panel: "12px"
+spacing:
+  base: "8px"
+  compact: "12px"
+  group: "16px"
+  panel: "24px"
+  page: "32px"
+  section: "48px"
+components:
+  button-primary:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.control}"
+    padding: "12px 24px"
+    height: "48px"
+  button-outline:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.control}"
+    padding: "12px 24px"
+    height: "48px"
+  panel:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.panel}"
+    padding: "24px"
+  photo-count-dropdown:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.control}"
+    padding: "12px 16px"
+    height: "48px"
+---
+
+# Design System: Pixbooth
+
+## Overview
+
+**Creative North Star: "The Monochrome Photo Booth"**
+
+Pixbooth is a quiet, modern photo instrument: generous space, clear monochrome controls, and one primary decision on each screen. The camera and finished keepsake carry the visual weight; controls stay legible and secondary. Creative media and authored artwork keep their actual colors.
+
+The accepted modernization brief and direction contract supersede the earlier neobrutalist world. The supplied logo, bundled DM Sans, original assets, media geometry, and photo/live capabilities remain. The canonical working project is C:\Martin Archive\Programming\2026 Projects\PhotoPix.
+
+[MODERNIZATION-BRIEF.md](docs/design/MODERNIZATION-BRIEF.md) records the accepted request; [MODERNIZATION-CONTRACT.md](docs/design/MODERNIZATION-CONTRACT.md) records its direction. This file owns current visual tokens; [.impeccable/design.json](.impeccable/design.json) extends them. [Implementation](docs/design/MODERNIZATION-IMPLEMENTATION.md) records changes and validation. The previous concept and tokens are historical references, preserved below and in the dated archive.
+
+**Key Characteristics:**
+
+- Six neutral interface colors with content colors preserved.
+- Bundled DM Sans with a clear, readable hierarchy.
+- An 8px spacing rhythm and restrained 8–12px working corners.
+- Border-led surfaces without action shadows.
+- Camera-first capture and an artifact-first editor.
+
+## Colors
+
+**Primary:** Ink is used for primary actions, readable text, selected states, and focus. **Neutral:** Paper is the white working surface; Page is the faint overall background; Surface groups secondary controls; Line separates surfaces; Muted supports secondary copy on suitable light backgrounds.
+
+**The Chrome Rule.** Use the six normative interface tokens. Captured media, authored frame textures, background swatches, and sticker artwork retain their actual colors; never desaturate the page root to enforce chrome neutrality.
+
+Use Ink for camera idle instructions on Surface and for hovered secondary captions. Translucent Ink backdrops are functional overlays: the dialog backdrop is 25% alpha while the photograph countdown has no full-frame backdrop. They are derived overlay treatments, not additional chromatic tokens. Error and completion states use words, geometry, and availability rather than red/green signals.
+
+## Typography
+
+Use bundled DM Sans at weights 400, 500, and 700 with sans-serif fallback. The compact camera layout heading uses 16px/1.4; capture progress and timer use 12px. Section headings and control/action labels use 14px, while tool labels, sticker names, timer/status and supporting metadata use 12px. Controls inherit DM Sans; mode labels remain one line without shrinking their 44px targets. Only local 400/500/700 weights are imported; ordinary prose retains 16px/1.5. The frontmatter describes the repeated roles. Workflow intro headings use Headline; dialog and empty-camera headings use Title; supporting workflow paragraphs use Body, with a maximum intro measure of 65 characters. Action labels use Label.
+
+Secondary workflow/status text is generally 14px, smaller metadata 12px. Page intro copy becomes 14px on mobile. The unchanged landing display uses its Display role, 60px at compact desktop heights and a 38–48px responsive mobile range. Camera countdown is a distinct 64–120px transient readout. Keep labels readable and allow long names to wrap.
+
+## Layout
+
+The shared workflow container is at most 1280px wide with 32px side padding, reducing to 24px below 800px and 16px below 600px. Use the 8px rhythm for major relationships; 12px compact gaps, 4px inset corrections, and border-compensating selection padding are observed optical exceptions.
+
+The All view uses native multi-column masonry: five columns, four below 1100px, three below 800px, two below 600px, and one below 360px. Cards flow top-to-bottom then left-to-right, so DOM and keyboard order agree with the visual columns. Preview heights follow actual layout proportions, capped at 176px (144px on mobile), with a 96px minimum while preserving the full SVG. A labeled native Photo count dropdown offers All layouts and exact counts 1, 2, 3, 4, 6, 8, 9. Layout search and Pick for me are removed. A compact selected-layout Continue row stacks at mobile widths and has a sticky bottom offset.
+
+Photo-count results switch to an auto-fit CSS grid, filling rows left-to-right and stretching available tracks across the catalog. Cards retain their proportional previews and start alignment. The minimum track is 192px, reducing to 144px below 600px; selecting All restores masonry. This prevents short filtered lists from balancing into the leftmost masonry columns.
+
+The booth uses a camera-left / review-right arrangement. Stickers and Settings are opened by circular controls at the camera’s bottom-left and bottom-right; the centered white shutter remains on the camera. The separate left tools sidebar is removed. Tool bodies overlay the preview, using the existing DM Sans, neutral surfaces and borders. Both can open on wider frames; below620px preview width, only one opens at a time. Escape closes the current panel and restores its toggle focus. Hidden controls stay mounted, retaining their selections.
+
+The camera top bar retains the layout name, progress and Camera switch. Tools open inside its lower corners, above48px icon toggles; the64px shutter stays centered. Preview/control state does not change frame dimensions. Right-side Continue and Start over remain below photo review and outside its scroll collection.
+
+Stickers keeps Fresh picks, all original collections, provider selection, None/Clear, status and retry. Settings retains Photo/Live, timer, mirror and devices. The review uses a standard two-column grid regardless of capture count. All media and empty cells are4:3 with identical dimensions; cover cropping normalizes mixed template shapes. Retake and individual MP4-download controls overlay the media on hover/focus and stay visible on touch.
+
+The editor uses a flexible artifact plus a 360px control column (340px below 1100px), then stacks below 800px. The artifact is sticky only on wider screens and fitted to its true output proportions. Six tabs reveal one tool category at a time; download actions remain prominent above the tools. Actual overflow, sticky coverage, and viewport fit still need rendered-browser verification at the requested 1440/1024/768/375–430px widths.
+
+The desktop camera expands into the full left column with a1280 × 720 (16:9) reference fitted to available space. Below600px viewport width, the5:4 frame keeps tool panels usable. Video, canvas overlay, completed photos and clips all use object-fit:cover and centered positioning, filling the frame without letterbox margins. This changes preview framing; original capture sources and template export geometry remain unchanged.
+
+The step nav sits between the supplied logo and Home in one header row above 600px. At smaller widths it remains inside the same brand row as a second grid row. Current, completed, and unavailable semantics remain.
+
+Home retains the approved centered hero, logo, illustrative print composition, formats ribbon, and three how-to rows. Modern chrome removes the background grid and hard action shadow; Capture uses an Ink button with Paper text. Illustrative artwork and its provenance remain intact.
+
+## Elevation & Depth
+
+The interface uses tonal surfaces and fine borders rather than decorative depth. Current panels and buttons have no box shadow; the camera remains flat. Dialogs use a translucent backdrop to establish modal separation.
+
+Functional transitions use 180ms with the existing easing curve. Hover lifts template choices by 2px and primary buttons by 1px; press moves buttons down by 1px. The circular shutter scales to 1.04 on hover and 0.96 on press. Reduced-motion preference removes animation and transitions and disables nonessential hover transforms.
+
+## Shapes
+
+Working controls use the Control radius; panels and preview containers use the Panel radius. Structural borders are generally 1px, with 2px selected edges. Selected-border padding compensates to keep geometry stable.
+
+The circular shutter, numbered workflow markers, selected check, and switch track/thumb are semantic exceptions. The retired mobile tool-sheet rules remain historical CSS; current capture tools use native details/summary disclosures. Tab buttons use 6px inside an 8px segmented tray and artwork thumbnails retain 4px clipping. These source-backed exceptions do not establish a broader radius scale. Keep the supplied PNG logo in its original proportions.
+
+## Components
+
+Shared actions have a 48px minimum height; compact booth actions use 44px. Buttons retain labeled text; icon controls and inputs generally have at least 44px targets. Disabled primary actions use Surface, Line, and Muted with nearby recovery copy. Photo count uses a visibly labeled native select with keyboard semantics. Both layout and sticker search are removed.
+
+Masonry template cards retain their actual layout SVG, name, count, strong selected border, and check. Collapsible tool sections preserve control labels, keyboard focus and mounted state while closing removes their controls from the tab order. Reset confirmation explains discarded captures and edits before clearing the session.
+
+The workflow remains ordered three-step navigation with Home and current/completed/unavailable states. Current-step semantics use aria-current; future unavailable steps remain non-links. Editor tabs use roving focus and ArrowLeft/ArrowRight/Home/End navigation. Undo/Redo handles reversible edits; background choice and frame removal are one atomic history action.
+
+Download metadata separates full-size JPG dimensions from composed MP4 dimensions. A prepared MP4 displays its actual encoded dimensions; before export it describes the 1920px limit. Download status says a request was made and directs the user to browser downloads, because page code cannot confirm a saved file.
+
+**The Focus Rule.** Every interactive state has a visible keyboard focus treatment. Selected templates show a stronger border and check; selected tools expose pressed or selected semantics as well as their visual state.
+
+Focus outlines are 2px Ink with a 4px offset on light controls; inverted segmented controls use Paper inside the selection. Camera and recording announcements retain live-region behavior; avoid announcing per-frame rendering. Respect content colors in all media previews.
+
+## Do's and Don'ts
+
+- Do use the current frontmatter and modern stylesheet for new interface work.
+- Do preserve the supplied logo, bundled font, creative artwork, and media geometry.
+- Do keep source camera frames contained and exported media center-cropped to template openings.
+- Do explain unavailable actions and recovery in concise nearby copy.
+- Do preserve keyboard operation, focus return, and reduced-motion behavior.
+- Don't restore hard action shadows, the landing grid, or the retired neobrutalist chrome.
+- Don't flatten media colors or substitute placeholder captures for a live user session.
+- Don't claim browser, device, camera, export, or accessibility conformance from source-only checks.
+
+
+Current [collapsible tools and shutter cleanup](docs/design/COLLAPSIBLE-TOOLS.md) restores independent closed-by-default dropdown sections and removes shutter-label/shutter-timer. Prior source and documentation remain archived.
+
+
+The floating shutter has a Paper-white circle, 2px Ink outline and Ink camera icon. Its positioning wrapper is transparent with no padded dark backdrop; label/timer text is removed.
+
+
+On desktop and tablet windows at least900px wide and420px tall, camera and review fit the viewport. Review stays on the right and tools now overlay the camera. Narrower/shorter windows stack review below the camera.
+
+
+The current [Fresh picks and scaling refinement](docs/design/FRESH-STICKERS.md) adds 12 original mixed accessories, normalizes artwork thumbnails, uses an800 × 640 (5:4) camera reference and wider256–320px side panels, and compacts controls without reducing44px targets. Earlier design records remain preserved.
+
+
+Current organization: [camera corner tools](docs/design/CAMERA-CORNER-TOOLS.md) supersedes the separate left panel, uniform5:4 desktop frame and count-dependent gallery columns. The supplied images establish element organization only; their visual styling and photographic assets are not used.
+
+
+[Supplied control icons](docs/design/PROVIDED-ICONS.md) now provide the Stickers, shutter and Settings artwork, centered within their controls. Jeeliz fallback reports its specific initialization failure and offers Retry Jeeliz instead of labeling every failure as an unsupported device.
+
+
+Current capture behavior: [automatic capture and compact Settings](docs/design/AUTOMATIC-CAPTURE.md). One shutter click fills the selected layout with a configurable countdown before every capture. Individual thumbnail retakes are removed; Redo replaces and repeats the whole set. The supplied aperture shutter is white without a circular backing.
+
+
+Current face-effects stack: [MediaPipe + PixiJS](docs/design/MEDIAPIPE-PIXI-STICKERS.md) replaces the Jeeliz trial in the active app, with Canvas2D rendering fallback. All 48 effects are shown without tracker/category dropdowns. Countdown now uses Off / 3 sec / Custom, revealing a 1-10 second numeric stepper only for Custom.
+
+## Historical design before modernization — 2026-10-12
+
+The complete previous document, including its former normative frontmatter, follows verbatim. It is historical and does not override the current tokens, accepted brief, or direction contract. The exact file snapshot is also in [the dated archive](docs/design/archive/pre-modernization-2026-10-12/DESIGN.md).
+
+````markdown
+---
+name: Pixbooth
 description: A bold monochrome browser photo and live-clip booth.
 colors:
   black: "#000"
@@ -120,3 +340,9 @@ Focus uses a 3px outline; disabled primary buttons use a dashed border, white fi
 Eight original decorative frames combine three generated paper textures with authored canvas mounts and motifs. Artwork is creative media and may retain color; controls and selected states stay black and white. Frame thumbnails use empty apertures rather than simulated captures. Choosing a background explicitly removes the decorative frame. The template catalog adds name search, photo-count filters and Pick for me; the frame picker adds Surprise me.
 
 Finished strips display immediately without a printing animation, printer slot, or replay action. Fit the real artifact dimensions inside the stage and keep export actions visible. See [frame-artwork.md](docs/design/frame-artwork.md) for provenance and exact prompts.
+
+
+## Jeeliz face-sticker trial — 2026-10-12
+
+Face stickers now offer Jeeliz (default) and the original MediaPipe tracker. Choose Face tracking in the Face stickers panel. Jeeliz uses local face-pose estimates for the existing 36 sticker artworks and automatically falls back to MediaPipe on initialization failure. See [implementation, manual checks and rollback](docs/design/JEELIZ-FACE-STICKERS.md). Existing layout and earlier documentation are retained.
+````

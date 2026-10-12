@@ -3,10 +3,17 @@ export default function CaptureIntro({ template, mode, templateLocked, mp4Suppor
     <>
       <div className="intro booth-intro">
         <div>
-          <h1 tabIndex="-1">Capture your moments.</h1>
+          <h1 tabIndex="-1">Strike a pose!</h1>
           <p>
-            {template.name} · {template.count} {mode === 'live' ? 'five-second clips' : 'photos'}.
-            Submit when you’re ready to edit.
+            {template.name} · {template.count}{' '}
+            {mode === 'live'
+              ? template.count === 1
+                ? 'five-second clip'
+                : 'five-second clips'
+              : template.count === 1
+                ? 'photo'
+                : 'photos'}
+            .
           </p>
         </div>
         <div className="capture-mode" role="group" aria-label="Capture mode">

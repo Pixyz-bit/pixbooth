@@ -13,9 +13,13 @@ export default function useBoothSession() {
   const stream = useRef(null);
   const requestId = useRef(0);
   const timer = useRef(null);
+  const sequence = useRef(false);
+  const [autoCapture, setAutoCapture] = useState(false);
+  const [redoRequested, setRedoRequested] = useState(false);
   const shotUrls = useRef([]);
   const recording = useRef(null);
   const [shots, setShots] = useState([]);
+  const [retakeIndex, setRetakeIndex] = useState(null);
   const [templateId, setTemplateId] = useState('strip-four');
   const [layoutChosen, setLayoutChosen] = useState(false);
   const [editorSettings, setEditorSettings] = useState(null);
@@ -32,7 +36,7 @@ export default function useBoothSession() {
   const [mode, setMode] = useState('photo');
   const [mp4Supported, setMp4Supported] = useState(null);
   const [recordProgress, setRecordProgress] = useState(0);
-  const completed = shots.length === template.count;
+  const completed = shots.length === template.count && retakeIndex === null;
   const cameraActive =
     ['ready', 'recording'].includes(status) || (status === 'saving' && !completed);
   const { releaseCamera, openCamera, stopCamera } = useCamera({
@@ -73,6 +77,9 @@ export default function useBoothSession() {
     };
   }, [page]);
   function cancelCountdown() {
+    sequence.current = false;
+    setAutoCapture(false);
+    setRedoRequested(false);
     clearInterval(timer.current);
     timer.current = null;
     setCountdown(null);
@@ -85,12 +92,19 @@ export default function useBoothSession() {
     shotUrls,
     timer,
     shots,
+    sequence,
+    setAutoCapture,
     template,
     mode,
     mirror,
     delay,
     sticker,
     face,
+    retakeIndex,
+    setRetakeIndex,
+    status,
+    countdown,
+    completed,
     cancelCountdown,
     releaseCamera,
     setError,
@@ -100,6 +114,34 @@ export default function useBoothSession() {
     setFlash,
     setCountdown,
   });
+  useEffect(() => {
+    if (!redoRequested) return;
+    if (error || page !== 'booth') {
+      setRedoRequested(false);
+      return;
+    }
+    if (status === 'ready' && stickerReady) {
+      setRedoRequested(false);
+      takePhoto();
+    }
+  }, [redoRequested, status, stickerReady, error, page]);
+  function redoAll() {
+    if (busy || redoRequested) return;
+    requestId.current++;
+    recording.current?.abort();
+    cancelCountdown();
+    releaseCamera();
+    shotUrls.current.forEach((url) => URL.revokeObjectURL(url));
+    shotUrls.current = [];
+    setShots([]);
+    setRetakeIndex(null);
+    setEditorSettings(null);
+    setFlash(false);
+    setError('');
+    setRecordProgress(0);
+    openCamera(deviceId);
+    setRedoRequested(true);
+  }
   function retake() {
     requestId.current++;
     recording.current?.abort();
@@ -111,17 +153,40 @@ export default function useBoothSession() {
     shotUrls.current.forEach((url) => URL.revokeObjectURL(url));
     shotUrls.current = [];
     setShots([]);
+    setRetakeIndex(null);
     setEditorSettings(null);
     setStatus('idle');
     setFlash(false);
     setError('');
     setRecordProgress(0);
   }
-  const busy = countdown !== null || ['loading', 'saving', 'recording'].includes(status);
+  function retakePhoto(index) {
+    if (busy || !shots[index]) return;
+    cancelCountdown();
+    setRetakeIndex(index);
+    setError('');
+    if (stream.current?.active) setStatus('ready');
+    else openCamera(deviceId);
+  }
+  function cancelRetake() {
+    if (busy) return;
+    releaseCamera();
+    setRetakeIndex(null);
+    setError('');
+    setStatus(shots.length === template.count ? 'review' : 'idle');
+  }
+  const busy =
+    autoCapture || countdown !== null || ['loading', 'saving', 'recording'].includes(status);
   const reviewing = status === 'review';
   const templateLocked = busy || shots.length > 0;
   return {
     shots,
+    autoCapture,
+    redoRequested,
+    redoAll,
+    retakeIndex,
+    retakePhoto,
+    cancelRetake,
     template,
     templateId,
     setTemplateId,

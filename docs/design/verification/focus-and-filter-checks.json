@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-12",
+  "build": {
+    "exitCode": 0,
+    "modules": 172,
+    "displayDuration": "1m 1s"
+  },
+  "tests": {
+    "passed": 21,
+    "scope": "Pure state/geometry, static SSR, mocked capture lifecycle; no browser/event/layout approval."
+  },
+  "format": {
+    "exitCode": 0,
+    "scope": "src and tests"
+  },
+  "layoutDetector": {
+    "findings": []
+  },
+  "preservation": {
+    "embeddedDesignUnchanged": true,
+    "embeddedReadmeUnchanged": true,
+    "sidecarHistoryUnchanged": true,
+    "archives": [
+      "docs/design/archive/pre-capture-focus-2026-10-12",
+      "docs/design/archive/pre-filter-spread-2026-10-12"
+    ]
+  },
+  "capture": {
+    "sectionHeight": "100dvh",
+    "at": "min-width:720px and min-height:560px",
+    "ratio": "16:9",
+    "controls": "Right sidebar",
+    "galleryColumns": "min(3,captureCount)",
+    "scroll": "Native proximity snapping; gesture count unverified"
+  },
+  "templates": {
+    "all": "Native masonry",
+    "filtered": "Row-major auto-fit grid, 240px minimum tracks; 144px on mobile"
+  },
+  "browser": "Fresh rendered preview and physical camera/gesture/export checks remain unavailable."
+}

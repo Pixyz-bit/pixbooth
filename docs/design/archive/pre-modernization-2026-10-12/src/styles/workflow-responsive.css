@@ -1,0 +1,88 @@
+@media (max-width: 999px) {
+  .workflow-nav {
+    gap: 10px;
+  }
+  .selection-layout {
+    grid-template-columns: minmax(0, 1fr) 260px;
+  }
+  .template-choices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 560px;
+  }
+  .capture-main .sidebar-column {
+    display: flex;
+  }
+}
+@media (max-width: 800px) {
+  .workflow-nav {
+    flex-wrap: wrap;
+  }
+  .workflow-nav ol {
+    order: 3;
+    flex: 1 0 100%;
+  }
+}
+@media (max-width: 600px) {
+  .workflow-nav {
+    padding: 10px 0;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .workflow-nav ol {
+    width: 100%;
+    gap: 4px;
+  }
+  .workflow-nav li {
+    flex: 1;
+    min-width: 0;
+    gap: 4px;
+  }
+  .workflow-nav li a,
+  .step-unavailable {
+    flex-direction: column;
+    gap: 5px;
+    padding: 7px 3px;
+    width: 100%;
+    font-size: 11px;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .step-chevron {
+    width: 12px;
+    flex-shrink: 0;
+  }
+  .workflow-home {
+    padding: 10px 0;
+  }
+  .selection-layout {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .template-catalog {
+    padding: 12px;
+  }
+  .template-choices {
+    max-height: 340px;
+    grid-auto-rows: 92px;
+    gap: 8px;
+  }
+  .template-choice {
+    gap: 9px;
+    padding: 8px;
+  }
+  .template-choice .template-mini {
+    width: 32px;
+    height: 58px;
+  }
+  .choice-copy strong {
+    font-size: 12px;
+  }
+  .selection-summary {
+    padding: 16px;
+  }
+  .selection-stage {
+    height: 180px;
+    flex: none;
+    padding: 5px;
+  }
+}

@@ -6,6 +6,7 @@ export default function BackgroundOptions({
   setBackground,
   frame,
   setFrame,
+  chooseBackground,
 }) {
   return (
     <details className="editor-section" open>
@@ -26,8 +27,11 @@ export default function BackgroundOptions({
             disabled={exporting}
             aria-pressed={frame === 'none' && background === item.id}
             onClick={() => {
-              setFrame('none');
-              setBackground(item.id);
+              if (chooseBackground) chooseBackground(item.id);
+              else {
+                setFrame('none');
+                setBackground(item.id);
+              }
             }}
           >
             <span

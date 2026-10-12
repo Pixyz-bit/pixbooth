@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { encodeCanvas } from '../lib/media/live-media.js';
+import { replaceCapturedShot } from '../lib/capture-state.js';
 import { drawSticker } from '../lib/stickers/sticker-art.js';
 export default function usePhotoCapture({
   video,
@@ -9,13 +10,19 @@ export default function usePhotoCapture({
   shotUrls,
   timer,
   shots,
+  sequence,
+  setAutoCapture = () => {},
   template,
   mode,
   mirror,
   delay,
   sticker,
   face,
-  cancelCountdown,
+  retakeIndex,
+  setRetakeIndex,
+  status,
+  countdown,
+  completed,
   releaseCamera,
   setError,
   setStatus,
@@ -24,8 +31,52 @@ export default function usePhotoCapture({
   setFlash,
   setCountdown,
 }) {
+  const captureLock = useRef(false);
+  const localSequence = useRef(false);
+  const activeSequence = sequence ?? localSequence;
+  const sequenceShots = useRef(shots);
+  function clearCountdown() {
+    clearInterval(timer.current);
+    timer.current = null;
+    setCountdown(null);
+  }
+  function stopSequence() {
+    activeSequence.current = false;
+    setAutoCapture(false);
+    captureLock.current = false;
+    clearCountdown();
+  }
+  useEffect(() => {
+    if (
+      !activeSequence.current &&
+      countdown === null &&
+      !['saving', 'recording', 'loading'].includes(status)
+    )
+      captureLock.current = false;
+  }, [status, countdown]);
+  function saveShot(shot) {
+    const previous = retakeIndex === null ? null : sequenceShots.current[retakeIndex];
+    const next = replaceCapturedShot(sequenceShots.current, shot, retakeIndex);
+    sequenceShots.current = next;
+    setShots(next);
+    if (previous) {
+      URL.revokeObjectURL(previous.url);
+      shotUrls.current = shotUrls.current.filter((url) => url !== previous.url);
+      setRetakeIndex(null);
+    }
+    if (next.length === template.count) {
+      stopSequence();
+      releaseCamera();
+      setStatus('review');
+    } else {
+      setStatus('ready');
+      if (activeSequence.current) scheduleCapture();
+      else stopSequence();
+    }
+  }
   useEffect(
     () => () => {
+      activeSequence.current = false;
       requestId.current++;
       recording.current?.abort();
       clearInterval(timer.current);
@@ -35,10 +86,11 @@ export default function usePhotoCapture({
     []
   );
   async function captureLive() {
-    cancelCountdown();
+    clearCountdown();
     const id = requestId.current,
       source = video.current;
     if (!source?.videoWidth || !stream.current?.active) {
+      stopSequence();
       setError('The camera isn’t ready. Enable it and try again.');
       return;
     }
@@ -66,7 +118,7 @@ export default function usePhotoCapture({
           ctx.drawImage(source, 0, 0, canvas.width, canvas.height);
           const result = face.latest.current;
           if (sticker !== 'none' && result && performance.now() - result.timestamp < 600)
-            drawSticker(ctx, result.points, canvas.width, canvas.height, sticker);
+            (face.draw || drawSticker)(ctx, result.points, canvas.width, canvas.height, sticker);
           ctx.restore();
           if (!poster) poster = canvas.toDataURL('image/jpeg', 0.9);
         },
@@ -79,23 +131,9 @@ export default function usePhotoCapture({
       if (id !== requestId.current) return;
       const url = URL.createObjectURL(blob);
       shotUrls.current.push(url);
-      const next = [
-        ...shots,
-        {
-          url,
-          poster,
-          blob,
-          type: 'live',
-          width: canvas.width,
-          height: canvas.height,
-        },
-      ];
-      setShots(next);
-      if (next.length === template.count) {
-        releaseCamera();
-        setStatus('review');
-      } else setStatus('ready');
+      saveShot({ url, poster, blob, type: 'live', width: canvas.width, height: canvas.height });
     } catch (err) {
+      if (id === requestId.current) stopSequence();
       if (id === requestId.current && err.name !== 'AbortError') {
         setError(err.message || 'Live recording failed. Try again or switch to Photo.');
         setStatus('ready');
@@ -106,10 +144,11 @@ export default function usePhotoCapture({
     }
   }
   async function capture() {
-    cancelCountdown();
+    clearCountdown();
     const id = requestId.current;
     const source = video.current;
     if (!source?.videoWidth || source.readyState < 2 || !stream.current?.active) {
+      stopSequence();
       setError('The camera isn’t ready yet. Wait a moment, then take your photo again.');
       return;
     }
@@ -124,6 +163,7 @@ export default function usePhotoCapture({
       }
       if (id !== requestId.current) return;
       if (!fresh()) {
+        stopSequence();
         setStatus('ready');
         setError(
           'Face tracking lost your face. Face the camera and try again, or select None under Face stickers.'
@@ -141,53 +181,69 @@ export default function usePhotoCapture({
       ctx.scale(-1, 1);
     }
     ctx.drawImage(source, 0, 0);
-    if (stickerPoints) drawSticker(ctx, stickerPoints, canvas.width, canvas.height, sticker);
+    if (stickerPoints)
+      (face.draw || drawSticker)(ctx, stickerPoints, canvas.width, canvas.height, sticker);
     setFlash(true);
     canvas.toBlob(
       (blob) => {
         if (id !== requestId.current) return;
         setFlash(false);
         if (!blob) {
+          stopSequence();
           setError('The photo couldn’t be saved. Please try again.');
           setStatus('ready');
           return;
         }
         const url = URL.createObjectURL(blob);
         shotUrls.current.push(url);
-        const nextShots = [
-          ...shots,
-          {
-            url,
-            width: canvas.width,
-            height: canvas.height,
-          },
-        ];
-        setShots(nextShots);
-        if (nextShots.length < template.count) {
-          setStatus('ready');
-          return;
-        }
-        releaseCamera();
-        setStatus('review');
+        saveShot({ url, width: canvas.width, height: canvas.height });
       },
       'image/jpeg',
       0.95
     );
   }
-  function takePhoto() {
-    setError('');
-    const take = mode === 'live' ? captureLive : capture;
+  function scheduleCapture() {
+    const take = async () => {
+      const id = requestId.current;
+      try {
+        await (mode === 'live' ? captureLive() : capture());
+      } catch (error) {
+        if (id !== requestId.current) return;
+        stopSequence();
+        setFlash(false);
+        setStatus('ready');
+        setError(error.message || 'Capture failed. Try the sequence again.');
+      }
+    };
     if (delay === 0) {
       take();
       return;
     }
     let remaining = delay;
     setCountdown(remaining);
+    const id = requestId.current;
     timer.current = setInterval(() => {
+      if (
+        id !== requestId.current ||
+        !captureLock.current ||
+        (retakeIndex === null && !activeSequence.current)
+      ) {
+        clearCountdown();
+        return;
+      }
       remaining--;
       if (remaining === 0) take();
       else setCountdown(remaining);
     }, 1000);
+  }
+  function takePhoto() {
+    if (captureLock.current || status !== 'ready' || countdown !== null || completed) return;
+    captureLock.current = true;
+    sequenceShots.current = shots;
+    activeSequence.current = retakeIndex === null;
+    setAutoCapture(activeSequence.current);
+    setError('');
+    scheduleCapture();
   }
   return {
     takePhoto,

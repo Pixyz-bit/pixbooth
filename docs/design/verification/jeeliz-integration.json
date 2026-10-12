@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-12",
+  "workspace": "C:\\Users\\arlan\\OneDrive\\ドキュメント\\ChatGPT\\PhotoPix",
+  "build": {
+    "exitCode": 0,
+    "seconds": 11.23,
+    "modules": 169
+  },
+  "format": {
+    "exitCode": 0,
+    "files": [
+      "src/hooks/useFaceStickers.js",
+      "src/lib/face/jeeliz-pose.js",
+      "src/lib/face/jeeliz-tracker.js",
+      "src/lib/face/mediapipe-tracker.js",
+      "src/components/capture/FaceStickerPanel.jsx",
+      "src/components/capture/FaceStickerPanel.css"
+    ]
+  },
+  "checks": {
+    "exitCode": 0,
+    "report": "jeeliz-checks.json"
+  },
+  "vendor": {
+    "repository": "https://github.com/jeeliz/jeelizFaceFilter",
+    "revision": "6f2695120b992511fd6cb1fd80c600bb957cd08c",
+    "files": [
+      {
+        "file": "jeelizFaceFilter.module.js",
+        "source": "https://raw.githubusercontent.com/jeeliz/jeelizFaceFilter/6f2695120b992511fd6cb1fd80c600bb957cd08c/dist/jeelizFaceFilter.module.js",
+        "bytes": 111512,
+        "sha256": "777e1c52f61860493478ab20a35208d8fe2667968530717334a0fd8206309427"
+      },
+      {
+        "file": "NN_DEFAULT.json",
+        "source": "https://raw.githubusercontent.com/jeeliz/jeelizFaceFilter/6f2695120b992511fd6cb1fd80c600bb957cd08c/neuralNets/NN_DEFAULT.json",
+        "bytes": 3756740,
+        "sha256": "f348ce0fb3b30b8cf27e1666bc56de0c6b1f1b8f02cadc4cd5ca53169534b182"
+      },
+      {
+        "file": "LICENSE",
+        "source": "https://raw.githubusercontent.com/jeeliz/jeelizFaceFilter/6f2695120b992511fd6cb1fd80c600bb957cd08c/LICENSE",
+        "bytes": 11357,
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    ],
+    "adapter": {
+      "file": "jeelizFaceFilter.esm.js",
+      "change": "Exact upstream module plus a named ES-module export; original retained separately",
+      "sha256": "28c1bcdb8944dffdc9550266f8e43230fe1f592827cfe8ae547b010dd1f9018a"
+    }
+  },
+  "manualReview": "User will test physical camera, actual WebGL tracking, alignment and JPG/MP4 behavior; no browser/device validation claimed",
+  "live5173": {
+    "project": "C:/Martin Archive/Programming/2026 Projects/PhotoPix",
+    "status": "Approved by user and applied",
+    "backup": "docs/design/archive/pre-jeeliz-live-20261012-155836",
+    "http": {
+      "module": 200,
+      "model": 200,
+      "hook": "Serves Jeeliz code and tracking selector"
+    },
+    "formatExitCode": 0,
+    "build": {
+      "exitCode": 0,
+      "modules": 169,
+      "seconds": 9.39
+    }
+  }
+}

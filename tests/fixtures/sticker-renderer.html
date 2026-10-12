@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><title>Pixbooth renderer verification</title>
+  <style>
+    body {
+      font: 16px sans-serif;
+      margin: 24px;
+      background: #fafafa;
+      color: #111;
+    }
+    canvas {
+      width: min(640px, 100%);
+      border: 1px solid #ddd;
+      background: #eee;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+  </style>
+  <h1>Sticker renderer verification</h1>
+  <p id="status">Running actual WebGL checks...</p>
+  <canvas id="preview" width="640" height="480"></canvas>
+  <pre id="results"></pre>
+  <script type="module">
+    import { createStickerRenderer } from '/src/lib/stickers/sticker-renderer.js';
+    import { stickers, drawSticker } from '/src/lib/stickers/sticker-art.js';
+    const preview = document.querySelector('#preview'),
+      ctx = preview.getContext('2d');
+    const points = {
+      33: { x: 0.36, y: 0.48 },
+      263: { x: 0.64, y: 0.48 },
+      10: { x: 0.5, y: 0.31 },
+      1: { x: 0.5, y: 0.61 },
+      13: { x: 0.5, y: 0.73 },
+    };
+    function bounds(canvas) {
+      const p = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+      let left = canvas.width,
+        top = canvas.height,
+        right = -1,
+        bottom = -1;
+      for (let y = 0; y < canvas.height; y++)
+        for (let x = 0; x < canvas.width; x++) {
+          if (p[(y * canvas.width + x) * 4 + 3] > 24) {
+            left = Math.min(left, x);
+            right = Math.max(right, x);
+            top = Math.min(top, y);
+            bottom = Math.max(bottom, y);
+          }
+        }
+      return [left, top, right, bottom];
+    }
+    const checks = [];
+    try {
+      const renderer = await createStickerRenderer();
+      if (renderer.mode !== 'pixi') throw new Error('WebGL unavailable in verification browser');
+      const expected = document.createElement('canvas');
+      expected.width = 640;
+      expected.height = 480;
+      const compare = expected.getContext('2d');
+      let maximumDifference = 0;
+      for (const sticker of stickers.filter((s) => s.id !== 'none')) {
+        ctx.clearRect(0, 0, 640, 480);
+        compare.clearRect(0, 0, 640, 480);
+        renderer.drawTo(ctx, points, 640, 480, sticker.id);
+        drawSticker(compare, points, 640, 480, sticker.id);
+        const actual = bounds(preview),
+          original = bounds(expected);
+        if (actual[2] < actual[0]) throw new Error(sticker.id + ' produced no pixels');
+        const difference = Math.max(...actual.map((n, i) => Math.abs(n - original[i])));
+        maximumDifference = Math.max(maximumDifference, difference);
+        if (difference > 8)
+          throw new Error(sticker.id + ' attachment bounds differ by ' + difference + ' pixels');
+      }
+      checks.push('PASS: all 48 effects render through real PixiJS WebGL.');
+      checks.push(
+        'PASS: GPU and Canvas2D artwork bounds differ by at most ' + maximumDifference + ' pixels.'
+      );
+      ctx.clearRect(0, 0, 640, 480);
+      renderer.drawTo(ctx, points, 640, 480, 'ribbon-bow');
+      const fallback = await createStickerRenderer({
+        loadPixi: async () => {
+          throw new Error('Simulated unavailable GPU');
+        },
+      });
+      compare.clearRect(0, 0, 640, 480);
+      fallback.drawTo(compare, points, 640, 480, 'ribbon-bow');
+      if (fallback.mode !== 'canvas2d' || bounds(expected)[2] < 0)
+        throw new Error('Canvas2D fallback failed');
+      checks.push('PASS: unavailable GPU falls back to the original artwork.');
+      const rotated = Object.fromEntries(
+        Object.entries(points).map(([key, p]) => {
+          const x = p.x - 0.5,
+            y = p.y - 0.48;
+          return [
+            key,
+            {
+              x: 0.5 + x * Math.cos(0.25) - y * Math.sin(0.25),
+              y: 0.48 + x * Math.sin(0.25) + y * Math.cos(0.25),
+            },
+          ];
+        })
+      );
+      ctx.clearRect(0, 0, 640, 480);
+      renderer.drawTo(ctx, rotated, 640, 480, 'ribbon-bow');
+      compare.clearRect(0, 0, 640, 480);
+      drawSticker(compare, rotated, 640, 480, 'ribbon-bow');
+      if (Math.max(...bounds(preview).map((n, i) => Math.abs(n - bounds(expected)[i]))) > 8)
+        throw new Error('Rotated sticker differs');
+      checks.push('PASS: rotated facial anchors agree between rendering paths.');
+      renderer.destroy();
+      fallback.destroy();
+      const worker = new Worker(new URL('../../src/workers/face-worker.js', import.meta.url), {
+        type: 'module',
+      });
+      try {
+        await new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => reject(new Error('MediaPipe startup timed out')), 45000);
+          worker.onerror = (error) => {
+            clearTimeout(timeout);
+            reject(new Error(error.message));
+          };
+          worker.onmessage = ({ data }) => {
+            if (data.type === 'ready') {
+              createImageBitmap(preview).then((frame) =>
+                worker.postMessage({ type: 'frame', frame, timestamp: performance.now() }, [frame])
+              );
+            } else if (data.type === 'result') {
+              clearTimeout(timeout);
+              resolve();
+            } else if (data.type === 'error') {
+              clearTimeout(timeout);
+              reject(new Error('MediaPipe worker failed'));
+            }
+          };
+          worker.postMessage({ type: 'init', assetBase: location.origin + '/mediapipe' });
+        });
+        checks.push(
+          'PASS: local MediaPipe worker/model initialized and processed a synthetic frame without camera access.'
+        );
+      } finally {
+        worker.terminate();
+      }
+      document.querySelector('#status').textContent =
+        'PASS - real GPU rendering and Canvas2D fallback verified.';
+    } catch (error) {
+      document.querySelector('#status').textContent = 'FAIL - ' + error.message;
+      checks.push(error.stack);
+    }
+    document.querySelector('#results').textContent = checks.join('\n');
+  </script>
+</html>

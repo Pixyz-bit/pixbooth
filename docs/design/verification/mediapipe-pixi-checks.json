@@ -1,0 +1,41 @@
+{
+  "desktop": {
+    "countdownOptions": [
+      "Off",
+      "3 sec",
+      "Custom"
+    ],
+    "customInput": "7",
+    "horizontalOverflow": 0,
+    "removedDropdowns": 0,
+    "stickerChoices": 49,
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  "mobile": {
+    "customInputVisible": true,
+    "horizontalOverflow": 0,
+    "openPanels": 1,
+    "viewport": [
+      375,
+      812
+    ]
+  },
+  "gpu": "- heading \"Sticker renderer verification\" [level=1]\n- paragraph: PASS - real GPU rendering and Canvas2D fallback verified.\n- generic: \"PASS: all 48 effects render through real PixiJS WebGL. PASS: GPU and Canvas2D artwork bounds differ by at most 2 pixels. PASS: unavailable GPU falls back to the original artwork. PASS: rotated facial anchors agree between rendering paths. PASS: local MediaPipe worker/model initialized and processed a synthetic frame without camera access.\"",
+  "mobileCustomFocus": {
+    "viewport": [
+      375,
+      812
+    ],
+    "focused": true,
+    "panelScroll": 72.80000305175781,
+    "inputInsidePanel": true
+  },
+  "finalChecks": {
+    "testsPassed": 43,
+    "formatting": "passed",
+    "productionBuild": "passed"
+  }
+}

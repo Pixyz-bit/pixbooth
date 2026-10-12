@@ -1,0 +1,326 @@
+.home-app {
+  height: auto;
+  min-height: 100dvh;
+  background-color: #fff;
+  background-image:
+    linear-gradient(#0001 1px, transparent 1px), linear-gradient(90deg, #0001 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.landing-main {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  flex: 1;
+}
+.landing-hero {
+  padding-top: 36px;
+}
+.landing-copy {
+  text-align: center;
+}
+.landing-copy > .wordmark {
+  width: fit-content;
+  margin: 0 auto 20px;
+}
+.landing-copy .brand-logo {
+  width: 200px;
+}
+.landing-copy h1 {
+  font-size: clamp(48px, 5.3vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin: 0 0 18px;
+  font-weight: 700;
+}
+.landing-copy > p {
+  max-width: 48ch;
+  margin: 0 auto 22px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.landing-capture {
+  width: 190px;
+  min-height: 50px;
+  font-size: 16px;
+  justify-content: space-between;
+  padding: 11px 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.landing-capture.button-dark {
+  background: #fff;
+  color: #000;
+}
+.landing-capture.button-dark:hover:not(:disabled) {
+  background: #000;
+  color: #fff;
+}
+.landing-privacy {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+}
+.landing-showcase {
+  display: grid;
+  grid-template-columns: 110px 300px 180px;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin: 30px auto 18px;
+  padding-bottom: 24px;
+  position: relative;
+}
+.sample-photo {
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+.pose-0 {
+  background-position: 0% 0%;
+}
+.pose-1 {
+  background-position: 100% 0%;
+}
+.pose-2 {
+  background-position: 0% 100%;
+}
+.pose-3 {
+  background-position: 100% 100%;
+}
+.showcase-strip {
+  border: 2px solid #000;
+  padding: 6px;
+  background: #000;
+  color: #fff;
+  display: grid;
+  gap: 5px;
+  transform: rotate(-6deg);
+}
+.showcase-strip .sample-photo {
+  aspect-ratio: 1;
+}
+.showcase-strip > span {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 0 2px;
+}
+.showcase-main {
+  border: 3px solid #000;
+  padding: 9px 9px 0;
+  background: #fff;
+}
+.showcase-main .sample-photo {
+  aspect-ratio: 1;
+}
+.print-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 2px;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 10px;
+}
+.print-caption span:last-child {
+  font-size: 16px;
+  letter-spacing: -0.03em;
+}
+.showcase-side {
+  display: grid;
+  gap: 20px;
+}
+.showcase-small {
+  border: 2px solid #000;
+  padding: 6px;
+  transform: rotate(5deg);
+}
+.showcase-small .sample-photo {
+  aspect-ratio: 1.2;
+}
+.showcase-small > span {
+  display: block;
+  padding: 10px 0 4px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+}
+.live-note {
+  padding: 14px 0 0;
+  border-top: 2px solid #000;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+.live-note strong {
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+.live-note > span {
+  grid-column: 1/-1;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.landing-showcase figcaption {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  text-align: center;
+  font-size: 10px;
+}
+.landing-formats {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 18px 0;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  font-size: 14px;
+  font-weight: 700;
+  scroll-margin-top: 20px;
+}
+.landing-how {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  padding: 48px 0;
+  scroll-margin-top: 20px;
+}
+.landing-how h2 {
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px;
+}
+.landing-how p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.landing-how ol {
+  list-style: decimal-leading-zero;
+  margin: 0;
+  padding-left: 30px;
+}
+.landing-how li {
+  padding: 0 0 18px 8px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #000;
+}
+.landing-how li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.landing-how li::marker {
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.landing-how li strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.landing-how li span {
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media (max-width: 999px) {
+  .landing-showcase {
+    gap: 24px;
+    grid-template-columns: 95px 270px 150px;
+  }
+}
+@media (min-width: 1000px) and (max-height: 800px) {
+  .landing-copy .brand-logo {
+    width: 180px;
+  }
+  .landing-hero {
+    padding-top: 24px;
+  }
+  .landing-copy h1 {
+    font-size: 60px;
+    margin-bottom: 14px;
+  }
+  .landing-copy > p {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .landing-showcase {
+    grid-template-columns: 76px 250px 160px;
+    margin-top: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .booth-intro {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .capture-mode {
+    width: 100%;
+  }
+  .capture-mode button {
+    flex: 1;
+  }
+  .landing-copy .brand-logo {
+    width: 160px;
+  }
+  .landing-hero {
+    padding-top: 30px;
+  }
+  .landing-copy h1 {
+    font-size: clamp(38px, 10vw, 48px);
+    margin-bottom: 16px;
+  }
+  .landing-copy > p {
+    font-size: 13px;
+    max-width: 35ch;
+    margin-bottom: 20px;
+  }
+  .desktop-break {
+    display: none;
+  }
+  .landing-showcase {
+    grid-template-columns: 64px minmax(0, 210px);
+    gap: 18px;
+    width: min(300px, 100%);
+    margin-top: 28px;
+    padding-bottom: 26px;
+  }
+  .showcase-strip {
+    padding: 4px;
+    gap: 3px;
+  }
+  .showcase-main {
+    padding: 6px 6px 0;
+  }
+  .print-caption {
+    padding: 12px 0;
+    font-size: 8px;
+  }
+  .print-caption span:last-child {
+    font-size: 14px;
+  }
+  .showcase-side {
+    display: none;
+  }
+  .landing-formats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 12px;
+    padding: 20px 8px;
+    text-align: center;
+    font-size: 11px;
+  }
+  .landing-how {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 32px 0;
+  }
+  .landing-how h2 {
+    font-size: 30px;
+  }
+}

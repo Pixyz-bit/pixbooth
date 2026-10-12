@@ -7,10 +7,10 @@ export default function StickerThumbnail({ id }) {
     ctx.clearRect(0, 0, 112, 112);
     ctx.strokeStyle = '#b8b8c1';
     ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.ellipse(56, 61, 21, 28, 0, 0, Math.PI * 2);
-    ctx.stroke();
     if (id === 'none') {
+      ctx.beginPath();
+      ctx.ellipse(56, 61, 21, 28, 0, 0, Math.PI * 2);
+      ctx.stroke();
       ctx.beginPath();
       ctx.moveTo(33, 34);
       ctx.lineTo(79, 88);
@@ -46,7 +46,41 @@ export default function StickerThumbnail({ id }) {
       x: 0.5,
       y: 0.73,
     };
-    drawSticker(ctx, points, 112, 112, id);
+    const artwork = document.createElement('canvas');
+    artwork.width = artwork.height = 112;
+    const artworkContext = artwork.getContext('2d');
+    drawSticker(artworkContext, points, 112, 112, id);
+    const pixels = artworkContext.getImageData(0, 0, 112, 112).data;
+    let left = 112,
+      top = 112,
+      right = -1,
+      bottom = -1;
+    for (let y = 0; y < 112; y++)
+      for (let x = 0; x < 112; x++) {
+        if (pixels[(y * 112 + x) * 4 + 3] > 16) {
+          left = Math.min(left, x);
+          top = Math.min(top, y);
+          right = Math.max(right, x);
+          bottom = Math.max(bottom, y);
+        }
+      }
+    if (right < left) return;
+    const width = right - left + 1,
+      height = bottom - top + 1,
+      scale = 88 / Math.max(width, height);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(
+      artwork,
+      left,
+      top,
+      width,
+      height,
+      (112 - width * scale) / 2,
+      (112 - height * scale) / 2,
+      width * scale,
+      height * scale
+    );
   }, [id]);
   return (
     <canvas ref={canvas} width="112" height="112" className="sticker-icon" aria-hidden="true" />

@@ -1,5 +1,99 @@
 # Pixbooth
 
+A React browser booth for photos and five-second live clips, with 21 layouts, 48 face effects plus None, eight original decorative frames, 20 backgrounds, 20 filters, 11 border-sticker designs plus None, and a custom caption.
+
+The current interface follows the accepted modern monochrome [brief](docs/design/MODERNIZATION-BRIEF.md) and [direction contract](docs/design/MODERNIZATION-CONTRACT.md). [DESIGN.md](DESIGN.md) owns current tokens and [.impeccable/design.json](.impeccable/design.json) carries component metadata. The prior neobrutalist guide remains historical in [DESIGN-CONCEPT.md](docs/design/DESIGN-CONCEPT.md). The supplied logo, bundled DM Sans, artwork, and source media keep their identity and colors.
+
+## Workflow
+
+Open #/ for the centered home hero and illustrative sample prints, then Capture to enter the three-step flow. Classic strip is selected initially.
+
+1. **Choose template — #/templates.** Browse 21 layouts in compact masonry for All or left-to-right rows when filtered. A labeled Photo count dropdown offers All layouts and 1/2/3/4/6/8/9 photos. Pick for me and layout search are removed. The selected-layout row provides Continue to camera.
+2. **Capture photos — #/booth.** The camera leads between equally sized left tool and right photo panels. Both desktop sides use clamp(256px, 20vw, 320px). Stickers and Settings have independent native Stickers and Settings disclosures, initially closed and operated by click, Enter or Space. The icon-only shutter floats inside the camera frame, freeing vertical preview space. At >=900px width and >=420px height, the complete app fits 100dvh; smaller/shorter windows show the camera first and stack two equal 512px panels with internal overflow. The centered gallery uses image-overlay retakes on hover/focus, with always-visible touch controls. Continue and Start over use stacked full-width buttons. Capture replacement, locking, cancellation and media lifetime remain unchanged.
+3. **Edit & download — #/edit.** View the fitted composed artifact; use Frames, Backgrounds, Filters, Text, Stickers, or Layout tabs. Undo/Redo preserves up to 60 past edits through in-session backtracking. Choosing a background removes its frame in one undoable action. Same-count editor layout changes synchronize the session's selected layout. Download JPG or create/download the composed live MP4 with separate accurate dimensions and request feedback. Start over asks before discarding the session.
+
+Step navigation sits in the logo/Home row and highlights current and completed steps; available previous steps remain reachable. Initial layout and capture mode lock after the first capture. Captures, editor choices, and edit history remain in browser memory until reset/reload. Reloaded capture/edit routes without a session return to templates. Leaving capture cancels countdown/recording and stops camera tracks; completion and cancellation also clean up media resources.
+
+Face effects preserve category filtering, None/Clear sticker, the existing renderer, and Jeeliz with MediaPipe fallback. The eight authored decorative frames and all creative catalogs remain. Photo pixels, clips, and face landmarks stay local; the app has no account, upload, backend, or storage requirement.
+
+## Media and export
+
+Template geometry remains in src/lib/collage.js; media rendering and codecs remain in src/lib/media/. JPG exports retain full fixed layout dimensions and centered source crops. Live captures are silent five-second H.264 MP4 clips at 20fps, proportionally limited to 960 × 720px with even dimensions. Composed MP4s preserve template proportions, use even dimensions, and limit the longest side to 1920px. Browser encoding/decoding support controls availability. Progress, cancellation, playback, individual downloads, and JPG covers remain available.
+
+## Development
+
+Requires Node.js 20.19+ or 22.12+.
+
+```sh
+npm install
+npm run setup:face
+npm run dev
+npm test
+npm run format:check
+npm run build
+npm run preview
+```
+
+The face setup copies pinned MediaPipe 0.10.32 assets and downloads its model if absent; subsequent processing serves local assets. Camera use requires permission and HTTPS or localhost. Deploy dist/ to an HTTPS static host. [THIRD_PARTY.md](THIRD_PARTY.md) records dependency and asset provenance.
+
+Pages compose JSX components; hooks own state and lifecycle; catalogs are in src/data/, renderers in src/lib/, and face inference in src/workers/. src/styles/index.css loads base/feature styles and appends src/styles/modern.css last as current visual authority. Historical theme/responsive/workflow-responsive/interactions sheets are retained but no longer imported. [Project structure](docs/development/PROJECT-STRUCTURE.md) records the original separation; the modernization implementation document records current changes.
+
+## Project location
+
+The sole canonical working project is C:\Martin Archive\Programming\2026 Projects\PhotoPix. Run commands and make changes there. The previous OneDrive application files were deleted at the user's request and must not be recreated. The public brand remains Pixbooth and the package name remains photopix.
+
+The [masonry and capture-grid refinement](docs/design/LAYOUT-REFINEMENT.md) records the follow-up layout changes, preservation snapshot, and checks.
+
+The [viewport-fit refinement](docs/design/VIEWPORT-FIT.md) records the compact header, removal of layout search, fixed camera ratio, sizing rules, and verification limits.
+
+The [capture-focus refinement](docs/design/CAPTURE-FOCUS.md) records the dedicated full-viewport section and relocated controls, superseding the previous app-wide viewport sizing.
+
+The [filtered-layout correction](docs/design/FILTERED-LAYOUTS.md) records how photo-count results spread horizontally while All retains masonry.
+
+The current [camera-first implementation](docs/design/CAMERA-FIRST.md) supersedes the full-screen capture-section experiment: shutter below the camera, native right-side collapsible tools, and compact review. Earlier layout records remain dated history.
+
+The preceding [left tools and compact catalog refinement](docs/design/LEFT-TOOLS-COMPACT-TEMPLATES.md) supersedes the preceding right-side tools. Smaller cards and more columns reduce catalog height while preserving all layouts.
+
+## Current validation and manual checks
+
+[MODERNIZATION-IMPLEMENTATION.md](docs/design/MODERNIZATION-IMPLEMENTATION.md) records current checks, changed files, bug fixes, and limitations; [verification JSON](docs/design/verification/modernization-checks.json) records exact machine results. Earlier browser results below apply only to their dated implementations. That dated pass was source-only because preview access was restricted. With the user’s subsequent simulation authorization, current browser access succeeded through the official tool: desktop 1440 × 900 and phone 375 × 812 UI checks are recorded in PERMANENT-PANELS.md. All 23 tests, production build and formatting passed. Capture lifecycle simulation is mocked source testing; physical camera, tracking and actual exports remain unverified.
+
+Manual follow-up should cover requested viewport widths, sticky-action coverage, keyboard tabs and dialog focus return, camera permission/off/on/device switching, countdown/recording cancellation, successful and failed individual retakes, state/backtracking/history, reset confirmation, tracking overlay alignment, and preview/export agreement. Test physical desktop/mobile cameras and actual JPG/MP4 downloads over HTTPS.
+
+
+The current [permanent panels and typography refinement](docs/design/PERMANENT-PANELS.md) supersedes the collapsible rail and documents camera sizing, floating controls, gallery behavior and validation. Prior documentation and source remain in the dated archive.
+
+
+Current [collapsible tools and shutter cleanup](docs/design/COLLAPSIBLE-TOOLS.md) restores independent closed-by-default dropdown sections and removes shutter-label/shutter-timer. Prior source and documentation remain archived.
+
+
+The floating shutter has a Paper-white circle, 2px Ink outline and Ink camera icon. Its positioning wrapper is transparent with no padded dark backdrop; label/timer text is removed.
+
+
+On desktop and tablet windows at least900px wide and420px tall, camera and review fit the viewport. Review stays on the right and tools now overlay the camera. Narrower/shorter windows stack review below the camera.
+
+
+The current [Fresh picks and scaling refinement](docs/design/FRESH-STICKERS.md) adds 12 original mixed accessories, normalizes artwork thumbnails, uses an800 × 640 (5:4) camera reference and wider256–320px side panels, and compacts controls without reducing44px targets. Earlier design records remain preserved.
+
+
+Current organization: [camera corner tools](docs/design/CAMERA-CORNER-TOOLS.md) supersedes the separate left panel, uniform5:4 desktop frame and count-dependent gallery columns. The supplied images establish element organization only; their visual styling and photographic assets are not used.
+
+
+[Supplied control icons](docs/design/PROVIDED-ICONS.md) now provide the Stickers, shutter and Settings artwork, centered within their controls. Jeeliz fallback reports its specific initialization failure and offers Retry Jeeliz instead of labeling every failure as an unsupported device.
+
+
+Current capture behavior: [automatic capture and compact Settings](docs/design/AUTOMATIC-CAPTURE.md). One shutter click fills the selected layout with a configurable countdown before every capture. Individual thumbnail retakes are removed; Redo replaces and repeats the whole set. The supplied aperture shutter is white without a circular backing.
+
+
+Current face-effects stack: [MediaPipe + PixiJS](docs/design/MEDIAPIPE-PIXI-STICKERS.md) replaces the Jeeliz trial in the active app, with Canvas2D rendering fallback. All 48 effects are shown without tracker/category dropdowns. Countdown now uses Off / 3 sec / Custom, revealing a 1-10 second numeric stepper only for Custom.
+
+## Historical README before modernization — 2026-10-12
+
+The complete prior README follows verbatim for provenance. Its visual descriptions, former OneDrive staging location, and browser results describe earlier versions; they do not override the current project location, design, or validation scope.
+
+````markdown
+# Pixbooth
+
 A React browser booth for photos and five-second live clips, with a centered landing page and illustrative sample photos, 21 templates, 36 face effects plus None, and an editor with eight original decorative frames, 20 backgrounds, 20 filters, 11 border-sticker designs plus None, and a custom caption.
 
 The authoritative site-wide visual guide is [docs/design/DESIGN-CONCEPT.md](docs/design/DESIGN-CONCEPT.md). [DESIGN.md](DESIGN.md) is its compact token entry point. Pixbooth uses the supplied PNG logo and a black-and-white neobrutalist interface. Creative media and user-selected strip artwork retain their colors.
@@ -104,3 +198,9 @@ The later hero refinement removes the navbar, centers the logo above the heading
 - Create a live strip, play/pause preview, cancel export, and verify MP4 duration, playable H.264 video, frame geometry, selected artwork, and JPG cover download.
 - Open or reload `#/booth` and `#/edit` without a session and confirm both return to `#/templates`. Leave capture during countdown/recording and confirm cancellation and camera shutdown; test denied permission, disconnected/busy cameras, and multiple-device switching.
 - Test actual desktop and mobile devices over HTTPS. Check keyboard focus, reduced motion, and the concept's black/white chrome separately from colorful media.
+
+
+## Jeeliz face-sticker trial — 2026-10-12
+
+Face stickers now offer Jeeliz (default) and the original MediaPipe tracker. Choose Face tracking in the Face stickers panel. Jeeliz uses local face-pose estimates for the existing 36 sticker artworks and automatically falls back to MediaPipe on initialization failure. See [implementation, manual checks and rollback](docs/design/JEELIZ-FACE-STICKERS.md). Existing layout and earlier documentation are retained.
+````

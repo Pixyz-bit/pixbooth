@@ -1,5 +1,5 @@
 import TemplateCatalog from '../../components/templates/TemplateCatalog.jsx';
-import SelectedLayout from '../../components/templates/SelectedLayout.jsx';
+import Icon from '../../components/common/Icon.jsx';
 export default function TemplatesPage({
   template,
   onSelect,
@@ -11,23 +11,33 @@ export default function TemplatesPage({
   return (
     <main className="template-main">
       <div className="intro">
-        <div>
-          <h1 tabIndex="-1">Choose your layout.</h1>
-          <p>
-            {locked
-              ? `${captured} captured. Your layout stays with this session.`
-              : 'Pick a strip, a grid or a single frame. Then step into the booth.'}
-          </p>
-        </div>
+        <h1 tabIndex="-1">Pick your photo layout.</h1>
+        <p>
+          {locked
+            ? captured + ' captured. Keep this layout, or start a new session.'
+            : 'A strip, a grid or one perfect frame. Make it your own.'}
+        </p>
       </div>
-      <div className="selection-layout">
-        <TemplateCatalog template={template} locked={locked} onSelect={onSelect} />
-        <SelectedLayout
-          template={template}
-          locked={locked}
-          onContinue={onContinue}
-          onStartOver={onStartOver}
-        />
+      <TemplateCatalog {...{ template, locked, onSelect }} />
+      <div className="selection-actionbar">
+        <div>
+          <span className="selection-label">Your layout</span>
+          <strong>{template.name}</strong>
+          <span>
+            {template.count} {template.count === 1 ? 'photo' : 'photos'}
+          </span>
+        </div>
+        <div className="selection-actions">
+          {locked && (
+            <button className="text-button" onClick={onStartOver}>
+              Start over
+            </button>
+          )}
+          <button className="button button-dark" onClick={onContinue}>
+            {locked ? 'Return to camera' : 'Continue to camera'}
+            <Icon name="arrow" />
+          </button>
+        </div>
       </div>
     </main>
   );

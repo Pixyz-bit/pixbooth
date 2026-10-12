@@ -1,27 +1,23 @@
-export default function TemplateTools({ query, setQuery, count, setCount, locked, onSurprise }) {
+export default function TemplateTools({ count, setCount, counts }) {
   return (
     <div className="template-tools">
-      <label className="template-search">
-        <span>Find a layout</span>
-        <input
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Strip, square, Polaroid…"
-        />
-      </label>
-      <div className="template-filter-row">
-        <div className="template-counts" role="group" aria-label="Filter layouts by photo count">
-          {['all', 1, 2, 3, 4, '6+'].map((value) => (
-            <button key={value} aria-pressed={count === value} onClick={() => setCount(value)}>
-              {value === 'all' ? 'All' : value === '6+' ? '6+' : value}
-            </button>
+      <label className="template-count-filter">
+        <span>Photo count</span>
+        <select
+          aria-label="Photo count"
+          value={count}
+          onChange={(event) =>
+            setCount(event.target.value === 'all' ? 'all' : Number(event.target.value))
+          }
+        >
+          <option value="all">All layouts</option>
+          {counts.map((value) => (
+            <option key={value} value={value}>
+              {value} {value === 1 ? 'photo' : 'photos'}
+            </option>
           ))}
-        </div>
-        <button className="text-button" disabled={locked} onClick={onSurprise}>
-          Pick for me
-        </button>
-      </div>
+        </select>
+      </label>
     </div>
   );
 }

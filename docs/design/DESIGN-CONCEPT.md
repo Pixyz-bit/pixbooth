@@ -1,3 +1,5 @@
+> **Historical concept — superseded 2026-10-12.** The user approved a modern minimal monochrome redesign in [MODERNIZATION-BRIEF.md](MODERNIZATION-BRIEF.md). [MODERNIZATION-CONTRACT.md](MODERNIZATION-CONTRACT.md) and [root DESIGN.md](../../DESIGN.md) now govern current visual decisions, with src/styles/modern.css as the final loaded stylesheet. The former hard shadows, dense sidebars, sharp working corners, pure black/white-only chrome, and landing grid described below are historical. The supplied logo, authored artwork, creative content colors, and original reference files remain intact. The complete original concept follows without alteration; see [implementation and validation](MODERNIZATION-IMPLEMENTATION.md) for the current scope.
+
 # Pixbooth design concept
 
 ## Overview

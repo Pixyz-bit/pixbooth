@@ -7,13 +7,19 @@ export default function FaceStickerPanel({
   completed,
   cameraActive,
   face,
+  embedded = false,
 }) {
+  const Container = embedded ? 'section' : 'details';
   return (
-    <details className="sticker-panel panel" open>
-      <summary>
-        <span>Face stickers</span>
-        <Chevron />
-      </summary>
+    <Container className="sticker-panel" aria-label="Face stickers">
+      {embedded ? (
+        <h2 className="tools-heading">Stickers</h2>
+      ) : (
+        <summary className="tools-heading">
+          Stickers
+          <Chevron />
+        </summary>
+      )}
       <div className="sticker-content">
         <StickerPicker selected={sticker} onSelect={setSticker} disabled={busy || completed} />
         <p className="sticker-status" role="status" aria-live="polite">
@@ -30,11 +36,15 @@ export default function FaceStickerPanel({
                     : 'Face the camera to place your sticker.'}
         </p>
         {face.state === 'error' && (
-          <button className="text-button" onClick={face.retry}>
+          <button
+            className="text-button"
+            disabled={busy || completed || !cameraActive}
+            onClick={face.retry}
+          >
             Retry face tracking
           </button>
         )}
       </div>
-    </details>
+    </Container>
   );
 }

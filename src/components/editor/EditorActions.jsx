@@ -10,6 +10,9 @@ export default function EditorActions({
   output,
   exportVideo,
   onStartOver,
+  size,
+  downloadStatus,
+  onDownload,
 }) {
   return (
     <div className="editor-actions">
@@ -22,7 +25,12 @@ export default function EditorActions({
             </button>
           </>
         ) : mp4 ? (
-          <a className="button button-dark" href={mp4.url} download={`${filename}.mp4`}>
+          <a
+            className="button button-dark"
+            href={mp4.url}
+            download={`${filename}.mp4`}
+            onClick={onDownload}
+          >
             Download live strip · MP4
           </a>
         ) : (
@@ -36,6 +44,7 @@ export default function EditorActions({
             className={`button ${live ? 'button-outline' : 'button-dark'}`}
             href={output}
             download={`${filename}.jpg`}
+            onClick={onDownload}
           >
             {live ? 'Download cover photo' : 'Download photo strip'}
           </a>
@@ -44,7 +53,22 @@ export default function EditorActions({
             Applying edits…
           </button>
         ))}
-      <button className="button button-outline" disabled={exporting} onClick={onStartOver}>
+      <p className="download-meta">
+        {live ? 'JPG cover' : 'JPG · full quality'} · {size.width} × {size.height} px
+      </p>
+      {live && (
+        <p className="download-meta">
+          {mp4
+            ? 'MP4 · ' + mp4.width + ' × ' + mp4.height + ' px · 5 sec'
+            : 'MP4 · 5 sec · up to 1920px on the longest side'}
+        </p>
+      )}
+      {downloadStatus && (
+        <p className="download-status" role="status" aria-live="polite">
+          {downloadStatus}
+        </p>
+      )}
+      <button className="text-button reset-secondary" disabled={exporting} onClick={onStartOver}>
         Start over
       </button>
     </div>

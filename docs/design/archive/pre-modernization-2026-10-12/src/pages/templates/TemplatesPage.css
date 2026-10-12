@@ -1,0 +1,131 @@
+.selection-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 18px;
+  flex: 1;
+  min-height: 0;
+}
+.template-catalog {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 18px;
+}
+.catalog-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.catalog-heading h2,
+.selection-summary h2 {
+  margin: 0;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+.catalog-heading > span {
+  font-size: 12px;
+}
+.template-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 100px;
+  align-content: start;
+  gap: 10px;
+  overflow: auto;
+  min-height: 0;
+  padding: 4px;
+  flex: 1;
+  overscroll-behavior: contain;
+}
+.template-choice {
+  --mini-photo: #fff;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  position: relative;
+  min-width: 0;
+  border: 2px solid #000;
+  background: #fff;
+  border-radius: 2px;
+  text-align: left;
+}
+.template-choice:hover:not(:disabled),
+.template-choice.selected {
+  background: #000;
+  color: #fff;
+  --mini-photo: #000;
+}
+.template-choice .template-mini {
+  width: 42px;
+  height: 64px;
+  flex-shrink: 0;
+}
+.choice-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.choice-copy strong {
+  font-size: 13px;
+  line-height: 1.3;
+}
+.choice-copy > span {
+  font-size: 11px;
+}
+.choice-check {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+}
+.template-choice:disabled {
+  opacity: 1;
+}
+.template-choice:disabled:not(.selected) {
+  opacity: 0.5;
+}
+.selection-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  padding: 20px;
+  min-height: 0;
+  gap: 10px;
+}
+.selection-summary > p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.selection-stage {
+  --mini-photo: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 100px;
+  padding: 16px;
+  overflow: hidden;
+}
+.selection-stage .template-mini {
+  width: 100%;
+  height: 100%;
+  max-height: 310px;
+}
+.selection-summary .selection-note {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.selection-summary .button {
+  width: 100%;
+  font-size: 14px;
+}
+@media (min-width: 1200px) {
+  .template-choices {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

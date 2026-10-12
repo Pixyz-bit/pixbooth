@@ -1,16 +1,40 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useReducer } from 'react';
+import { makeEditHistory, editHistoryReducer } from '../lib/edit-history.js';
 import { templates } from '../data/templates.js';
 import { composePhotos, layoutSize } from '../lib/collage.js';
 import { composeLive } from '../lib/media/live-media.js';
 export default function useStripEditor({ shots, template, settings, onSettingsChange }) {
   const live = shots[0]?.type === 'live';
-  const [background, setBackground] = useState(settings?.background ?? 'black'),
-    [layoutId, setLayoutId] = useState(settings?.layoutId ?? template.id),
-    [filter, setFilter] = useState(settings?.filter ?? 'normal');
-  const [decoration, setDecoration] = useState(settings?.decoration ?? 'none'),
-    [caption, setCaption] = useState(settings?.caption ?? 'pixbooth'),
-    [playing, setPlaying] = useState(true);
-  const [frame, setFrame] = useState(settings?.frame ?? 'none');
+  const compatible = templates.filter((item) => item.count === shots.length);
+  const initialLayout = compatible.some((item) => item.id === settings?.layoutId)
+    ? settings.layoutId
+    : template.id;
+  const [editHistory, dispatch] = useReducer(editHistoryReducer, null, () =>
+    makeEditHistory(
+      {
+        background: settings?.background ?? 'black',
+        layoutId: initialLayout,
+        filter: settings?.filter ?? 'normal',
+        decoration: settings?.decoration ?? 'none',
+        caption: settings?.caption ?? 'pixbooth',
+        frame: settings?.frame ?? 'none',
+      },
+      settings?.history
+    )
+  );
+  const { background, layoutId, filter, decoration, caption, frame } = editHistory.present;
+  const patch = (values) => dispatch({ type: 'patch', values });
+  const setBackground = (value) => patch({ background: value }),
+    setLayoutId = (value) => {
+      if (compatible.some((item) => item.id === value)) patch({ layoutId: value });
+    },
+    setFilter = (value) => patch({ filter: value }),
+    setDecoration = (value) => patch({ decoration: value }),
+    setCaption = (value) => patch({ caption: value }),
+    setFrame = (value) => patch({ frame: value });
+  const chooseBackground = (value) => patch({ frame: 'none', background: value });
+  const [playing, setPlaying] = useState(true);
+  const [downloadStatus, setDownloadStatus] = useState('');
   const [output, setOutput] = useState(null),
     [busy, setBusy] = useState(true),
     [error, setError] = useState(''),
@@ -43,12 +67,14 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
       filter,
       decoration,
       caption,
+      history: { past: editHistory.past, future: editHistory.future },
     });
-  }, [frame, background, layoutId, filter, decoration, caption, onSettingsChange]);
+  }, [editHistory, onSettingsChange]);
   useEffect(() => {
     let cancelled = false;
     setBusy(true);
     setError('');
+    setDownloadStatus('');
     setMp4(null);
     if (mp4Url.current) {
       URL.revokeObjectURL(mp4Url.current);
@@ -130,6 +156,13 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
   const previewImage = shots[0].poster || shots[0].url;
   return {
     live,
+    chooseBackground,
+    undo: () => dispatch({ type: 'undo' }),
+    redo: () => dispatch({ type: 'redo' }),
+    canUndo: editHistory.past.length > 0,
+    canRedo: editHistory.future.length > 0,
+    downloadStatus,
+    onDownload: () => setDownloadStatus('Download requested. Check your browser downloads.'),
     frame,
     setFrame,
     background,

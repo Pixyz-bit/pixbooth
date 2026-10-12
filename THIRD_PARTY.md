@@ -38,3 +38,11 @@ Test-only portrait fixtures and verification screenshots are not application ass
 ## Original decorative frame artwork
 
 Three original paper PNGs in public/frames were generated with the built-in imagegen tool for this project. The supplied style references were not used as image inputs or traced. Eight frames combine these textures with original canvas mounts, patterns and motifs in src/lib/frames/frame-art.js. No stock frame pack, third-party character artwork or new runtime dependency was added. [Frame artwork provenance and exact prompts](docs/design/frame-artwork.md) record the files and generation brief.
+
+## User-supplied camera controls — 2026-10-12
+
+The theater, camera and setting PNG files were supplied by the user and copied unmodified to public/icons. [Provenance and checksums](docs/design/verification/provided-icons.json) record their mapping. No external asset download was used for these controls.
+
+The aperture shutter artwork was also supplied by the user as shutter-camera.png and copied unmodified to public/icons/shutter-camera.png.
+
+PixiJS 8.22.0 (MIT) is the lazily loaded WebGL sticker renderer. The existing local MediaPipe assets remain the active tracker. No new third-party sticker artwork was downloaded. [Runtime details](docs/design/MEDIAPIPE-PIXI-STICKERS.md).

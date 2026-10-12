@@ -1,0 +1,13 @@
+{
+  "scope": "Pure pose/artwork and mocked tracking lifecycle; no real WebGL or camera testing",
+  "passed": [
+    "Pose maps to unmirrored source coordinates with correct vertical axis",
+    "Invalid poses rejected and detection threshold uses hysteresis",
+    "All 36 sticker artworks accept finite Jeeliz anchors",
+    "Tracking cleanup stops private clones only and ignores late callbacks",
+    "WebGL initialization errors reach fallback callback without stopping camera",
+    "Cancellation during lazy module loading creates no camera clone",
+    "Original MediaPipe provider still returns points and terminates cleanly",
+    "Local ESM adapter retains upstream code and exposes Jeeliz"
+  ]
+}

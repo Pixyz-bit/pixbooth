@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background-image: radial-gradient(#bdd0eb 0.8px, transparent 0.8px);
+  background-size: 20px 20px;
+}
+button,
+select,
+input {
+  font: inherit;
+  color: inherit;
+}
+button,
+a {
+  touch-action: manipulation;
+}
+button,
+a,
+select,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+summary {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+a {
+  color: inherit;
+}
+svg {
+  flex-shrink: 0;
+}
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+[tabindex='0']:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 3px;
+}
+::selection {
+  background: #111;
+  color: #fff;
+}
+.app {
+  width: 100%;
+  padding: 0 24px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.wordmark {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  margin-right: 10px;
+  background: #111;
+  color: #fff;
+}
+main {
+  min-width: 0;
+}
+.intro {
+  padding: 16px 0 18px;
+  flex-shrink: 0;
+}
+.intro h1 {
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+.intro p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}

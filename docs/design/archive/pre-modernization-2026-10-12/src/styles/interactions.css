@@ -1,0 +1,11 @@
+button:not(:disabled),
+a.button {
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+.button:active:not(:disabled),
+.template-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
