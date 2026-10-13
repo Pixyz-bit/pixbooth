@@ -19,15 +19,15 @@
   flex-wrap: wrap;
   gap: 12px 24px;
   width: min(1216px, calc(100% - 64px));
-  min-height: 72px;
+  min-height: 42.4px;
   margin-inline: auto;
-  padding-block: 14px;
+  padding-block: 0;
 }
 .app .workflow-footer a {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  min-height: 44px;
+  min-height: 40px;
   color: #fff;
   font-weight: 700;
   text-decoration: none;
