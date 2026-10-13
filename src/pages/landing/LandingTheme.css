@@ -62,8 +62,8 @@
 .home-app .landing-capture.button-dark {
   width: 190px;
   margin-inline: auto;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
   box-shadow: none;
 }
 .home-app :is(.landing-capture, .landing-footer-capture).button-dark:hover:not(:disabled) {
@@ -73,8 +73,8 @@
   box-shadow: var(--home-shadow);
 }
 .home-app .landing-capture.button-dark:hover:not(:disabled) {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
   box-shadow: var(--home-shadow);
 }
 .home-app :is(.landing-capture, .landing-footer-capture).button-dark:active:not(:disabled) {

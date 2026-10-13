@@ -269,7 +269,16 @@ Current face-effects stack: [MediaPipe + PixiJS](docs/design/MEDIAPIPE-PIXI-STIC
 
 Current camera feedback: [conditional notification fade and fixed countdowns](docs/design/CAMERA-NOTIFICATIONS.md). Transparent messages use a top-heavy dark fade only while a visible notice/error exists. Countdown choices are Off / 3 sec / 5 sec, with no Custom input.
 
-## Open landing steps and viewport-fit hero — 2026-10-13
+## Shared workflow margins and Capture inversion — 2026-10-13
+
+The latest user request makes the booth follow the editor/template outer geometry. Remove booth-only max-width and padding overrides so all three inherit `.app`: max-width 1280px, centered, 32px side padding, 24px below 800px and 16px below 600px. Reserve a stable root scrollbar gutter so centered navigation does not shift between scrolling and viewport-fitted pages. Remove the booth-only 128px logo override; all pages use the same WorkflowSteps header and its 144px desktop / 112px tablet-mobile logo, sizing and breakpoints. Preserve the booth's viewport-height layout, review/gallery, tools and capture behavior.
+
+The landing Capture now defaults to black with white text and **no shadow**. Hover switches to white with black text and a 6px black offset shadow. This supersedes the previous white-default description below. Open landing steps, grid, viewport-fit hero, full-width formats and dedicated footer remain.
+
+Source/documentation prior to this refinement is preserved in `docs/design/archive/pre-workflow-alignment-2026-10-13/`.
+Workflow alignment validation: build and changed-file formatting passed. Booth and template navbars at 1440px measured the same left/right edges, 72.8px height and 144px logo width after the stable scrollbar gutter. The shared header retains 112px logos and 16px gutters at 390px. The editor uses the same unchanged .app and WorkflowSteps renderer. Landing Capture computes black/white with no default shadow. No horizontal overflow was observed.
+
+## Earlier open landing steps and viewport-fit hero — 2026-10-13
 
 The latest user comments supersede the boxed how-to treatment. Restore three open image-over-copy columns with no background, border, radius, shadow or text divider. Markers are 34px black rounded squares with white numerals. Preserve the transparent illustrations, Plus Jakarta Sans, full-width formats strip, grid and dedicated footer. Hero Capture is white with black text and no shadow; hover inverts it and introduces the 6px hard shadow. The footer action retains its existing treatment.
 

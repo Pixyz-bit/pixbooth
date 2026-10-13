@@ -382,6 +382,25 @@
       "marker": "34px black square, 8px radius",
       "footer": "preserved",
       "cards": false
+    },
+    "workflowAlignment": {
+      "maxWidth": "1280px",
+      "captureDefault": "black, white text, no shadow",
+      "pages": [
+        "templates",
+        "booth",
+        "editor"
+      ],
+      "navbar": "Shared WorkflowSteps without booth logo override",
+      "container": ".app",
+      "captureHover": "white, black text, 6px black shadow",
+      "gutters": [
+        "32px",
+        "24px below 800px",
+        "16px below 600px"
+      ],
+      "updatedAt": "2026-10-13",
+      "scrollbarGutter": "stable"
     }
   },
   "components": [
