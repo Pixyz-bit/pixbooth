@@ -413,17 +413,21 @@
       "scope": ".home-app",
       "updatedAt": "2026-10-13",
       "footer": {
-        "actionHover": "white/black, 6px black shadow",
-        "background": "#fff",
-        "actionDefault": "white/black, no shadow",
-        "bottomBar": "black",
-        "text": "#000",
-        "supporting": "#52525b",
-        "logo": "original, unfiltered, no plate"
+        "background": "#000",
+        "text": "#fff",
+        "details": "permanently removed",
+        "bottomBar": "copyright/privacy/back-to-top only",
+        "height": "43.2px desktop"
       },
       "hero": "100svh, 560px minimum, container-sized sample prints",
       "heroCaption": "A few poses. A little keepsake.",
-      "source": "docs/design/LANDING-DESIGN-CONCEPT.md"
+      "source": "docs/design/LANDING-DESIGN-CONCEPT.md",
+      "formats": {
+        "style": "white marquee, 2px black borders, star separators",
+        "duration": "28s linear",
+        "pause": "hover only; toggle removed",
+        "reducedMotion": "static wrapping labels; no duplicate/control"
+      }
     }
   },
   "components": [

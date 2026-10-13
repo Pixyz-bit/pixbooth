@@ -474,3 +474,7 @@ The user extends the established landing/template design to #/booth. [BOOTH-DESI
 ## Customize and the shared workflow footer — 2026-10-13
 
 [EDITOR-DESIGN-CONCEPT.md](docs/design/EDITOR-DESIGN-CONCEPT.md) extends the established design to #/edit: Plus Jakarta Sans, 32px monochrome grid, 2px outlines, matching workflow header and white actions with stationary black/white hover states. Choose layout, Capture and Customize now share the full-width black copyright/privacy/Back-to-top footer through Footer.jsx and WorkflowFooter.css. Both confirmation-dialog actions also invert without lift or shadow. The homepage retains its dedicated footer. Editor behavior, real media colors and capture guards stay intact.
+
+## Landing formats marquee and permanent compact footer — 2026-10-13
+
+The formats strip now uses a seamless 28-second monochrome marquee with star separators, pause/resume control, hover/focus pause and a static reduced-motion fallback. The user confirms permanent removal of landing-footer-inner; its markup and obsolete theme styles are removed. Only the compact black bottom bar remains. [LANDING-DESIGN-CONCEPT.md](docs/design/LANDING-DESIGN-CONCEPT.md) is updated as the current landing authority. Previous source and documentation are preserved in docs/design/archive/pre-formats-marquee-2026-10-13/.

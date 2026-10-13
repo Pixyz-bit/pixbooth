@@ -1,182 +1,107 @@
 ---
 name: Pixbooth landing page
-description: Monochrome neobrutalism with an open photo composition and a white footer.
+description: Monochrome neobrutalism with a photo composition, moving formats ribbon and compact black footer.
 colors:
   ink: "#000"
   paper: "#fff"
   supporting: "#52525b"
   grid: "#0001"
-  footer-supporting: "#52525b"
 typography:
-  hero:
-    fontFamily: "'Plus Jakarta Sans', sans-serif"
-    fontSize: "clamp(38px, 6.5svh, 64px)"
-    fontWeight: 800
-    lineHeight: 1.08
-    letterSpacing: "-0.04em"
-  section:
-    fontFamily: "'Plus Jakarta Sans', sans-serif"
-    fontSize: "clamp(32px, 3.5vw, 44px)"
-    fontWeight: 800
-    lineHeight: 1.15
-    letterSpacing: "-0.035em"
-  step:
-    fontFamily: "'Plus Jakarta Sans', sans-serif"
-    fontSize: "clamp(19px, 1.8vw, 24px)"
-    fontWeight: 800
-    lineHeight: 1.3
-    letterSpacing: "-0.025em"
-  body:
-    fontFamily: "'Plus Jakarta Sans', sans-serif"
-    fontSize: "16px"
-    fontWeight: 400
-    lineHeight: 1.65
-  action:
-    fontFamily: "'Plus Jakarta Sans', sans-serif"
-    fontSize: "15px"
-    fontWeight: 800
-    lineHeight: 1.5
+  family: "'Plus Jakarta Sans', sans-serif"
+  weights: "400/600/700/800"
+  hero: "clamp(38px, 6.5svh, 64px)/1.08, weight 800, tracking -0.04em"
+  section: "clamp(32px, 3.5vw, 44px)/1.15, weight 800, tracking -0.035em"
+  body: "16px/1.65"
+  action: "15px/1.5, weight 800"
+  marquee: "clamp(16px, 1.5vw, 20px)/1.5, weight 800"
 rounded:
   action: "10px"
   marker: "8px"
 spacing:
-  base: "8px"
-  mobile-gutter: "16px"
   desktop-gutter: "32px"
-  desktop-step-gap: "40px"
-components:
-  capture:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.action}"
-    padding: "12px 20px"
-    width: "190px"
-    height: "50px"
-  capture-hover:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-  footer:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-  footer-action:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.action}"
-    padding: "12px 20px"
-    height: "50px"
+  mobile-gutter: "16px"
+  grid: "32px"
 ---
 
 # Pixbooth: current landing design concept
 
 ## Overview
 
-**Creative direction: a monochrome photo booth with crisp outlines, bold lettering and real keepsakes as the main visual.**
+The home route `#/` uses the user-pinned monochrome neobrutalist world: a white grid canvas, black outlines, bold locally bundled typography and real photo keepsakes as its visual center. This document records the current design on 2026-10-13 and supersedes earlier landing descriptions. Earlier versions remain archived.
 
-This document governs the home route `#/` and its dedicated footer as of **2026-10-13**. It records the implemented design after the latest comments: white Capture by default, open how-to steps and a white footer. It supersedes conflicting earlier landing contracts, while preserving their files and archives. [Root DESIGN.md](../../DESIGN.md) remains the shared workflow entry point; this is the current landing-specific authority.
-
-The supplied portfolio references establish the type, outline, rounded-control and hard-shadow vocabulary. The user separately pins the centered hero, 32px grid, open illustrated instructions, edge-to-edge formats strip and dedicated footer. This combination is deliberate; copying the reference's boxed cards into the how-to section is no longer part of the concept.
-
-The homepage's job is to introduce the booth and start a session. It is not an account dashboard. Existing copy, photos and browser behavior supply product truth; do not add claims, pricing, user counts or unrelated account controls.
+The permanent footer decision removes the former white brand/navigation/invitation section. The page now ends with only its compact black copyright/privacy/Back-to-top bar. The former static format row is now a continuous marquee.
 
 ## Colors
 
 | Role | Value | Use |
 | --- | --- | --- |
-| Ink | `#000` | Headings, outlines, numerals' background and bottom metadata bar |
-| Paper | `#fff` | Main canvas, Capture fill, footer text and footer action |
-| Supporting text | `#52525b` | Hero intro, metadata and explanatory text on light surfaces |
-| Grid lines | `#0001` | 1px lines repeated every 32px on both axes |
-| Footer supporting text | `#52525b` | Secondary copy and navigation on the white footer |
+| Ink | `#000` | Headings, borders, markers, separators and bottom bar |
+| Paper | `#fff` | Main canvas, marquee, Capture fill and bottom-bar text |
+| Supporting text | `#52525b` | Explanatory copy and metadata on white |
+| Grid | `#0001` | 1px lines every 32px on both axes |
 
-UI chrome stays monochrome. Generated landing illustrations and illustrative captures are grayscale by asset choice. Do not globally desaturate the app: a user's captured media, filters and artwork retain their content colors. Preserve the supplied logo in its original black-and-white rendering directly on the white footer.
+The interface stays monochrome. Illustrative landing imagery is grayscale by asset choice; do not globally desaturate captured media, creative artwork or user-selected filters/backgrounds. The supplied logo retains its original proportions.
 
 ## Typography
 
-Use locally bundled **Plus Jakarta Sans**, weights 400/600/700/800, from `@fontsource/plus-jakarta-sans@5.3.0`. The landing imports Latin font files locally; no remote font request is needed. The font license is redistributed in `public/licenses/plus-jakarta-sans-OFL.txt`.
+Use locally bundled Plus Jakarta Sans, weights 400/600/700/800. Font licensing is redistributed in `public/licenses/plus-jakarta-sans-OFL.txt`. Headings are weight 800 with tight tracking. Hero sizing is 38–64px using viewport-height units; section headings are 32–44px. Step titles use 18–24px according to viewport width, body copy 16px/1.65 and actions 15px/800.
 
-Hero and section headings use 800 weight, tight tracking and balanced line lengths. Ordinary step copy is 16px/1.65. Step titles use 18px below 1000px and 22px below 700px. Hero supporting text adapts from 14–16px with viewport height. Footer headings are 16px/800, with its invitation at 26px/1.2. Actions are 15px/800 with readable labels.
-
-The small lettering inside the illustrative prints is artwork metadata, not a UI control. It uses 8–12px; live-note text is 11px with a 14px title. Footer metadata is 12px. Workflow pages continue to use DM Sans; the landing font override is scoped to `.home-app`.
+The marquee uses bold 16–20px labels with -0.025em tracking. Supporting hero text is 14–16px. Illustrative print metadata is 8–12px artwork lettering, not a control. Footer metadata is 12px.
 
 ## Layout
 
-The page follows this sequence:
+The page sequence is the viewport-fit hero, full-width formats marquee, open three-step instructions and compact black footer. The hero and instructions use a 1200px maximum inner width with 32px gutters, reduced to 16px below 700px. The grid, marquee surface and footer span the available browser content width.
 
-1. **First-screen hero:** supplied logo; “A little booth. A lot of you.”; a brief introduction; Capture; the caption “A few poses. A little keepsake.”; sample photo composition.
-2. **Full-width formats strip:** Photo strips, Face stickers, 5-second live clips and JPG & MP4 downloads.
-3. **Open how-to section:** “A moment, in three moves.”, its subtitle, and three illustrated sequential instructions.
-4. **White dedicated footer:** brand/product copy, navigation, a booth action, copyright, privacy and Back to top.
+The hero uses `100svh`, a 560px minimum and normal flow below 560px viewport height. A flexible artwork stage with size containment fits the tall strip, central print and right ornament into the remaining space. Print size is bounded by available height and width rather than fixed desktop/mobile caps. The composition aligns to the bottom of that stage, leaving the caption 16px above the viewport edge; the marquee follows immediately without the former 40px margin. Preserve their native geometry and artifact-specific rotations. Below 600px, hide the right ornament and retain the strip/central print. Copy: “A little booth. A lot of you.” and “A few poses. A little keepsake.”
 
-### Hero and sample prints
+The how-to section remains open image-over-copy columns: no boxed cards, panel shadows or copy dividers. It uses 72px top/88px bottom spacing, 40px column gaps (22px below 1000px), 300px contained artwork slots (280px on narrower screens) and 34px black numbered markers. Below 700px, the steps stack with 28px gaps and 48px/56px section spacing.
 
-Hero height is `100svh` with a 560px minimum for readable controls. Below 560px viewport height it uses ordinary flow. A flexible `.landing-art-stage` with `container-type: size` receives the space left below the copy; container width/height units size the sample composition without cropping its contents. The tall strip, central print and right Polaroid/live note retain their actual geometry. Fixed −6°/+5° rotations are specific to printed artifacts, never to UI controls. Below 600px, the right ornament is hidden and the strip/central print remain. This layout fits the checked 802×668 and 390×844 viewports.
+### Formats marquee
 
-### Containers and rhythm
+Preserve the exact four labels: Photo strips; Face stickers; 5-second live clips; JPG & MP4 downloads. The white ribbon has 2px black horizontal borders. Crisp four-point star SVGs separate labels; their geometry is decorative and hidden from assistive technology.
 
-The home app fills the available browser content width. Hero and how-to content are bounded to 1200px with 32px gutters; gutters reduce to 16px below 700px. The formats strip's white surface and border lines span edge to edge, while its text shares the bounded inner width. It becomes a two-column row below 700px.
+Two identical flex groups provide a seamless loop. Each desktop group is at least the viewport width or 1100px; mobile groups are 1000px. The track moves from zero to -50% over 28 seconds at constant speed using a CSS transform. No per-frame React state or JavaScript animation loop is used. The duplicate group is `aria-hidden`, so the formats are announced once.
 
-The how-to section has 72px top / 88px bottom spacing at desktop width, reducing to 48px / 56px on mobile. Heading-to-steps spacing is 40px, reducing to 28px. The three columns use a 40px gap, reduced to 22px below 1000px; below 700px they stack with 28px gaps. Images are contained in 300px artwork slots, or 280px at narrower sizes, with 20–26px below each.
+The ribbon pauses on hover. The user has removed its pause/resume button; the animation spans the full strip. Reduced-motion preference removes the animation, duplicate group and separators, leaving all four labels in a static wrapping row. Horizontal overflow is clipped inside the ribbon rather than on the page root.
 
 ### Footer
 
-The white surface is full width. Its inner content shares the 1200px/32px container and has 56px block padding, reduced to 40px on mobile. Three desktop columns become two below 800px, with the invitation spanning both, then one below 420px. The bottom metadata row wraps naturally. The logo keeps its original artwork directly on the white footer without a separate plate.
+The former `.landing-footer-inner` section is permanently removed, including its logo/product copy, navigation and invitation. The compact black bottom bar remains: dynamic copyright year, “Photos and clips stay in your browser.” and Back to top with the supplied arrow. Its inner row is 43.2px high on desktop, with zero vertical padding and a 40px link; mobile content wraps naturally. Back to top scrolls the current page and respects reduced motion.
 
 ## Elevation & Depth
 
-The open how-to steps have **no panel background, border, radius, shadow or text divider**. Their transparent assets float over the actual grid, with text directly below. Numbered markers are separate 34px black squares; they do not create a surrounding card.
+Capture defaults to white with black text and no shadow. Hover keeps those colors, adds a `6px 6px 0 #000` shadow and translates -2px on both axes. Press translates +4px and removes the shadow. Transitions use 180ms exponential easing; reduced motion removes nonessential movement.
 
-Capture has no default shadow. On hover its fill remains white and its lettering remains black; a crisp `6px 6px 0 #000` shadow appears and the button moves by −2px on both axes. On press it moves by +4px and the shadow disappears. This preserves the requested hover behavior while making the default white.
-
-The footer action matches Capture: white background, black text and no default shadow. Hover adds a 6px black offset shadow and a -2px lift on both axes. Press moves it by +4px and removes the shadow. Both actions share the same CSS state rules.
-
-Transitions use 180ms with `cubic-bezier(0.16, 1, 0.3, 1)`. Reduced-motion preference removes transitions and nonessential transforms; in-page scrolling switches to immediate movement.
+The marquee uses a linear loop to maintain constant velocity.  Open steps and the footer have no card shadow. Use crisp structural lines rather than ambient depth.
 
 ## Shapes
 
-Use crisp 2px action/format borders, 10px action corners and 8px numbered-marker corners. Printed photo mounts preserve their native square geometry. Large round cards, soft shadows and decorative gradients are outside this landing concept. The grid uses ordinary 1px linear-gradient lines, not dots or texture noise.
-
-The white footer and black bottom metadata bar are structural surfaces. Do not add cards around its columns. Keep the logo's original proportions and enough separation around links, headings and the booth action.
+Actions use 2px outlines and 10px corners. Numbered markers use 8px corners. Printed photo mounts preserve their native geometry. Do not introduce gradients, soft shadows or decorative panels into the open instruction layout.
 
 ## Components
 
 | Component | Responsibility |
 | --- | --- |
-| `LandingPage.jsx` | Local font imports and bounded hero/how-to wrappers |
-| `LandingHero.jsx` | Hero copy, white Capture default, new caption and flexible artwork stage |
-| `LandingShowcase.jsx` | Sample print/Polaroid composition with illustrative caption |
-| `LandingFormats.jsx` | Full-width strip and bounded text wrapper |
-| `LandingHowItWorks.jsx` | Semantic ordered list of open illustrated steps |
-| `LandingFooter.jsx` | Home-only white footer and working navigation |
-| `LandingTheme.css` | Landing-only tokens, geometry, states and responsive rules |
+| `LandingPage.jsx` | Local fonts, hero/how-to wrappers and section order |
+| `LandingHero.jsx` / `LandingShowcase.jsx` | Hero entry and illustrative sample prints |
+| `LandingFormats.jsx` | Memoized formats marquee, duplicates and hover pause |
+| `LandingHowItWorks.jsx` | Open illustrated three-step sequence |
+| `LandingFooter.jsx` | Compact black footer and Back-to-top behavior |
+| `LandingTheme.css` | Scoped home tokens, layout, motion and responsive states |
 
-Capture and Open the booth lead to `#/templates`. Footer section links scroll without changing the hash router; Back to top returns to page position zero. The footer is selected only for home in `App.jsx`; other workflow pages keep their compact footer.
+Capture enters `#/templates`. All interactive elements retain visible focus. Primary Capture is at least 50px high. Footer focus is white on black. Generated step images are decorative because adjacent text gives the instruction. Their prompts remain in [LANDING-IMAGE-PROMPTS.json](LANDING-IMAGE-PROMPTS.json); earlier sample-capture provenance is in [landing-artwork.md](landing-artwork.md).
 
-All interactive elements have visible keyboard focus. Light surfaces use a 3px black outline; the main footer uses black, while bottom-bar links use white. Footer links have 44px minimum target height, and primary actions are at least 50px high. The heading hierarchy uses H1, H2 and H3. Decorative generated step images have empty alt text and an aria-hidden container because adjacent text provides the complete instruction. Explicit dimensions reserve space, with lazy loading and async decoding.
-
-The three transparent PNG assets are in `public/how-it-works/`. Their generation prompts and provenance remain in [LANDING-IMAGE-PROMPTS.json](LANDING-IMAGE-PROMPTS.json). The earlier illustrative capture asset is documented in [landing-artwork.md](landing-artwork.md). These are samples, not customer sessions or testimonials.
+The established visual world also extends to [Choose layout](TEMPLATES-DESIGN-CONCEPT.md), [Capture](BOOTH-DESIGN-CONCEPT.md) and [Customize](EDITOR-DESIGN-CONCEPT.md), each with route-specific task behavior.
 
 ## Do's and Don'ts
 
-- Do keep the main page white with its 32px grid and the dedicated footer white, with a black bottom metadata bar.
-- Do retain the supplied logo, local font and transparent illustration assets.
-- Do use the viewport-fit hero and open three-step layout; preserve mobile stacking.
-- Do keep Capture white with no default shadow and introduce the black shadow on hover.
-- Do maintain black focus rings on the white main footer and white rings on the black bottom bar.
-- Do preserve real route behavior, footer links and reduced-motion handling.
-- Don't restore the three boxed how-to cards, divider lines or panel shadows.
-- Don't recolor the supplied logo or apply global grayscale to user media.
-- Don't spread the landing type/chrome onto workflow pages without an explicit request.
-- Don't treat older design-history entries as the current landing specification.
+- Keep the 32px grid, original logo, viewport-fit sample composition and open instructions.
+- Keep the marquee seamless, pausable and static for reduced motion.
+- Keep duplicate labels hidden from assistive technology and preserve the four real feature labels.
+- Keep only the compact black landing footer; the inner footer removal is now permanent.
+- Preserve actual media colors and all existing route/session behavior.
+- Do not restore boxed how-to cards, the removed footer columns or global grayscale.
 
-Implementation notes and previous decisions are archived rather than deleted. Validation evidence for this revision is recorded after the browser checks in root DESIGN.md; source-only checks do not establish real-camera or export compatibility.
+Verification: production build and changed-file formatting pass. Desktop and 390px browser checks confirm equal marquee group widths, hover pause, no visible toggle, one accessible copy of the labels, no horizontal page overflow and absence of inner-footer markup. No camera capture/export code is changed.
 
-
-Verified revision: production build and changed-file formatting passed. Browser checks at 1440×900 and 390×844 confirmed the current colors/caption, footer stacking, 44px minimum link targets and no horizontal overflow. No browser console errors were observed. The detector's font and grid findings are intentional choices pinned by the user. Camera capture and export compatibility are outside this landing-design revision.
-
-![Current desktop landing/footer](references/landing-current-footer-desktop.jpg)
-
-
-
-Current footer revision: restored the original white-background footer at the user's explicit request. Main footer text is black, supporting copy uses #52525b, the supplied logo is unfiltered without a plate, and Open the booth matches Capture with white fill, black text and no default shadow. The bottom copyright/privacy bar remains black. This supersedes all earlier dark-footer treatments in this document. Capture and the new hero caption retain their latest state.
-
-Bottom footer bar height refinement: its desktop row is reduced to 60% of the original 72px height, now 43.2px with zero vertical padding and a compact 40px Back-to-top link. The white main footer keeps its existing spacing; mobile metadata wraps naturally.
+Hero space verification: 1280×720, 802×668 and 390×844 retain the complete hero inside one viewport, with the caption 16px above its bottom and no horizontal overflow.
