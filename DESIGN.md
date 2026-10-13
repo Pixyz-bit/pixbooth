@@ -8,6 +8,12 @@ colors:
   surface: "#F5F5F5"
   line: "#E5E5E5"
   muted: "#737373"
+  # Home-route overrides; shared workflow colors above remain current.
+  homeInk: "#000"
+  homePaper: "#fff"
+  homeSupportingText: "#52525b"
+  homeDivider: "#e4e4e7"
+  homeGrid: "#0001"
 typography:
   display:
     fontFamily: "'DM Sans', sans-serif"
@@ -60,9 +66,56 @@ typography:
     fontSize: "clamp(64px, 12vw, 120px)"
     fontWeight: 700
     lineHeight: 1
+  homeHowHeadline:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "clamp(32px, 3.5vw, 44px)"
+    fontWeight: 800
+    lineHeight: 1.12
+  homeStepTitle:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "clamp(19px, 1.8vw, 24px)"
+    fontWeight: 800
+    lineHeight: 1.25
+  homeCompactStepTitle:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "20px"
+    fontWeight: 800
+    lineHeight: 1.25
+  homeMobileStepTitle:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "23px"
+    fontWeight: 800
+    lineHeight: 1.25
+  homeActionLabel:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "15px"
+    fontWeight: 800
+    lineHeight: 1.5
+  homeFooterInvitation:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "26px"
+    fontWeight: 800
+    lineHeight: 1.2
+  homeHeroDisplay:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "clamp(38px, 6.5svh, 64px)"
+    fontWeight: 800
+    lineHeight: 1.08
+  homePrintCaption:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "8px"
+    fontWeight: 700
+    lineHeight: 1.5
+  homeLiveNote:
+    fontFamily: "'Plus Jakarta Sans', sans-serif"
+    fontSize: "11px"
+    fontWeight: 400
+    lineHeight: 1.5
 rounded:
   control: "8px"
   panel: "12px"
+  homeAction: "10px"
+  homeCard: "18px"
 spacing:
   base: "8px"
   compact: "12px"
@@ -150,7 +203,7 @@ The desktop camera expands into the full left column with a1280 × 720 (16:9) re
 
 The step nav sits between the supplied logo and Home in one header row above 600px. At smaller widths it remains inside the same brand row as a second grid row. Current, completed, and unavailable semantics remain.
 
-Home retains the approved centered hero, logo, illustrative print composition, formats ribbon, and three how-to rows. Modern chrome removes the background grid and hard action shadow; Capture uses an Ink button with Paper text. Illustrative artwork and its provenance remain intact.
+Home retains the approved centered hero, logo, illustrative print composition and formats ribbon. The current home-page neobrutalist override restores the 32px grid, bold outlines and hard Capture shadow, and uses three image-led sequential instructions. See the Home-page neobrutalism section and landing contract for the page-specific tokens.
 
 ## Elevation & Depth
 
@@ -185,7 +238,7 @@ Focus outlines are 2px Ink with a 4px offset on light controls; inverted segment
 - Do keep source camera frames contained and exported media center-cropped to template openings.
 - Do explain unavailable actions and recovery in concise nearby copy.
 - Do preserve keyboard operation, focus return, and reduced-motion behavior.
-- Don't restore hard action shadows, the landing grid, or the retired neobrutalist chrome.
+- Keep the modern workflow chrome on non-home surfaces; use the user-approved neobrutalist override on home.
 - Don't flatten media colors or substitute placeholder captures for a live user session.
 - Don't claim browser, device, camera, export, or accessibility conformance from source-only checks.
 
@@ -213,6 +266,32 @@ Current capture behavior: [automatic capture and compact Settings](docs/design/A
 
 Current face-effects stack: [MediaPipe + PixiJS](docs/design/MEDIAPIPE-PIXI-STICKERS.md) replaces the Jeeliz trial in the active app, with Canvas2D rendering fallback. All 48 effects are shown without tracker/category dropdowns. Countdown now uses Off / 3 sec / Custom, revealing a 1-10 second numeric stepper only for Custom.
 
+
+Current camera feedback: [conditional notification fade and fixed countdowns](docs/design/CAMERA-NOTIFICATIONS.md). Transparent messages use a top-heavy dark fade only while a visible notice/error exists. Countdown choices are Off / 3 sec / 5 sec, with no Custom input.
+
+## Open landing steps and viewport-fit hero — 2026-10-13
+
+The latest user comments supersede the boxed how-to treatment. Restore three open image-over-copy columns with no background, border, radius, shadow or text divider. Markers are 34px black rounded squares with white numerals. Preserve the transparent illustrations, Plus Jakarta Sans, full-width formats strip, grid and dedicated footer. Hero Capture is white with black text and no shadow; hover inverts it and introduces the 6px hard shadow. The footer action retains its existing treatment.
+
+Hero copy and sample prints form one 100svh composition (minimum 560px for readable controls), with a flexible size-container artwork stage. Container query units size the prints to the actual remaining height/width, retaining photo geometry and captions. Shorter-than-560px screens use ordinary flow. Archive: `docs/design/archive/pre-open-landing-steps-2026-10-13/`.
+Validation: production build and changed-file formatting passed. Browser measurements at 802 × 668 and 390 × 844 confirmed the entire hero/showcase within the first viewport and no horizontal overflow. Desktop open steps have zero border, padding and shadow. The requested font/grid are intentional detector findings; decorative print-caption sizes are documented above. Previews are saved in the chat visualization directory.
+
+## Earlier portfolio-reference landing — 2026-10-13
+
+The user's correction pins the supplied portfolio/admin screenshots and `http://localhost:8080/Frontend/User/PublicDashboard.aspx` as the visual authority for **landing and dedicated footer only**. This section supersedes the initial home-only interpretation below; shared workflow styling stays unchanged. [Reference implementation and validation](docs/design/LANDING-REFERENCE-MATCH.md) documents source evidence and scope.
+
+Landing uses locally bundled **Plus Jakarta Sans** 400/600/700/800 from `@fontsource/plus-jakarta-sans@5.3.0`; display and card headings use 800. Normative home colors are Ink `#000`, Paper `#fff`, supporting text `#52525b`, divider `#e4e4e7` and grid `#0001`. Structural cards have 2.5px Ink borders, 18px corners and `6px 6px 0 #000` shadows; buttons use 2px borders, 10px corners and a 4px hard shadow, increasing to 6px on hover and compressing on press. Numbered step markers are outlined 44px circles. Preserve generated transparent illustrations, logo and product copy. Hero remains centered; cards preserve the three sequential instructions.
+
+The 32px grid fills home. The formats strip now spans the full app/browser width, including its white surface and border lines; only its contents are bounded to 1200px. Main sections use that same inner width with 32px gutters, reducing to 16px below 700px. Step cards stack below 700px. The dedicated footer has logo/product copy, working section links, an Open the booth action, and a black copyright/privacy bar. Footer columns collapse from three to two at 800px and one at 420px. Touch links are at least 44px; focus and reduced motion remain explicit.
+
+Prior documentation and source are preserved in [the exact archive](docs/design/archive/pre-exact-landing-reference-2026-10-13/DESIGN.md). The original shared workflow still uses DM Sans and the modern tokens at the top of this document. Home font overrides affect `.home-app` only.
+## Superseded initial home-page neobrutalism — 2026-10-13
+
+The latest user request restores monochrome neobrutalism specifically on `#/`. [Landing contract](docs/design/LANDING-NEOBRUTALISM.md) supersedes the earlier home-page grid/shadow exclusions. The public dashboard at `http://localhost:8080/Frontend/User/PublicDashboard.aspx` supplies the high-contrast white/black surfaces, bold sans hierarchy, dark outlines and modest control rounding; the explicitly requested 32px grid remains. Shared workflow tokens above continue to govern non-home surfaces.
+
+Home overrides: Ink `#000`, Paper `#fff`, supporting text `#333`; 2px structural borders; 10px Capture corners; 3px hard Capture shadow; inverse hover and 3px pressed compression. Bundled DM Sans remains 400/500/700. Preserve centered hero and supplied logo. Three transparent generated illustrations sit above numbered step headings and copy, in three open columns at desktop width, stacked at 700px and below. Heading 32–44px, step title 19–24px, body 16px/1.65. Home rules are scoped in `LandingTheme.css` and loaded last. Preserve creative media colors and reduced-motion support.
+
+The previous complete design file is preserved in [the dated archive](docs/design/archive/pre-landing-neobrutalism-2026-10-13/DESIGN.md). Earlier design history below remains verbatim.
 ## Historical design before modernization — 2026-10-12
 
 The complete previous document, including its former normative frontmatter, follows verbatim. It is historical and does not override the current tokens, accepted brief, or direction contract. The exact file snapshot is also in [the dated archive](docs/design/archive/pre-modernization-2026-10-12/DESIGN.md).

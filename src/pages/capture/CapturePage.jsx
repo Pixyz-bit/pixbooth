@@ -4,14 +4,20 @@ import CapturedGallery from '../../components/capture/CapturedGallery.jsx';
 import CaptureFeedback from '../../components/capture/CaptureFeedback.jsx';
 import Icon from '../../components/common/Icon.jsx';
 export default function CapturePage({ session }) {
+  const showTrackingNotice =
+    session.sticker !== 'none' && session.cameraActive && !session.stickerReady;
   const remaining = Math.max(0, session.template.count - session.shots.length);
   return (
     <main className="capture-main">
       <section className="camera-workspace" aria-label="Camera workspace">
         <div className="capture-camera">
-          <CameraPreview {...session} tools={<CameraTools session={session} />}>
+          <CameraPreview
+            {...session}
+            hasNotification={Boolean(session.error) || showTrackingNotice}
+            tools={<CameraTools session={session} />}
+          >
             <CaptureFeedback {...session} />
-            {session.sticker !== 'none' && session.cameraActive && !session.stickerReady && (
+            {showTrackingNotice && (
               <p className="tracking-note" role="status" aria-live="polite">
                 {session.face.state === 'loading'
                   ? 'Loading your sticker. Keep facing the camera…'

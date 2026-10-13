@@ -46,3 +46,8 @@ The theater, camera and setting PNG files were supplied by the user and copied u
 The aperture shutter artwork was also supplied by the user as shutter-camera.png and copied unmodified to public/icons/shutter-camera.png.
 
 PixiJS 8.22.0 (MIT) is the lazily loaded WebGL sticker renderer. The existing local MediaPipe assets remain the active tracker. No new third-party sticker artwork was downloaded. [Runtime details](docs/design/MEDIAPIPE-PIXI-STICKERS.md).
+
+
+## Plus Jakarta Sans — landing page
+
+Bundled through @fontsource/plus-jakarta-sans 5.3.0 to match the user's portfolio reference. Copyright 2020 The Plus Jakarta Sans Project Authors. Licensed under the SIL Open Font License 1.1; the full license is distributed at public/licenses/plus-jakarta-sans-OFL.txt. This font is used only by the landing page and dedicated footer.

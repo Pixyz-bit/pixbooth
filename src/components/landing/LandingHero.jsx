@@ -21,7 +21,9 @@ export default function LandingHero({ onCapture }) {
         </button>
         <span className="landing-privacy">No sign-up. Just you and your camera.</span>
       </div>
-      <LandingShowcase />
+      <div className="landing-art-stage">
+        <LandingShowcase />
+      </div>
     </section>
   );
 }

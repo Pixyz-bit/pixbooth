@@ -2441,3 +2441,38 @@ footer {
     min-height: 44px;
   }
 }
+
+/* Only visible camera notifications enable the top-to-bottom contrast fade. */
+.camera-feedback {
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.camera-feedback.has-notification {
+  padding: 12px 16px;
+  color: var(--paper);
+}
+.camera-feedback.has-notification::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 -48px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, #111111c7 0%, #1111119e calc(100% - 48px), #11111100 100%);
+}
+.camera-feedback :is(.tracking-note, .error-message) {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--paper);
+  box-shadow: none;
+  line-height: 1.5;
+}
+.camera-feedback .error-message {
+  max-height: 120px;
+}
+.camera-feedback .text-button {
+  color: var(--paper);
+}

@@ -203,9 +203,9 @@
     "paletteScope": "Six neutral interface colors; actual media/artwork colors preserved.",
     "validationScope": "Current UI checked through official browser at 1440x900 and 375x812; 23 tests/build/format pass. Mocked capture simulation only; physical cameras/tracking/exports unverified.",
     "layoutRefinement": {
-      "masonry": "Compact All: 5/4/3/2/1 columns at 1100/800/600/360px; previews 96\u00e2\u20ac\u201c176px desktop, 96\u00e2\u20ac\u201c144px mobile, 12px gaps/padding. Count filters: left-to-right auto-fit grid, 192px minimum tracks (144px mobile).",
+      "masonry": "Compact All: 5/4/3/2/1 columns at 1100/800/600/360px; previews 96â€“176px desktop, 96â€“144px mobile, 12px gaps/padding. Count filters: left-to-right auto-fit grid, 192px minimum tracks (144px mobile).",
       "photoCount": "Labeled native dropdown: All layouts plus 1, 2, 3, 4, 6, 8, 9; no layout search or Pick for me.",
-      "capture": "The booth uses a camera-left / review-right arrangement. Stickers and Settings are opened by circular controls at the camera\u00e2\u20ac\u2122s bottom-left and bottom-right; the centered white shutter remains on the camera. The separate left tools sidebar is removed. Tool bodies overlay the preview, using the existing DM Sans, neutral surfaces and borders. Both can open on wider frames; below620px preview width, only one opens at a time. Escape closes the current panel and restores its toggle focus. Hidden controls stay mounted, retaining their selections.",
+      "capture": "The booth uses a camera-left / review-right arrangement. Stickers and Settings are opened by circular controls at the cameraâ€™s bottom-left and bottom-right; the centered white shutter remains on the camera. The separate left tools sidebar is removed. Tool bodies overlay the preview, using the existing DM Sans, neutral surfaces and borders. Both can open on wider frames; below620px preview width, only one opens at a time. Escape closes the current panel and restores its toggle focus. Hidden controls stay mounted, retaining their selections.",
       "gallery": "Two equal columns for all capture counts; every figure/media/placeholder4:3. No template-specific thumbnail aspect ratios or below-frame links."
     },
     "cameraViewport": {
@@ -221,7 +221,7 @@
     },
     "cameraFirst": {
       "shutter": "64px white outlined circle,52px on phones; transparent positioning wrapper and no label/timer.",
-      "tools": "The booth uses a camera-left / review-right arrangement. Stickers and Settings are opened by circular controls at the camera\u00e2\u20ac\u2122s bottom-left and bottom-right; the centered white shutter remains on the camera. The separate left tools sidebar is removed. Tool bodies overlay the preview, using the existing DM Sans, neutral surfaces and borders. Both can open on wider frames; below620px preview width, only one opens at a time. Escape closes the current panel and restores its toggle focus. Hidden controls stay mounted, retaining their selections.",
+      "tools": "The booth uses a camera-left / review-right arrangement. Stickers and Settings are opened by circular controls at the cameraâ€™s bottom-left and bottom-right; the centered white shutter remains on the camera. The separate left tools sidebar is removed. Tool bodies overlay the preview, using the existing DM Sans, neutral surfaces and borders. Both can open on wider frames; below620px preview width, only one opens at a time. Escape closes the current panel and restores its toggle focus. Hidden controls stay mounted, retaining their selections.",
       "review": "Right review panel with standard two-column4:3 thumbnails; overlay retakes and MP4 downloads; pinned Continue/reset below.",
       "title": "Layout name and capture position in camera top bar; no standalone intro.",
       "scroll": "Fitted desktop workspace; review width clamp(280px,24vw,360px). Tool popovers scroll internally. Review stacks on narrow/short windows."
@@ -272,7 +272,8 @@
       "documentation": "docs/design/AUTOMATIC-CAPTURE.md",
       "countdownSeconds": [
         0,
-        10
+        3,
+        5
       ],
       "redo": "Entire set, automatic restart",
       "shutter": "White transparent aperture",
@@ -283,12 +284,104 @@
       "tracker": "Local MediaPipe Face Landmarker CPU worker, one face",
       "renderer": "PixiJS WebGL; Canvas2D fallback",
       "picker": "All 48 effects plus None; no tracker/category selectors",
-      "countdown": "Off / 3 sec / Custom; Custom-only 1-10 sec input"
+      "countdown": "Off / 3 sec / 5 sec; no numeric input"
     },
     "finalCaptureControls": {
       "cameraSwitch": "44 x 28 px track, 20 px thumb; coarse-pointer hit area 44 px",
       "countdown": "Previous plain white number, no full-frame backdrop",
       "stickerSelection": "No selected-name/Clear row; None clears the effect"
+    },
+    "cameraNotifications": {
+      "documentation": "docs/design/CAMERA-NOTIFICATIONS.md",
+      "container": "Transparent, white text",
+      "background": "Conditional Ink fade: 78% to 62% to transparent; 48 px tail",
+      "visible": "Camera tracking notices or errors only"
+    },
+    "landingNeobrutalism": {
+      "action": {
+        "border": "2px solid #000",
+        "radius": "10px",
+        "shadow": "3px 3px 0 #000"
+      },
+      "contract": "docs/design/LANDING-NEOBRUTALISM.md",
+      "steps": {
+        "artwork": "transparent PNG",
+        "columns": 3,
+        "heading": "centered",
+        "stackBelow": "700px"
+      },
+      "scope": ".home-app",
+      "colors": {
+        "ink": "#000",
+        "supportingText": "#333",
+        "paper": "#fff"
+      },
+      "updatedAt": "2026-10-13",
+      "typography": {
+        "step": "clamp(19px, 1.8vw, 24px)",
+        "heading": "clamp(32px, 3.5vw, 44px)",
+        "fontFamily": "DM Sans",
+        "body": "16px / 1.65"
+      },
+      "grid": {
+        "color": "#0001",
+        "spacing": "32px",
+        "stroke": "1px"
+      }
+    },
+    "landingReferenceMatch": {
+      "formats": {
+        "contentWidth": "1200px",
+        "width": "100%",
+        "fullBleed": true
+      },
+      "footer": {
+        "scope": "home only",
+        "breakpoints": [
+          800,
+          420
+        ],
+        "component": "LandingFooter"
+      },
+      "font": {
+        "package": "@fontsource/plus-jakarta-sans@5.3.0",
+        "weights": [
+          400,
+          600,
+          700,
+          800
+        ],
+        "family": "Plus Jakarta Sans"
+      },
+      "action": {
+        "border": "2px solid #000",
+        "radius": "10px",
+        "shadow": "4px 4px 0 #000"
+      },
+      "updatedAt": "2026-10-13",
+      "source": "portfolio public/admin supplied references",
+      "colors": {
+        "grid": "#0001",
+        "paper": "#fff",
+        "ink": "#000",
+        "divider": "#e4e4e7",
+        "muted": "#52525b"
+      },
+      "scope": ".home-app only",
+      "card": {
+        "border": "2.5px solid #000",
+        "radius": "18px",
+        "shadow": "6px 6px 0 #000"
+      }
+    },
+    "openLandingSteps": {
+      "hero": "100svh with container-sized artwork",
+      "captureHover": "black, white text, 6px hard shadow",
+      "captureDefault": "white, black text, no shadow",
+      "updatedAt": "2026-10-13",
+      "marker": "34px black square, 8px radius",
+      "footer": "preserved",
+      "cards": false
     }
   },
   "components": [
@@ -319,7 +412,7 @@
       "name": "Template Card",
       "kind": "card",
       "description": "Compact proportional SVG previews, capped at 176px desktop/144px mobile; denser All masonry and left-to-right filtered rows.",
-      "html": "<button class=\"ds-card\" aria-pressed=\"true\"><span class=\"ds-card-preview\"><svg viewBox=\"0 0 40 120\" height=\"152\" aria-hidden=\"true\"><rect x=\"1\" y=\"1\" width=\"38\" height=\"118\" fill=\"#111111\"/><path d=\"M5 5h30v24H5zm0 28h30v24H5zm0 28h30v24H5zm0 28h30v24H5z\" fill=\"#ffffff\"/></svg></span><strong>Classic strip</strong><span>4 photos \u00c2\u00b7 Selected \u00e2\u0153\u201c</span></button>",
+      "html": "<button class=\"ds-card\" aria-pressed=\"true\"><span class=\"ds-card-preview\"><svg viewBox=\"0 0 40 120\" height=\"152\" aria-hidden=\"true\"><rect x=\"1\" y=\"1\" width=\"38\" height=\"118\" fill=\"#111111\"/><path d=\"M5 5h30v24H5zm0 28h30v24H5zm0 28h30v24H5zm0 28h30v24H5z\" fill=\"#ffffff\"/></svg></span><strong>Classic strip</strong><span>4 photos Â· Selected âœ“</span></button>",
       "css": ".ds-card{font-family:\"DM Sans\",sans-serif;transition:background 180ms cubic-bezier(.16,1,.3,1),border-color 180ms cubic-bezier(.16,1,.3,1),transform 180ms cubic-bezier(.16,1,.3,1);display:grid;gap:12px;width:240px;padding:11px;border:2px solid var(--ink,#111111);border-radius:12px;background:var(--paper,#ffffff);color:var(--ink,#111111);text-align:left}.ds-card-preview{display:grid;place-items:center;aspect-ratio:1/3;min-height:96px;max-height:176px;border-radius:8px;background:var(--surface,#f5f5f5)}.ds-card strong{font-size:14px;line-height:1.5}.ds-card>span:last-child{font-size:14px;color:var(--muted,#737373)}.ds-card:hover{transform:translateY(-2px)}.ds-card:focus-visible{outline:2px solid var(--ink,#111111);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-card{transition:none}.ds-card:hover,.ds-card:active{transform:none}}"
     },
     {
@@ -343,7 +436,7 @@
     "keyCharacteristics": [
       "Six neutral interface colors with content colors preserved.",
       "Bundled DM Sans with a clear, readable hierarchy.",
-      "An 8px spacing rhythm and restrained 8\u00e2\u20ac\u201c12px working corners.",
+      "An 8px spacing rhythm and restrained 8â€“12px working corners.",
       "Border-led surfaces without action shadows.",
       "Camera-first capture and an artifact-first editor."
     ],
@@ -419,7 +512,7 @@
           },
           "headline": {
             "displayName": "Page Heading",
-            "purpose": "Booth/editor title; 25\u00e2\u20ac\u201c26px in compact layouts."
+            "purpose": "Booth/editor title; 25â€“26px in compact layouts."
           },
           "title": {
             "displayName": "Panel Title",
@@ -603,7 +696,7 @@
         "keyCharacteristics": [
           "Pure black-and-white interface chrome.",
           "Bold bundled DM Sans with compact, useful hierarchy.",
-          "Sharp frames with square or subtly softened 0\u00e2\u20ac\u201c4px edges.",
+          "Sharp frames with square or subtly softened 0â€“4px edges.",
           "Clear outlined groups and high-contrast selected states.",
           "Hard offset shadows reserved for major actions.",
           "An expansive, shadow-free camera and media-led editor."

@@ -1,0 +1,18 @@
+{
+  "tool": "built-in imagegen",
+  "transparent_background": true,
+  "assets": [
+    {
+      "file": "public/how-it-works/pick-your-format.png",
+      "prompt": "Use case: stylized-concept. Asset type: transparent PNG illustration for Pixbooth's monochrome neobrutalist landing-page how-to step 1, Pick your format. Create an isolated studio product render of a small fan of three photobooth print formats: a tall four-photo black strip, a square white Polaroid print, and a white 2x2 contact sheet. Print windows contain tasteful grayscale candid portrait photographs of two adult friends laughing. Strong crisp black outlines, tactile matte white paper, chunky black and white graphic geometry, a small square black checkmark selection token beside the prints. Mostly frontal, subtle three-quarter depth, arrangement centered and fully contained with generous transparent margins. Pure grayscale only, no color or beige. Sharp graphic neobrutalist character, realistic paper details; no rounded toy look. No text, no logos, no watermarks, no background, no floor, no checkerboard, no cast shadow outside objects. Genuinely transparent alpha background."
+    },
+    {
+      "file": "public/how-it-works/make-your-moment.png",
+      "prompt": "Use case: product-mockup. Asset type: transparent PNG for step 2 of a monochrome neobrutalist photo-booth landing page. Subject: ONLY one compact vintage digital camera in a frontal three-quarter view, large circular lens, chunky rectangular black body, white top plate, black shutter button. Professional tactile studio product photograph with strong crisp silhouette and grayscale materials; realistic lens glass and matte body. Center the camera fully within generous transparent margins, matching an isolated photobooth-print product illustration. Black, white and neutral gray only. No other objects, no photos, no stickers, no UI, no lettering or logos. Background must be genuinely transparent alpha, not black or gray, no floor, no backdrop, no glow, no cast shadow outside camera, no checkerboard."
+    },
+    {
+      "file": "public/how-it-works/make-it-yours.png",
+      "prompt": "Use case: stylized-concept. Asset type: transparent PNG illustration for Pixbooth monochrome neobrutalist how-to step 3, Make it yours. An isolated studio product composition: one finished square black-and-white Polaroid photo print featuring two adult friends laughing, with a broad white caption footer, beside a small chunky black pencil and a black square download token bearing a simple white downward arrow over a horizontal line. A subtle layered second paper print behind gives depth. Render tactile matte paper and black objects, crisp black outlines, sharp square graphic geometry, slight three-quarter perspective. No camera. Match a grayscale photobooth print mockup and vintage black-and-white camera product photograph. Centered, fully contained, generous transparent margins, balanced silhouette for a landing section. Pure grayscale black white neutral gray only, no colors. No text, logos or watermarks. Genuinely transparent alpha background, no floor, backdrop, checkerboard, glow or cast shadow outside objects."
+    }
+  ]
+}

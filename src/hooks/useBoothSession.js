@@ -29,7 +29,9 @@ export default function useBoothSession() {
   const [devices, setDevices] = useState([]);
   const [deviceId, setDeviceId] = useState('');
   const [mirror, setMirror] = useState(true);
-  const [delay, setDelay] = useState(3);
+  const [selectedDelay, setSelectedDelay] = useState(3);
+  const delay = [0, 3, 5].includes(selectedDelay) ? selectedDelay : 3;
+  const setDelay = (value) => setSelectedDelay([0, 3, 5].includes(value) ? value : 3);
   const [countdown, setCountdown] = useState(null);
   const [flash, setFlash] = useState(false);
   const [sticker, setSticker] = useState('none');

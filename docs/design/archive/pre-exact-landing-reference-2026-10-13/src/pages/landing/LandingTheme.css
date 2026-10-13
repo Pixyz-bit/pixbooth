@@ -1,0 +1,187 @@
+/* User-approved home-page neobrutalism; load after shared workflow chrome. */
+.home-app {
+  --ink: #000;
+  --paper: #fff;
+  --muted: #333;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(#0001 1px, transparent 1px), linear-gradient(90deg, #0001 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--ink);
+}
+.home-app .landing-main {
+  width: min(1200px, 100%);
+}
+.home-app .landing-copy > p,
+.home-app .landing-privacy,
+.home-app .landing-showcase figcaption {
+  color: var(--ink);
+}
+.home-app .landing-capture.button-dark {
+  display: flex;
+  width: 190px;
+  min-height: 50px;
+  margin-inline: auto;
+  padding: 12px 20px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.home-app .landing-capture.button-dark:hover:not(:disabled) {
+  background: var(--paper);
+  color: var(--ink);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.home-app .landing-capture.button-dark:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+.home-app :is(button, a):focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 5px;
+}
+.home-app .showcase-small {
+  background: var(--paper);
+}
+.home-app .landing-formats {
+  background: var(--paper);
+  border-block: 2px solid var(--ink);
+  color: var(--ink);
+  margin-top: 32px;
+  padding-block: 20px;
+}
+.home-app .landing-how {
+  display: block;
+  padding: 72px 0 80px;
+}
+.home-app .landing-how-heading {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.home-app .landing-how h2 {
+  margin: 0 0 14px;
+  font-size: clamp(32px, 3.5vw, 44px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.home-app .landing-how-heading > p {
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 65ch;
+}
+.home-app .landing-how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.home-app .landing-how-step {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.home-app .landing-how-artwork {
+  display: grid;
+  place-items: center;
+  height: 300px;
+  margin-bottom: 26px;
+}
+.home-app .landing-how-artwork img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.home-app .landing-how-step h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  font-size: clamp(19px, 1.8vw, 24px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.home-app .landing-how-number {
+  display: grid;
+  place-items: center;
+  flex: 0 0 34px;
+  height: 34px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  box-shadow:
+    3px 3px 0 var(--paper),
+    4px 4px 0 var(--ink);
+}
+.home-app .landing-how-step > p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 36ch;
+}
+.home-app footer {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding-block: 24px;
+  border-top: 2px solid var(--ink);
+  color: var(--ink);
+}
+@media (max-width: 900px) {
+  .home-app .landing-how-steps {
+    gap: 24px;
+  }
+  .home-app .landing-how-artwork {
+    height: 240px;
+  }
+  .home-app .landing-how-step h3 {
+    align-items: flex-start;
+    font-size: 20px;
+  }
+}
+@media (max-width: 700px) {
+  .home-app .landing-how {
+    padding-block: 48px;
+  }
+  .home-app .landing-how-heading {
+    margin-bottom: 16px;
+  }
+  .home-app .landing-how-steps {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+  .home-app .landing-how-artwork {
+    height: 280px;
+    margin-bottom: 16px;
+  }
+  .home-app .landing-how-step h3 {
+    align-items: center;
+    font-size: 23px;
+  }
+  .home-app .landing-how-step > p {
+    max-width: 40ch;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-app .landing-capture.button-dark {
+    transition: none;
+  }
+  .home-app .landing-capture.button-dark:is(:hover, :active):not(:disabled) {
+    transform: none;
+  }
+}

@@ -1,5 +1,8 @@
 # Pixbooth
 
+Current camera feedback: [conditional notification fade and fixed countdowns](docs/design/CAMERA-NOTIFICATIONS.md). Transparent messages use a top-heavy dark fade only while a visible notice/error exists. Countdown choices are Off / 3 sec / 5 sec, with no Custom input.
+
+
 Current face-effects stack: [MediaPipe + PixiJS](docs/design/MEDIAPIPE-PIXI-STICKERS.md) replaces the Jeeliz trial in the active app, with Canvas2D rendering fallback. All 48 effects are shown without tracker/category dropdowns. Countdown now uses Off / 3 sec / Custom, revealing a 1-10 second numeric stepper only for Custom.
 
 

@@ -330,7 +330,7 @@ test('supplied icons retain decorative semantics and tracking errors expose an a
   assert.doesNotMatch(html, /<button[^>]*disabled[^>]*>Retry face tracking/);
 });
 
-test('capture review offers one whole-set Redo and countdown accepts exact seconds', async () => {
+test('capture review offers one whole-set Redo and countdown offers three fixed presets', async () => {
   const { default: Page } = await server.ssrLoadModule('/src/pages/capture/CapturePage.jsx');
   const html = render(Page, {
     session: {
@@ -353,19 +353,46 @@ test('capture review offers one whole-set Redo and countdown accepts exact secon
   const { default: Settings } = await server.ssrLoadModule(
     '/src/components/capture/PhotoSettings.jsx'
   );
-  const settings = render(Settings, {
-    embedded: true,
-    delay: 7,
-    busy: false,
-    completed: true,
+  const settings = render(Settings, { embedded: true, delay: 3, busy: false, devices: [] });
+  for (const label of ['Off', '3 sec', '5 sec'])
+    assert.match(settings, new RegExp('>' + label + '<'));
+  assert.doesNotMatch(settings, /Custom|type="number"|countdown-value/);
+});
+
+test('camera gradient follows visible notifications rather than hidden announcements', async () => {
+  const { default: Page } = await server.ssrLoadModule('/src/pages/capture/CapturePage.jsx');
+  const session = {
+    template,
+    shots: [],
+    mode: 'photo',
+    status: 'ready',
+    cameraActive: true,
+    sticker: 'none',
+    stickerReady: true,
+    face: { state: 'tracking' },
+    delay: 3,
+    countdown: null,
     devices: [],
-  });
-  assert.match(settings, /type="number" min="1" max="10" step="1"/);
-  assert.match(settings, /Custom/);
-  assert.doesNotMatch(
-    render(Settings, { embedded: true, delay: 3, busy: false, devices: [] }),
-    /type="number"/
+  };
+  assert.doesNotMatch(render(Page, { session }), /camera-feedback has-notification/);
+  assert.match(
+    render(Page, {
+      session: { ...session, sticker: 'dog', stickerReady: false, face: { state: 'searching' } },
+    }),
+    /camera-feedback has-notification/
   );
-  assert.match(settings, /Countdown seconds before each capture/);
-  assert.match(settings, /value="7"/);
+  assert.doesNotMatch(
+    render(Page, { session: { ...session, sticker: 'dog', stickerReady: true } }),
+    /camera-feedback has-notification/
+  );
+  assert.doesNotMatch(
+    render(Page, {
+      session: { ...session, sticker: 'dog', stickerReady: false, cameraActive: false },
+    }),
+    /camera-feedback has-notification/
+  );
+  assert.match(
+    render(Page, { session: { ...session, error: 'Camera disconnected' } }),
+    /camera-feedback has-notification/
+  );
 });

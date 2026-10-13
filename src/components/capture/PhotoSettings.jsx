@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Chevron from '../common/Chevron.jsx';
 import Icon from '../common/Icon.jsx';
 import CaptureMode from './CaptureMode.jsx';
@@ -19,7 +18,6 @@ export default function PhotoSettings({
   openCamera,
   embedded = false,
 }) {
-  const [customCountdown, setCustomCountdown] = useState(delay !== 0 && delay !== 3);
   const Container = embedded ? 'section' : 'details';
   return (
     <Container className="settings-panel" aria-label="Camera settings">
@@ -47,52 +45,16 @@ export default function PhotoSettings({
             Countdown
           </legend>
           <div className="segmented">
-            {[0, 3].map((seconds) => (
+            {[0, 3, 5].map((seconds) => (
               <button
                 key={seconds}
-                aria-pressed={!customCountdown && delay === seconds}
-                onClick={() => {
-                  setCustomCountdown(false);
-                  setDelay(seconds);
-                }}
+                aria-pressed={delay === seconds}
+                onClick={() => setDelay(seconds)}
               >
                 {seconds ? `${seconds} sec` : 'Off'}
               </button>
             ))}
-            <button
-              aria-pressed={customCountdown}
-              onClick={() => {
-                setCustomCountdown(true);
-                if (!delay) setDelay(3);
-              }}
-              aria-expanded={customCountdown}
-              aria-controls="custom-countdown-seconds"
-            >
-              Custom
-            </button>
           </div>
-          {customCountdown && (
-            <label className="countdown-value">
-              <span>
-                <input
-                  id="custom-countdown-seconds"
-                  autoFocus
-                  type="number"
-                  min="1"
-                  max="10"
-                  step="1"
-                  value={delay}
-                  aria-label="Countdown seconds before each capture"
-                  onChange={(event) => {
-                    const value = event.target.valueAsNumber;
-                    if (Number.isFinite(value))
-                      setDelay(Math.max(1, Math.min(10, Math.round(value))));
-                  }}
-                />
-                <span>sec</span>
-              </span>
-            </label>
-          )}
         </fieldset>
         <div className="mirror-row">
           <div>

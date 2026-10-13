@@ -37,3 +37,5 @@ The earlier DESIGN/README history, Jeeliz trial, sticker collection and previous
 Implementation references: [MediaPipe web guide](https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker/web_js), [Pixi WebGL renderer guide](https://pixijs.com/8.x/guides/components/renderers), [Pixi sprite guide](https://pixijs.com/8.x/guides/components/scene-objects/sprite).
 
 Final pre-push refinements: the selected-name/Clear sticker row is removed, the Camera switch track measures 44 x 28 px with a 20 px thumb, and the prior plain countdown is retained. Final source/test formatting, all 43 tests and production build passed. [Final controls](verification/sticker-controls-final.png).
+
+The subsequent [camera notification/fixed-countdown refinement](CAMERA-NOTIFICATIONS.md) replaces Custom with Off / 3 sec / 5 sec and introduces a conditional transparent notification fade. Earlier controls documented above remain historical records.

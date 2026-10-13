@@ -29,3 +29,5 @@ The subsequent [MediaPipe/PixiJS update](MEDIAPIPE-PIXI-STICKERS.md) is the curr
 Countdown visual refinement: a centered white numeral and thin one-second timing ring replace the previous full-frame animation. The live preview remains undimmed; reduced motion disables the sweep/number entrance. The camera switch track is now 44 x 28 px with a 20 px thumb and a 44 px touch hit area on coarse pointers. Countdown timing, cancellation and capture logic are unchanged.
 
 The user reverted the timing-ring countdown refinement before publication. The current countdown is the previous plain white numeral with an undimmed camera preview. The compact Camera switch remains.
+
+The subsequent [camera notification/fixed-countdown refinement](CAMERA-NOTIFICATIONS.md) replaces Custom with Off / 3 sec / 5 sec and introduces a conditional transparent notification fade. Earlier controls documented above remain historical records.

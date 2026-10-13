@@ -4,6 +4,7 @@ import { templates } from './data/templates.js';
 import useBoothSession from './hooks/useBoothSession.js';
 import WorkflowSteps from './components/layout/WorkflowSteps.jsx';
 import Footer from './components/layout/Footer.jsx';
+import LandingFooter from './components/landing/LandingFooter.jsx';
 import LandingPage from './pages/landing/LandingPage.jsx';
 import TemplatesPage from './pages/templates/TemplatesPage.jsx';
 import CapturePage from './pages/capture/CapturePage.jsx';
@@ -83,7 +84,7 @@ export default function App() {
         <WorkflowSteps page={page} layoutChosen={layoutChosen} completed={completed} />
       )}
       {content}
-      <Footer />
+      {page === 'home' ? <LandingFooter /> : <Footer />}
       {resetPending && (
         <Dialog
           title="Start a new session?"

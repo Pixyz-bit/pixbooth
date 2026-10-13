@@ -23,6 +23,7 @@ export default function CameraPreview({
   children,
   tools,
   face,
+  hasNotification = false,
 }) {
   return (
     <section className="booth" aria-label="Photo booth">
@@ -146,7 +147,9 @@ export default function CameraPreview({
               </div>
             )}
           </div>
-          <div className="camera-feedback">{children}</div>
+          <div className={'camera-feedback' + (hasNotification ? ' has-notification' : '')}>
+            {children}
+          </div>
           {tools}
           {!completed &&
             (cameraActive ||
