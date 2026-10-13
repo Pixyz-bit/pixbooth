@@ -385,7 +385,7 @@
     },
     "workflowAlignment": {
       "maxWidth": "1280px",
-      "captureDefault": "black, white text, no shadow",
+      "captureDefault": "white, black text, no shadow",
       "pages": [
         "templates",
         "booth",
@@ -401,6 +401,29 @@
       ],
       "updatedAt": "2026-10-13",
       "scrollbarGutter": "stable"
+    },
+    "currentLandingConcept": {
+      "howTo": "open image-over-copy columns without cards",
+      "capture": {
+        "hover": "white, black text, 6px black shadow",
+        "default": "white, black text, no shadow",
+        "press": "4px compression, no shadow"
+      },
+      "grid": "32px",
+      "scope": ".home-app",
+      "updatedAt": "2026-10-13",
+      "footer": {
+        "actionHover": "white/black, 6px black shadow",
+        "background": "#fff",
+        "actionDefault": "white/black, no shadow",
+        "bottomBar": "black",
+        "text": "#000",
+        "supporting": "#52525b",
+        "logo": "original, unfiltered, no plate"
+      },
+      "hero": "100svh, 560px minimum, container-sized sample prints",
+      "heroCaption": "A few poses. A little keepsake.",
+      "source": "docs/design/LANDING-DESIGN-CONCEPT.md"
     }
   },
   "components": [

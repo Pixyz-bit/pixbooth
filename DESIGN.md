@@ -14,6 +14,8 @@ colors:
   homeSupportingText: "#52525b"
   homeDivider: "#e4e4e7"
   homeGrid: "#0001"
+  homeFooterSupporting: "#d4d4d8"
+  homeFooterDivider: "#3f3f46"
 typography:
   display:
     fontFamily: "'DM Sans', sans-serif"
@@ -147,11 +149,26 @@ components:
     rounded: "{rounded.control}"
     padding: "12px 16px"
     height: "48px"
+  home-capture:
+    backgroundColor: "{colors.homePaper}"
+    textColor: "{colors.homeInk}"
+    rounded: "{rounded.homeAction}"
+    padding: "12px 20px"
+    width: "190px"
+    height: "50px"
+  home-capture-hover:
+    backgroundColor: "{colors.homePaper}"
+    textColor: "{colors.homeInk}"
+  home-footer:
+    backgroundColor: "{colors.homePaper}"
+    textColor: "{colors.homeInk}"
 ---
 
 # Design System: Pixbooth
 
 ## Overview
+
+**Current home-page authority:** [Landing design concept](docs/design/LANDING-DESIGN-CONCEPT.md). Its page-specific tokens and latest states supersede older home interpretations below; the shared workflow guidance remains current.
 
 **Creative North Star: "The Monochrome Photo Booth"**
 
@@ -269,7 +286,18 @@ Current face-effects stack: [MediaPipe + PixiJS](docs/design/MEDIAPIPE-PIXI-STIC
 
 Current camera feedback: [conditional notification fade and fixed countdowns](docs/design/CAMERA-NOTIFICATIONS.md). Transparent messages use a top-heavy dark fade only while a visible notice/error exists. Countdown choices are Off / 3 sec / 5 sec, with no Custom input.
 
-## Shared workflow margins and Capture inversion — 2026-10-13
+## Current landing concept and restored white footer — 2026-10-13
+
+[LANDING-DESIGN-CONCEPT.md](docs/design/LANDING-DESIGN-CONCEPT.md) is the current, complete landing-only visual specification. It consolidates the implemented palette, local font, viewport-fit hero, open three-step layout, full-width formats strip, actions, responsive behavior, dark footer, accessibility and asset provenance. It supersedes conflicting earlier landing entries while retaining them as history.
+
+Current footer: the original white main surface is restored, with the unfiltered supplied logo, black headings, #52525b supporting text, and a white/black booth action with no default shadow, matching Capture. Both actions gain a 6px black shadow on hover. Its bottom metadata bar remains black. This supersedes the dark-footer description below.
+
+Prior dark-footer change (superseded for footer appearance): hero Capture defaults to white with black text and no shadow; hover remains white/black and gains the existing 6px black offset shadow. Caption: “A few poses. A little keepsake.” Dedicated footer now has black background, white headings and #d4d4d8 supporting copy; the supplied logo stays unchanged on a white plate. The footer action is white/black by default and black/white with a white offset shadow on hover. Footer focus is white. Main grid, generated illustrations, open steps and aligned workflow margins remain.
+
+Pre-change source and documentation are preserved at `docs/design/archive/pre-black-footer-2026-10-13/`.
+Current landing revision validation: build and formatting passed. Browser checks at 1440 × 900 and 390 × 844 confirmed white/black Capture with no default shadow, the new caption, black/white footer, single-column mobile footer, 44px minimum footer links and no horizontal overflow. Browser console reported no errors. Font/grid detector findings reflect explicit user requirements. Desktop/mobile screenshot references are included in the current landing concept document.
+
+## Earlier shared workflow margins and Capture inversion — 2026-10-13
 
 The latest user request makes the booth follow the editor/template outer geometry. Remove booth-only max-width and padding overrides so all three inherit `.app`: max-width 1280px, centered, 32px side padding, 24px below 800px and 16px below 600px. Reserve a stable root scrollbar gutter so centered navigation does not shift between scrolling and viewport-fitted pages. Remove the booth-only 128px logo override; all pages use the same WorkflowSteps header and its 144px desktop / 112px tablet-mobile logo, sizing and breakpoints. Preserve the booth's viewport-height layout, review/gallery, tools and capture behavior.
 

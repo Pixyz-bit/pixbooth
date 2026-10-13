@@ -19,7 +19,7 @@ export default function LandingHero({ onCapture }) {
           Capture
           <Arrow />
         </button>
-        <span className="landing-privacy">No sign-up. Just you and your camera.</span>
+        <span className="landing-privacy">A few poses. A little keepsake.</span>
       </div>
       <div className="landing-art-stage">
         <LandingShowcase />

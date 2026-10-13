@@ -45,14 +45,14 @@
   min-height: 50px;
   gap: 24px;
   padding: 12px 20px;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
   border: 2px solid var(--ink);
   border-radius: 10px;
   font-size: 15px;
   font-weight: 800;
   text-decoration: none;
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: none;
   transition:
     transform 180ms var(--ease),
     box-shadow 180ms var(--ease),
@@ -62,19 +62,11 @@
 .home-app .landing-capture.button-dark {
   width: 190px;
   margin-inline: auto;
-  background: var(--ink);
-  color: var(--paper);
-  box-shadow: none;
 }
 .home-app :is(.landing-capture, .landing-footer-capture).button-dark:hover:not(:disabled) {
   background: var(--paper);
   color: var(--ink);
   transform: translate(-2px, -2px);
-  box-shadow: var(--home-shadow);
-}
-.home-app .landing-capture.button-dark:hover:not(:disabled) {
-  background: var(--paper);
-  color: var(--ink);
   box-shadow: var(--home-shadow);
 }
 .home-app :is(.landing-capture, .landing-footer-capture).button-dark:active:not(:disabled) {
