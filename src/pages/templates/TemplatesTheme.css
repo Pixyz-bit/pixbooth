@@ -100,6 +100,7 @@
     box-shadow 180ms var(--ease);
 }
 .templates-app .template-choice.selected {
+  transform: translate(-2px, -2px);
   box-shadow: var(--template-shadow);
 }
 .templates-app .template-choice:hover:not(:disabled) {
@@ -122,13 +123,6 @@
 .templates-app .choice-copy > span {
   font-size: 12px;
   line-height: 1.65;
-}
-.templates-app .choice-check {
-  width: 28px;
-  height: 28px;
-  top: 16px;
-  right: 16px;
-  border-radius: 8px;
 }
 .templates-app .selection-actionbar {
   border: 2px solid var(--ink);
@@ -174,6 +168,25 @@
 .templates-app :is(button, a, select):focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 5px;
+}
+.templates-app .template-count-filter select:focus {
+  outline: none;
+}
+.templates-app .template-count-filter select:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: -3px;
+}
+.templates-app .selection-actions .button:hover:not(:disabled),
+.templates-app .selection-actions .button:active:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+  transform: none;
+  box-shadow: none;
+}
+.templates-app .selection-actions .button {
+  transition:
+    background-color 180ms var(--ease),
+    color 180ms var(--ease);
 }
 .templates-app footer {
   border-top: 2px solid var(--ink);
@@ -227,6 +240,9 @@
     transition: none;
   }
   .templates-app :is(.template-choice, .button):is(:hover, :active):not(:disabled) {
+    transform: none;
+  }
+  .templates-app .template-choice.selected {
     transform: none;
   }
 }
