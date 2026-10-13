@@ -30,3 +30,16 @@ Capture correction — 2026-10-13: Redo clears captures and editor choices, pres
 Footer scope refinement — 2026-10-13: the shared footer keeps copyright and Powered by .decide on all routes. Back to top is rendered only on the landing page, superseding earlier universal-link descriptions.
 
 Final uniform-footer decision — 2026-10-13: all four pages use the same Footer.jsx/Footer.css, containing only the dynamic copyright year and Powered by .decide. Back to top is removed from every page. Its route flag, click handler, link styles and unused LandingArrow.jsx are removed. This supersedes earlier footer-link descriptions.
+
+## Mobile camera tools — 2026-10-13
+
+On the stacked capture layout (width below 900px or height below 420px), Settings and Face Stickers are mutually exclusive. Opening one immediately closes the other; tapping the active toggle closes it. Controls remain mounted, preserving the countdown, camera settings and sticker selection. Crossing into the mobile layout reconciles any desktop pair of open panels. The existing narrow-camera desktop exclusivity is retained.
+
+Mobile toggle buttons show the supplied icon, a short label and a chevron. An open panel uses a black button with white artwork/text and an upward chevron; closed buttons remain white with black artwork/text. Native summary keyboard activation, aria-expanded/aria-controls and Escape dismissal with focus return are preserved. Desktop buttons retain their original icon-only appearance.
+
+Mobile tool content has a 50dvh / 360px height cap and native vertical overflow, pan-y/pinch-zoom touch handling and contained overscroll. Phone toggles are 64 by 48px and reserve a separate central lane for the shutter and wrapped cancellation buttons. Creative sticker artwork is not recolored.
+
+Validation: the production build and all 14 existing UI contract checks pass. Chromium touch emulation verifies single-open switching, rapid taps, preserved countdown choice, active button colors, keyboard dismissal, actual touch swipes through Settings, no horizontal overflow, simulated-camera countdown cancellation spacing, and independent desktop panels at 390x844, 320x568, 820x1180, 844x390 and 1600x1000. These checks do not replace testing on a physical iOS/Android device.
+Mobile camera correction — 2026-10-14: tool toggles are icon-only again, with accessible labels retained. Remove the visible text labels and chevrons; the black/white open-state inversion remains, along with single-panel opening and preserved selections. Mobile targets return to 48px (44px on phone widths). This supersedes the labeled-button description above.
+
+Settings uses automatic scroll chaining on mobile. With no internal overflow, swiping anywhere in Settings scrolls the document; with overflow, the panel scrolls internally and passes movement to the page at its boundaries. The previous contained overscroll trapped gestures on fitting panels. Verified actual touch gestures beginning on both a setting label and the Photo button at 390x844, 320x568 and 844x390, plus overflowing Settings at 320px viewport height. Chromium touch emulation and the existing 14 UI contract checks pass; physical-device validation remains separate.

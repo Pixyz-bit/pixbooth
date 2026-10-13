@@ -333,3 +333,57 @@
     --ribbon-gap: 28px;
   }
 }
+
+/* Mobile camera tools: icon-only toggles and one open panel at a time. */
+@media (max-width: 899px), (max-height: 419px) {
+  .booth-app .camera-frame-area {
+    --mobile-tool-width: 48px;
+  }
+  .booth-app .floating-shutter {
+    width: min(240px, calc(100% - var(--mobile-tool-width) - var(--mobile-tool-width) - 48px));
+  }
+  .booth-app .camera-tool-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--mobile-tool-width);
+    height: var(--mobile-tool-width);
+    top: calc(var(--preview-height) - var(--mobile-tool-width) - 12px);
+    padding: 0;
+    color: var(--ink);
+  }
+  .booth-app .camera-tool[open] > .camera-tool-toggle {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .booth-app .camera-tool[open] > .camera-tool-toggle .provided-icon {
+    filter: brightness(0) invert(1);
+  }
+  .booth-app .camera-tool[open] > .camera-tool-toggle:focus-visible {
+    outline-color: var(--paper);
+    outline-offset: -4px;
+  }
+  .booth-app .camera-tool-content {
+    min-height: 0;
+    max-height: min(50dvh, 360px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    touch-action: pan-y pinch-zoom;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+  }
+  /* Let a swipe reach the page when Settings fits or reaches a scroll boundary. */
+  .booth-app .camera-tool-settings .camera-tool-content {
+    overscroll-behavior-y: auto;
+  }
+  .booth-app .camera-tool-content > :is(.settings-panel, .sticker-panel) {
+    pointer-events: auto;
+    touch-action: pan-y pinch-zoom;
+  }
+}
+@media (max-width: 600px) {
+  .booth-app .camera-frame-area {
+    --mobile-tool-width: 44px;
+  }
+}
