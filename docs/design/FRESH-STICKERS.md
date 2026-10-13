@@ -1,6 +1,6 @@
 # Fresh picks and compact booth scaling — 2026-10-12
 
-The user selected a mixed playful/stylish collection and requested less congested scaling, a 5:4 camera and wider side panels. This supersedes current ratio/density descriptions in COLLAPSIBLE-TOOLS.md; previous source/docs remain in [the pre-change archive](archive/pre-fresh-stickers-2026-10-12).
+The user selected a mixed playful/stylish collection and requested less congested scaling, a 5:4 camera and wider side panels. This supersedes current ratio/density descriptions in COLLAPSIBLE-TOOLS.md; previous source/docs remain in the pre-change archive (historical file removed).
 
 ## Collection and artwork
 
@@ -18,8 +18,10 @@ Equal left/right panels now use clamp(256px,20vw,320px). Desktop tool grids use 
 
 All 26 tests passed, including unique catalog/legacy-category preservation, finite artwork geometry at thumbnail/landscape/portrait sizes, balanced canvas transforms and accessible default discovery. Production build passed (173 modules, 8.17 seconds). Browser checks confirmed Fresh picks, 49 All buttons, new-effect selection and console without errors. Live camera/inference/export were not exercised; shared-code and mock geometry checks do not establish physical alignment.
 
-At 1440 × 1000 the camera is 800 × 640, side panels 288 × 884.4, cards 111.6 × 80, no horizontal or page overflow. At 1024 × 768 camera 456 × 364.8, panels 256 × 652.4, no overflow. At 375 × 812 camera 328 × 262.4, stacked panels 328 × 512, no horizontal overflow. [Measurements](verification/fresh-stickers-checks.json), [desktop screenshot](verification/fresh-stickers-desktop.png), [phone screenshot](verification/fresh-stickers-mobile.png). All dimensions were read from the rendered DOM.
+At 1440 × 1000 the camera is 800 × 640, side panels 288 × 884.4, cards 111.6 × 80, no horizontal or page overflow. At 1024 × 768 camera 456 × 364.8, panels 256 × 652.4, no overflow. At 375 × 812 camera 328 × 262.4, stacked panels 328 × 512, no horizontal overflow. Measurements (historical file removed), desktop screenshot (historical file removed), phone screenshot (historical file removed). All dimensions were read from the rendered DOM.
 
 Organization/sizing is superseded by [CAMERA-CORNER-TOOLS.md](CAMERA-CORNER-TOOLS.md). The earlier implementation and measurements above remain dated history.
 
 The subsequent [MediaPipe/PixiJS update](MEDIAPIPE-PIXI-STICKERS.md) is the current face-effects authority. It removes tracker/category selectors, uses a shared GPU renderer with Canvas2D fallback, and makes the exact-second countdown field conditional on Custom. Earlier records above are preserved.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

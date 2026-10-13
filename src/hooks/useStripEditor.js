@@ -181,6 +181,7 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
     busy,
     error,
     setRetry,
+    retry,
     exporting,
     progress,
     mp4,

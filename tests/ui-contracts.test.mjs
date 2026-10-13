@@ -69,7 +69,7 @@ test('capture grid preserves slot order and has no individual retakes and preser
   const page = render(Page, {
     session: {
       mode: 'photo',
-      face: { engine: 'jeeliz', state: 'idle', notice: '' },
+      face: { state: 'idle' },
       devices: [],
       delay: 3,
       mp4Supported: true,
@@ -321,7 +321,6 @@ test('supplied icons retain decorative semantics and tracking errors expose an a
     completed: false,
     cameraActive: true,
     face: {
-      engine: 'jeeliz',
       state: 'error',
     },
   });
@@ -344,7 +343,7 @@ test('capture review offers one whole-set Redo and countdown offers three fixed 
       stickerReady: true,
       countdown: null,
       devices: [],
-      face: { engine: 'jeeliz', state: 'idle', notice: '' },
+      face: { state: 'idle' },
       delay: 7,
     },
   });

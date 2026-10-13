@@ -20,6 +20,7 @@ export default function EditorPreview({
   busy,
   error,
   mp4,
+  retry = 0,
 }) {
   return (
     <section className="editor-preview panel" aria-label="Edited photo strip">
@@ -34,7 +35,13 @@ export default function EditorPreview({
       </div>
       <div className="editor-stage">
         {live ? (
-          <LiveStripPreview shots={shots} template={layout} options={options} playing={playing} />
+          <LiveStripPreview
+            shots={shots}
+            template={layout}
+            options={options}
+            playing={playing}
+            artworkRetry={retry}
+          />
         ) : output ? (
           <img
             className="edited-strip"

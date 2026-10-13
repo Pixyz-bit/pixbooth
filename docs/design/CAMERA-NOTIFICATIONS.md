@@ -8,4 +8,6 @@ The latest user choice replaces Custom with three fixed presets: Off, 3 sec and 
 
 Verification: all 44 tests and the production build passed. Browser checks confirmed transparent notification backgrounds, white text, the conditional gradient, disappearance of the gradient when cleared, readable error content and no horizontal overflow at 375 x 812. The real booth exposed the three fixed presets; 5 sec selected correctly and no numeric input remained. A camera-free fixture used the existing illustrative sample artwork. No webcam permissions or physical captures were requested.
 
-[Visual check](verification/camera-notification-gradient.png). Earlier design documentation remains as dated implementation history; this guide supersedes solid camera-notification cards and Custom countdown controls.
+Visual check (historical file removed). Earlier design documentation remains as dated implementation history; this guide supersedes solid camera-notification cards and Custom countdown controls.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

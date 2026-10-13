@@ -28,7 +28,7 @@ The camera-free browser fixture at tests/fixtures/sticker-renderer.html used act
 
 UI checks confirmed 49 choices, zero removed-dropdown elements and Off / 3 sec / Custom. Custom accepted 7 seconds; Off and 3 sec hid the field. Desktop 1440 x 900 and phone 375 x 812 had no horizontal overflow. Phone Custom focused its input and scrolled it fully inside the panel; only one phone corner panel remained open. The viewport override was reset, the camera-free fixture tab closed and the booth preview retained. No new camera permissions or physical webcam captures were performed. Real-device face attachment quality and live-video encoding remain manual checks.
 
-[Measured checks](verification/mediapipe-pixi-checks.json), [desktop controls](verification/mediapipe-pixi-controls-desktop.png), [phone controls](verification/mediapipe-pixi-controls-mobile.png), [GPU/tracker fixture](verification/mediapipe-pixi-gpu-verification.png).
+Measured checks (historical file removed), desktop controls (historical file removed), phone controls (historical file removed), GPU/tracker fixture (historical file removed).
 
 ## Preservation and sources
 
@@ -36,6 +36,8 @@ The earlier DESIGN/README history, Jeeliz trial, sticker collection and previous
 
 Implementation references: [MediaPipe web guide](https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker/web_js), [Pixi WebGL renderer guide](https://pixijs.com/8.x/guides/components/renderers), [Pixi sprite guide](https://pixijs.com/8.x/guides/components/scene-objects/sprite).
 
-Final pre-push refinements: the selected-name/Clear sticker row is removed, the Camera switch track measures 44 x 28 px with a 20 px thumb, and the prior plain countdown is retained. Final source/test formatting, all 43 tests and production build passed. [Final controls](verification/sticker-controls-final.png).
+Final pre-push refinements: the selected-name/Clear sticker row is removed, the Camera switch track measures 44 x 28 px with a 20 px thumb, and the prior plain countdown is retained. Final source/test formatting, all 43 tests and production build passed. Final controls (historical file removed).
 
 The subsequent [camera notification/fixed-countdown refinement](CAMERA-NOTIFICATIONS.md) replaces Custom with Off / 3 sec / 5 sec and introduces a conditional transparent notification fade. Earlier controls documented above remain historical records.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

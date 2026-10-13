@@ -416,7 +416,7 @@
         "background": "#000",
         "text": "#fff",
         "details": "permanently removed",
-        "bottomBar": "shared copyright / Powered by .decide / route-preserving Back to top",
+        "bottomBar": "shared copyright and Powered by .decide only",
         "height": "43.2px desktop",
         "component": "src/components/layout/Footer.jsx"
       },

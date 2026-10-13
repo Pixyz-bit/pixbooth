@@ -393,8 +393,6 @@
     gap: 0;
     padding-block: 18px;
   }
-  .home-app .landing-marquee-group li {
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-app .landing-marquee-track {

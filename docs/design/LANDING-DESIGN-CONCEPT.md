@@ -111,3 +111,7 @@ Responsive system refinement: [RESPONSIVE-DESIGN.md](RESPONSIVE-DESIGN.md) super
 Marquee spacing refinement: labels and stars are separate alternating flex items. Equal space-around distribution with zero group padding produces equal text-to-star and star-to-text gaps, including the repeated-group boundary. Decorative separator items are hidden in the static reduced-motion layout.
 
 Universal footer and ribbon rhythm — 2026-10-13: all four pages use the single shared Footer.jsx. The inner footer remains permanently removed. The ribbon has matching 40px gaps to the sample caption and section heading (28px at 600px and below), with equal text/star spacing across the loop boundary.
+
+Footer scope refinement — 2026-10-13: the shared footer keeps copyright and Powered by .decide on all routes. Back to top is rendered only on the landing page, superseding earlier universal-link descriptions.
+
+Final uniform-footer decision — 2026-10-13: all four pages use the same Footer.jsx/Footer.css, containing only the dynamic copyright year and Powered by .decide. Back to top is removed from every page. Its route flag, click handler, link styles and unused LandingArrow.jsx are removed. This supersedes earlier footer-link descriptions.

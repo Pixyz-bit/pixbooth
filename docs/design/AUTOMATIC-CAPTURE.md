@@ -20,7 +20,7 @@ All 37 tests and the production build passed. Behavioral tests cover repeated co
 
 Browser checks accepted 7 seconds and then the 5 sec shortcut. At 1440 x 900, the Settings body was 280 x 289.4 px, with 36 px countdown controls and no internal scrolling. At 375 x 812, the body was 296 x 174.4 px with internal overflow to keep it within the phone camera frame. Neither viewport had horizontal page overflow. The temporary viewport override was reset. No physical-camera capture or actual white-shutter screenshot was performed; camera lifecycle was simulated in tests.
 
-[Desktop preview](verification/automatic-capture-settings-desktop.png), [phone preview](verification/automatic-capture-settings-mobile.png). Earlier design documentation remains; this guide supersedes per-photo retake behavior and the earlier black aperture appearance.
+Desktop preview (historical file removed), phone preview (historical file removed). Earlier design documentation remains; this guide supersedes per-photo retake behavior and the earlier black aperture appearance.
 
 Follow-up refinement: the visible Before each capture label is removed, while the exact-second input retains its accessible name and aligns to the right. Countdown numbers now appear over an undimmed live preview with a small text shadow for contrast; no dark full-frame countdown backing remains.
 
@@ -31,3 +31,5 @@ Countdown visual refinement: a centered white numeral and thin one-second timing
 The user reverted the timing-ring countdown refinement before publication. The current countdown is the previous plain white numeral with an undimmed camera preview. The compact Camera switch remains.
 
 The subsequent [camera notification/fixed-countdown refinement](CAMERA-NOTIFICATIONS.md) replaces Custom with Off / 3 sec / 5 sec and introduces a conditional transparent notification fade. Earlier controls documented above remain historical records.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

@@ -1,5 +1,4 @@
 import Brand from '../common/Brand.jsx';
-import Arrow from './LandingArrow.jsx';
 import LandingShowcase from './LandingShowcase.jsx';
 export default function LandingHero({ onCapture }) {
   const capture = () => onCapture('strip-four');

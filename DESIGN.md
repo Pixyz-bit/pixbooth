@@ -321,17 +321,17 @@ Landing uses locally bundled **Plus Jakarta Sans** 400/600/700/800 from `@fontso
 
 The 32px grid fills home. The formats strip now spans the full app/browser width, including its white surface and border lines; only its contents are bounded to 1200px. Main sections use that same inner width with 32px gutters, reducing to 16px below 700px. Step cards stack below 700px. The dedicated footer has logo/product copy, working section links, an Open the booth action, and a black copyright/privacy bar. Footer columns collapse from three to two at 800px and one at 420px. Touch links are at least 44px; focus and reduced motion remain explicit.
 
-Prior documentation and source are preserved in [the exact archive](docs/design/archive/pre-exact-landing-reference-2026-10-13/DESIGN.md). The original shared workflow still uses DM Sans and the modern tokens at the top of this document. Home font overrides affect `.home-app` only.
+Prior documentation and source are preserved in the exact archive (historical file removed). The original shared workflow still uses DM Sans and the modern tokens at the top of this document. Home font overrides affect `.home-app` only.
 ## Superseded initial home-page neobrutalism — 2026-10-13
 
 The latest user request restores monochrome neobrutalism specifically on `#/`. [Landing contract](docs/design/LANDING-NEOBRUTALISM.md) supersedes the earlier home-page grid/shadow exclusions. The public dashboard at `http://localhost:8080/Frontend/User/PublicDashboard.aspx` supplies the high-contrast white/black surfaces, bold sans hierarchy, dark outlines and modest control rounding; the explicitly requested 32px grid remains. Shared workflow tokens above continue to govern non-home surfaces.
 
 Home overrides: Ink `#000`, Paper `#fff`, supporting text `#333`; 2px structural borders; 10px Capture corners; 3px hard Capture shadow; inverse hover and 3px pressed compression. Bundled DM Sans remains 400/500/700. Preserve centered hero and supplied logo. Three transparent generated illustrations sit above numbered step headings and copy, in three open columns at desktop width, stacked at 700px and below. Heading 32–44px, step title 19–24px, body 16px/1.65. Home rules are scoped in `LandingTheme.css` and loaded last. Preserve creative media colors and reduced-motion support.
 
-The previous complete design file is preserved in [the dated archive](docs/design/archive/pre-landing-neobrutalism-2026-10-13/DESIGN.md). Earlier design history below remains verbatim.
+The previous complete design file is preserved in the dated archive (historical file removed). Earlier design history below remains verbatim.
 ## Historical design before modernization — 2026-10-12
 
-The complete previous document, including its former normative frontmatter, follows verbatim. It is historical and does not override the current tokens, accepted brief, or direction contract. The exact file snapshot is also in [the dated archive](docs/design/archive/pre-modernization-2026-10-12/DESIGN.md).
+The complete previous document, including its former normative frontmatter, follows verbatim. It is historical and does not override the current tokens, accepted brief, or direction contract. The exact file snapshot is also in the dated archive (historical file removed).
 
 ````markdown
 ---
@@ -404,7 +404,7 @@ The four user-supplied neobrutalist references establish bold type, sharp frames
 
 Source ownership and CSS loading order are documented in [docs/development/PROJECT-STRUCTURE.md](docs/development/PROJECT-STRUCTURE.md). Page and feature styles are separated, with shared tokens and theme rules under `src/styles/`; `src/styles/index.css` preserves their cascade order.
 
-The additional [landing composition reference](docs/design/references/landing-composition.png) pins the centered home-page hero as a user-approved composition. It does not replace the site's typography, palette, sharp controls, or camera behavior.
+The additional landing composition reference (historical file removed) pins the centered home-page hero as a user-approved composition. It does not replace the site's typography, palette, sharp controls, or camera behavior.
 
 ## Colors
 
@@ -491,3 +491,15 @@ All four pages now use the same Footer.jsx and Footer.css: compact full-width bl
 ## Capture controls and mobile footer correction — 2026-10-13
 
 Redo reconnects a cleared session and waits for the shutter instead of automatically snapping. Stacked camera actions stay 12px inside the preview and reserve space between corner tool toggles even when cancellation text wraps. The mobile universal footer centers its copyright/credit columns and places Back to top on a centered second row.
+
+## System audit and cleanup — 2026-10-13
+
+The [system audit](docs/development/SYSTEM-AUDIT-2026-10-13.md) records the current checks and remaining limitations. Verified unused modules, retired Jeeliz files/test, legacy unimported styles, old favicon and unused Space Grotesk dependency are removed, with rollback originals archived. The live editor's artwork retry path now recovers the same selected frame after a transient load failure. No established visual tokens or capture/export format was changed. Current README instructions replace conflicting historical descriptions.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.
+
+## Documentation cleanup and footer scope — 2026-10-13
+
+At the user's request, archive, references and verification are removed from docs/design. No runtime assets were removed. Footer.jsx remains shared across all four routes, but App.jsx enables Back to top only for home. Choose layout, Capture and Customize display copyright and credit only.
+
+Final uniform-footer decision — 2026-10-13: all four pages use the same Footer.jsx/Footer.css, containing only the dynamic copyright year and Powered by .decide. Back to top is removed from every page. Its route flag, click handler, link styles and unused LandingArrow.jsx are removed. This supersedes earlier footer-link descriptions.

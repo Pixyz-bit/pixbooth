@@ -15,10 +15,12 @@ The later [capture-focus refinement](CAPTURE-FOCUS.md) supersedes app-wide 100dv
 
 ## Preservation
 
-[Pre-change archive](archive/pre-viewport-fit-2026-10-12) preserves all ten affected source/test files and the previous DESIGN, README, PRODUCT, sidecar, direction contract, and layout-refinement document. Earlier archives and historical DESIGN/README blocks remain intact. Current docs supersede only relevant layout/search descriptions.
+Pre-change archive (historical file removed) preserves all ten affected source/test files and the previous DESIGN, README, PRODUCT, sidecar, direction contract, and layout-refinement document. Earlier archives and historical DESIGN/README blocks remain intact. Current docs supersede only relevant layout/search descriptions.
 
 ## Verification
 
-Final production build passed: 172 modules, 17.63 seconds. All 21 tests passed. Prettier passed across src and tests; the scoped layout detector returned no findings before and after the changes. Embedded historical DESIGN/README text and sidecar history were verified unchanged. [Exact verification](verification/viewport-fit-checks.json) records these results. Source tests cover the nested header's availability/current semantics and absence of layout search alongside existing workflow/capture tests. Browser preview access remains restricted; no current rendered fit, physical-camera, tracking, playback, or export approval is claimed.
+Final production build passed: 172 modules, 17.63 seconds. All 21 tests passed. Prettier passed across src and tests; the scoped layout detector returned no findings before and after the changes. Embedded historical DESIGN/README text and sidecar history were verified unchanged. Exact verification (historical file removed) records these results. Source tests cover the nested header's availability/current semantics and absence of layout search alongside existing workflow/capture tests. Browser preview access remains restricted; no current rendered fit, physical-camera, tracking, playback, or export approval is claimed.
 
 Manual checks: inspect header wrapping, camera 16:9 outline in every state, whole-source/overlay alignment for 4:3 and 16:9 feeds, shutter and Continue visibility, nine-photo and nine-live grids, retake/error states, portrait/landscape/zoom, and keyboard focus. The 100dvh constraint is source implementation, not proof of rendered fit in every browser.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

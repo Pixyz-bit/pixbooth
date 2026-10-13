@@ -28,23 +28,6 @@
   margin-inline: auto;
   padding: 0 0 env(safe-area-inset-bottom, 0px);
 }
-.app .landing-footer-bottom a {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 40px;
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  text-underline-offset: 4px;
-}
-.app .landing-footer-bottom a:hover {
-  text-decoration: underline;
-}
-.app .landing-footer-bottom a:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 5px;
-}
 :is(.templates-app, .editor-app) footer.landing-footer {
   margin-top: 32px;
 }
@@ -60,10 +43,5 @@
     text-align: center;
     gap: 4px 16px;
     padding-top: 8px;
-  }
-  .app .landing-footer-bottom a {
-    grid-column: 1 / -1;
-    justify-self: center;
-    min-height: 44px;
   }
 }

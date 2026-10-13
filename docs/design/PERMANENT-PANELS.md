@@ -2,7 +2,7 @@
 
 Historical pass: [COLLAPSIBLE-TOOLS.md](COLLAPSIBLE-TOOLS.md) supersedes permanently visible sections and shutter text.
 
-Implemented in the canonical Martin Archive project at localhost:5173. This pass supersedes LEFT-TOOLS-COMPACT-TEMPLATES.md while retaining prior records and the exact [pre-change snapshot](archive/pre-permanent-panels-2026-10-12).
+Implemented in the canonical Martin Archive project at localhost:5173. This pass supersedes LEFT-TOOLS-COMPACT-TEMPLATES.md while retaining prior records and the exact pre-change snapshot (historical file removed).
 
 ## Layout and controls
 
@@ -18,8 +18,10 @@ Use only bundled DM Sans 400/500/700. Camera layout heading: 18px/1.4 weight500.
 
 ## Verification
 
-All 23 tests passed, including duplicate-click gating, countdown advancement/cancellation, individual photo/live replacement, recording cleanup, floating-shutter lifecycle and completed-playback clearance. Production build passed (172 modules, 12.72 seconds), and source/test formatting passed. Final scoped typography and layout scans have no findings after documenting compact labels and the transient countdown readout. Historical DESIGN/README blocks and sidecar history were verified unchanged. [Exact checks](verification/permanent-panels-checks.json) and scoped [type](verification/permanent-panels-type-scan.json)/[layout](verification/permanent-panels-layout-scan.json) results are retained. These include mocked source capture tests and server-rendered UI contracts, not browser-camera simulation.
+All 23 tests passed, including duplicate-click gating, countdown advancement/cancellation, individual photo/live replacement, recording cleanup, floating-shutter lifecycle and completed-playback clearance. Production build passed (172 modules, 12.72 seconds), and source/test formatting passed. Final scoped typography and layout scans have no findings after documenting compact labels and the transient countdown readout. Historical DESIGN/README blocks and sidecar history were verified unchanged. Exact checks (historical file removed) and scoped type (historical file removed)/layout (historical file removed) results are retained. These include mocked source capture tests and server-rendered UI contracts, not browser-camera simulation.
 
 Official browser checks succeeded after the user authorized simulation and checking. An eight-photo filter/selection opened the matching booth; Animals category and countdown selection worked. At 1440 × 900, the frame measured 936 × 526.5 (16:9), both side panels 224 × 784.4, and page/horizontal overflow was zero. At 375 × 812, frame 328 × 184.5, both panels 328 × 512, horizontal overflow zero. The mobile sticker/settings panel now scrolls internally instead of expanding to 1818px. Computed DM Sans was loaded; camera title 18px, control14px and label12px, with both mode targets44px. Console checks reported no warnings/errors.
 
-[Browser measurements](verification/permanent-panels-browser.json), [desktop screenshot](verification/permanent-booth-desktop.png), and [phone screenshot](verification/permanent-booth-mobile.png) record current UI evidence. Physical camera/device compatibility, actual tracking overlay alignment, capture hover rendering on real media, real JPG/MP4 exports and broad accessibility conformance still require manual device testing. No camera permission was granted or synthetic media injected into the browser.
+Browser measurements (historical file removed), desktop screenshot (historical file removed), and phone screenshot (historical file removed) record current UI evidence. Physical camera/device compatibility, actual tracking overlay alignment, capture hover rendering on real media, real JPG/MP4 exports and broad accessibility conformance still require manual device testing. No camera permission was granted or synthetic media injected into the browser.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

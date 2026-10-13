@@ -41,7 +41,7 @@ Three original paper PNGs in public/frames were generated with the built-in imag
 
 ## User-supplied camera controls — 2026-10-12
 
-The theater, camera and setting PNG files were supplied by the user and copied unmodified to public/icons. [Provenance and checksums](docs/design/verification/provided-icons.json) record their mapping. No external asset download was used for these controls.
+The theater, camera and setting PNG files were supplied by the user and copied unmodified to public/icons. Provenance and checksums (historical file removed) record their mapping. No external asset download was used for these controls.
 
 The aperture shutter artwork was also supplied by the user as shutter-camera.png and copied unmodified to public/icons/shutter-camera.png.
 
@@ -50,4 +50,8 @@ PixiJS 8.22.0 (MIT) is the lazily loaded WebGL sticker renderer. The existing lo
 
 ## Plus Jakarta Sans — landing page
 
-Bundled through @fontsource/plus-jakarta-sans 5.3.0 to match the user's portfolio reference. Copyright 2020 The Plus Jakarta Sans Project Authors. Licensed under the SIL Open Font License 1.1; the full license is distributed at public/licenses/plus-jakarta-sans-OFL.txt. This font is used only by the landing page and dedicated footer.
+Bundled through @fontsource/plus-jakarta-sans 5.3.0 to match the user's portfolio reference. Copyright 2020 The Plus Jakarta Sans Project Authors. Licensed under the SIL Open Font License 1.1; the full license is distributed at public/licenses/plus-jakarta-sans-OFL.txt. This font is used across the landing page, Choose layout, Capture, Customize and shared footer.
+
+DM Sans font distributions include the full SIL Open Font License in public/licenses/dm-sans-OFL.txt, so the notice is present in deployed dist/ assets as well as the development dependency.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

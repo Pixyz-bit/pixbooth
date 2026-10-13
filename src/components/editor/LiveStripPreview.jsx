@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { layoutSize, paintStrip } from '../../lib/collage.js';
 import useFrameArtwork from '../../hooks/useFrameArtwork.js';
-export default function LiveStripPreview({ shots, template, options, playing }) {
-  const artwork = useFrameArtwork(options.frame);
+export default function LiveStripPreview({ shots, template, options, playing, artworkRetry = 0 }) {
+  const artwork = useFrameArtwork(options.frame, artworkRetry);
   const ref = useRef(null),
     settings = useRef({
       template,

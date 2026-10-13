@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { loadFrameArtwork } from '../lib/frames/frame-assets.js';
 
-export default function useFrameArtwork(id = 'none') {
+export default function useFrameArtwork(id = 'none', retry = 0) {
   const [artwork, setArtwork] = useState({ id: null, image: null, error: '' });
   useEffect(() => {
     let active = true;
@@ -16,7 +16,7 @@ export default function useFrameArtwork(id = 'none') {
     return () => {
       active = false;
     };
-  }, [id]);
+  }, [id, retry]);
   return {
     image: artwork.id === id ? artwork.image : null,
     ready: artwork.id === id && !artwork.error,

@@ -11,10 +11,12 @@ Implemented at the user's request in the Martin Archive project serving localhos
 - Desktop template preview height is capped at 176px rather than 320px; mobile at 144px rather than 256px. The minimum is 96px, card padding/gaps are 12px, names remain 14px, and count text is 12px. Selected borders/checks, complete SVG proportions, and touch targets remain.
 - All masonry uses five desktop columns, four below 1100px, three below 800px, two below 600px, and one below 360px. Count-filtered rows stay left-to-right with 192px minimum tracks (144px mobile). More columns and smaller preview caps reduce the source layout's height budget; actual rendered scroll distance is unverified.
 
-[Pre-change archive](archive/pre-left-tools-compact-2026-10-12) retains the three changed source/test files and six affected docs. Previous design archives and historical guides remain intact. No dependency, catalog, camera/media/tracking engine, export quality, or editor behavior changed.
+Pre-change archive (historical file removed) retains the three changed source/test files and six affected docs. Previous design archives and historical guides remain intact. No dependency, catalog, camera/media/tracking engine, export quality, or editor behavior changed.
 
 ## Checks
 
-Final production build passed (172 modules, 28.68 seconds). All 22 tests passed; Prettier passed across src and tests. Scoped layout scans returned no findings. Historical DESIGN/README blocks and sidecar history were verified unchanged. [Exact verification](verification/left-tools-compact-checks.json) records these source-level results. Existing SSR checks were updated to verify that tools precede the camera, the rail starts collapsed with hidden named controls, the right panel excludes tools, and the shutter/Continue remain available. They do not simulate toggling or establish visual fit.
+Final production build passed (172 modules, 28.68 seconds). All 22 tests passed; Prettier passed across src and tests. Scoped layout scans returned no findings. Historical DESIGN/README blocks and sidecar history were verified unchanged. Exact verification (historical file removed) records these source-level results. Existing SSR checks were updated to verify that tools precede the camera, the rail starts collapsed with hidden named controls, the right panel excludes tools, and the shutter/Continue remain available. They do not simulate toggling or establish visual fit.
 
 Browser preview access remains restricted. Manually check rail opening/closing, retained selections and focus, expanded-panel camera sizing, desktop/phone card readability, all/count-filter layouts, and actual scrolling. Camera/device/export checks remain manual.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

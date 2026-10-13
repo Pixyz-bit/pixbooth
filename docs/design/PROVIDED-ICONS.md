@@ -4,7 +4,7 @@ The user supplied theater.png, camera.png and setting.png. They are copied unmod
 
 ## Alignment
 
-Control containers use explicit flex alignment in both axes, zero inherited summary padding and no inline-image baseline spacing. Provided PNGs display as blocks with contained, centered artwork. Rendered corner controls measured zero horizontal and vertical center offsets after fixing inherited summary padding/distribution; the shutter core uses the same explicit alignment. The actual shutter was not displayed in the idle verification session. [Measurements](verification/provided-icons-alignment.json), [current preview](verification/provided-icons-centered.png), [asset provenance/hashes](verification/provided-icons.json).
+Control containers use explicit flex alignment in both axes, zero inherited summary padding and no inline-image baseline spacing. Provided PNGs display as blocks with contained, centered artwork. Rendered corner controls measured zero horizontal and vertical center offsets after fixing inherited summary padding/distribution; the shutter core uses the same explicit alignment. The actual shutter was not displayed in the idle verification session. Measurements (historical file removed), current preview (historical file removed), asset provenance/hashes (historical file removed).
 
 ## Why Jeeliz can be unavailable
 
@@ -12,7 +12,7 @@ The old fallback message classified every initialization failure as device unava
 
 The fallback now reports categories for unsupported/lost graphics context, unreadable camera frames, initialization timeout, network/module load failure and unexpected initialization errors. It records the original reason in a local console warning and keeps automatic MediaPipe fallback. Retry Jeeliz is available while the camera is active and capture is not busy/completed. The [official error-code guide](https://github.com/jeeliz/jeelizFaceFilter#error-codes) documents WebGL and camera initialization failures. No browser hardware/security settings or camera permissions were changed.
 
-All 29 tests passed, including icon paths/decorative semantics, fallback categories, retry availability and the preceding uniform grid/capture lifecycle checks. The production build passed; final alignment CSS is included in the final build. Physical camera, actual failure reproduction and tracker/export alignment remain unverified. The [pre-change source snapshot](archive/pre-provided-icons-2026-10-12) preserves Icon, tracker hook and sticker-panel code before this follow-up. Earlier design records remain.
+All 29 tests passed, including icon paths/decorative semantics, fallback categories, retry availability and the preceding uniform grid/capture lifecycle checks. The production build passed; final alignment CSS is included in the final build. Physical camera, actual failure reproduction and tracker/export alignment remain unverified. The pre-change source snapshot (historical file removed) preserves Icon, tracker hook and sticker-panel code before this follow-up. Earlier design records remain.
 
 ## Aperture shutter replacement — 2026-10-12
 
@@ -20,3 +20,5 @@ The user subsequently supplied `shutter-camera.png`. It is copied unmodified to 
 The subsequent [automatic capture and compact Settings update](AUTOMATIC-CAPTURE.md) supersedes individual thumbnail retakes, makes the aperture shutter white and reduces Settings control scale. Previous implementation measurements above remain dated records.
 
 The subsequent [MediaPipe/PixiJS update](MEDIAPIPE-PIXI-STICKERS.md) is the current face-effects authority. It removes tracker/category selectors, uses a shared GPU renderer with Canvas2D fallback, and makes the exact-second countdown field conditional on Custom. Earlier records above are preserved.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

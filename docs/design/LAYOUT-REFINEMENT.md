@@ -10,10 +10,12 @@ The monochrome tokens, camera/tracker hooks, capture guard, retake ownership, me
 
 ## Preservation
 
-[Pre-refinement archive](archive/pre-masonry-2026-10-12) contains all nine affected source/test files and the complete preceding DESIGN.md, README.md, PRODUCT.md, sidecar, modernization contract, and implementation record. The earlier full pre-modernization snapshot and embedded historical docs remain intact. Current docs describe the revised layout; the original modernization record remains dated with a follow-up authority notice.
+Pre-refinement archive (historical file removed) contains all nine affected source/test files and the complete preceding DESIGN.md, README.md, PRODUCT.md, sidecar, modernization contract, and implementation record. The earlier full pre-modernization snapshot and embedded historical docs remain intact. Current docs describe the revised layout; the original modernization record remains dated with a follow-up authority notice.
 
 ## Checks
 
-Existing tests were updated to check exact count coverage, search combinations, count-button semantics without a dropdown, and the sidebar's ordered media/actions. All 20 state, static SSR, and mocked lifecycle tests passed after the functional changes. Final production build passed (172 modules, 6.72 seconds). Prettier passed across src and tests. The scoped layout detector returned no findings before and after the changes. Read-only checks confirmed the embedded historical DESIGN/README sections and sidecar history remain unchanged. These are source/static checks, not rendered-browser approval. [Verification JSON](verification/layout-refinement-checks.json) records the bounded results.
+Existing tests were updated to check exact count coverage, search combinations, count-button semantics without a dropdown, and the sidebar's ordered media/actions. All 20 state, static SSR, and mocked lifecycle tests passed after the functional changes. Final production build passed (172 modules, 6.72 seconds). Prettier passed across src and tests. The scoped layout detector returned no findings before and after the changes. Read-only checks confirmed the embedded historical DESIGN/README sections and sidecar history remain unchanged. These are source/static checks, not rendered-browser approval. Verification JSON (historical file removed) records the bounded results.
 
 Fresh rendered-browser checks remain unavailable under the earlier preview-security restriction. No camera/device/inference/export verification is claimed for these layout changes. Inspect desktop/tablet/mobile masonry, tab flow, long labels, all nine thumbnails, video controls, and sidebar stacking at localhost:5173.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

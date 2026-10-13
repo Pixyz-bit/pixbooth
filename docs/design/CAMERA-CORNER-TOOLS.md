@@ -20,8 +20,10 @@ Both source video and its intrinsic-source-sized canvas overlay use centered obj
 
 All27 tests passed, including every template's uniform gallery markup and accessible live downloads, capture replacement/cancellation/cleanup, gallery ordering and shutter lifecycle. Production build passed (174 modules,12.39 seconds); changed files were formatted. Browser checks confirmed two open desktop panels inside the camera, timer selection, Escape closure/focus return, one-panel phone behavior and equal cells:150 × 112.5 desktop;141.2 × 105.9 phone. Computed video and overlay fit both equal cover. No physical-camera permission/capture was performed.
 
-[Measurements](verification/camera-corner-tools-checks.json), [desktop](verification/camera-corner-tools-desktop.png), [phone](verification/camera-corner-tools-mobile.png). [Pre-change archive](archive/pre-camera-corner-tools-2026-10-12) preserves affected source/tests/current docs. Earlier dated design notes, embedded DESIGN/README history and sidecar history remain unchanged.
+Measurements (historical file removed), desktop (historical file removed), phone (historical file removed). Pre-change archive (historical file removed) preserves affected source/tests/current docs. Earlier dated design notes, embedded DESIGN/README history and sidecar history remain unchanged.
 
 The subsequent [supplied icons/diagnostics update](PROVIDED-ICONS.md) replaces the three primary control symbols and corrects their centering. Earlier geometry measurements above remain valid for the organization pass.
 
 The subsequent [automatic capture and compact Settings update](AUTOMATIC-CAPTURE.md) supersedes individual thumbnail retakes, makes the aperture shutter white and reduces Settings control scale. Previous implementation measurements above remain dated records.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

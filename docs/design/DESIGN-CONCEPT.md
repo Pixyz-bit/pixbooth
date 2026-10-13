@@ -27,14 +27,14 @@ The images are inspiration for visual grammar, not specifications for another pr
 
 | Supplied reference | What carries into Pixbooth | What stays outside the concept |
 | --- | --- | --- |
-| [Mobile interface](references/mobile-interface.png) | Dense boxed groups, bold headings, practical image grids, unmistakable selection and action placement. | Shopping navigation, carts, price labels, fashion photography, lime/purple accents, and the exact commerce composition. |
-| [Button system](references/button-system.png) | Thick action outlines, firm rectangular silhouettes, a hard shadow that compresses on press, and clear default/hover/pressed states. | Acid highlights, cream/grid backdrop, monospace branding, component-documentation copy, and shadows on every component. |
-| [Card structure](references/card-structure.png) | Strong heading/content/action hierarchy and a framed surface whose primary action is easy to find. | Pricing tiers, checkbox glyph decoration, purple action fill, and a hard shadow on every panel. |
-| [Workspace layout](references/workspace-layout.png) | Framed desktop rails, dense useful grouping, bold main content, and an obvious relationship between navigation, artifact, and controls. | Documentation-site navigation, framework badges, saturated colors, ornamental tilted stickers, and its header topology. |
+| Mobile interface (historical file removed) | Dense boxed groups, bold headings, practical image grids, unmistakable selection and action placement. | Shopping navigation, carts, price labels, fashion photography, lime/purple accents, and the exact commerce composition. |
+| Button system (historical file removed) | Thick action outlines, firm rectangular silhouettes, a hard shadow that compresses on press, and clear default/hover/pressed states. | Acid highlights, cream/grid backdrop, monospace branding, component-documentation copy, and shadows on every component. |
+| Card structure (historical file removed) | Strong heading/content/action hierarchy and a framed surface whose primary action is easy to find. | Pricing tiers, checkbox glyph decoration, purple action fill, and a hard shadow on every panel. |
+| Workspace layout (historical file removed) | Framed desktop rails, dense useful grouping, bold main content, and an obvious relationship between navigation, artifact, and controls. | Documentation-site navigation, framework badges, saturated colors, ornamental tilted stickers, and its header topology. |
 
 Read the references together. The user's black-and-white restriction and camera-shadow exception take precedence over any individual screenshot detail. Interpret the shapes and hierarchy in Pixbooth's current home/booth/editor flow rather than recreating an ecommerce or UI-kit site.
 
-The additional [landing composition reference](references/landing-composition.png) establishes the centered headline/copy/action hierarchy and a central photographic artifact with supporting items. It supplies structure only. Its serif display type, colored cards, rounded pills, phone mockup, metrics, brand-logo row, and commerce content are not Pixbooth requirements. The centered hero is an explicit user-pinned exception to generic layout defaults; retain the site's DM Sans, black-and-white chrome, and sharp frames.
+The additional landing composition reference (historical file removed) establishes the centered headline/copy/action hierarchy and a central photographic artifact with supporting items. It supplies structure only. Its serif display type, colored cards, rounded pills, phone mockup, metrics, brand-logo row, and commerce content are not Pixbooth requirements. The centered hero is an explicit user-pinned exception to generic layout defaults; retain the site's DM Sans, black-and-white chrome, and sharp frames.
 
 ## Colors
 
@@ -143,3 +143,5 @@ Keep live preview containment separate from output cover cropping. Photo and Liv
 - Don't copy ecommerce features, pricing content, reference text, product photography, third-party code, or assumed licenses from the screenshots.
 - Don't make the entire site grayscale or recolor the logo to satisfy the chrome palette.
 - Don't call untested MP4 encoding, playback, browser compatibility, or physical-camera behavior verified.
+
+Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.

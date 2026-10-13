@@ -26,3 +26,7 @@ Responsive system refinement: [RESPONSIVE-DESIGN.md](RESPONSIVE-DESIGN.md) super
 Universal footer revision — 2026-10-13: all four pages use one Footer.jsx/Footer.css with dynamic copyright year, “Powered by .decide” and route-preserving Back to top. The desktop row is 43.2px high; the phone link has a 44px minimum target and the row wraps. This supersedes earlier footer content and height notes.
 
 Capture correction — 2026-10-13: Redo clears captures and editor choices, preserves layout/camera settings and reconnects the preview; only pressing the shutter starts the next sequence. On stacked layouts, capture/cancel actions anchor by their bottom edge 12px inside the preview and reserve horizontal space for both tool toggles, so wrapped cancel labels stay within the frame.
+
+Footer scope refinement — 2026-10-13: the shared footer keeps copyright and Powered by .decide on all routes. Back to top is rendered only on the landing page, superseding earlier universal-link descriptions.
+
+Final uniform-footer decision — 2026-10-13: all four pages use the same Footer.jsx/Footer.css, containing only the dynamic copyright year and Powered by .decide. Back to top is removed from every page. Its route flag, click handler, link styles and unused LandingArrow.jsx are removed. This supersedes earlier footer-link descriptions.
