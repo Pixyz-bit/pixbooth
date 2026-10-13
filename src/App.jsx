@@ -79,7 +79,9 @@ export default function App() {
     );
   else content = <CapturePage session={{ ...session, retake: requestReset }} />;
   return (
-    <div className={`app ${page === 'home' ? 'home-app' : page === 'booth' ? 'booth-app' : ''}`}>
+    <div
+      className={`app ${page === 'home' ? 'home-app' : page === 'booth' ? 'booth-app' : page === 'templates' ? 'templates-app' : ''}`}
+    >
       {page !== 'home' && (
         <WorkflowSteps page={page} layoutChosen={layoutChosen} completed={completed} />
       )}

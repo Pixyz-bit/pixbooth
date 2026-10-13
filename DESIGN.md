@@ -462,3 +462,7 @@ Finished strips display immediately without a printing animation, printer slot, 
 
 Face stickers now offer Jeeliz (default) and the original MediaPipe tracker. Choose Face tracking in the Face stickers panel. Jeeliz uses local face-pose estimates for the existing 36 sticker artworks and automatically falls back to MediaPipe on initialization failure. See [implementation, manual checks and rollback](docs/design/JEELIZ-FACE-STICKERS.md). Existing layout and earlier documentation are retained.
 ````
+
+## Template picker adopts the landing design — 2026-10-13
+
+The user's explicit request extends the landing vocabulary to #/templates. See [TEMPLATES-DESIGN-CONCEPT.md](docs/design/TEMPLATES-DESIGN-CONCEPT.md) for the route contract: Plus Jakarta Sans, 32px grid, black outlines, square workflow markers, hard selected/hover shadows and white Capture-style actions. Preserve shared workflow margins, filter/selection/capture-lock behavior and the compact footer. Camera and editor retain their current styling. The route-scoped TemplatesTheme.css is the implementation authority for this extension.

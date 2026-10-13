@@ -1,0 +1,232 @@
+/* Extend the current landing vocabulary to the layout-selection route only. */
+.app.templates-app {
+  --ink: #000;
+  --paper: #fff;
+  --muted: #52525b;
+  --line: #000;
+  --surface: #f5f5f5;
+  --control-radius: 10px;
+  --template-shadow: 6px 6px 0 var(--ink);
+  max-width: none;
+  padding-inline: 0;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(#0001 1px, transparent 1px), linear-gradient(90deg, #0001 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.templates-app :is(.workflow-brand-row, .template-main, footer) {
+  width: min(1216px, calc(100% - 64px));
+  margin-inline: auto;
+}
+.templates-app .workflow-header {
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+.templates-app .workflow-nav li a,
+.templates-app .step-unavailable {
+  font-weight: 600;
+  color: var(--muted);
+  border-radius: 10px;
+}
+.templates-app .workflow-nav li a[aria-current='step'] {
+  color: var(--ink);
+  font-weight: 800;
+}
+.templates-app .step-number {
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.templates-app .workflow-home {
+  font-weight: 700;
+}
+.templates-app .intro {
+  padding-block: 40px 32px;
+}
+.templates-app .intro h1 {
+  font-size: clamp(32px, 3.5vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  margin-bottom: 12px;
+}
+.templates-app .intro p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.templates-app .template-count-filter {
+  gap: 16px;
+  font-weight: 700;
+}
+.templates-app .template-count-filter select {
+  min-height: 50px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.templates-app .template-results {
+  margin-block: 20px 16px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.templates-app .template-choices {
+  column-gap: 20px;
+  padding: 4px 8px 8px 0;
+}
+.templates-app .template-choices[data-filtered='true'] {
+  gap: 20px;
+  grid-auto-rows: auto;
+}
+.templates-app .template-choice,
+.templates-app .template-choice.selected {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 20px;
+  gap: 14px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: none;
+  transition:
+    transform 180ms var(--ease),
+    box-shadow 180ms var(--ease);
+}
+.templates-app .template-choice.selected {
+  box-shadow: var(--template-shadow);
+}
+.templates-app .template-choice:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--template-shadow);
+}
+.templates-app .template-choice:active:not(:disabled) {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+.templates-app .template-choice:disabled:not(.selected) {
+  opacity: 0.5;
+}
+.templates-app .choice-copy strong {
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+.templates-app .choice-copy > span {
+  font-size: 12px;
+  line-height: 1.65;
+}
+.templates-app .choice-check {
+  width: 28px;
+  height: 28px;
+  top: 16px;
+  right: 16px;
+  border-radius: 8px;
+}
+.templates-app .selection-actionbar {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 24px;
+  bottom: 16px;
+}
+.templates-app .selection-actionbar strong {
+  font-weight: 800;
+}
+.templates-app .selection-actionbar .selection-label {
+  font-size: 12px;
+}
+.templates-app .button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 50px;
+  padding: 12px 20px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: none;
+  transition:
+    transform 180ms var(--ease),
+    box-shadow 180ms var(--ease);
+}
+.templates-app .button:hover:not(:disabled) {
+  background: var(--paper);
+  color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--template-shadow);
+}
+.templates-app .button:active:not(:disabled) {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+.templates-app :is(button, a, select):focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 5px;
+}
+.templates-app footer {
+  border-top: 2px solid var(--ink);
+  color: var(--muted);
+  padding-block: 20px;
+  margin-top: 32px;
+}
+@media (max-width: 800px) {
+  .templates-app :is(.workflow-brand-row, .template-main, footer) {
+    width: calc(100% - 48px);
+  }
+}
+@media (max-width: 600px) {
+  .templates-app :is(.workflow-brand-row, .template-main, footer) {
+    width: calc(100% - 32px);
+  }
+  .templates-app .intro {
+    padding-block: 28px 24px;
+  }
+  .templates-app .workflow-nav li a,
+  .templates-app .step-unavailable {
+    gap: 6px;
+    padding-inline: 2px;
+    font-size: 11px;
+  }
+  .templates-app .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  .templates-app .template-choices {
+    column-gap: 16px;
+  }
+  .templates-app .template-choices[data-filtered='true'] {
+    gap: 16px;
+  }
+  .templates-app .template-choice,
+  .templates-app .template-choice.selected {
+    padding: 10px;
+  }
+  .templates-app .selection-actionbar {
+    padding: 16px;
+    bottom: 8px;
+  }
+  .templates-app .selection-actions > .button {
+    gap: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .templates-app :is(.template-choice, .button) {
+    transition: none;
+  }
+  .templates-app :is(.template-choice, .button):is(:hover, :active):not(:disabled) {
+    transform: none;
+  }
+}
