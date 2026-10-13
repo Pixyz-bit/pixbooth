@@ -114,6 +114,10 @@
   border: 2px solid var(--ink);
   border-radius: 8px;
 }
+.booth-app .capture-slot :is(img, video, .empty-slot) {
+  border: 0;
+  border-radius: 0;
+}
 .booth-app .empty-slot {
   border: 0;
   background: var(--surface);

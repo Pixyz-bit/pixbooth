@@ -26,3 +26,6 @@
 @import '../pages/templates/TemplatesTheme.css';
 
 @import '../pages/capture/BoothTheme.css';
+
+@import '../pages/editor/EditorTheme.css';
+@import '../components/layout/WorkflowFooter.css';

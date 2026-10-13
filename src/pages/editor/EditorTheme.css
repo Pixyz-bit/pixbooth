@@ -1,0 +1,217 @@
+/* Customize continues the established landing/template/booth design. */
+.app.editor-app {
+  --ink: #000;
+  --paper: #fff;
+  --muted: #52525b;
+  --line: #000;
+  --surface: #f5f5f5;
+  --radius: 10px;
+  --control-radius: 10px;
+  max-width: none;
+  padding-inline: 0;
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(#0001 1px, transparent 1px), linear-gradient(90deg, #0001 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-font-smoothing: antialiased;
+}
+.editor-app :is(.workflow-brand-row, .editor-main) {
+  width: min(1216px, calc(100% - 64px));
+  margin-inline: auto;
+}
+.editor-app .workflow-header {
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+.editor-app .workflow-nav li a,
+.editor-app .step-unavailable {
+  font-weight: 600;
+  color: var(--muted);
+  border-radius: 10px;
+}
+.editor-app .workflow-nav li a[aria-current='step'] {
+  color: var(--ink);
+  font-weight: 800;
+}
+.editor-app .step-number {
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.editor-app .workflow-home {
+  font-weight: 700;
+}
+.editor-app .intro {
+  padding-block: 40px 32px;
+}
+.editor-app .intro h1 {
+  margin-bottom: 12px;
+  font-size: clamp(32px, 3.5vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+.editor-app .intro p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.editor-app :is(.editor-preview, .editor-download-area, .editor-tool-panel) {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  box-shadow: none;
+}
+.editor-app .editor-preview-heading h2,
+.editor-app .editor-tool-panel > h2 {
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+.editor-app .editor-preview-heading h2 {
+  font-size: 18px;
+}
+.editor-app .editor-render-status {
+  font-size: 12px;
+  line-height: 1.65;
+}
+.editor-app .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 50px;
+  padding: 12px 20px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: none;
+  text-decoration: none;
+  transition:
+    background-color 180ms var(--ease),
+    color 180ms var(--ease);
+}
+.editor-app .button:is(:hover, :active):not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+  transform: none;
+  box-shadow: none;
+}
+.editor-app .button:disabled {
+  border-color: var(--muted);
+  border-style: dashed;
+  background: var(--surface);
+  color: var(--muted);
+  opacity: 1;
+}
+.editor-app .text-button {
+  font-weight: 700;
+}
+.editor-app .text-button:hover:not(:disabled) {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.editor-app .editor-tabs {
+  padding: 4px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+}
+.editor-app .editor-tabs button {
+  font-size: 13px;
+  font-weight: 700;
+}
+.editor-app .editor-tabs button[aria-selected='true'] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 800;
+}
+.editor-app :is(.frame-option, .design-option, .filter-option, .template-button) {
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  padding: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 700;
+  transition:
+    transform 180ms var(--ease),
+    box-shadow 180ms var(--ease);
+}
+.editor-app :is(.frame-option, .design-option, .filter-option, .template-button).selected {
+  background: var(--paper);
+  color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.editor-app
+  :is(.frame-option, .design-option, .filter-option, .template-button):hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.editor-app :is(.frame-options, .background-options, .filter-options, .decoration-options) {
+  gap: 12px;
+}
+.editor-app .editor-controls legend {
+  font-weight: 800;
+}
+.editor-app .caption-control input {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  min-height: 50px;
+  background: var(--paper);
+}
+.editor-app :is(button, a, input, select, summary):focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 5px;
+}
+.editor-app :is(input, select):focus-visible {
+  outline-offset: -3px;
+}
+.editor-app .editor-tabs button[aria-selected='true']:focus-visible {
+  outline-color: var(--paper);
+  outline-offset: -4px;
+}
+@media (max-width: 800px) {
+  .editor-app :is(.workflow-brand-row, .editor-main) {
+    width: calc(100% - 48px);
+  }
+}
+@media (max-width: 600px) {
+  .editor-app :is(.workflow-brand-row, .editor-main) {
+    width: calc(100% - 32px);
+  }
+  .editor-app .intro {
+    padding-block: 28px 24px;
+  }
+  .editor-app .workflow-nav li a,
+  .editor-app .step-unavailable {
+    gap: 6px;
+    padding-inline: 2px;
+    font-size: 11px;
+  }
+  .editor-app .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  .editor-app :is(.editor-preview, .editor-download-area, .editor-tool-panel) {
+    padding: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .editor-app :is(.button, .frame-option, .design-option, .filter-option, .template-button) {
+    transition: none;
+  }
+  .editor-app
+    :is(.frame-option, .design-option, .filter-option, .template-button):is(.selected, :hover) {
+    transform: none;
+  }
+}

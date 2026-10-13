@@ -470,3 +470,7 @@ The user's explicit request extends the landing vocabulary to #/templates. See [
 ## Booth adopts the established design — 2026-10-13
 
 The user extends the established landing/template design to #/booth. [BOOTH-DESIGN-CONCEPT.md](docs/design/BOOTH-DESIGN-CONCEPT.md) is the route contract. BoothTheme.css supplies the 32px monochrome grid, Plus Jakarta Sans, square workflow markers, 2px preview/review outlines, rounded camera tools, hard popover shadows and white actions with black hover states. Preserve the shared workflow alignment and all capture/media behavior; the editor keeps its existing styling.
+
+## Customize and the shared workflow footer — 2026-10-13
+
+[EDITOR-DESIGN-CONCEPT.md](docs/design/EDITOR-DESIGN-CONCEPT.md) extends the established design to #/edit: Plus Jakarta Sans, 32px monochrome grid, 2px outlines, matching workflow header and white actions with stationary black/white hover states. Choose layout, Capture and Customize now share the full-width black copyright/privacy/Back-to-top footer through Footer.jsx and WorkflowFooter.css. Both confirmation-dialog actions also invert without lift or shadow. The homepage retains its dedicated footer. Editor behavior, real media colors and capture guards stay intact.
