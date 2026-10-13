@@ -152,8 +152,16 @@
     overscroll-behavior: contain;
   }
   .booth-app .floating-shutter {
-    top: calc(var(--preview-height) - 80px);
+    top: calc(var(--preview-height) - 12px);
     bottom: auto;
+    width: min(240px, calc(100% - 144px));
+    transform: translate(-50%, -100%);
+  }
+  .booth-app .floating-shutter .cancel-capture {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 8px;
+    font-size: 14px;
   }
   .booth-app .camera-control .switch {
     width: 44px;
@@ -260,7 +268,7 @@
     top: calc(var(--preview-height) - 56px);
   }
   .booth-app .floating-shutter {
-    top: calc(var(--preview-height) - 64px);
+    width: min(240px, calc(100% - 136px));
   }
   .booth-app .capture-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));

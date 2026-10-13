@@ -15,7 +15,6 @@ export default function useBoothSession() {
   const timer = useRef(null);
   const sequence = useRef(false);
   const [autoCapture, setAutoCapture] = useState(false);
-  const [redoRequested, setRedoRequested] = useState(false);
   const shotUrls = useRef([]);
   const recording = useRef(null);
   const [shots, setShots] = useState([]);
@@ -81,7 +80,6 @@ export default function useBoothSession() {
   function cancelCountdown() {
     sequence.current = false;
     setAutoCapture(false);
-    setRedoRequested(false);
     clearInterval(timer.current);
     timer.current = null;
     setCountdown(null);
@@ -116,19 +114,8 @@ export default function useBoothSession() {
     setFlash,
     setCountdown,
   });
-  useEffect(() => {
-    if (!redoRequested) return;
-    if (error || page !== 'booth') {
-      setRedoRequested(false);
-      return;
-    }
-    if (status === 'ready' && stickerReady) {
-      setRedoRequested(false);
-      takePhoto();
-    }
-  }, [redoRequested, status, stickerReady, error, page]);
   function redoAll() {
-    if (busy || redoRequested) return;
+    if (busy) return;
     requestId.current++;
     recording.current?.abort();
     cancelCountdown();
@@ -142,7 +129,6 @@ export default function useBoothSession() {
     setError('');
     setRecordProgress(0);
     openCamera(deviceId);
-    setRedoRequested(true);
   }
   function retake() {
     requestId.current++;
@@ -184,7 +170,6 @@ export default function useBoothSession() {
   return {
     shots,
     autoCapture,
-    redoRequested,
     redoAll,
     retakeIndex,
     retakePhoto,

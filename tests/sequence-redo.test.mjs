@@ -128,9 +128,12 @@ function harness(t) {
   };
 }
 
-test('Redo clears every capture and editor choice, keeps the layout, then automatically restarts', (t) => {
+test('Redo clears every capture and editor choice, preserves settings, and waits for the shutter', (t) => {
   const { session, snapshot, flush, ready } = harness(t);
   session.setEditorSettings({ caption: 'Earlier session' });
+  session.setDelay(5);
+  session.setMirror(false);
+  session.setMode('live');
   const before = flush();
   before.redoAll();
   let next = flush();
@@ -145,19 +148,31 @@ test('Redo clears every capture and editor choice, keeps the layout, then automa
   assert.equal(snapshot.opens, 1);
   ready();
   next = flush();
+  assert.equal(next.status, 'ready');
+  assert.equal(next.autoCapture, false);
+  assert.equal(next.countdown, null);
+  assert.equal(next.delay, 5);
+  assert.equal(next.mirror, false);
+  assert.equal(next.mode, 'live');
+  assert.equal(snapshot.starts, 0);
+  flush();
+  assert.equal(snapshot.starts, 0);
+  next.takePhoto();
+  next = flush();
   assert.equal(snapshot.starts, 1);
   assert.deepEqual(snapshot.shotsAtStart, []);
   assert.equal(next.autoCapture, true);
-  assert.equal(next.redoRequested, false);
   flush();
   assert.equal(snapshot.starts, 1);
 });
 
-test('stopping the camera while Redo reconnects cancels the pending automatic restart', (t) => {
+test('stopping the camera while Redo reconnects does not start a capture', (t) => {
   const { session, snapshot, flush, ready } = harness(t);
   session.redoAll();
   flush().stopCamera();
-  assert.equal(flush().redoRequested, false);
+  assert.equal(flush().status, 'idle');
+  assert.equal(flush().autoCapture, false);
+  assert.equal(flush().countdown, null);
   ready();
   flush();
   assert.equal(snapshot.starts, 0);

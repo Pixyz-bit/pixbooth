@@ -487,3 +487,7 @@ The formats strip now uses a seamless 28-second monochrome marquee with star sep
 ## Universal footer and landing rhythm — 2026-10-13
 
 All four pages now use the same Footer.jsx and Footer.css: compact full-width black bar, dynamic copyright year, “Powered by .decide”, and route-preserving Back to top. LandingFooter.jsx and WorkflowFooter.css are removed; dialog actions use DialogActions.css. The marquee separates alternating text and stars with equal gaps across the repeated boundary. The sample caption and “Snap. Style. Save.” heading each sit 40px from the ribbon, reduced to 28px on phones. This supersedes earlier separate-footer and 16px-caption-spacing notes.
+
+## Capture controls and mobile footer correction — 2026-10-13
+
+Redo reconnects a cleared session and waits for the shutter instead of automatically snapping. Stacked camera actions stay 12px inside the preview and reserve space between corner tool toggles even when cancellation text wraps. The mobile universal footer centers its copyright/credit columns and places Back to top on a centered second row.

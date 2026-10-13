@@ -53,11 +53,17 @@
 }
 @media (max-width: 600px) {
   .app .landing-footer-bottom > div {
-    justify-content: flex-start;
-    gap: 8px 20px;
-    padding-top: 4px;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    justify-items: center;
+    text-align: center;
+    gap: 4px 16px;
+    padding-top: 8px;
   }
   .app .landing-footer-bottom a {
+    grid-column: 1 / -1;
+    justify-self: center;
     min-height: 44px;
   }
 }

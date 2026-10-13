@@ -45,3 +45,5 @@ These responsive rules supersede conflicting fixed-height/small-screen sizing no
 ## Universal footer
 
 All four routes render one shared `components/layout/Footer.jsx`, styled by `Footer.css`. Its black full-width bar contains the dynamic copyright year, “Powered by .decide” and a route-preserving Back to top link. The desktop inner row remains 43.2px high; phones wrap the row and give the link a 44px touch target. LandingFooter.jsx and WorkflowFooter.css are removed; dialog action styling is retained in DialogActions.css. Archived originals are in `archive/pre-universal-footer-2026-10-13/`.
+
+Mobile correction — 2026-10-13: cancel-countdown/recording buttons anchor by their actual bottom edge inside the preview, with a separate center lane between tool toggles. The universal footer uses two balanced metadata columns and a centered full-row Back-to-top link at 600px and below.

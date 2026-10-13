@@ -61,7 +61,7 @@ export default function CapturePage({ session }) {
               {session.shots.length > 0 && (
                 <button
                   className="button button-outline"
-                  disabled={session.busy || session.redoRequested}
+                  disabled={session.busy}
                   onClick={session.redoAll}
                 >
                   <Icon name="retake" size={16} />

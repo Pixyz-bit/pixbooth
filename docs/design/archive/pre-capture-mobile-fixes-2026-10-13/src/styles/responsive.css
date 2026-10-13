@@ -1,0 +1,327 @@
+/* Shared responsive hardening; preserve the established monochrome tokens. */
+.app {
+  --page-gutter: 32px;
+  --safe-left: max(var(--page-gutter), env(safe-area-inset-left, 0px));
+  --safe-right: max(var(--page-gutter), env(safe-area-inset-right, 0px));
+}
+.app :is(.workflow-brand-row, .template-main, .capture-main, .editor-main) {
+  width: min(1216px, calc(100% - var(--safe-left) - var(--safe-right)));
+}
+.home-app .landing-section-inner {
+  width: min(1200px, calc(100% - var(--safe-left) - var(--safe-right)));
+}
+.app .workflow-header {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.app
+  :is(
+    .workflow-nav,
+    .workflow-nav li,
+    .selection-actions,
+    .editor-controls,
+    .editor-download-area,
+    .editor-tool-panel
+  ) {
+  min-width: 0;
+}
+.app .button {
+  white-space: normal;
+  text-align: center;
+}
+.app .selection-actions {
+  flex-wrap: wrap;
+}
+.app .selection-actionbar strong {
+  overflow-wrap: anywhere;
+}
+.app .app-dialog {
+  max-height: calc(
+    100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)
+  );
+  overscroll-behavior: contain;
+}
+.home-app .landing-hero {
+  padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+}
+.home-app .showcase-strip {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+.home-app .showcase-strip .sample-photo {
+  min-width: 0;
+  width: 100%;
+}
+.home-app .showcase-strip > span {
+  font-size: clamp(7px, calc(var(--print-size) * 0.04), 10px);
+}
+.home-app .print-caption span:last-child {
+  font-size: clamp(9px, calc(var(--print-size) * 0.05), 12px);
+}
+@media (max-width: 1000px) {
+  .editor-app .editor-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .editor-app .editor-artifact {
+    position: static;
+  }
+  .editor-app .editor-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    align-items: start;
+    gap: 24px;
+  }
+  .editor-app .editor-stage {
+    height: clamp(280px, 50svh, 480px);
+  }
+}
+@media (max-width: 800px) {
+  .app {
+    --page-gutter: 24px;
+  }
+}
+@media (max-width: 899px), (max-height: 419px) {
+  .booth-app .capture-sidebar {
+    position: static;
+    height: auto;
+    max-height: none;
+    min-height: 0;
+  }
+  .booth-app .capture-review-scroll {
+    flex: none;
+    overflow: visible;
+  }
+  .booth-app .capture-review {
+    min-height: 0;
+  }
+  .booth-app .capture-gallery {
+    flex: none;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+    padding-block: 16px;
+  }
+  .booth-app .booth-bar {
+    height: auto;
+    min-height: 52px;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    padding-block: 4px 8px;
+  }
+  /* On narrow screens, open tools expand below the preview instead of covering it. */
+  .booth-app .camera-frame-area {
+    --preview-height: 56.25cqw;
+    aspect-ratio: auto;
+  }
+  .booth-app .viewfinder {
+    position: relative;
+    inset: auto;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .booth-app .camera-tools.capture-tools {
+    position: static;
+    inset: auto;
+    height: auto;
+  }
+  .booth-app .camera-tools > .camera-tool {
+    position: static;
+    width: auto;
+    pointer-events: none;
+  }
+  .booth-app .camera-tool-toggle {
+    position: absolute;
+    top: calc(var(--preview-height) - 64px);
+    bottom: auto;
+    pointer-events: auto;
+    z-index: 13;
+  }
+  .booth-app .camera-tool-stickers > .camera-tool-toggle {
+    left: 16px;
+  }
+  .booth-app .camera-tool-settings > .camera-tool-toggle {
+    right: 16px;
+  }
+  .booth-app .camera-tool-content {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-height: min(60dvh, 480px);
+    margin-top: 12px;
+    pointer-events: auto;
+    box-shadow: none;
+    overscroll-behavior: contain;
+  }
+  .booth-app .floating-shutter {
+    top: calc(var(--preview-height) - 80px);
+    bottom: auto;
+  }
+  .booth-app .camera-control .switch {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+  .booth-app .camera-tool-settings .mirror-row .switch {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 3px;
+    border: 0;
+    background: transparent;
+  }
+  .booth-app .camera-tool-settings .mirror-row .switch::before {
+    content: '';
+    position: absolute;
+    inset: 50% 0 auto;
+    transform: translateY(-50%);
+    height: 28px;
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+  }
+  .booth-app .camera-tool-settings .mirror-row .switch.on::before {
+    background: var(--ink);
+  }
+  .booth-app .camera-tool-settings .mirror-row .switch span {
+    position: relative;
+  }
+}
+@media (max-width: 700px) {
+  .home-app {
+    --page-gutter: 16px;
+  }
+  .editor-app .editor-controls {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .app {
+    --page-gutter: 16px;
+  }
+  .app .workflow-brand-row {
+    padding-block: 8px;
+    row-gap: 4px;
+  }
+  .app .workflow-nav ol {
+    width: 100%;
+    gap: 8px;
+  }
+  .app .workflow-nav li a,
+  .app .step-unavailable {
+    min-height: 48px;
+    font-size: 11px;
+    padding-inline: 2px;
+  }
+  .app .workflow-home {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .templates-app .template-count-filter select,
+  .booth-app .camera-tool-settings select,
+  .editor-app :is(input, select) {
+    font-size: 16px;
+  }
+  .templates-app .template-choices,
+  .templates-app .template-choices[data-filtered='true'] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;
+    align-items: start;
+    gap: 16px;
+    padding: 4px 6px 8px 0;
+  }
+  .templates-app .template-choices > .template-choice {
+    margin-bottom: 0;
+  }
+  .templates-app .selection-actionbar {
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    padding: 12px;
+    gap: 12px;
+  }
+  .templates-app .selection-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  .templates-app .selection-actions > :is(.button, .text-button) {
+    width: 100%;
+  }
+  .booth-app .camera-frame-area {
+    --preview-height: 80cqw;
+  }
+  .booth-app .viewfinder {
+    aspect-ratio: 5 / 4;
+  }
+  .booth-app .camera-tool-toggle {
+    width: 44px;
+    height: 44px;
+    top: calc(var(--preview-height) - 56px);
+  }
+  .booth-app .floating-shutter {
+    top: calc(var(--preview-height) - 64px);
+  }
+  .booth-app .capture-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .editor-app .editor-stage {
+    height: clamp(260px, 48svh, 420px);
+    padding: 12px;
+  }
+  .editor-app .editor-intro {
+    gap: 12px;
+  }
+  .editor-app .editor-tabs button {
+    min-height: 48px;
+  }
+  .editor-app :is(.frame-options, .background-options, .filter-options, .decoration-options) {
+    gap: 10px;
+  }
+  .app .dialog-actions {
+    flex-direction: column;
+  }
+  .app .dialog-actions .button {
+    width: 100%;
+  }
+}
+@media (max-width: 360px) {
+  .home-app .landing-copy h1 {
+    font-size: clamp(32px, 6svh, 40px);
+  }
+  .home-app .landing-copy .brand-logo {
+    width: 128px;
+  }
+  .home-app .landing-showcase {
+    --print-size: min(calc((100cqh - 36px) / 1.31), calc((100cqw - 20px) / 1.32));
+  }
+  .editor-app :is(.frame-options, .background-options, .filter-options, .decoration-options) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (hover: none) {
+  .app .text-button:not(:disabled) {
+    min-height: 44px;
+  }
+}
+
+/* Center the landing entry label. */
+.home-app .landing-capture.button-dark {
+  justify-content: center;
+}
+
+/* Balanced spacing around the formats ribbon. */
+.home-app {
+  --ribbon-gap: 40px;
+}
+.home-app .landing-hero {
+  padding-bottom: calc(var(--ribbon-gap) + env(safe-area-inset-bottom, 0px));
+}
+.home-app .landing-how {
+  padding-top: var(--ribbon-gap);
+}
+@media (max-width: 600px) {
+  .home-app {
+    --ribbon-gap: 28px;
+  }
+}

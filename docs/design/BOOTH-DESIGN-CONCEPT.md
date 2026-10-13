@@ -24,3 +24,5 @@ Latest workflow footer revision — 2026-10-13: Choose layout, Capture and Custo
 Responsive system refinement: [RESPONSIVE-DESIGN.md](RESPONSIVE-DESIGN.md) supersedes earlier narrow-screen sizing with safe-area-aware containers, touch-sized controls and adaptive flow. Its implementation is the last-loaded src/styles/responsive.css.
 
 Universal footer revision — 2026-10-13: all four pages use one Footer.jsx/Footer.css with dynamic copyright year, “Powered by .decide” and route-preserving Back to top. The desktop row is 43.2px high; the phone link has a 44px minimum target and the row wraps. This supersedes earlier footer content and height notes.
+
+Capture correction — 2026-10-13: Redo clears captures and editor choices, preserves layout/camera settings and reconnects the preview; only pressing the shutter starts the next sequence. On stacked layouts, capture/cancel actions anchor by their bottom edge 12px inside the preview and reserve horizontal space for both tool toggles, so wrapped cancel labels stay within the frame.
