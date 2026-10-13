@@ -167,49 +167,6 @@
   line-height: 1.65;
   max-width: 36ch;
 }
-.home-app .landing-footer {
-  display: block;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  border-top: var(--home-border);
-  background: var(--paper);
-  color: var(--ink);
-  font-size: 14px;
-}
-.home-app .landing-footer-bottom {
-  background: var(--ink);
-  color: var(--paper);
-}
-.home-app .landing-footer-bottom > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  width: min(1200px, calc(100% - 64px));
-  min-height: 43.2px;
-  padding-block: 0;
-  margin-inline: auto;
-  font-size: 12px;
-  line-height: 1.6;
-}
-.home-app .landing-footer-bottom a {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 40px;
-  font-weight: 700;
-  text-decoration: none;
-  text-underline-offset: 4px;
-}
-.home-app .landing-footer-bottom a:hover {
-  text-decoration: underline;
-}
-.home-app .landing-footer-bottom a:focus-visible {
-  outline-color: var(--paper);
-}
 @media (max-width: 1000px) {
   .home-app .landing-how-steps {
     gap: 22px;
@@ -232,8 +189,7 @@
   }
 }
 @media (max-width: 700px) {
-  .home-app .landing-section-inner,
-  .home-app .landing-footer-bottom > div {
+  .home-app .landing-section-inner {
     width: calc(100% - 32px);
   }
   .home-app .landing-how {
@@ -257,16 +213,19 @@
     margin-bottom: 20px;
   }
   .home-app .landing-how-step h3 {
+    justify-content: center;
+    text-align: center;
     font-size: 22px;
     gap: 14px;
+  }
+  .home-app .landing-how-step > p {
+    margin-inline: auto;
+    text-align: center;
   }
   .home-app .landing-how-number {
     flex-basis: 34px;
     height: 34px;
     font-size: 16px;
-  }
-  .home-app .landing-footer-bottom > div {
-    justify-content: flex-start;
   }
 }
 @media (prefers-reduced-motion: reduce) {

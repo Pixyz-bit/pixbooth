@@ -20,3 +20,5 @@ Validation: production build and changed-file formatting pass. Browser inspectio
 
 Latest workflow footer revision — 2026-10-13: Choose layout, Capture and Customize use the shared full-width black copyright/privacy/Back-to-top bar. This supersedes the earlier compact footer description. Customize now has its own established-design theme; see [EDITOR-DESIGN-CONCEPT.md](EDITOR-DESIGN-CONCEPT.md). Confirmation-dialog buttons use stationary black/white hover inversion.
 Responsive system refinement: [RESPONSIVE-DESIGN.md](RESPONSIVE-DESIGN.md) supersedes earlier narrow-screen sizing with safe-area-aware containers, touch-sized controls and adaptive flow. Its implementation is the last-loaded src/styles/responsive.css.
+
+Universal footer revision — 2026-10-13: all four pages use one Footer.jsx/Footer.css with dynamic copyright year, “Powered by .decide” and route-preserving Back to top. The desktop row is 43.2px high; the phone link has a 44px minimum target and the row wraps. This supersedes earlier footer content and height notes.

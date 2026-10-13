@@ -416,8 +416,9 @@
         "background": "#000",
         "text": "#fff",
         "details": "permanently removed",
-        "bottomBar": "copyright/privacy/back-to-top only",
-        "height": "43.2px desktop"
+        "bottomBar": "shared copyright / Powered by .decide / route-preserving Back to top",
+        "height": "43.2px desktop",
+        "component": "src/components/layout/Footer.jsx"
       },
       "hero": "100svh, 560px minimum, container-sized sample prints",
       "heroCaption": "A few poses. A little keepsake.",
@@ -426,8 +427,10 @@
         "style": "white marquee, 2px black borders, star separators",
         "duration": "28s linear",
         "pause": "hover only; toggle removed",
-        "reducedMotion": "static wrapping labels; no duplicate/control"
-      }
+        "reducedMotion": "static wrapping labels; no duplicate/control",
+        "spacing": "alternating label/star items with equal gaps, including repeated boundary"
+      },
+      "ribbonSpacing": "40px to caption and heading; 28px at 600px and below"
     }
   },
   "components": [

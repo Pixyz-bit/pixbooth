@@ -12,7 +12,6 @@
 @import '../components/capture/CapturedGallery.css';
 @import '../components/capture/PhotoSettings.css';
 @import './feedback.css';
-@import '../components/layout/Footer.css';
 @import '../pages/editor/EditorPage.css';
 @import '../components/common/Brand.css';
 @import '../pages/capture/CapturePage.css';
@@ -28,6 +27,8 @@
 @import '../pages/capture/BoothTheme.css';
 
 @import '../pages/editor/EditorTheme.css';
-@import '../components/layout/WorkflowFooter.css';
 
 @import './responsive.css';
+
+@import '../components/layout/Footer.css';
+@import '../components/common/DialogActions.css';

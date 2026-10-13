@@ -12,12 +12,14 @@ The six existing customization tabs, keyboard navigation, selected states, frame
 
 Creative content keeps its actual colors: do not desaturate photos, frame art, backgrounds, stickers or authored filter previews. The rendered strip preserves its output geometry and has no new CSS filter or forced corner mask.
 
-Choose layout, Capture and Customize share the requested black footer bar: copyright/year, “Photos and clips stay in your browser.” and Back to top with the supplied arrow. The black surface spans the page, while the inner row follows the common workflow margins. It wraps naturally on mobile and provides a compact 40px minimum link target and white focus outline. Back to top scrolls the current page without changing its route, respecting reduced motion. The homepage's dedicated footer remains as previously designed.
+Choose layout, Capture and Customize share the requested black footer bar: copyright/year, “Photos and clips stay in your browser.” and Back to top with the supplied arrow. The black surface spans the page, while the inner row follows the common workflow margins. It wraps naturally on mobile and provides a compact 40px minimum link target and white focus outline. Back to top scrolls the current page without changing its route, respecting reduced motion. The homepage uses this same universal footer.
 
-Implementation: `.editor-app` in `EditorTheme.css`, shared `Footer.jsx` and `WorkflowFooter.css`, and the editor route class in `App.jsx`. Footer and dialog-action styles load last so older compact-footer and button rules cannot override them.
+Implementation: `.editor-app` in `EditorTheme.css`, shared `Footer.jsx` and `Footer.css`, and the editor route class in `App.jsx`. Footer and dialog-action styles load last so older compact-footer and button rules cannot override them.
 
 Verification uses the real editor components with existing illustrative sample photos in a temporary separate preview, because the live route requires completed captures. Desktop/mobile checks confirm preview rendering, local typography, caption editing, undo, tab navigation, confirmation dialog controls, footer colors/wrapping and no horizontal overflow. Live Choose layout/Capture footer checks confirm route-preserving navigation. Changed-file formatting and the production build pass. The temporary preview is removed after verification; no real camera capture or MP4 export is part of this styling check.
 
 Footer height refinement: the workflow footer is 60% of its previous desktop height: 74px including its border becomes 44.4px. The inner row is 42.4px with no vertical padding; mobile content may wrap naturally.
 
 Responsive system refinement: [RESPONSIVE-DESIGN.md](RESPONSIVE-DESIGN.md) supersedes earlier narrow-screen sizing with safe-area-aware containers, touch-sized controls and adaptive flow. Its implementation is the last-loaded src/styles/responsive.css.
+
+Universal footer revision — 2026-10-13: all four pages use one Footer.jsx/Footer.css with dynamic copyright year, “Powered by .decide” and route-preserving Back to top. The desktop row is 43.2px high; the phone link has a 44px minimum target and the row wraps. This supersedes earlier footer content and height notes.

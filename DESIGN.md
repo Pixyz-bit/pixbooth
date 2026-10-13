@@ -483,3 +483,7 @@ The formats strip now uses a seamless 28-second monochrome marquee with star sep
 ## Responsive system refinement — 2026-10-13
 
 [RESPONSIVE-DESIGN.md](docs/design/RESPONSIVE-DESIGN.md) governs responsive adaptations across home, Choose layout, Capture and Customize. The last-loaded responsive.css adds safe-area gutters, short-phone hero sizing, two-column mobile layout choices, stacked locked-session actions, expanding mobile review panels, below-preview camera tools with 44px switch targets, and a more compact adaptive editor. The landing entry label is centered. Current copy and all capture/session/export logic remain unchanged. Browser checks cover 320×568, 390×844, 768×1024, 844×390 and 1440×900; 44 existing tests pass.
+
+## Universal footer and landing rhythm — 2026-10-13
+
+All four pages now use the same Footer.jsx and Footer.css: compact full-width black bar, dynamic copyright year, “Powered by .decide”, and route-preserving Back to top. LandingFooter.jsx and WorkflowFooter.css are removed; dialog actions use DialogActions.css. The marquee separates alternating text and stars with equal gaps across the repeated boundary. The sample caption and “Snap. Style. Save.” heading each sit 40px from the ribbon, reduced to 28px on phones. This supersedes earlier separate-footer and 16px-caption-spacing notes.

@@ -1,6 +1,6 @@
 # Pixbooth responsive layout contract
 
-This refinement covers home, Choose layout, Capture and Customize. It preserves the established monochrome grid, locally bundled typography, borders, artwork, current copy and existing session/capture/export behavior. `src/styles/responsive.css` loads after the route themes and owns these shared adaptations.
+This refinement covers home, Choose layout, Capture and Customize. It preserves the established monochrome grid, locally bundled typography, borders, artwork, current copy and existing session/capture/export behavior. `src/styles/responsive.css` loads after the route themes and owns these shared adaptations. Canonical `Footer.css` and `DialogActions.css` load afterward.
 
 ## Containers and safe areas
 
@@ -10,7 +10,7 @@ Controls allow readable wrapping rather than widening the page. Native mobile se
 
 ## Home
 
-Portrait viewports retain the first-screen hero and caption. The strip's grid now permits its children to shrink, and its small artwork lettering scales with the print size; this prevents intrinsic text width from stretching the strip past the short-phone hero. At 360px and below, the title and logo scale down appropriately. The landing entry label is centered inside its action. Short landscape viewports use readable normal flow rather than forcing all content into a cramped first screen. The marquee remains clipped to its own ribbon, with the existing reduced-motion fallback.
+Portrait viewports retain the first-screen hero and caption. The strip's grid now permits its children to shrink, and its small artwork lettering scales with the print size; this prevents intrinsic text width from stretching the strip past the short-phone hero. At 360px and below, the title and logo scale down appropriately. The landing entry label is centered inside its action. Short landscape viewports use readable normal flow rather than forcing all content into a cramped first screen. The marquee remains clipped to its own ribbon, with the existing reduced-motion fallback. Labels and star separators alternate as separate items with equal spacing, including the repeated-group boundary. Matching gaps separate the sample caption, marquee and next heading: 40px on desktop/tablet and 28px at 600px and below, while the portrait hero stays inside one viewport.
 
 ## Choose layout
 
@@ -32,8 +32,8 @@ Browser checks cover the following viewports on all four surfaces, including a l
 
 | Viewport | Use scene | Result |
 | --- | --- | --- |
-| 320×568 | Small phone | No horizontal overflow; home caption at 552px; two layout columns; 44px switches |
-| 390×844 | Modern portrait phone | No horizontal overflow; home caption at 828px; stacked editor controls |
+| 320×568 | Small phone | No horizontal overflow; hero fits the viewport; two layout columns; 44px switches |
+| 390×844 | Modern portrait phone | No horizontal overflow; hero fits the viewport; stacked editor controls |
 | 768×1024 | Portrait tablet | No horizontal overflow; expanded review; two-column editor controls |
 | 844×390 | Phone landscape | No horizontal overflow; readable vertical page flow |
 | 1440×900 | Desktop | No horizontal overflow; existing bounded desktop composition |
@@ -41,3 +41,7 @@ Browser checks cover the following viewports on all four surfaces, including a l
 Photo-count filtering/selection, countdown changes, camera-tool exclusivity and Escape, caption editing and undo were exercised. All 44 existing tests and the production build pass. Verification used browser viewport overrides and existing illustrative photos; no real camera capture or device-specific MP4 recording was exercised. Temporary preview files are removed after verification.
 
 These responsive rules supersede conflicting fixed-height/small-screen sizing notes in earlier route documents. Original files are preserved in `docs/design/archive/pre-responsive-system-2026-10-13/`.
+
+## Universal footer
+
+All four routes render one shared `components/layout/Footer.jsx`, styled by `Footer.css`. Its black full-width bar contains the dynamic copyright year, “Powered by .decide” and a route-preserving Back to top link. The desktop inner row remains 43.2px high; phones wrap the row and give the link a 44px touch target. LandingFooter.jsx and WorkflowFooter.css are removed; dialog action styling is retained in DialogActions.css. Archived originals are in `archive/pre-universal-footer-2026-10-13/`.

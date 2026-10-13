@@ -4,19 +4,14 @@
   --safe-left: max(var(--page-gutter), env(safe-area-inset-left, 0px));
   --safe-right: max(var(--page-gutter), env(safe-area-inset-right, 0px));
 }
-.app :is(.workflow-brand-row, .template-main, .capture-main, .editor-main),
-.app .workflow-footer > div {
+.app :is(.workflow-brand-row, .template-main, .capture-main, .editor-main) {
   width: min(1216px, calc(100% - var(--safe-left) - var(--safe-right)));
 }
-.home-app :is(.landing-section-inner, .landing-footer-bottom > div) {
+.home-app .landing-section-inner {
   width: min(1200px, calc(100% - var(--safe-left) - var(--safe-right)));
 }
 .app .workflow-header {
   padding-top: env(safe-area-inset-top, 0px);
-}
-.app .workflow-footer > div,
-.home-app .landing-footer-bottom > div {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 .app
   :is(
@@ -289,15 +284,6 @@
   .app .dialog-actions .button {
     width: 100%;
   }
-  .app .workflow-footer > div,
-  .home-app .landing-footer-bottom > div {
-    gap: 8px 20px;
-    padding-top: 4px;
-  }
-  .app .workflow-footer a,
-  .home-app .landing-footer-bottom a {
-    min-height: 44px;
-  }
 }
 @media (max-width: 360px) {
   .home-app .landing-copy h1 {
@@ -322,4 +308,20 @@
 /* Center the landing entry label. */
 .home-app .landing-capture.button-dark {
   justify-content: center;
+}
+
+/* Balanced spacing around the formats ribbon. */
+.home-app {
+  --ribbon-gap: 40px;
+}
+.home-app .landing-hero {
+  padding-bottom: calc(var(--ribbon-gap) + env(safe-area-inset-bottom, 0px));
+}
+.home-app .landing-how {
+  padding-top: var(--ribbon-gap);
+}
+@media (max-width: 600px) {
+  .home-app {
+    --ribbon-gap: 28px;
+  }
 }
