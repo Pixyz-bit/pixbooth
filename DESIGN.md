@@ -466,3 +466,7 @@ Face stickers now offer Jeeliz (default) and the original MediaPipe tracker. Cho
 ## Template picker adopts the landing design — 2026-10-13
 
 The user's explicit request extends the landing vocabulary to #/templates. See [TEMPLATES-DESIGN-CONCEPT.md](docs/design/TEMPLATES-DESIGN-CONCEPT.md) for the route contract: Plus Jakarta Sans, 32px grid, black outlines, square workflow markers, hard selected/hover shadows and white Capture-style actions. Preserve shared workflow margins, filter/selection/capture-lock behavior and the compact footer. Camera and editor retain their current styling. The route-scoped TemplatesTheme.css is the implementation authority for this extension.
+
+## Booth adopts the established design — 2026-10-13
+
+The user extends the established landing/template design to #/booth. [BOOTH-DESIGN-CONCEPT.md](docs/design/BOOTH-DESIGN-CONCEPT.md) is the route contract. BoothTheme.css supplies the 32px monochrome grid, Plus Jakarta Sans, square workflow markers, 2px preview/review outlines, rounded camera tools, hard popover shadows and white actions with black hover states. Preserve the shared workflow alignment and all capture/media behavior; the editor keeps its existing styling.
