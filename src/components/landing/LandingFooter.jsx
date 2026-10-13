@@ -11,7 +11,7 @@ export default function LandingFooter() {
       <div className="landing-footer-bottom">
         <div>
           <span>© {new Date().getFullYear()} Pixbooth</span>
-          <span>Photos and clips stay in your browser.</span>
+          <span>Powered by .decide</span>
           <a href="#/" onClick={backToTop}>
             Back to top <Arrow />
           </a>

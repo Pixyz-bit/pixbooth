@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { Fragment, memo } from 'react';
 
 const formats = ['Photo strips', 'Face stickers', '5-second live clips', 'JPG & MP4 downloads'];
 
@@ -28,10 +28,14 @@ export default memo(function LandingFormats() {
               aria-hidden={copy === 1 ? true : undefined}
             >
               {formats.map((format) => (
-                <li key={format}>
-                  <span>{format}</span>
-                  <Separator />
-                </li>
+                <Fragment key={format}>
+                  <li>
+                    <span>{format}</span>
+                  </li>
+                  <li className="landing-marquee-separator" aria-hidden="true">
+                    <Separator />
+                  </li>
+                </Fragment>
               ))}
             </ul>
           ))}

@@ -16,8 +16,7 @@ export default function LandingHero({ onCapture }) {
           <br className="desktop-break" /> or keep five seconds of the moment.
         </p>
         <button className="button button-dark landing-capture" onClick={capture}>
-          Capture
-          <Arrow />
+          Say Cheese :)
         </button>
         <span className="landing-privacy">A few poses. A little keepsake.</span>
       </div>

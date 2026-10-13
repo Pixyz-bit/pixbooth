@@ -11,16 +11,16 @@ export default function LandingHowItWorks() {
       </div>
       <ol>
         <li>
-          <strong>Pick your format.</strong>
-          <span>Choose a strip, grid or Polaroid, then switch on your camera.</span>
+          <strong>Frame it.</strong>
+          <span>Choose your preferred layout and turn on the camera.</span>
         </li>
         <li>
-          <strong>Make your moment.</strong>
-          <span>Strike a pose, try a face sticker, or record five seconds.</span>
+          <strong>Snap it.</strong>
+          <span>Grab a still shot or a quick five-second clip.</span>
         </li>
         <li>
-          <strong>Make it yours.</strong>
-          <span>Add a background, filter and finishing touches. Download your keepsake.</span>
+          <strong>Keep it.</strong>
+          <span>Style with filters and download your keepsake.</span>
         </li>
       </ol>
     </section>

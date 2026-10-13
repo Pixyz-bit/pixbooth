@@ -478,3 +478,8 @@ The user extends the established landing/template design to #/booth. [BOOTH-DESI
 ## Landing formats marquee and permanent compact footer — 2026-10-13
 
 The formats strip now uses a seamless 28-second monochrome marquee with star separators, pause/resume control, hover/focus pause and a static reduced-motion fallback. The user confirms permanent removal of landing-footer-inner; its markup and obsolete theme styles are removed. Only the compact black bottom bar remains. [LANDING-DESIGN-CONCEPT.md](docs/design/LANDING-DESIGN-CONCEPT.md) is updated as the current landing authority. Previous source and documentation are preserved in docs/design/archive/pre-formats-marquee-2026-10-13/.
+
+
+## Responsive system refinement — 2026-10-13
+
+[RESPONSIVE-DESIGN.md](docs/design/RESPONSIVE-DESIGN.md) governs responsive adaptations across home, Choose layout, Capture and Customize. The last-loaded responsive.css adds safe-area gutters, short-phone hero sizing, two-column mobile layout choices, stacked locked-session actions, expanding mobile review panels, below-preview camera tools with 44px switch targets, and a more compact adaptive editor. The landing entry label is centered. Current copy and all capture/session/export logic remain unchanged. Browser checks cover 320×568, 390×844, 768×1024, 844×390 and 1440×900; 44 existing tests pass.

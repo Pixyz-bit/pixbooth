@@ -105,3 +105,7 @@ The established visual world also extends to [Choose layout](TEMPLATES-DESIGN-CO
 Verification: production build and changed-file formatting pass. Desktop and 390px browser checks confirm equal marquee group widths, hover pause, no visible toggle, one accessible copy of the labels, no horizontal page overflow and absence of inner-footer markup. No camera capture/export code is changed.
 
 Hero space verification: 1280×720, 802×668 and 390×844 retain the complete hero inside one viewport, with the caption 16px above its bottom and no horizontal overflow.
+
+Responsive system refinement: [RESPONSIVE-DESIGN.md](RESPONSIVE-DESIGN.md) supersedes earlier narrow-screen sizing with safe-area-aware containers, touch-sized controls and adaptive flow. Its implementation is the last-loaded src/styles/responsive.css.
+
+Marquee spacing refinement: labels and stars are separate alternating flex items. Equal space-around distribution with zero group padding produces equal text-to-star and star-to-text gaps, including the repeated-group boundary. Decorative separator items are hidden in the static reduced-motion layout.

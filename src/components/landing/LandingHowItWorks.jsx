@@ -1,12 +1,12 @@
 const steps = [
   {
-    title: 'Pick your format.',
-    description: 'Choose a strip, grid or Polaroid, then switch on your camera.',
+    title: 'Pick a frame.',
+    description: 'Choose your preferred layout and turn on your camera.',
     image: '/how-it-works/pick-your-format.png',
   },
   {
-    title: 'Make your moment.',
-    description: 'Strike a pose, try a face sticker, or record five seconds.',
+    title: 'Capture the moment.',
+    description: 'Strike a pose, try a face sticker, or record for five seconds.',
     image: '/how-it-works/make-your-moment.png',
   },
   {
@@ -20,8 +20,8 @@ export default function LandingHowItWorks() {
   return (
     <section className="landing-how" id="how-it-works" aria-labelledby="how-title">
       <header className="landing-how-heading">
-        <h2 id="how-title">A moment, in three moves.</h2>
-        <p>Photos and clips stay in your browser.</p>
+        <h2 id="how-title">Snap. Style. Save.</h2>
+        <p>The classic photobooth experience, contained entirely in your browser.</p>
       </header>
       <ol className="landing-how-steps">
         {steps.map((step, index) => (

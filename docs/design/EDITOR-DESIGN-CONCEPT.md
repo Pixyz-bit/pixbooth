@@ -19,3 +19,5 @@ Implementation: `.editor-app` in `EditorTheme.css`, shared `Footer.jsx` and `Wor
 Verification uses the real editor components with existing illustrative sample photos in a temporary separate preview, because the live route requires completed captures. Desktop/mobile checks confirm preview rendering, local typography, caption editing, undo, tab navigation, confirmation dialog controls, footer colors/wrapping and no horizontal overflow. Live Choose layout/Capture footer checks confirm route-preserving navigation. Changed-file formatting and the production build pass. The temporary preview is removed after verification; no real camera capture or MP4 export is part of this styling check.
 
 Footer height refinement: the workflow footer is 60% of its previous desktop height: 74px including its border becomes 44.4px. The inner row is 42.4px with no vertical padding; mobile content may wrap naturally.
+
+Responsive system refinement: [RESPONSIVE-DESIGN.md](RESPONSIVE-DESIGN.md) supersedes earlier narrow-screen sizing with safe-area-aware containers, touch-sized controls and adaptive flow. Its implementation is the last-loaded src/styles/responsive.css.
