@@ -272,8 +272,8 @@
   flex-wrap: wrap;
   gap: 12px 24px;
   width: min(1200px, calc(100% - 64px));
-  min-height: 72px;
-  padding-block: 14px;
+  min-height: 43.2px;
+  padding-block: 0;
   margin-inline: auto;
   font-size: 12px;
   line-height: 1.6;
@@ -282,7 +282,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  min-height: 44px;
+  min-height: 40px;
   font-weight: 700;
   text-decoration: none;
   text-underline-offset: 4px;

@@ -178,3 +178,5 @@ Verified revision: production build and changed-file formatting passed. Browser 
 
 
 Current footer revision: restored the original white-background footer at the user's explicit request. Main footer text is black, supporting copy uses #52525b, the supplied logo is unfiltered without a plate, and Open the booth matches Capture with white fill, black text and no default shadow. The bottom copyright/privacy bar remains black. This supersedes all earlier dark-footer treatments in this document. Capture and the new hero caption retain their latest state.
+
+Bottom footer bar height refinement: its desktop row is reduced to 60% of the original 72px height, now 43.2px with zero vertical padding and a compact 40px Back-to-top link. The white main footer keeps its existing spacing; mobile metadata wraps naturally.
