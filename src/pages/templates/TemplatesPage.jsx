@@ -4,7 +4,6 @@ export default function TemplatesPage({
   template,
   onSelect,
   locked,
-  captured,
   onContinue,
   onStartOver,
 }) {
@@ -12,11 +11,7 @@ export default function TemplatesPage({
     <main className="template-main">
       <div className="intro">
         <h1 tabIndex="-1">Pick your photo layout.</h1>
-        <p>
-          {locked
-            ? captured + ' captured. Keep this layout, or start a new session.'
-            : 'A strip, a grid or one perfect frame. Make it your own.'}
-        </p>
+        <p>A strip, a grid or one perfect frame. Make it your own.</p>
       </div>
       <TemplateCatalog {...{ template, locked, onSelect }} />
       <div className="selection-actionbar">

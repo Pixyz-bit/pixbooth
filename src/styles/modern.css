@@ -14,7 +14,8 @@
   font-family: 'DM Sans', sans-serif;
   line-height: 1.5;
   scrollbar-color: var(--muted) var(--surface);
-  scrollbar-gutter: stable;
+  /* Full-width page chrome: reserve scrollbar space only when scrolling is needed. */
+  scrollbar-gutter: auto;
 }
 body {
   background: var(--page);
