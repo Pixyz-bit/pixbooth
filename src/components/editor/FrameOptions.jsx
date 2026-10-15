@@ -3,22 +3,12 @@ import { frames } from '../../data/frames.js';
 import FrameThumbnail from './FrameThumbnail.jsx';
 
 export default function FrameOptions({ frame, setFrame, exporting }) {
-  function surprise() {
-    const choices = frames.filter((item) => item.id !== 'none' && item.id !== frame);
-    setFrame(choices[Math.floor(Math.random() * choices.length)].id);
-  }
   return (
     <details className="editor-section frame-section" open>
       <summary>
         <span>Original frames · {frames.length - 1}</span>
         <Chevron />
       </summary>
-      <div className="frame-heading">
-        <p>Made for Pixbooth. Choose a frame for your moments.</p>
-        <button className="text-button" disabled={exporting} onClick={surprise}>
-          Surprise me
-        </button>
-      </div>
       <div className="frame-options" role="group" aria-label="Choose a decorative photo frame">
         {frames.map((item) => (
           <button
