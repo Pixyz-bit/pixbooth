@@ -55,3 +55,9 @@ Bundled through @fontsource/plus-jakarta-sans 5.3.0 to match the user's portfoli
 DM Sans font distributions include the full SIL Open Font License in public/licenses/dm-sans-OFL.txt, so the notice is present in deployed dist/ assets as well as the development dependency.
 
 Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.
+
+## Original scrapbook expansion — 2026-10-14
+
+The fifteen new scrapbook frame themes use twenty original assets generated with the built-in ImageGen tool: fifteen transparent sticker atlases and five paper textures. Generated originals are preserved, and WebP files under public/frames retain alpha transparency. User-supplied reference photographs, text and logos are not application assets. Ten background patterns are authored in canvas code. [Collection and provenance](docs/design/SCRAPBOOK-FRAMES.md), [exact prompts](docs/design/scrapbook-frames-generation.json).
+
+Vercel Web Analytics uses @vercel/analytics 2.0.1 (MIT), mounted through its React component. The package's license is retained in node_modules/@vercel/analytics/LICENSE.

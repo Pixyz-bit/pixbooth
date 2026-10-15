@@ -2,22 +2,29 @@ import { getFrame } from '../../data/frames.js';
 
 const assets = new Map();
 
-export function loadFrameArtwork(id) {
-  const frame = getFrame(id);
-  if (!frame.asset) return Promise.resolve(null);
-  if (!assets.has(frame.asset)) {
+function loadImage(asset) {
+  if (!asset) return Promise.resolve(null);
+  if (!assets.has(asset)) {
     const pending = new Promise((resolve, reject) => {
       const image = new Image();
       image.onload = () => resolve(image);
       image.onerror = () => {
-        assets.delete(frame.asset);
+        assets.delete(asset);
         reject(new Error('Frame artwork could not be loaded. Try again.'));
       };
-      image.src = `${import.meta.env.BASE_URL}frames/${frame.asset}`;
+      image.src = `${import.meta.env.BASE_URL}frames/${asset}`;
     });
-    assets.set(frame.asset, pending);
+    assets.set(asset, pending);
   }
-  return assets.get(frame.asset);
+  return assets.get(asset);
+}
+
+export function loadFrameArtwork(id) {
+  const frame = getFrame(id);
+  if (!frame.stickerAsset) return loadImage(frame.asset);
+  return Promise.all([loadImage(frame.asset), loadImage(frame.stickerAsset)]).then(
+    ([paper, stickers]) => ({ paper, stickers })
+  );
 }
 
 export async function prepareFrameOptions(options = {}) {

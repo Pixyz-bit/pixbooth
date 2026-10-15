@@ -10,7 +10,7 @@ The application source is at `C:\Martin Archive\Programming\2026 Projects\PhotoP
 
 - **Home — `#/`:** illustrative sample prints, scrolling formats ribbon and open three-step instructions.
 - **Choose layout — `#/templates`:** filter the 21 layouts by photo count, select a layout and continue. Selection locks after capturing media.
-- **Capture — `#/booth`:** enable the camera, choose Photo or Live, and use Off / 3 sec / 5 sec countdown. One shutter press captures the complete set. Cancellation preserves earlier captures. Redo clears the set, preserves camera/layout settings and reconnects the preview; it waits for another shutter press.
+- **Capture — `#/booth`:** enable the camera, choose Photo or Live, and use Off / 3 sec / 5 sec countdown. With Countdown Off, each shutter press captures one photo or live clip. With 3 sec or 5 sec selected, one press captures the remaining set with a fresh countdown before each item. Cancellation preserves earlier captures. Redo clears the set, preserves camera/layout settings and reconnects the preview; it waits for another shutter press.
 - **Customize — `#/edit`:** choose compatible layouts, frames, backgrounds, filters, captions and border artwork. Undo/Redo retains up to 60 edits during the session. Download the JPG, or create and download a composed five-second MP4 for live captures.
 
 The editor requires completed captures. Direct capture/editor navigation without a session returns to Choose layout. Leaving capture stops camera tracks and cancels its countdown/recording. Start over confirms before discarding captured media or edits.
@@ -52,3 +52,7 @@ Camera access requires permission and HTTPS or localhost. Face setup copies the 
 `src/styles/index.css` loads base/feature styles, legacy shared layout rules in `modern.css`, route themes, responsive corrections, then the canonical footer and dialog action styles. Route-specific documents take precedence over dated historical notes.
 
 The historical archive, reference and verification folders were removed from the project at the user's request; current route documentation remains authoritative. Physical-device camera, face alignment and native MP4 playback still require manual validation beyond mocked tests and viewport checks.
+
+## Visitor analytics
+
+Vercel Web Analytics is installed through @vercel/analytics 2.0.1. The React Analytics component is mounted once at the application root in src/main.jsx. Enable Analytics for the pixbooth project in the Vercel dashboard, deploy production, then visit the public website and inspect the Analytics dashboard. Local development does not provide production visitor data. No custom interaction events are configured.

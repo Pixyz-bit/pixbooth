@@ -141,14 +141,30 @@ function harness(
     await draw(0);
     return new Blob(['video'], { type: 'video/mp4' });
   };
+  const refs = [];
+  let refIndex = 0;
   const useCapture = factory(
     useEffect,
-    (value) => ({ current: value }),
+    (value) => {
+      const index = refIndex++;
+      if (!refs[index]) refs[index] = { current: value };
+      return refs[index];
+    },
     encode,
     () => {},
     replaceCapturedShot
   );
-  return { api: useCapture(props), props, snapshot, canvases };
+  const render = () => {
+    refIndex = 0;
+    return useCapture({
+      ...props,
+      shots: snapshot.shots ?? props.shots,
+      status: snapshot.statuses.at(-1) ?? props.status,
+      countdown: snapshot.countdown ?? null,
+      completed: retakeIndex === null && (snapshot.shots ?? props.shots).length === count,
+    });
+  };
+  return { api: render(), render, props, snapshot, canvases };
 }
 test('rapid duplicate photo clicks produce one capture and completed session', (t) => {
   const { api, snapshot, canvases } = harness(t);
@@ -256,9 +272,11 @@ test('cancelling the remaining sequence keeps captures and rejects a queued time
 });
 
 test('failed photo saving stops automatic capture and preserves earlier photos', (t) => {
-  const { api, props, snapshot, canvases } = harness(t, { count: 3 });
+  const { api, props, snapshot, canvases } = harness(t, { count: 3, delay: 3 });
   api.takePhoto();
+  for (let tick = 0; tick < 3; tick++) snapshot.interval();
   canvases[0].blobCallback(new Blob(['photo']));
+  for (let tick = 0; tick < 3; tick++) snapshot.interval();
   canvases[1].blobCallback(null);
   assert.equal(canvases.length, 2);
   assert.equal(snapshot.shots.length, 1);
@@ -278,9 +296,14 @@ test('camera stop during saving cannot append or restart the sequence', (t) => {
 });
 
 test('live mode records each clip serially and stops at the required count', async (t) => {
-  const { api, snapshot } = harness(t, { mode: 'live', count: 3 });
+  const { api, snapshot } = harness(t, { mode: 'live', count: 3, delay: 3 });
   api.takePhoto();
-  await new Promise((resolve) => setImmediate(resolve));
+  for (let index = 0; index < 3; index++) {
+    assert.equal(snapshot.countdown, 3);
+    for (let tick = 0; tick < 3; tick++) snapshot.interval();
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(snapshot.shots.length, index + 1);
+  }
   assert.equal(snapshot.shots.length, 3);
   assert.ok(snapshot.shots.every((shot) => shot.type === 'live' && shot.poster));
   assert.equal(snapshot.stops, 1);
@@ -301,4 +324,51 @@ test('photo and live capture use the shared sticker renderer before saving media
     assert.deepEqual(calls, [{ width: 640, height: 480, id: 'dog' }]);
     assert.equal(snapshot.shots.length, 1);
   }
+});
+
+test('Countdown Off takes one photo per press and keeps the camera ready until the final slot', (t) => {
+  const { render, props, snapshot, canvases } = harness(t, { count: 4, delay: 0 });
+  for (let index = 0; index < 4; index++) {
+    const api = render();
+    api.takePhoto();
+    api.takePhoto();
+    assert.equal(canvases.length, index + 1, 'Ignore another press during saving');
+    canvases[index].blobCallback(new Blob(['photo']));
+    assert.equal(canvases.length, index + 1, 'Do not automatically start the next photo');
+    assert.equal(snapshot.shots.length, index + 1);
+    assert.equal(props.sequence.current, false);
+    assert.equal(snapshot.autoCapture, false);
+    assert.equal(snapshot.countdown, null);
+    assert.equal(snapshot.interval, null);
+    assert.equal(snapshot.stops, index === 3 ? 1 : 0);
+    assert.equal(snapshot.statuses.at(-1), index === 3 ? 'review' : 'ready');
+  }
+  render().takePhoto();
+  assert.equal(canvases.length, 4, 'Completed sessions cannot capture again');
+});
+
+test('Countdown Off records one live clip per press', async (t) => {
+  const { render, snapshot } = harness(t, { mode: 'live', count: 3, delay: 0 });
+  for (let index = 0; index < 3; index++) {
+    const api = render();
+    api.takePhoto();
+    api.takePhoto();
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(snapshot.shots.length, index + 1);
+    assert.equal(snapshot.autoCapture, false);
+    assert.equal(snapshot.stops, index === 2 ? 1 : 0);
+  }
+});
+
+test('five-second countdown still fills the layout automatically', (t) => {
+  const { api, snapshot, canvases } = harness(t, { count: 2, delay: 5 });
+  api.takePhoto();
+  for (let index = 0; index < 2; index++) {
+    assert.equal(snapshot.countdown, 5);
+    for (let tick = 0; tick < 5; tick++) snapshot.interval();
+    canvases[index].blobCallback(new Blob(['photo']));
+    assert.equal(snapshot.shots.length, index + 1);
+  }
+  assert.equal(snapshot.statuses.at(-1), 'review');
+  assert.equal(snapshot.autoCapture, false);
 });

@@ -14,7 +14,7 @@ export default function FrameOptions({ frame, setFrame, exporting }) {
         <Chevron />
       </summary>
       <div className="frame-heading">
-        <p>Made for Pixbooth. Pick a paper mood.</p>
+        <p>Made for Pixbooth. Choose a frame for your moments.</p>
         <button className="text-button" disabled={exporting} onClick={surprise}>
           Surprise me
         </button>

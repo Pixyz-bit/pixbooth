@@ -1,3 +1,5 @@
+import { scrapbookFrames } from './scrapbookFrames.js';
+
 export const frames = [
   {
     id: 'none',
@@ -82,6 +84,7 @@ export const frames = [
     inset: 72,
     motif: 'cloud',
   },
+  ...scrapbookFrames,
 ];
 
 export const getFrame = (id) => frames.find((frame) => frame.id === id) || frames[0];

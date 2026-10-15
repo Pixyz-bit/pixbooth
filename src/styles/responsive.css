@@ -68,7 +68,7 @@
   }
   .editor-app .editor-controls {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    grid-template-columns: minmax(0, 1fr);
     align-items: start;
     gap: 24px;
   }
@@ -386,4 +386,51 @@
   .booth-app .camera-frame-area {
     --mobile-tool-width: 44px;
   }
+}
+
+/* Scroll tool content on every screen; keep tabs and download actions outside it. */
+.editor-app .editor-tool-panel {
+  max-height: min(48dvh, 420px);
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
+  scrollbar-gutter: stable;
+}
+.editor-app .editor-tool-panel:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: -4px;
+}
+/* Let the preview establish the row height; the active tool fills the controls column. */
+@media (min-width: 1001px) {
+  .editor-app .editor-controls {
+    align-self: stretch;
+    contain: size;
+    min-height: 0;
+  }
+  .editor-app .editor-options {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+  .editor-app :is(.editor-tabs, .editor-download-area, .editor-error) {
+    flex-shrink: 0;
+  }
+  .editor-app .editor-tool-panel {
+    flex: 1 1 0;
+    max-height: none;
+    min-height: 0;
+  }
+}
+
+/* Give the tool list the space freed by a compact download section. */
+.editor-app .editor-download-area {
+  padding-block: 16px;
+}
+.editor-app .editor-actions {
+  gap: 8px;
+}
+.editor-app .editor-controls {
+  gap: 16px;
 }

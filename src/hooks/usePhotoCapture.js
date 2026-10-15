@@ -240,7 +240,7 @@ export default function usePhotoCapture({
     if (captureLock.current || status !== 'ready' || countdown !== null || completed) return;
     captureLock.current = true;
     sequenceShots.current = shots;
-    activeSequence.current = retakeIndex === null;
+    activeSequence.current = delay > 0 && retakeIndex === null;
     setAutoCapture(activeSequence.current);
     setError('');
     scheduleCapture();

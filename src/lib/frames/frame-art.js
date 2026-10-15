@@ -1,4 +1,5 @@
 import { getFrame } from '../../data/frames.js';
+import { paintScrapbookPaper, paintScrapbookStickers } from './scrapbook-art.js';
 
 const tiles = new WeakMap();
 function paperTile(image) {
@@ -109,8 +110,10 @@ export function paintFramePaper(ctx, size, id, image) {
   if (frame.id === 'none') return;
   const { width, height, footer, padding } = size;
   ctx.save();
-  ctx.fillStyle = image ? ctx.createPattern(paperTile(image), 'repeat') : frame.color;
+  const paper = frame.stickerAsset ? image?.paper : image;
+  ctx.fillStyle = paper ? ctx.createPattern(paperTile(paper), 'repeat') : frame.color;
   ctx.fillRect(0, 0, width, height);
+  if (frame.stickerAsset && !paper) paintScrapbookPaper(ctx, size, frame, image?.stickers);
   if (frame.id === 'paper-trail') {
     ctx.strokeStyle = '#c8beab';
     ctx.lineWidth = 1.5;
@@ -159,11 +162,11 @@ export function paintFrameMounts(ctx, rects, id) {
   ctx.save();
   rects.forEach((raw) => {
     const rect = mountRect(raw, id);
-    ctx.fillStyle = frame.id === 'film-night' ? '#000' : '#fffdf6';
+    ctx.fillStyle = frame.mountColor || (frame.id === 'film-night' ? '#000' : '#fffdf6');
     ctx.strokeStyle = frame.ink;
     ctx.lineWidth = frame.id === 'film-night' ? 3 : 4;
     ctx.beginPath();
-    if (frame.torn) {
+    if (frame.torn || frame.mountStyle === 'torn') {
       for (let i = 0; i <= 20; i++)
         ctx.lineTo(rect.x + (rect.width * i) / 20, rect.y + ((i * 7) % 11));
       for (let i = 0; i <= 20; i++)
@@ -171,7 +174,7 @@ export function paintFrameMounts(ctx, rects, id) {
       for (let i = 20; i >= 0; i--)
         ctx.lineTo(rect.x + (rect.width * i) / 20, rect.y + rect.height - ((i * 3) % 10));
       ctx.closePath();
-    } else if (frame.id === 'daisy-diary') {
+    } else if (frame.id === 'daisy-diary' || frame.mountStyle === 'scallop') {
       const r = 8;
       ctx.rect(rect.x, rect.y, rect.width, rect.height);
       for (let x = rect.x + r; x < rect.x + rect.width; x += r * 2) {
@@ -180,14 +183,16 @@ export function paintFrameMounts(ctx, rects, id) {
         ctx.moveTo(x + r, rect.y + rect.height);
         ctx.arc(x, rect.y + rect.height, r, 0, Math.PI * 2);
       }
-    } else ctx.rect(rect.x, rect.y, rect.width, rect.height);
+    } else if (frame.mountStyle === 'rounded')
+      ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 32);
+    else ctx.rect(rect.x, rect.y, rect.width, rect.height);
     ctx.fill();
     ctx.stroke();
   });
   ctx.restore();
 }
 
-export function paintFrameDetails(ctx, rects, size, id) {
+export function paintFrameDetails(ctx, rects, size, id, artwork) {
   const frame = getFrame(id);
   if (frame.id === 'none') return;
   ctx.save();
@@ -209,6 +214,7 @@ export function paintFrameDetails(ctx, rects, size, id) {
       ctx.restore();
     }
   });
+  paintScrapbookStickers(ctx, rects, id, artwork);
   // A quiet caption plaque keeps the user's own words legible on patterned paper.
   const y = size.height - size.padding - size.footer / 2;
   ctx.fillStyle = frame.id === 'film-night' || frame.id === 'moon-mail' ? frame.color : '#fffdf6';

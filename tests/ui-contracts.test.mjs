@@ -160,7 +160,7 @@ test('downloads retain JPG/MP4 format and truthful download-request feedback', a
   };
   const html = render(Actions, props);
   assert.match(html, /download="pixbooth.jpg"/);
-  assert.match(html, /972 × 2889/);
+  assert.doesNotMatch(html, /download-meta|JPG · full quality|972 × 2889/);
   assert.match(html, /Download requested/);
   const liveHtml = render(Actions, {
     ...props,
@@ -169,7 +169,7 @@ test('downloads retain JPG/MP4 format and truthful download-request feedback', a
   });
   assert.match(liveHtml, /download="pixbooth.mp4"/);
   assert.match(liveHtml, /MP4 · 640 × 1920 px/);
-  assert.match(liveHtml, /JPG cover/);
+  assert.match(liveHtml, /Download cover photo/);
 });
 
 test('shared header contains reachable steps between logo and Home with guarded future links', async () => {

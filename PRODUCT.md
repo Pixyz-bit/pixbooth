@@ -55,5 +55,5 @@ Current organization: [camera corner tools](docs/design/CAMERA-CORNER-TOOLS.md) 
 [Supplied control icons](docs/design/PROVIDED-ICONS.md) now provide the Stickers, shutter and Settings artwork, centered within their controls. Jeeliz fallback reports its specific initialization failure and offers Retry Jeeliz instead of labeling every failure as an unsupported device.
 
 
-Current capture behavior: [automatic capture and compact Settings](docs/design/AUTOMATIC-CAPTURE.md). One shutter click fills the selected layout with a configurable countdown before every capture. Individual thumbnail retakes are removed; Redo replaces and repeats the whole set. The supplied aperture shutter is white without a circular backing.
+Current capture behavior: [automatic capture and compact Settings](docs/design/AUTOMATIC-CAPTURE.md). Countdown Off captures one photo or live clip per shutter click. The 3 sec and 5 sec options fill the remaining layout automatically with a countdown before each capture. Individual thumbnail retakes are removed; Redo replaces and repeats the whole set. The supplied aperture shutter is white without a circular backing.
 

@@ -33,3 +33,7 @@ The user reverted the timing-ring countdown refinement before publication. The c
 The subsequent [camera notification/fixed-countdown refinement](CAMERA-NOTIFICATIONS.md) replaces Custom with Off / 3 sec / 5 sec and introduces a conditional transparent notification fade. Earlier controls documented above remain historical records.
 
 Historical archive/reference/verification artifacts mentioned here were removed from the project at the user's request on 2026-10-13. Current route design documents remain available.
+
+## Countdown Off correction — 2026-10-14
+
+This supersedes the original Off behavior above: Off captures one photo or five-second live clip per shutter press. It leaves the camera ready until the layout is complete; saving/recording still rejects duplicate presses. With 3 sec or 5 sec, one press continues to capture all remaining slots automatically. Redo preserves the selected countdown mode and waits for a shutter press. Regression checks cover four separate manual photo presses, manual live clips, 3/5-second sequences, duplicate presses and final camera release.

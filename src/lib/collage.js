@@ -276,7 +276,7 @@ export function paintStrip(ctx, images, template, options = {}) {
     );
     ctx.restore();
   });
-  paintFrameDetails(ctx, frames, size, frameDesign.id);
+  paintFrameDetails(ctx, frames, size, frameDesign.id, options.frameArtwork);
   const decoration = decorations.find((item) => item.id === options.decoration);
   if (decoration && decoration.id !== 'none') {
     const radius = Math.min(padding * 0.38, 28);

@@ -10,7 +10,6 @@ export default function EditorActions({
   output,
   exportVideo,
   onStartOver,
-  size,
   downloadStatus,
   onDownload,
 }) {
@@ -53,9 +52,6 @@ export default function EditorActions({
             Applying edits…
           </button>
         ))}
-      <p className="download-meta">
-        {live ? 'JPG cover' : 'JPG · full quality'} · {size.width} × {size.height} px
-      </p>
       {live && (
         <p className="download-meta">
           {mp4

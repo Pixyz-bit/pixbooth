@@ -52,6 +52,7 @@ export default function EditorOptions(props) {
           key={toolId}
           id={id + '-panel-' + toolId}
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby={id + '-tab-' + toolId}
           hidden={active !== toolId}
         >
