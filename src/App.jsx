@@ -10,6 +10,7 @@ import CapturePage from './pages/capture/CapturePage.jsx';
 import EditorPage from './pages/editor/EditorPage.jsx';
 import posthog, { posthogEnabled } from './lib/posthog.js';
 import { logPosthogInfo } from './lib/posthogLogger.js';
+import { navigate } from './lib/navigation.js';
 export default function App() {
   const session = useBoothSession();
   const [resetPending, setResetPending] = useState(false);
@@ -49,7 +50,7 @@ export default function App() {
   }
   function continueToCapture() {
     setLayoutChosen(true);
-    location.hash = '/booth';
+    navigate('/booth');
   }
   let content;
   if (page === 'home')
@@ -58,7 +59,7 @@ export default function App() {
         onCapture={() => {
           if (posthogEnabled) posthog.capture('booth_started');
           logPosthogInfo('booth session started', { entry_point: 'landing_page' });
-          location.hash = '/templates';
+          navigate('/templates');
         }}
       />
     );

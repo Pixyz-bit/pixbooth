@@ -4,6 +4,7 @@ import CapturedGallery from '../../components/capture/CapturedGallery.jsx';
 import CaptureFeedback from '../../components/capture/CaptureFeedback.jsx';
 import Icon from '../../components/common/Icon.jsx';
 import posthog, { posthogEnabled } from '../../lib/posthog.js';
+import { navigate } from '../../lib/navigation.js';
 export default function CapturePage({ session }) {
   const showTrackingNotice =
     session.sticker !== 'none' && session.cameraActive && !session.stickerReady;
@@ -59,7 +60,7 @@ export default function CapturePage({ session }) {
                       media_count: session.shots.length,
                       template_id: session.template.id,
                     });
-                  location.hash = '/edit';
+                  navigate('/edit');
                 }}
               >
                 Continue to customize

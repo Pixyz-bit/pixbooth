@@ -1,4 +1,5 @@
-import Brand from '../common/Brand.jsx';
+import Brand from '../common/Brand.jsx';  
+import { navigate } from '../../lib/navigation.js';
 const steps = [
   { page: 'templates', path: '/templates', label: 'Choose layout' },
   { page: 'booth', path: '/booth', label: 'Capture' },
@@ -40,8 +41,8 @@ export default function WorkflowSteps({ page, layoutChosen, completed }) {
                 <li key={step.page} className={done ? 'step-complete' : ''}>
                   {available ? (
                     <a
-                      href={'#' + step.path}
-                      aria-current={page === step.page ? 'step' : undefined}
+href={step.path}
+onClick={navigateLink}                      aria-current={page === step.page ? 'step' : undefined}
                     >
                       {contents}
                     </a>
@@ -55,8 +56,7 @@ export default function WorkflowSteps({ page, layoutChosen, completed }) {
             })}
           </ol>
         </nav>
-        <a className="workflow-home" href="#/">
-          Home
+<a className="workflow-home" href="/" onClick={navigateLink}>          Home
         </a>
       </div>
     </header>

@@ -26,15 +26,14 @@ if (!posthogEnabled) {
     loaded: (client) => {
       client.register(analyticsProperties);
       const capturePage = () => {
-        const route = (window.location.hash.slice(1) || '/').split('?')[0];
+        const route = window.location.pathname;
         client.capture('$pageview', {
           route,
-          $current_url: window.location.origin + window.location.pathname + '#' + route,
-        });
+$current_url: window.location.origin + route,        });
       };
       capturePage();
-      window.addEventListener('hashchange', capturePage);
-    },
+window.addEventListener('pixbooth:navigate', capturePage);
+window.addEventListener('popstate', capturePage);    },
     defaults: '2026-05-30',
     logs: {
       serviceName: 'pixbooth-web',

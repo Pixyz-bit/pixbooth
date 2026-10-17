@@ -5,7 +5,7 @@ import { useFaceStickers } from './useFaceStickers.js';
 import useCamera from './useCamera.js';
 import usePhotoCapture from './usePhotoCapture.js';
 import useWorkflow from './useWorkflow.js';
-
+import { navigate } from '../lib/navigation.js';
 // Session ownership stays above the pages so breadcrumb navigation retains captures.
 export default function useBoothSession() {
   const video = useRef(null);
@@ -135,7 +135,7 @@ export default function useBoothSession() {
     recording.current?.abort();
     cancelCountdown();
     releaseCamera();
-    location.hash = '/templates';
+    navigate('/templates');
     setPage('templates');
     setLayoutChosen(false);
     shotUrls.current.forEach((url) => URL.revokeObjectURL(url));
