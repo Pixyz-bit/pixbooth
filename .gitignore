@@ -5,3 +5,6 @@ dist/
 .impeccable/review/
 
 .vercel
+.env
+.env.*
+!.env.example

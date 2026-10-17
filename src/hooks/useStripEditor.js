@@ -3,6 +3,7 @@ import { makeEditHistory, editHistoryReducer } from '../lib/edit-history.js';
 import { templates } from '../data/templates.js';
 import { composePhotos, layoutSize } from '../lib/collage.js';
 import { composeLive } from '../lib/media/live-media.js';
+import posthog, { posthogEnabled } from '../lib/posthog.js';
 export default function useStripEditor({ shots, template, settings, onSettingsChange }) {
   const live = shots[0]?.type === 'live';
   const compatible = templates.filter((item) => item.count === shots.length);
@@ -141,6 +142,11 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
         width: result.width,
         height: result.height,
       });
+      if (posthogEnabled)
+        posthog.capture('live_strip_created', {
+          template_id: layout.id,
+          media_count: shots.length,
+        });
     } catch (err) {
       if (err.name !== 'AbortError')
         setError(err.message || 'The MP4 couldn’t be created. Try again.');
@@ -162,7 +168,15 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
     canUndo: editHistory.past.length > 0,
     canRedo: editHistory.future.length > 0,
     downloadStatus,
-    onDownload: () => setDownloadStatus('Download requested. Check your browser downloads.'),
+    onDownload: (downloadFormat) => {
+      if (posthogEnabled)
+        posthog.capture('strip_downloaded', {
+          download_format: downloadFormat,
+          template_id: layout.id,
+          media_count: shots.length,
+        });
+      setDownloadStatus('Download requested. Check your browser downloads.');
+    },
     frame,
     setFrame,
     background,

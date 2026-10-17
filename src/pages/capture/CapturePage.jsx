@@ -3,6 +3,7 @@ import CameraPreview from '../../components/capture/CameraPreview.jsx';
 import CapturedGallery from '../../components/capture/CapturedGallery.jsx';
 import CaptureFeedback from '../../components/capture/CaptureFeedback.jsx';
 import Icon from '../../components/common/Icon.jsx';
+import posthog, { posthogEnabled } from '../../lib/posthog.js';
 export default function CapturePage({ session }) {
   const showTrackingNotice =
     session.sticker !== 'none' && session.cameraActive && !session.stickerReady;
@@ -52,6 +53,12 @@ export default function CapturePage({ session }) {
                 className="button button-dark"
                 disabled={!session.completed || session.busy}
                 onClick={() => {
+                  if (posthogEnabled)
+                    posthog.capture('customization_started', {
+                      media_type: session.mode === 'live' ? 'live_clip' : 'photo',
+                      media_count: session.shots.length,
+                      template_id: session.template.id,
+                    });
                   location.hash = '/edit';
                 }}
               >

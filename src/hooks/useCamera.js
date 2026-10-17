@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import cameraError from '../lib/cameraError.js';
+import posthog, { posthogEnabled } from '../lib/posthog.js';
+import { logPosthogInfo } from '../lib/posthogLogger.js';
 export default function useCamera({
   video,
   stream,
@@ -79,6 +81,8 @@ export default function useCamera({
       video.current.srcObject = next;
       await video.current.play();
       if (id !== requestId.current) return;
+      if (posthogEnabled) posthog.capture('camera_enabled');
+      logPosthogInfo('camera ready', { media_mode: 'camera' });
       setStatus('ready');
       try {
         const all = await navigator.mediaDevices.enumerateDevices();

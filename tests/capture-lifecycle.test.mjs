@@ -13,6 +13,9 @@ const factory = new Function(
   'encodeCanvas',
   'drawSticker',
   'replaceCapturedShot',
+  'posthogEnabled',
+  'posthog',
+  'logPosthogInfo',
   source + ';return usePhotoCapture;'
 );
 function harness(
@@ -152,7 +155,10 @@ function harness(
     },
     encode,
     () => {},
-    replaceCapturedShot
+    replaceCapturedShot,
+    false,
+    { capture() {} },
+    () => {}
   );
   const render = () => {
     refIndex = 0;

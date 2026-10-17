@@ -8,6 +8,8 @@ import LandingPage from './pages/landing/LandingPage.jsx';
 import TemplatesPage from './pages/templates/TemplatesPage.jsx';
 import CapturePage from './pages/capture/CapturePage.jsx';
 import EditorPage from './pages/editor/EditorPage.jsx';
+import posthog, { posthogEnabled } from './lib/posthog.js';
+import { logPosthogInfo } from './lib/posthogLogger.js';
 export default function App() {
   const session = useBoothSession();
   const [resetPending, setResetPending] = useState(false);
@@ -36,6 +38,12 @@ export default function App() {
     [setEditorSettings, setTemplateId, shots.length]
   );
   function selectTemplate(id) {
+    const selectedTemplate = templates.find((item) => item.id === id);
+    if (posthogEnabled && selectedTemplate)
+      posthog.capture('template_selected', {
+        template_id: selectedTemplate.id,
+        photo_count: selectedTemplate.count,
+      });
     setTemplateId(id);
     setEditorSettings(null);
   }
@@ -48,6 +56,8 @@ export default function App() {
     content = (
       <LandingPage
         onCapture={() => {
+          if (posthogEnabled) posthog.capture('booth_started');
+          logPosthogInfo('booth session started', { entry_point: 'landing_page' });
           location.hash = '/templates';
         }}
       />
@@ -103,6 +113,11 @@ export default function App() {
             <button
               className="button button-dark"
               onClick={() => {
+                if (posthogEnabled)
+                  posthog.capture('booth_session_restarted', {
+                    captured_media_count: shots.length,
+                    had_customizations: Boolean(editorSettings),
+                  });
                 setResetPending(false);
                 retake();
               }}

@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { encodeCanvas } from '../lib/media/live-media.js';
 import { replaceCapturedShot } from '../lib/capture-state.js';
 import { drawSticker } from '../lib/stickers/sticker-art.js';
+import posthog, { posthogEnabled } from '../lib/posthog.js';
+import { logPosthogInfo } from '../lib/posthogLogger.js';
 export default function usePhotoCapture({
   video,
   stream,
@@ -57,6 +59,20 @@ export default function usePhotoCapture({
   function saveShot(shot) {
     const previous = retakeIndex === null ? null : sequenceShots.current[retakeIndex];
     const next = replaceCapturedShot(sequenceShots.current, shot, retakeIndex);
+    const mediaType = shot.type === 'live' ? 'live_clip' : 'photo';
+    const captureNumber = retakeIndex === null ? next.length : retakeIndex + 1;
+    if (posthogEnabled)
+      posthog.capture('media_captured', {
+        media_type: mediaType,
+        capture_number: captureNumber,
+        template_id: template.id,
+        is_retake: retakeIndex !== null,
+      });
+    logPosthogInfo('media capture completed', {
+      media_type: mediaType,
+      capture_number: captureNumber,
+      is_retake: retakeIndex !== null,
+    });
     sequenceShots.current = next;
     setShots(next);
     if (previous) {

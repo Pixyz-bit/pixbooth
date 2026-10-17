@@ -28,7 +28,7 @@ export default function EditorActions({
             className="button button-dark"
             href={mp4.url}
             download={`${filename}.mp4`}
-            onClick={onDownload}
+            onClick={() => onDownload('mp4')}
           >
             Download live strip · MP4
           </a>
@@ -43,7 +43,7 @@ export default function EditorActions({
             className={`button ${live ? 'button-outline' : 'button-dark'}`}
             href={output}
             download={`${filename}.jpg`}
-            onClick={onDownload}
+            onClick={() => onDownload('jpg')}
           >
             {live ? 'Download cover photo' : 'Download photo strip'}
           </a>
