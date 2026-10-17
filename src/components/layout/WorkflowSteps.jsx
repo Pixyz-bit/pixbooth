@@ -1,5 +1,5 @@
 import Brand from '../common/Brand.jsx';  
-import { navigate } from '../../lib/navigation.js';
+import { navigateLink } from '../../lib/navigation.js';
 const steps = [
   { page: 'templates', path: '/templates', label: 'Choose layout' },
   { page: 'booth', path: '/booth', label: 'Capture' },
