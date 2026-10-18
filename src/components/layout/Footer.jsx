@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="landing-footer-bottom">
         <div>
           <span>© {new Date().getFullYear()} Pixbooth</span>
-          <span>Powered by .decide</span>
+          <span>Made by Decode</span>
         </div>
       </div>
     </footer>
