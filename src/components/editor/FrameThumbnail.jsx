@@ -16,7 +16,7 @@ export default function FrameThumbnail({ frame }) {
       frame: frame.id,
       background: 'white',
       frameArtwork: artwork.image,
-      caption: 'pixbooth',
+      caption: 'mentomory',
     });
     // Empty apertures preview the actual artwork without inventing captured photos.
     frameRects(stencil).forEach((rect) => {

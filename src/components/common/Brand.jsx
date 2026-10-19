@@ -1,17 +1,14 @@
 import { navigateLink } from '../../lib/navigation.js';
 export default function Brand() {
   return (
-<a
-  className="wordmark"
-  href="/"
-  onClick={navigateLink}
-  aria-label="Pixbooth home"
->      <img
+    <a className="wordmark" href="/" onClick={navigateLink} aria-label="Mentomory home">
+      {' '}
+      <img
         className="brand-logo"
-        src={`${import.meta.env.BASE_URL}pixbooth-logo.png`}
-        alt="Pixbooth"
-        width="1581"
-        height="655"
+        src={`${import.meta.env.BASE_URL}mentomory-logo-v2.png`}
+        alt="Mentomory"
+        width="1200"
+        height="320"
       />
     </a>
   );

@@ -299,7 +299,7 @@ export function paintStrip(ctx, images, template, options = {}) {
   ctx.font = `700 ${Math.round(cellWidth * 0.065)}px sans-serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  const caption = (options.caption || 'pixbooth').slice(0, 32);
+  const caption = (options.caption || 'mentomory').slice(0, 32);
   ctx.fillText(caption, width / 2, height - padding - footer / 2, width - padding * 2 - 100);
 }
 export async function composePhotos(shots, template, options = {}) {

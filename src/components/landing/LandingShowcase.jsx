@@ -6,13 +6,13 @@ export default function LandingShowcase() {
         {[0, 1, 2, 3].map((pose) => (
           <SamplePhoto key={pose} pose={pose} />
         ))}
-        <span>pixbooth</span>
+        <span>mentomory</span>
       </div>
       <div className="showcase-main" aria-hidden="true">
         <SamplePhoto pose={0} />
         <div className="print-caption">
           <span>GOOD COMPANY.</span>
-          <span>pixbooth</span>
+          <span>mentomory</span>
         </div>
       </div>
       <div className="showcase-side" aria-hidden="true">

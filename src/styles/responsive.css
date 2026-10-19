@@ -298,7 +298,7 @@
     font-size: clamp(32px, 6svh, 40px);
   }
   .home-app .landing-copy .brand-logo {
-    width: 128px;
+    width: 180px;
   }
   .home-app .landing-showcase {
     --print-size: min(calc((100cqh - 36px) / 1.31), calc((100cqw - 20px) / 1.32));

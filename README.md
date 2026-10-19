@@ -1,4 +1,4 @@
-# Pixbooth
+# Mentomory
 
 A browser photo booth with a monochrome grid interface, 21 photo layouts, 48 face effects and photo/live-strip customization. Captures and edits stay in browser memory; reloading clears the session.
 

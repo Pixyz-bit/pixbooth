@@ -27,7 +27,7 @@ export default function useCamera({
     setStatus('loading');
     if (!navigator.mediaDevices?.getUserMedia) {
       setError(
-        'Camera access requires HTTPS or localhost and a supported browser. Open Pixbooth through a secure address.'
+        'Camera access requires HTTPS or localhost and a supported browser. Open Mentomory through a secure address.'
       );
       setStatus('idle');
       return;

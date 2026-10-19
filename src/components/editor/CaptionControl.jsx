@@ -7,7 +7,7 @@ export default function CaptionControl({ caption, exporting, setCaption }) {
         maxLength="32"
         disabled={exporting}
         onChange={(e) => setCaption(e.target.value)}
-        placeholder="pixbooth"
+        placeholder="mentomory"
       />
       <span>{caption.length} / 32 characters</span>
     </label>

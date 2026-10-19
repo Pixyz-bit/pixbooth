@@ -1,4 +1,4 @@
-# Pixbooth
+# Mentomory
 
 Current camera feedback: [conditional notification fade and fixed countdowns](docs/design/CAMERA-NOTIFICATIONS.md). Transparent messages use a top-heavy dark fade only while a visible notice/error exists. Countdown choices are Off / 3 sec / 5 sec, with no Custom input.
 
@@ -6,7 +6,7 @@ Current camera feedback: [conditional notification fade and fixed countdowns](do
 Current face-effects stack: [MediaPipe + PixiJS](docs/design/MEDIAPIPE-PIXI-STICKERS.md) replaces the Jeeliz trial in the active app, with Canvas2D rendering fallback. All 48 effects are shown without tracker/category dropdowns. Countdown now uses Off / 3 sec / Custom, revealing a 1-10 second numeric stepper only for Custom.
 
 
-Pixbooth is a browser photo and live-clip booth built with React. The canonical working project is `C:\Martin Archive\Programming\2026 Projects\PhotoPix`; the folder name is retained even though the public brand is Pixbooth. The supplied Pixbooth PNG logo is the identity asset. The current visual authority is [DESIGN.md](DESIGN.md), following the accepted [modernization brief](docs/design/MODERNIZATION-BRIEF.md) and [direction contract](docs/design/MODERNIZATION-CONTRACT.md). The previous concept is preserved as a historical reference.
+Mentomory is a browser photo and live-clip booth built with React. The canonical working project is `C:\Martin Archive\Programming\2026 Projects\PhotoPix`; the folder name is retained even though the public brand is Mentomory. The supplied monochrome doodle camera-m logo is the identity asset (public/mentomory-logo-v2.png). The current visual authority is [DESIGN.md](DESIGN.md), following the accepted [modernization brief](docs/design/MODERNIZATION-BRIEF.md) and [direction contract](docs/design/MODERNIZATION-CONTRACT.md). The previous concept is preserved as a historical reference.
 
 Start on the home page with its centered hero, supplied logo, plain neutral page and illustrative photo-print composition. One Capture action enters `#/templates`, the first of three steps. There is no landing navbar. The locally generated grayscale sample artwork is labeled Illustrative sample captures; it is not a user's session or a testimonial. The home page has no interactive strip-design playground.
 
@@ -56,4 +56,3 @@ Current organization: [camera corner tools](docs/design/CAMERA-CORNER-TOOLS.md) 
 
 
 Current capture behavior: [automatic capture and compact Settings](docs/design/AUTOMATIC-CAPTURE.md). Countdown Off captures one photo or live clip per shutter click. The 3 sec and 5 sec options fill the remaining layout automatically with a countdown before each capture. Individual thumbnail retakes are removed; Redo replaces and repeats the whole set. The supplied aperture shutter is white without a circular backing.
-

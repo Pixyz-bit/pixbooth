@@ -40,7 +40,7 @@ export default function CapturedGallery({ mode, shots, template }) {
                       aria-label={'Download clip ' + (index + 1) + ' as MP4'}
                       title={'Download clip ' + (index + 1)}
                       href={shot.url}
-                      download={'pixbooth-live-' + (index + 1) + '.mp4'}
+                      download={'mentomory-live-' + (index + 1) + '.mp4'}
                     >
                       <Icon name="download" size={18} />
                     </a>

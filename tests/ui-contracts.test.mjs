@@ -61,7 +61,7 @@ test('capture grid preserves slot order and has no individual retakes and preser
   });
   assert.equal((html.match(/class="capture-slot /g) || []).length, 4);
   assert.doesNotMatch(html, /Retake clip|thumbnail-retake/);
-  assert.match(html, /download="pixbooth-live-1.mp4"/);
+  assert.match(html, /download="mentomory-live-1.mp4"/);
   assert.match(html, /Awaiting clip 4/);
   assert.doesNotMatch(html, /<figcaption/);
   assert.match(html, /role="group" aria-label="Captured media in layout order"/);

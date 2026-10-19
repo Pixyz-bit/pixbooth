@@ -150,13 +150,13 @@ input::placeholder {
 }
 .workflow-brand-row {
   display: grid;
-  grid-template-columns: 144px minmax(0, 1fr) auto;
+  grid-template-columns: 180px minmax(0, 1fr) auto;
   align-items: center;
   gap: 16px;
   min-height: 72px;
 }
 .workflow-brand-row .brand-logo {
-  width: 144px;
+  width: 180px;
   height: auto;
 }
 .workflow-home {
@@ -1255,7 +1255,7 @@ footer {
     grid-row: 1;
   }
   .workflow-brand-row .brand-logo {
-    width: 112px;
+    width: 140px;
   }
   .workflow-nav {
     grid-column: 1 / -1;
@@ -1812,12 +1812,12 @@ footer {
 }
 @media (min-width: 601px) and (max-width: 1000px) {
   .workflow-brand-row {
-    grid-template-columns: 112px minmax(0, 1fr) auto;
+    grid-template-columns: 140px minmax(0, 1fr) auto;
     gap: 8px;
     min-height: 64px;
   }
   .workflow-brand-row .brand-logo {
-    width: 112px;
+    width: 140px;
   }
   .workflow-nav ol {
     gap: 8px;

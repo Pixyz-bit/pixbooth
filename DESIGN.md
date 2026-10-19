@@ -1,5 +1,5 @@
 ---
-name: Pixbooth
+name: Mentomory
 description: A modern monochrome browser photo and live-clip booth.
 colors:
   ink: "#111111"
@@ -164,7 +164,7 @@ components:
     textColor: "{colors.homeInk}"
 ---
 
-# Design System: Pixbooth
+# Design System: Mentomory
 
 ## Overview
 
@@ -542,3 +542,8 @@ All 21 layout previews show sample photography within their actual export frame 
 Eight approved frame styles are available in Customize → Frames: Chrome Crush, Holo Dream, Mixtape, Snail Mail, Play Date, Garden Club, Disco Pink and Pink Premiere. Original generated material textures and alpha sticker atlases adapt to all 21 layouts, with photos and captions composed at runtime. Corner decorations preserve the central photo area. Existing frame IDs, branding and logo remain unchanged.
 
 Each optimized WebP sheet combines a paper swatch with a four-sprite transparent atlas. The loader detects the transparent boundary, caches decoded layers and supports retry after load failure. Paper tiling preserves material proportions. Thumbnails, editor previews, JPG and live-strip rendering use the same layers. Browser verification covers all 168 new frame/layout combinations and eight correctly sized JPG exports. Live MP4 encoding was not separately exercised.
+
+## Mentomory identity — 2026-10-19
+
+The public brand is Mentomory. The selected monochrome doodle camera-m lockup is public/mentomory-logo-v2.png, with a matching favicon, touch icon and social card. Use the transparent horizontal lockup in the landing hero and workflow header with its original proportions; header widths are 180px on desktop and 140px on compact layouts. Landing logo widths range from 180px on narrow phones to 260px. The wordmark, footer, page metadata, sample print captions, default editor caption and download filenames use Mentomory/mentomory. Internal navigation event names and analytics identifiers remain stable. Existing hosting and repository addresses retain their configured names. Earlier Pixbooth design references describe historical identity; interface typography, palette and frame artwork remain current.
+Brand asset correction — 2026-10-19: the camera logo uses opaque white interior regions so the page grid does not show through it. The favicon uses the isolated camera mark with transparent exterior and no square backplate; its camera interior remains white.

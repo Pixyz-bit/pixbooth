@@ -17,7 +17,7 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
         layoutId: initialLayout,
         filter: settings?.filter ?? 'normal',
         decoration: settings?.decoration ?? 'none',
-        caption: settings?.caption ?? 'pixbooth',
+        caption: settings?.caption ?? 'mentomory',
         frame: settings?.frame ?? 'none',
       },
       settings?.history
@@ -158,7 +158,7 @@ export default function useStripEditor({ shots, template, settings, onSettingsCh
       }
     }
   }
-  const filename = `pixbooth-${layout.id}-${frame === 'none' ? background : frame}-${filter}`;
+  const filename = `mentomory-${layout.id}-${frame === 'none' ? background : frame}-${filter}`;
   const previewImage = shots[0].poster || shots[0].url;
   return {
     live,

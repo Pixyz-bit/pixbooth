@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="landing-footer">
       <div className="landing-footer-bottom">
         <div>
-          <span>© {new Date().getFullYear()} Pixbooth</span>
+          <span>© {new Date().getFullYear()} Mentomory</span>
           <span>Made by Decode</span>
         </div>
       </div>
