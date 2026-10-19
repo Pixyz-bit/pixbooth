@@ -1,0 +1,44 @@
+.landing-details {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 0 48px;
+  border-top: 1px solid var(--line);
+}
+.landing-details h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px;
+}
+.landing-details p {
+  max-width: 65ch;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+.landing-details a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+.landing-details details {
+  border-top: 1px solid var(--line);
+}
+.landing-details summary {
+  cursor: pointer;
+  padding: 16px 0;
+  min-height: 48px;
+  font-weight: 700;
+}
+.landing-details details p {
+  font-size: 14px;
+  padding-right: 16px;
+}
+.landing-details :is(a, summary):focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+@media (max-width: 600px) {
+  .landing-details {
+    padding: 32px 0;
+  }
+}

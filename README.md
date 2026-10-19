@@ -56,3 +56,8 @@ The historical archive, reference and verification folders were removed from the
 ## Visitor analytics
 
 Vercel Web Analytics is installed through @vercel/analytics 2.0.1. The React Analytics component is mounted once at the application root in src/main.jsx. Enable Analytics for the pixbooth project in the Vercel dashboard, deploy production, then visit the public website and inspect the Analytics dashboard. Local development does not provide production visitor data. No custom interaction events are configured.
+## Search visibility
+
+`npm run build` now produces crawlable HTML for the home page and layout catalog, route-specific metadata, structured data, `dist/sitemap.xml`, and `dist/robots.txt`. Build checks validate the generated output. The capture and editor routes are marked `noindex` because they depend on an active browser session. Vercel serves each route's generated HTML through the rewrites in vercel.json.
+
+The public origin is configured in src/data/seo.js as https://mentomory.pixyzbit.dev. Its DNS must resolve before deployment or indexing checks can succeed. After deploying the SEO build, submit https://mentomory.pixyzbit.dev/sitemap.xml in Google Search Console and use URL Inspection for the home and templates pages. The existing Google verification HTML file is retained. Recheck crawl access and canonical URLs before submitting if the public domain changes.

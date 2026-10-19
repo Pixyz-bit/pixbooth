@@ -11,6 +11,7 @@ import EditorPage from './pages/editor/EditorPage.jsx';
 import posthog, { posthogEnabled } from './lib/posthog.js';
 import { logPosthogInfo } from './lib/posthogLogger.js';
 import { navigate } from './lib/navigation.js';
+import usePageSeo from './hooks/usePageSeo.js';
 export default function App() {
   const session = useBoothSession();
   const [resetPending, setResetPending] = useState(false);
@@ -30,6 +31,7 @@ export default function App() {
     setLayoutChosen,
     retake,
   } = session;
+  usePageSeo(page);
   const updateEditorSettings = useCallback(
     (values) => {
       setEditorSettings(values);

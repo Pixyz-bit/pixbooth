@@ -3,15 +3,21 @@
   "rewrites": [
     {
       "source": "/templates",
-      "destination": "/index.html"
+      "destination": "/templates.html"
     },
     {
       "source": "/booth",
-      "destination": "/index.html"
+      "destination": "/booth.html"
     },
     {
       "source": "/edit",
-      "destination": "/index.html"
+      "destination": "/edit.html"
     }
+  ],
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/templates.html", "destination": "/templates", "permanent": true },
+    { "source": "/booth.html", "destination": "/booth", "permanent": true },
+    { "source": "/edit.html", "destination": "/edit", "permanent": true }
   ]
 }

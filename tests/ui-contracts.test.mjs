@@ -182,11 +182,11 @@ test('shared header contains reachable steps between logo and Home with guarded 
   assert.match(row, /<nav class="workflow-nav"/);
   assert.ok(row.indexOf('brand-logo') < row.indexOf('<nav'));
   assert.ok(row.indexOf('</nav>') < row.indexOf('workflow-home'));
-  assert.ok(active.includes('href="#/booth" aria-current="step"'));
-  assert.ok(!active.includes('href="#/edit"'));
+  assert.ok(active.includes('href="/booth" aria-current="step"'));
+  assert.ok(!active.includes('href="/edit"'));
   assert.ok(
     render(Steps, { page: 'editor', layoutChosen: true, completed: true }).includes(
-      'href="#/edit" aria-current="step"'
+      'href="/edit" aria-current="step"'
     )
   );
 });

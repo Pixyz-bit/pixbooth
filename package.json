@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.mjs && node scripts/check-seo.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "setup:face": "node scripts/setup-face-assets.mjs",
     "format": "prettier --write src",
