@@ -3,7 +3,7 @@ export const SITE_URL = 'https://mentomory.pixyzbit.dev';
 const pages = {
   home: {
     path: '/',
-    title: 'Mentomory | Online Photo Booth & Photo Strip Maker',
+    title: 'Mentomory | Online Photo Booth & Flipbook Studio',
     description:
       'Create photo strips with Mentomory’s online photo booth. Choose 21 layouts, add frames and face effects, then download JPG photos or seven-second MP4 live strips.',
     index: true,
