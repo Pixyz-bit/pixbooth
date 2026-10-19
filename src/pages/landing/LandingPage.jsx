@@ -17,7 +17,7 @@ export default function LandingPage({ onCapture }) {
       <div className="landing-section-inner">
         <LandingHowItWorks />
       </div>
-      <LandingDetails />
+      <LandingDetails onCapture={onCapture} />
     </main>
   );
 }
