@@ -12,7 +12,7 @@ export default function LandingHero({ onCapture }) {
         </h1>
         <p>
           Make a photo strip, wear something silly,
-          <br className="desktop-break" /> or keep seven seconds of the moment.
+          <br className="desktop-break" /> or make a seven-second flipbook.
         </p>
         <button className="button button-dark landing-capture" onClick={capture}>
           Say Cheese :)

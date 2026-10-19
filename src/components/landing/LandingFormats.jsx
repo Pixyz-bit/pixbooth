@@ -1,6 +1,11 @@
 import { Fragment, memo } from 'react';
 
-const formats = ['Photo strips', 'Face stickers', '7-second live clips', 'JPG & MP4 downloads'];
+const formats = [
+  'Photo strips',
+  'Face stickers',
+  'Flipbook-style live clips',
+  'JPG & MP4 downloads',
+];
 
 function Separator() {
   return (

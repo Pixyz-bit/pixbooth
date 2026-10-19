@@ -3,12 +3,13 @@ import './LandingDetails.css';
 
 export default function LandingDetails() {
   return (
-    <section className="landing-details" aria-labelledby="about-booth-title">
+    <section className="landing-details" aria-labelledby="about-booth-title" tabIndex={0}>
       <div className="landing-details-intro">
         <h2 id="about-booth-title">Your online photo booth, wherever you are.</h2>
         <p>
           Mentomory turns your browser into a photo booth. Make a classic photo strip, a
-          Polaroid-style print or a photo grid, then add frames, face effects and your own caption.
+          Polaroid-style print, a photo grid or a flipbook-style live strip, then add frames, face
+          effects and your own caption.
         </p>
         <a className="landing-details-link" href="/templates" onClick={navigateLink}>
           <span>Browse all 21 photo strip layouts.</span>
@@ -18,22 +19,22 @@ export default function LandingDetails() {
         </a>
       </div>
       <div className="landing-details-faq">
-        <details>
+        <details name="landing-faq">
           <summary>How do I make a photo strip?</summary>
           <p>
             Choose a layout, allow camera access and take your photos. In Customize, pick a frame,
             background and filter, then download your finished strip as a JPG.
           </p>
         </details>
-        <details>
-          <summary>Can I make a live photo strip?</summary>
+        <details name="landing-faq">
+          <summary>Can I make a flipbook?</summary>
           <p>
-            Yes. Choose Live before capturing to record silent seven-second clips. Download your
-            composed live strip as an MP4. Recording and export depend on your browser’s codec
+            Yes. Choose Live to capture a silent seven-second flipbook-style clip. Customize your
+            strip, then download it as an MP4. Recording and export depend on your browser’s codec
             support.
           </p>
         </details>
-        <details>
+        <details name="landing-faq">
           <summary>Where are my photos stored?</summary>
           <p>
             Your captures and edits stay in your browser session. Mentomory does not upload them to
