@@ -5,10 +5,10 @@ export default function Brand() {
       {' '}
       <img
         className="brand-logo"
-        src={`${import.meta.env.BASE_URL}mentomory-logo-v3.png`}
+        src={`${import.meta.env.BASE_URL}mentomory-logo-v4.png`}
         alt="Mentomory"
         width="1200"
-        height="400"
+        height="320"
       />
     </a>
   );
