@@ -6,7 +6,7 @@ const steps = [
   },
   {
     title: 'Capture the moment.',
-    description: 'Strike a pose, try a face sticker, or record for five seconds.',
+    description: 'Strike a pose, try a face sticker, or record for seven seconds.',
     image: '/how-it-works/make-your-moment.png',
   },
   {

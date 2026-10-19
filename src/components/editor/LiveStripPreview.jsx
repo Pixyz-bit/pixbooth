@@ -68,7 +68,7 @@ export default function LiveStripPreview({ shots, template, options, playing, ar
     <canvas
       ref={ref}
       className="edited-strip live-strip-canvas"
-      aria-label="Animated five-second photo strip preview"
+      aria-label="Animated seven-second photo strip preview"
     />
   );
 }

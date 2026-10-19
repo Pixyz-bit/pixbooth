@@ -27,7 +27,7 @@ export default function CaptureActions({
       : completed
         ? 'All captured'
         : mode === 'live'
-          ? 'Record 5 seconds'
+          ? 'Record 7 seconds'
           : 'Take photo';
   return (
     <div className="shutter-control">

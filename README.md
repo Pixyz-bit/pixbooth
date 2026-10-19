@@ -11,7 +11,7 @@ The application source is at `C:\Martin Archive\Programming\2026 Projects\PhotoP
 - **Home — `#/`:** illustrative sample prints, scrolling formats ribbon and open three-step instructions.
 - **Choose layout — `#/templates`:** filter the 21 layouts by photo count, select a layout and continue. Selection locks after capturing media.
 - **Capture — `#/booth`:** enable the camera, choose Photo or Live, and use Off / 3 sec / 5 sec countdown. With Countdown Off, each shutter press captures one photo or live clip. With 3 sec or 5 sec selected, one press captures the remaining set with a fresh countdown before each item. Cancellation preserves earlier captures. Redo clears the set, preserves camera/layout settings and reconnects the preview; it waits for another shutter press.
-- **Customize — `#/edit`:** choose compatible layouts, frames, backgrounds, filters, captions and border artwork. Undo/Redo retains up to 60 edits during the session. Download the JPG, or create and download a composed five-second MP4 for live captures.
+- **Customize — `#/edit`:** choose compatible layouts, frames, backgrounds, filters, captions and border artwork. Undo/Redo retains up to 60 edits during the session. Download the JPG, or create and download a composed seven-second MP4 for live captures.
 
 The editor requires completed captures. Direct capture/editor navigation without a session returns to Choose layout. Leaving capture stops camera tracks and cancels its countdown/recording. Start over confirms before discarding captured media or edits.
 
@@ -21,7 +21,7 @@ All four pages share the compact black copyright/credit footer. Portrait phone l
 
 MediaPipe `0.10.32` performs local face tracking in a worker. PixiJS `8.22.0` renders local sticker artwork with a Canvas2D fallback. Jeeliz is retired and no longer shipped.
 
-Live mode records silent five-second H.264 MP4s at 20fps, subject to browser codec support. Captures are proportionally limited to 960×720px; composed MP4s retain template proportions with even dimensions and a longest side up to 1920px. JPG exports retain full layout dimensions. The app has no accounts, upload service or backend.
+Live mode records silent seven-second H.264 MP4s at 4fps (28 frames) for a stepped, scrapbook-style animation, subject to browser codec support. Capture and composed exports use the same frame rate, so editor playback retains that motion. Captures are proportionally limited to 960×720px; composed MP4s retain template proportions with even dimensions and a longest side up to 1920px. JPG exports retain full layout dimensions. The app has no accounts, upload service or backend.
 
 ## Development
 

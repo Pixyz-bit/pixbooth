@@ -20,7 +20,7 @@ export default function CaptureMode({ mode, templateLocked, mp4Supported, setMod
             : undefined
         }
       >
-        Live · 5 sec
+        Live · 7 sec
       </button>
     </div>
   );

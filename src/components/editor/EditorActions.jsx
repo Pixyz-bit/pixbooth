@@ -55,8 +55,8 @@ export default function EditorActions({
       {live && (
         <p className="download-meta">
           {mp4
-            ? 'MP4 · ' + mp4.width + ' × ' + mp4.height + ' px · 5 sec'
-            : 'MP4 · 5 sec · up to 1920px on the longest side'}
+            ? 'MP4 · ' + mp4.width + ' × ' + mp4.height + ' px · 7 sec'
+            : 'MP4 · 7 sec · up to 1920px on the longest side'}
         </p>
       )}
       {downloadStatus && (

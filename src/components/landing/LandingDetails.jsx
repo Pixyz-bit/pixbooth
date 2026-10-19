@@ -28,7 +28,7 @@ export default function LandingDetails() {
         <details>
           <summary>Can I make a live photo strip?</summary>
           <p>
-            Yes. Choose Live before capturing to record silent five-second clips. Download your
+            Yes. Choose Live before capturing to record silent seven-second clips. Download your
             composed live strip as an MP4. Recording and export depend on your browser’s codec
             support.
           </p>

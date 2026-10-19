@@ -30,7 +30,7 @@ export default function EditorPreview({
           {live ? ' · Live' : ''}
         </h2>
         <span>
-          {size.width} × {size.height} px{live ? ' · 5 sec' : ''}
+          {size.width} × {size.height} px{live ? ' · 7 sec' : ''}
         </span>
       </div>
       <div className="editor-stage">

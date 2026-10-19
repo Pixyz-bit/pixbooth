@@ -32,7 +32,7 @@ export default function LandingShowcase() {
             <circle cx="10" cy="11" r="7" />
             <path d="M8 1h4m-2 6v4l3 2" />
           </svg>
-          <strong>5 seconds.</strong>
+          <strong>7 seconds.</strong>
           <span>
             A little movement.
             <br />A lot to remember.

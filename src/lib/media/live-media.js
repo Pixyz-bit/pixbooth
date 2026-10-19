@@ -1,7 +1,8 @@
 import { layoutSize, paintStrip } from '../collage.js';
 import { prepareFrameOptions } from '../frames/frame-assets.js';
-export const LIVE_SECONDS = 5;
-export const LIVE_FPS = 20;
+export const LIVE_SECONDS = 7;
+// Hold each pose long enough for a stepped, scrapbook-style animation.
+export const LIVE_FPS = 4;
 export async function supportsMp4() {
   try {
     const { canEncodeVideo } = await import('./mp4-codec.js');

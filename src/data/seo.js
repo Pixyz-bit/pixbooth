@@ -5,7 +5,7 @@ const pages = {
     path: '/',
     title: 'Mentomory | Online Photo Booth & Photo Strip Maker',
     description:
-      'Create photo strips with Mentomory’s online photo booth. Choose 21 layouts, add frames and face effects, then download JPG photos or five-second MP4 live strips.',
+      'Create photo strips with Mentomory’s online photo booth. Choose 21 layouts, add frames and face effects, then download JPG photos or seven-second MP4 live strips.',
     index: true,
   },
   templates: {
@@ -18,7 +18,7 @@ const pages = {
   booth: {
     path: '/booth',
     title: 'Capture Your Photos | Mentomory',
-    description: 'Capture photos or five-second live clips in your browser with Mentomory.',
+    description: 'Capture photos or seven-second live clips in your browser with Mentomory.',
     index: false,
   },
   editor: {

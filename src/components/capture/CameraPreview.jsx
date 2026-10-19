@@ -1,5 +1,6 @@
 import CaptureActions from './CaptureActions.jsx';
 import Icon from '../common/Icon.jsx';
+import { LIVE_SECONDS } from '../../lib/media/live-media.js';
 export default function CameraPreview({
   status,
   cameraActive,
@@ -153,7 +154,10 @@ export default function CameraPreview({
                 {status === 'recording' && (
                   <div className="recording-status" role="status">
                     <span />
-                    Recording · {Math.min(5, Math.ceil(recordProgress * 5))} / 5 sec
+                    Recording · {Math.min(
+                      LIVE_SECONDS,
+                      Math.ceil(recordProgress * LIVE_SECONDS)
+                    )} / {LIVE_SECONDS} sec
                     <progress value={recordProgress} max="1" aria-label="Live recording progress" />
                   </div>
                 )}
