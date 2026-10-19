@@ -18,6 +18,19 @@
   color: var(--ink);
 }
 
+.landing-details-intro > .wordmark {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 24px;
+}
+
+.landing-details-intro .brand-logo {
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+}
+
 .landing-details h2 {
   max-width: 17ch;
   margin: 0 0 24px;
@@ -76,7 +89,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  min-height: 88px;
+  min-height: 80px;
   padding: 24px 4px;
   cursor: pointer;
   list-style: none;
