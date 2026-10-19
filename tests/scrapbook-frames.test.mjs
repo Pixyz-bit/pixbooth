@@ -7,6 +7,7 @@ import { scrapbookStickerPlacements } from '../src/lib/frames/scrapbook-art.js';
 import { framePhotoRect } from '../src/lib/frames/frame-art.js';
 
 const collection = frames.filter((frame) => frame.collection === 'scrapbook-15');
+const partyCollection = frames.filter((frame) => frame.collection === 'party-8');
 function rects(template) {
   const cw = 900,
     ch = template.cellHeight || 675,
@@ -36,8 +37,16 @@ test('15 distinct scrapbook frames have packaged paper and alpha sticker assets'
       assert.ok(stat.size > 1000, file);
     }
 });
+test('eight approved party frames have packaged artwork', async () => {
+  assert.equal(partyCollection.length, 8);
+  for (const frame of partyCollection) {
+    const stat = await fs.stat(new URL('../public/frames/' + frame.stickerAsset, import.meta.url));
+    assert.ok(stat.size > 1000, frame.id);
+    assert.equal(frame.packedAsset, true);
+  }
+});
 test('all new frames fit every layout, overlap photo corners and leave the center clear', () => {
-  for (const frame of collection)
+  for (const frame of [...collection, ...partyCollection])
     for (const template of templates)
       rects(template).forEach((raw, index) => {
         const opening = framePhotoRect(raw, frame.id);

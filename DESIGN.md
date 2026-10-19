@@ -536,3 +536,9 @@ Validation: the production build and all 14 existing UI contract checks pass. Ch
 ## Template sample photography — 2026-10-19
 
 All 21 layout previews show sample photography within their actual export frame rectangles. Standard slots cycle through the bundled four-pose contact sheet with top-aligned cover cropping. Slots wider than 1.8:1 use template-wide-original-couple.png, generated with the original contact sheet as an identity reference, with centered cover fitting so both faces remain visible without side margins. The shared preview also supplies the editor layout picker. Template proportions, gutters, footer and selection behavior remain unchanged.
+
+## Metallic and party frames — 2026-10-19
+
+Eight approved frame styles are available in Customize → Frames: Chrome Crush, Holo Dream, Mixtape, Snail Mail, Play Date, Garden Club, Disco Pink and Pink Premiere. Original generated material textures and alpha sticker atlases adapt to all 21 layouts, with photos and captions composed at runtime. Corner decorations preserve the central photo area. Existing frame IDs, branding and logo remain unchanged.
+
+Each optimized WebP sheet combines a paper swatch with a four-sprite transparent atlas. The loader detects the transparent boundary, caches decoded layers and supports retry after load failure. Paper tiling preserves material proportions. Thumbnails, editor previews, JPG and live-strip rendering use the same layers. Browser verification covers all 168 new frame/layout combinations and eight correctly sized JPG exports. Live MP4 encoding was not separately exercised.

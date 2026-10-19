@@ -5,8 +5,14 @@ const tiles = new WeakMap();
 function paperTile(image) {
   if (!tiles.has(image)) {
     const tile = document.createElement('canvas');
-    tile.width = tile.height = 900;
-    tile.getContext('2d').drawImage(image, 0, 0, 900, 900);
+    tile.width = 900;
+    tile.height = Math.max(
+      1,
+      Math.round(
+        (900 * (image.naturalHeight || image.height)) / (image.naturalWidth || image.width)
+      )
+    );
+    tile.getContext('2d').drawImage(image, 0, 0, tile.width, tile.height);
     tiles.set(image, tile);
   }
   return tiles.get(image);

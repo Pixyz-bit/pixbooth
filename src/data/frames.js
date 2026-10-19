@@ -1,4 +1,5 @@
 import { scrapbookFrames } from './scrapbookFrames.js';
+import { partyFrames } from './partyFrames.js';
 
 export const frames = [
   {
@@ -85,6 +86,7 @@ export const frames = [
     motif: 'cloud',
   },
   ...scrapbookFrames,
+  ...partyFrames,
 ];
 
 export const getFrame = (id) => frames.find((frame) => frame.id === id) || frames[0];
