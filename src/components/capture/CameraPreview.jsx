@@ -139,13 +139,6 @@ export default function CameraPreview({
                 {countdown}
               </div>
             )}
-            {status === 'recording' && (
-              <div className="recording-status" role="status">
-                <span />
-                Recording · {Math.min(5, Math.ceil(recordProgress * 5))} / 5 sec
-                <progress value={recordProgress} max="1" aria-label="Live recording progress" />
-              </div>
-            )}
           </div>
           <div className={'camera-feedback' + (hasNotification ? ' has-notification' : '')}>
             {children}
@@ -157,6 +150,13 @@ export default function CameraPreview({
               status === 'saving' ||
               countdown !== null) && (
               <div className="floating-shutter">
+                {status === 'recording' && (
+                  <div className="recording-status" role="status">
+                    <span />
+                    Recording · {Math.min(5, Math.ceil(recordProgress * 5))} / 5 sec
+                    <progress value={recordProgress} max="1" aria-label="Live recording progress" />
+                  </div>
+                )}
                 <CaptureActions
                   {...{
                     countdown,

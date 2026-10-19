@@ -252,6 +252,21 @@
   color: var(--muted);
   font-size: 12px;
 }
+/* Keep recording feedback and cancellation in one bottom-anchored stack. */
+.booth-app .floating-shutter:has(.recording-status) {
+  gap: 8px;
+}
+.booth-app .floating-shutter .recording-status {
+  position: static;
+  transform: none;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+}
+.booth-app .floating-shutter .recording-status + .cancel-capture {
+  width: 100%;
+}
 @media (max-width: 800px) {
   .booth-app :is(.workflow-brand-row, .capture-main, footer) {
     width: calc(100% - 48px);

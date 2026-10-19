@@ -559,3 +559,7 @@ Deployment DNS verified — 2026-10-19: both mentomory and pixbooth resolve to c
 ## Landing help section and footer — 2026-10-20
 
 The home help section uses the full 1200px page container with an open two-column composition: introduction and layout link on the left, three native FAQ disclosures on the right. Plus Jakarta Sans headings scale from 32 to 44px; desktop introduction copy is 18px and FAQ questions are 20px. A solid Paper reading surface, a 2px Ink section divider and fine Line row separators keep the section clear against the home grid. Rows use plus/minus indicators, visible keyboard focus and native disclosure behavior. Below 900px, the section stacks; phone questions remain 18px with at least 80px row targets. Existing factual copy and clean navigation remain intact. The shared footer credit reads “Made by .dcd”, with only “.dcd” bold.
+
+## Live recording control spacing — 2026-10-20
+
+Recording status/progress and Cancel recording share the bottom-anchored floating control stack with an 8px gap. Status uses normal flow inside the stack, replacing its independent absolute position that overlapped cancellation. Both controls fit the central mobile lane and remain inside the preview at 1280x900, 820x1180, 390x844, 320x568 and 844x390 in a camera-free component preview. This verifies layout and callback dispatch; physical camera recording was not exercised.
