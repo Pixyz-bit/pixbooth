@@ -563,3 +563,7 @@ The home help section uses the full 1200px page container with an open two-colum
 ## Live recording control spacing — 2026-10-20
 
 Recording status/progress and Cancel recording share the bottom-anchored floating control stack with an 8px gap. Status uses normal flow inside the stack, replacing its independent absolute position that overlapped cancellation. Both controls fit the central mobile lane and remain inside the preview at 1280x900, 820x1180, 390x844, 320x568 and 844x390 in a camera-free component preview. This verifies layout and callback dispatch; physical camera recording was not exercised.
+
+## Camera mark with sparkles — 2026-10-20
+
+The active identity uses the freshly generated camera-m mark in public/mentomory-camera-v3.png, including the two excitement strokes and two diamond sparkles. public/mentomory-logo-v3.png pairs it with the Mentomory wordmark and is used by the shared Brand component on the home and workflow routes. The 1200x400 lockup, 256px favicon and 180px touch icon have transparent exteriors and white camera interiors. The 1200x630 social card uses a white background for JPEG compatibility. HTML and route metadata reference the versioned v3 assets to refresh cached branding. The source-generation prompt is recorded in docs/design/MENTOMORY-CAMERA-V3-PROMPT.txt. Existing section layouts and FAQ behavior are unchanged in this branding revision.

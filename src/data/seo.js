@@ -37,7 +37,7 @@ export function getSeo(page = 'home') {
   return {
     ...data,
     url: SITE_URL + data.path,
-    image: SITE_URL + '/mentomory-social.jpg',
+    image: SITE_URL + '/mentomory-social-v3.jpg',
     robots: data.index ? 'index, follow, max-image-preview:large' : 'noindex, follow',
   };
 }
