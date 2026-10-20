@@ -1,9 +1,8 @@
 .landing-closing {
-  padding-block: clamp(40px, 5vw, 64px);
+  padding-block: clamp(24px, 3vw, 40px);
   padding-left: max(var(--safe-left, 32px), calc((100% - 1200px) / 2));
   padding-right: max(var(--safe-right, 32px), calc((100% - 1200px) / 2));
-  border-top: 1px solid var(--line);
-  background: var(--paper);
+  background: transparent;
   color: var(--ink);
 }
 
@@ -23,11 +22,11 @@
 
 .landing-closing-prints {
   display: grid;
-  grid-template-columns: minmax(0, 110px) minmax(0, 176px);
+  grid-template-columns: minmax(0, 86px) minmax(0, 144px);
   justify-content: center;
   align-items: center;
-  gap: 24px;
-  min-height: 320px;
+  gap: 20px;
+  min-height: 252px;
 }
 
 .landing-closing-strip,
@@ -58,9 +57,9 @@
 }
 
 .landing-closing-print {
-  gap: 16px;
-  margin-top: 24px;
-  padding: 10px 10px 20px;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 8px 8px 16px;
   transform: rotate(8deg);
 }
 
@@ -76,7 +75,7 @@
 }
 
 .landing-closing-keepsakes figcaption {
-  margin-top: 12px;
+  margin-top: 8px;
   color: var(--muted);
   font-size: 11px;
   line-height: 1.5;
@@ -85,53 +84,33 @@
 
 .landing-closing-copy {
   min-width: 0;
+  container-type: inline-size;
 }
 
 .landing-closing h2 {
-  max-width: 17ch;
-  margin: 0 0 16px;
-  font-size: clamp(32px, 3.5vw, 44px);
+  max-width: none;
+  margin: 0 0 12px;
+  font-size: clamp(20px, 8cqi, 44px);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.035em;
-  text-wrap: balance;
+  white-space: nowrap;
 }
 
 .landing-closing p {
   max-width: 30ch;
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   color: var(--muted);
   font-size: 16px;
   line-height: 1.6;
 }
 
-.home-app .landing-closing-action {
-  justify-content: space-between;
-  gap: 24px;
+.home-app .landing-closing .landing-capture.landing-closing-action {
   min-height: 56px;
-  width: 228px;
+  width: fit-content;
+  min-width: min(228px, 100%);
   max-width: 100%;
-  padding: 12px 20px;
-  border: 2px solid var(--ink);
-  border-radius: 10px;
-  background: var(--ink);
-  color: var(--paper);
-  font-size: 15px;
-  font-weight: 800;
-  line-height: 1.5;
-  transition:
-    background-color 180ms var(--ease),
-    color 180ms var(--ease);
-}
-
-.home-app .landing-closing-action:hover {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.home-app .landing-closing-action:active {
-  background: var(--surface);
-  color: var(--ink);
+  margin-inline: 0;
 }
 
 .landing-closing-action svg {
@@ -147,14 +126,18 @@
 @media (max-width: 700px) {
   .landing-closing-inner {
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
+    gap: 24px;
     max-width: 440px;
   }
 
   .landing-closing-prints {
-    grid-template-columns: minmax(0, 82px) minmax(0, 140px);
-    gap: 24px;
-    min-height: 248px;
+    grid-template-columns: minmax(0, 76px) minmax(0, 116px);
+    gap: 20px;
+    min-height: 212px;
+  }
+
+  .landing-closing-strip {
+    padding: 4px;
   }
 
   .landing-closing-print {
@@ -168,11 +151,14 @@
 
   .landing-closing p {
     max-width: 28ch;
+    margin-inline: auto;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .home-app .landing-closing-action {
-    transition: none;
+  .landing-closing-copy {
+    text-align: center;
+  }
+
+  .home-app .landing-closing .landing-capture.landing-closing-action {
+    margin-inline: auto;
   }
 }

@@ -21,14 +21,14 @@ export default function LandingClosing({ onCapture }) {
           <figcaption>Illustrative sample captures</figcaption>
         </figure>
         <div className="landing-closing-copy">
-          <h2 id="landing-closing-title">Ready for your close-up?</h2>
-          <p>Pick a layout and make something to keep.</p>
+          <h2 id="landing-closing-title">Ready to make a memory?</h2>
+          <p>Turn a little moment into something to keep.</p>
           <button
-            className="button landing-closing-action"
+            className="button button-dark landing-capture landing-closing-action"
             type="button"
             onClick={() => onCapture('strip-four')}
           >
-            <span>Choose a layout</span>
+            <span>Capture the moment</span>
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
               <path d="M4 12h16m-6-6 6 6-6 6" />
             </svg>

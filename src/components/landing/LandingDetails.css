@@ -9,7 +9,6 @@
   padding-left: max(var(--safe-left, 32px), calc((100% - 1200px) / 2));
   padding-right: max(var(--safe-right, 32px), calc((100% - 1200px) / 2));
   scroll-margin-block: 16px;
-  border-top: 2px solid var(--ink);
   background: transparent;
   color: var(--ink);
 }
