@@ -8,4 +8,6 @@ Generate a photographic asset for a monochrome browser photo booth landing page.
 
 ## Implementation
 
+The Keepsake split closing section also reuses SamplePhoto and this same contact sheet for a three-photo strip and square print. Its visible “Illustrative sample captures” caption identifies the artwork as a sample. The decorative prints are hidden from assistive technology; their containing figure has a sample photo strip and print label.
+
 `src/pages/landing/LandingPage.jsx` composes the landing components, including `src/components/landing/SamplePhoto.jsx`. `src/pages/landing/LandingPage.css` displays the four contact-sheet quadrants in photo-print frames using CSS background positioning. The layout, captions, navigation and controls remain real HTML and React components. The supplied Pixbooth logo remains unchanged. The artwork does not request camera access or become part of a user's captured media.

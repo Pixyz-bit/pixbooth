@@ -2,16 +2,12 @@
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   align-items: start;
-  align-content: safe center;
   gap: clamp(40px, 6vw, 88px);
   box-sizing: border-box;
   width: 100%;
-  block-size: 100dvh;
-  padding-block: clamp(24px, 5dvh, 56px);
+  padding-block: clamp(48px, 6vw, 88px);
   padding-left: max(var(--safe-left, 32px), calc((100% - 1200px) / 2));
   padding-right: max(var(--safe-right, 32px), calc((100% - 1200px) / 2));
-  overflow-y: auto;
-  scroll-padding-block: 16px;
   scroll-margin-block: 16px;
   border-top: 2px solid var(--ink);
   background: transparent;
@@ -47,24 +43,6 @@
   color: var(--muted);
   font-size: 18px;
   line-height: 1.75;
-}
-
-.home-app .landing-details .landing-capture.landing-details-action {
-  width: fit-content;
-  max-width: 100%;
-  margin-top: 24px;
-  margin-inline: 0;
-  gap: 16px;
-}
-
-.landing-details-action svg {
-  flex: 0 0 22px;
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  stroke-width: 1.75;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 .landing-details a {
@@ -135,7 +113,6 @@
   border-radius: 2px;
 }
 
-.landing-details:focus-visible,
 .landing-details summary:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: -3px;
@@ -155,7 +132,7 @@
 @media (max-width: 600px) {
   .landing-details {
     gap: 24px;
-    padding-block: 24px;
+    padding-block: 40px;
   }
 
   .landing-details h2 {

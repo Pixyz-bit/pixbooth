@@ -2,9 +2,9 @@ import { navigateLink } from '../../lib/navigation.js';
 import Brand from '../common/Brand.jsx';
 import './LandingDetails.css';
 
-export default function LandingDetails({ onCapture }) {
+export default function LandingDetails() {
   return (
-    <section className="landing-details" aria-labelledby="about-booth-title" tabIndex={0}>
+    <section className="landing-details" aria-labelledby="about-booth-title">
       <div className="landing-details-intro">
         <Brand />
         <h2 id="about-booth-title">Your online photo booth, wherever you are.</h2>
@@ -13,16 +13,6 @@ export default function LandingDetails({ onCapture }) {
           Polaroid-style print, a photo grid or a flipbook-style live strip, then add frames, face
           effects and your own caption.
         </p>
-        <button
-          className="button button-dark landing-capture landing-details-action"
-          type="button"
-          onClick={() => onCapture('strip-four')}
-        >
-          <span>Let’s make memories</span>
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-            <path d="M4 12h16m-6-6 6 6-6 6" />
-          </svg>
-        </button>
       </div>
       <div className="landing-details-faq">
         <details name="landing-faq">

@@ -19,7 +19,7 @@ export default function useBoothSession() {
   const recording = useRef(null);
   const [shots, setShots] = useState([]);
   const [retakeIndex, setRetakeIndex] = useState(null);
-  const [templateId, setTemplateId] = useState('strip-four');
+  const [templateId, setTemplateId] = useState(null);
   const [layoutChosen, setLayoutChosen] = useState(false);
   const [editorSettings, setEditorSettings] = useState(null);
   const template = templates.find((item) => item.id === templateId);
@@ -37,7 +37,7 @@ export default function useBoothSession() {
   const [mode, setMode] = useState('photo');
   const [mp4Supported, setMp4Supported] = useState(null);
   const [recordProgress, setRecordProgress] = useState(0);
-  const completed = shots.length === template.count && retakeIndex === null;
+  const completed = Boolean(template && shots.length === template.count && retakeIndex === null);
   const cameraActive =
     ['ready', 'recording'].includes(status) || (status === 'saving' && !completed);
   const { releaseCamera, openCamera, stopCamera } = useCamera({
@@ -138,6 +138,7 @@ export default function useBoothSession() {
     navigate('/templates');
     setPage('templates');
     setLayoutChosen(false);
+    setTemplateId(null);
     shotUrls.current.forEach((url) => URL.revokeObjectURL(url));
     shotUrls.current = [];
     setShots([]);

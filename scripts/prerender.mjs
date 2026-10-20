@@ -15,19 +15,13 @@ const server = await createServer({
   logLevel: 'error',
 });
 try {
-  const [
-    { default: Landing },
-    { default: Templates },
-    { default: Steps },
-    { default: Footer },
-    { templates },
-  ] = await Promise.all([
-    server.ssrLoadModule('/src/pages/landing/LandingPage.jsx'),
-    server.ssrLoadModule('/src/pages/templates/TemplatesPage.jsx'),
-    server.ssrLoadModule('/src/components/layout/WorkflowSteps.jsx'),
-    server.ssrLoadModule('/src/components/layout/Footer.jsx'),
-    server.ssrLoadModule('/src/data/templates.js'),
-  ]);
+  const [{ default: Landing }, { default: Templates }, { default: Steps }, { default: Footer }] =
+    await Promise.all([
+      server.ssrLoadModule('/src/pages/landing/LandingPage.jsx'),
+      server.ssrLoadModule('/src/pages/templates/TemplatesPage.jsx'),
+      server.ssrLoadModule('/src/components/layout/WorkflowSteps.jsx'),
+      server.ssrLoadModule('/src/components/layout/Footer.jsx'),
+    ]);
   const el = React.createElement;
   const markup = {
     home: renderToStaticMarkup(el('div', { className: 'app home-app' }, el(Landing), el(Footer))),
@@ -36,7 +30,7 @@ try {
         'div',
         { className: 'app templates-app' },
         el(Steps, { page: 'templates', layoutChosen: false, completed: false }),
-        el(Templates, { template: templates.find((t) => t.id === 'strip-four'), locked: false }),
+        el(Templates, { template: null, locked: false }),
         el(Footer)
       )
     ),

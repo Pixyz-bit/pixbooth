@@ -23,7 +23,7 @@ export default function TemplateCatalog({ template, locked, onSelect }) {
           <TemplateChoice
             key={item.id}
             {...{ item, locked, onSelect }}
-            selected={item.id === template.id}
+            selected={item.id === template?.id}
           />
         ))}
       </div>

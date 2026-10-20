@@ -31,6 +31,12 @@ test('layout screen shows all cards and selected Continue action', async () => {
   assert.match(filtered, /<option value="8" selected="">8 photos/);
   assert.equal((filtered.match(/selected=""/g) || []).length, 1);
 });
+test('fresh layout screen offers all choices without a selection or Continue action', async () => {
+  const { default: Page } = await server.ssrLoadModule('/src/pages/templates/TemplatesPage.jsx');
+  const html = render(Page, { template: null, locked: false, captured: 0 });
+  assert.equal((html.match(/class="template-choice(?: |")/g) || []).length, 21);
+  assert.doesNotMatch(html, /aria-pressed="true"|selection-actionbar|Continue to camera/);
+});
 test('shutter capture gating and cancellation remain explicit', async () => {
   const { default: Actions } = await server.ssrLoadModule(
     '/src/components/capture/CaptureActions.jsx'

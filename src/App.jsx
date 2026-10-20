@@ -51,6 +51,7 @@ export default function App() {
     setEditorSettings(null);
   }
   function continueToCapture() {
+    if (!template) return;
     setLayoutChosen(true);
     navigate('/booth');
   }

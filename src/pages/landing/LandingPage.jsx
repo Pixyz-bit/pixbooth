@@ -6,6 +6,7 @@ import LandingHero from '../../components/landing/LandingHero.jsx';
 import LandingFormats from '../../components/landing/LandingFormats.jsx';
 import LandingHowItWorks from '../../components/landing/LandingHowItWorks.jsx';
 import LandingDetails from '../../components/landing/LandingDetails.jsx';
+import LandingClosing from '../../components/landing/LandingClosing.jsx';
 
 export default function LandingPage({ onCapture }) {
   return (
@@ -17,7 +18,8 @@ export default function LandingPage({ onCapture }) {
       <div className="landing-section-inner">
         <LandingHowItWorks />
       </div>
-      <LandingDetails onCapture={onCapture} />
+      <LandingDetails />
+      <LandingClosing onCapture={onCapture} />
     </main>
   );
 }

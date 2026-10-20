@@ -1,5 +1,9 @@
 # Mentomory
 
+Current layout selection — 2026-10-20: fresh sessions and Start over begin with no selected layout. The Your layout/Continue action bar appears only after choosing a layout. A choice is preserved during ordinary in-session navigation back from capture; captures still lock the chosen layout. Prerendered `/templates` HTML uses the same unselected initial state.
+
+Current landing action placement — 2026-10-20: the hero keeps its start action. The FAQ introduction has no action button; after the FAQ, a compact “Ready for your close-up?” section provides “Choose a layout”, opening `/templates`. The FAQ follows its content height and expands in ordinary page flow. This supersedes earlier full-viewport/internal-scroll FAQ guidance. See DESIGN.md, “Landing closing action”.
+
 Current camera feedback: [conditional notification fade and fixed countdowns](docs/design/CAMERA-NOTIFICATIONS.md). Transparent messages use a top-heavy dark fade only while a visible notice/error exists. Countdown choices are Off / 3 sec / 5 sec, with no Custom input.
 
 
