@@ -1,63 +1,125 @@
+<p align="center">
+  <img src="public/mentomory-logo-v4.png" alt="Mentomory" width="300" />
+</p>
+
 # Mentomory
 
-A browser photo booth with a monochrome grid interface, 21 photo layouts, 48 face effects and photo/live-strip customization. Captures and edits stay in browser memory; reloading clears the session.
+**Turn your smiles into keepsakes.**
 
-## Canonical project
+Bring your best face, strike a pose, and make something worth keeping. Mentomory turns your browser into a photo booth for creating photo strips, grids, Polaroid-style prints, and animated flipbooks—with playful face effects and finishing touches that make them yours.
 
-The application source is at `C:\Martin Archive\Programming\2026 Projects\PhotoPix`. Run development commands there. The OneDrive chat directory contains task artifacts, not a second application.
+**[Try Mentomory →](https://mentomory.pixyzbit.dev)**
 
-## Workflow
+## What you can make
 
-- **Home — `#/`:** illustrative sample prints, scrolling formats ribbon and open three-step instructions.
-- **Choose layout — `#/templates`:** filter the 21 layouts by photo count, select a layout and continue. Selection locks after capturing media.
-- **Capture — `#/booth`:** enable the camera, choose Photo or Live, and use Off / 3 sec / 5 sec countdown. With Countdown Off, each shutter press captures one photo or live clip. With 3 sec or 5 sec selected, one press captures the remaining set with a fresh countdown before each item. Cancellation preserves earlier captures. Redo clears the set, preserves camera/layout settings and reconnects the preview; it waits for another shutter press.
-- **Customize — `#/edit`:** choose compatible layouts, frames, backgrounds, filters, captions and border artwork. Undo/Redo retains up to 60 edits during the session. Download the JPG, or create and download a composed seven-second MP4 for live captures.
+- **Photo strips and prints:** choose from 21 layouts, including classic strips, grids, and single-photo keepsakes.
+- **Animated flipbooks:** capture silent seven-second live clips and export a composed MP4.
+- **Playful portraits:** try 48 face effects with local face tracking.
+- **Your own style:** add frames, backgrounds, filters, captions, and decorative stickers.
+- **A take-home keepsake:** download JPG photos or MP4 live strips.
 
-The editor requires completed captures. Direct capture/editor navigation without a session returns to Choose layout. Leaving capture stops camera tracks and cancels its countdown/recording. Start over confirms before discarding captured media or edits.
+The interface adapts to desktop and mobile, with keyboard-accessible controls and reduced-motion support.
 
-All four pages share the compact black copyright/credit footer. Portrait phone layouts stack controls; short landscape layouts use normal page flow. The marquee has a static reduced-motion alternative.
+## Snap. Style. Save.
 
-## Face tracking and media
+1. **Choose a layout.** Browse the collection or filter by photo count, then select your favorite.
+2. **Capture your photos.** Enable your camera, choose Photo or Live, and pose. Use Countdown Off for individual captures, or a three- or five-second countdown to capture the remaining set automatically.
+3. **Make it yours.** Customize your keepsake, undo or redo your edits, and download the result.
 
-MediaPipe `0.10.32` performs local face tracking in a worker. PixiJS `8.22.0` renders local sticker artwork with a Canvas2D fallback. Jeeliz is retired and no longer shipped.
+No account needed. Just you, your camera, and a little creativity.
 
-Live mode records silent seven-second H.264 MP4s at 4fps (28 frames) for a stepped, scrapbook-style animation, subject to browser codec support. Capture and composed exports use the same frame rate, so editor playback retains that motion. Captures are proportionally limited to 960×720px; composed MP4s retain template proportions with even dimensions and a longest side up to 1920px. JPG exports retain full layout dimensions. The app has no accounts, upload service or backend.
+## Your photos stay with you
 
-## Development
+Photos, clips, face tracking, and editing are processed in your browser. Mentomory does not upload your captured media to a photo-storage service.
 
-Requires Node.js 20.19+ or 22.12+.
+Your captures and edits live in the current browser session. **Download anything you want to keep before refreshing or closing the page.**
+
+The project includes Vercel Web Analytics and PostHog for visitor and usage analytics. PostHog session recording is disabled; media processing remains local.
+
+## Built with
+
+| Technology | Purpose |
+| --- | --- |
+| React + Vite | Interface and development tooling |
+| MediaPipe | Face tracking in a browser worker |
+| PixiJS | Face-effect rendering, with a Canvas2D fallback |
+| MediaBunny + browser media APIs | MP4 recording and composition |
+| CSS | Responsive monochrome interface |
+| Vercel | Static hosting and production deployments |
+
+## Run locally
+
+### Requirements
+
+- Node.js 20.19+ or 22.12+.
+- npm.
+- A camera and a browser with camera access enabled.
+
+### Setup
 
 ```sh
+git clone https://github.com/Pixyz-bit/pixbooth.git
+cd pixbooth
 npm install
-npm run setup:face
-npm run dev -- --port 5173 --strictPort
-npm test
-npm run format:check
-npm run build
-npm run preview
+cp .env.example .env.local
 ```
 
-Camera access requires permission and HTTPS or localhost. Face setup copies the pinned MediaPipe runtime and downloads the official model only if it is absent. Deploy `dist/` to an HTTPS static host. [THIRD_PARTY.md](THIRD_PARTY.md) records asset and dependency licenses.
+Set these values in `.env.local` using your PostHog project's settings:
 
-## Design and implementation references
+```dotenv
+VITE_POSTHOG_KEY=your_posthog_project_key
+VITE_POSTHOG_HOST=your_posthog_ingestion_url
+```
 
-- [Design entry point](DESIGN.md)
-- [Landing](docs/design/LANDING-DESIGN-CONCEPT.md)
-- [Choose layout](docs/design/TEMPLATES-DESIGN-CONCEPT.md)
-- [Capture](docs/design/BOOTH-DESIGN-CONCEPT.md)
-- [Customize](docs/design/EDITOR-DESIGN-CONCEPT.md)
-- [Responsive contract](docs/design/RESPONSIVE-DESIGN.md)
-- [System audit and cleanup](docs/development/SYSTEM-AUDIT-2026-10-13.md)
+The current development configuration requires both values and displays an error if either is missing. Variables prefixed with `VITE_` are included in the browser bundle; use the project key, not a personal API token.
 
-`src/styles/index.css` loads base/feature styles, legacy shared layout rules in `modern.css`, route themes, responsive corrections, then the canonical footer and dialog action styles. Route-specific documents take precedence over dated historical notes.
+Prepare the face-tracking assets and start the development server:
 
-The historical archive, reference and verification folders were removed from the project at the user's request; current route documentation remains authoritative. Physical-device camera, face alignment and native MP4 playback still require manual validation beyond mocked tests and viewport checks.
+```sh
+npm run setup:face
+npm run dev
+```
 
-## Visitor analytics
+Open **[localhost:5174](http://localhost:5174)**. Vite may choose another port if 5174 is occupied; check the terminal output.
 
-Vercel Web Analytics is installed through @vercel/analytics 2.0.1. The React Analytics component is mounted once at the application root in src/main.jsx. Enable Analytics for the pixbooth project in the Vercel dashboard, deploy production, then visit the public website and inspect the Analytics dashboard. Local development does not provide production visitor data. No custom interaction events are configured.
-## Search visibility
+The face setup command copies the pinned MediaPipe runtime and downloads the official face model if it is missing. Its first run requires an internet connection.
 
-`npm run build` now produces crawlable HTML for the home page and layout catalog, route-specific metadata, structured data, `dist/sitemap.xml`, and `dist/robots.txt`. Build checks validate the generated output. The capture and editor routes are marked `noindex` because they depend on an active browser session. Vercel serves each route's generated HTML through the rewrites in vercel.json.
+Camera access requires **HTTPS or localhost** and your browser's permission. Live recording and MP4 export depend on browser codec support; Photo mode remains available when Live is unsupported.
 
-The public origin is configured in src/data/seo.js as https://mentomory.pixyzbit.dev. Its DNS must resolve before deployment or indexing checks can succeed. After deploying the SEO build, submit https://mentomory.pixyzbit.dev/sitemap.xml in Google Search Console and use URL Inspection for the home and templates pages. The existing Google verification HTML file is retained. Recheck crawl access and canonical URLs before submitting if the public domain changes.
+## Development commands
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run setup:face` | Prepare local face-tracking assets |
+| `npm test` | Run the automated tests |
+| `npm run format:check` | Check source formatting |
+| `npm run format` | Format the source files |
+| `npm run build` | Build the site, prerender public pages, and validate SEO output |
+| `npm run preview` | Preview the production build locally |
+
+## Deploy
+
+Run `npm run build` and publish the generated `dist/` directory to an HTTPS static host. The repository includes `vercel.json` with the route rewrites used by the live Vercel deployment.
+
+The home page and layout catalog are prerendered for search engines. Capture and editing pages require an active session and are marked `noindex`. The build also generates a sitemap and `robots.txt`.
+
+The public origin is configured in [`src/data/seo.js`](src/data/seo.js). Update it if deploying to a different domain.
+
+## Explore the project
+
+- [`src/components/`](src/components/) — reusable interface components.
+- [`src/pages/`](src/pages/) — home, layout selection, capture, and customization screens.
+- [`src/hooks/`](src/hooks/) — session, camera, capture, and editing behavior.
+- [`src/lib/`](src/lib/) — rendering, media processing, and shared utilities.
+- [`public/`](public/) — artwork, fonts, face-tracking assets, and other static files.
+- [`tests/`](tests/) — automated checks for capture, workflow, rendering, and SEO.
+- [`DESIGN.md`](DESIGN.md) — interface design decisions and component guidance.
+
+## Credits and acknowledgments
+
+Made by **.dcd**.
+
+The landing page's sample photos are illustrative images of fictional people, not user captures or customer testimonials. See [landing artwork provenance](docs/design/landing-artwork.md) for details.
+
+Dependency licenses, font notices, and artwork credits are documented in [`THIRD_PARTY.md`](THIRD_PARTY.md).
