@@ -236,12 +236,44 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-rows: auto;
-    align-items: start;
-    gap: 16px;
+    align-items: stretch;
+    gap: 16px 12px;
     padding: 4px 6px 8px 0;
   }
   .templates-app .template-choices > .template-choice {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: stretch;
+    gap: 12px;
+    padding: 10px;
     margin-bottom: 0;
+  }
+  .templates-app .template-choices .choice-preview {
+    aspect-ratio: auto;
+    height: clamp(144px, 42vw, 188px);
+    min-height: 0;
+    max-height: none;
+    padding: 10px;
+  }
+  .templates-app .template-choices .choice-copy {
+    justify-content: space-between;
+    gap: 4px;
+  }
+  .templates-app .template-choices .choice-copy strong {
+    display: flex;
+    align-items: flex-end;
+    min-height: 2.8em;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+  .templates-app .template-choices > .template-choice:not(.selected):hover:not(:disabled) {
+    transform: none;
+    box-shadow: none;
+  }
+  .templates-app .template-choices > .template-choice.selected {
+    transform: none;
+    box-shadow: 3px 3px 0 var(--ink);
   }
   .templates-app .selection-actionbar {
     bottom: calc(8px + env(safe-area-inset-bottom, 0px));

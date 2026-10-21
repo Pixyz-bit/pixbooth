@@ -580,6 +580,8 @@ FAQ column balance — 2026-10-20: the introduction repeats the existing camera-
 
 ## Explicit template selection — 2026-10-20
 
+Mobile template grid refinement — 2026-10-21: at 600px and below, All layouts and filtered results use equal-height cards in two columns with 12px horizontal and 16px vertical gaps. A consistent 144–188px preview stage contains each complete layout without changing its proportions. Cards have 10px padding and 12px preview-to-copy spacing. The name area reserves two lines of 14px text, aligns shorter names to the bottom, and keeps photo counts on a common baseline. Mobile selection uses a compact 3px offset shadow without translating the card; unselected hover states stay still. Desktop masonry and selection behavior remain current. Browser checks at 320px, 390px and 600px confirmed equal card heights, all 21 choices and no text or page overflow; the 1280px desktop retains masonry. Filtering by four photos and choosing Classic strip reveals the existing Continue action.
+
 The templates page starts with no pressed layout card and no selection action bar. Choosing a layout reveals the existing Your layout summary and Continue to camera action; choosing another updates the summary. Start over clears the selection, while ordinary backtracking retains it. The capture route remains gated until Continue. Prerendered templates HTML also starts unselected. Browser checks at 1280×900 and 390×844 verified the initial absence, reveal after selecting, camera navigation and preserved selection on return. The existing UI/workflow/Redo checks plus a new initial-state regression pass (26 tests total).
 
 ## Landing closing action — 2026-10-20
