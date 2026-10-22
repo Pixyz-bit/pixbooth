@@ -1,5 +1,7 @@
-/* Universal footer for home, Choose layout, Capture and Customize. */
+/* Shared upper footer with the original black copyright bar underneath. */
 .app footer.landing-footer {
+  --footer-left: max(16px, env(safe-area-inset-left, 0px));
+  --footer-right: max(16px, env(safe-area-inset-right, 0px));
   display: block;
   flex-shrink: 0;
   width: 100%;
@@ -7,10 +9,86 @@
   margin: 0;
   padding: 0;
   border: 0;
-  background: #000;
-  color: #fff;
   font-size: 12px;
   line-height: 1.6;
+}
+.landing-footer-top {
+  background: #fff;
+  color: #000;
+  border-top: 1px solid #e5e5e5;
+}
+.landing-footer-top-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  width: min(1200px, calc(100% - var(--footer-left) - var(--footer-right)));
+  min-height: 88px;
+  margin-inline: auto;
+  padding-block: 16px;
+  box-sizing: border-box;
+}
+.landing-footer-top .wordmark {
+  width: fit-content;
+  max-width: 100%;
+}
+.landing-footer-top .brand-logo {
+  display: block;
+  width: 160px;
+  max-width: 100%;
+  height: auto;
+}
+.footer-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 24px;
+  min-width: 0;
+}
+.footer-navigation :is(a, span) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+  font-size: 14px;
+  text-decoration: none;
+}
+.footer-navigation a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.footer-socials {
+  display: flex;
+  gap: 8px;
+  justify-self: end;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+}
+.footer-socials a {
+  box-sizing: border-box;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+}
+.footer-socials svg {
+  width: 20px;
+  height: 20px;
+}
+.footer-socials a:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+.landing-footer-top :is(a):focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 4px;
 }
 .app .landing-footer-bottom {
   width: 100%;
@@ -22,8 +100,8 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px 24px;
-  width: min(1216px, calc(100% - var(--safe-left, 32px) - var(--safe-right, 32px)));
+  gap: 4px 16px;
+  width: min(1216px, calc(100% - var(--footer-left) - var(--footer-right)));
   min-height: 43.2px;
   margin-inline: auto;
   padding: 0 0 env(safe-area-inset-bottom, 0px);
@@ -34,14 +112,48 @@
 .booth-app footer.landing-footer {
   margin-top: 12px;
 }
+@media (max-width: 1000px) {
+  .landing-footer-top-inner {
+    grid-template-columns: 1fr auto;
+    gap: 8px 24px;
+  }
+  .footer-navigation {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
 @media (max-width: 600px) {
-  .app .landing-footer-bottom > div {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
+  .landing-footer-top-inner {
+    grid-template-columns: minmax(0, 1fr);
     justify-items: center;
+    gap: 6px;
+  }
+  .landing-footer-top .brand-logo {
+    width: 144px;
+  }
+  .footer-navigation {
+    grid-column: auto;
+    grid-row: auto;
+    column-gap: 16px;
+  }
+  .footer-navigation :is(a, span) {
+    font-size: 13px;
+  }
+  .footer-socials {
+    justify-self: center;
+  }
+  .app .landing-footer-bottom > div {
+    justify-content: center;
     text-align: center;
-    gap: 4px 16px;
+    column-gap: 20px;
     padding-top: 8px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (min-width: 601px) {
+  .app footer.landing-footer {
+    --footer-left: max(32px, env(safe-area-inset-left, 0px));
+    --footer-right: max(32px, env(safe-area-inset-right, 0px));
   }
 }

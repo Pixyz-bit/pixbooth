@@ -99,7 +99,7 @@ export default function App() {
         <WorkflowSteps page={page} layoutChosen={layoutChosen} completed={completed} />
       )}
       {content}
-      <Footer />
+      <Footer showHomeContent={page === 'home'} />
       {resetPending && (
         <Dialog
           title="Start a new session?"
